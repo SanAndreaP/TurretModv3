@@ -79,7 +79,7 @@ public class TurretProj_Flame extends TurretProjectile {
 		Block baseBlock = Block.blocksList[this.worldObj.getBlockId(blockX, blockY, blockZ)];
 		Block aboveBlock = Block.blocksList[this.worldObj.getBlockId(blockX, blockY+1, blockZ)];
 		
-		if(!this.worldObj.isRemote
+		if (!this.worldObj.isRemote
 				&& this.isPurified()
 				&& baseBlock != null
 				&& aboveBlock == null
@@ -124,7 +124,7 @@ public class TurretProj_Flame extends TurretProjectile {
 	@Override
 	public void readEntityFromNBT(NBTTagCompound par1nbtTagCompound) {
 		super.readEntityFromNBT(par1nbtTagCompound);
-		if(par1nbtTagCompound.getBoolean("purifying"))
+		if (par1nbtTagCompound.getBoolean("purifying"))
 			this.setPurified();
 	}
 }

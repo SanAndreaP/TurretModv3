@@ -38,7 +38,7 @@ public class PacketRecvLaptopTargets extends PacketBase {
 	        }
 			
 	        TileEntity te = player.worldObj.getBlockTileEntity(iStream.readInt(), iStream.readInt(), iStream.readInt());
-	        if(te != null && te instanceof TileEntityLaptop) {
+	        if (te != null && te instanceof TileEntityLaptop) {
 	        	((TileEntityLaptop)te).programItemsTargets(tgt);
 	        	player.openContainer.detectAndSendChanges();
 	        }
@@ -50,7 +50,7 @@ public class PacketRecvLaptopTargets extends PacketBase {
 	private static Packet250CustomPayload getPacket(Map<String, Boolean> list, TileEntity te, int id) {
 		NBTTagCompound nbt = new NBTTagCompound();				
 		NBTTagList nbtList = new NBTTagList("targetList");				
-		for(Entry<String, Boolean> target : list.entrySet()) {
+		for (Entry<String, Boolean> target : list.entrySet()) {
 			NBTTagCompound var4 = new NBTTagCompound();
             var4.setString("tgName", target.getKey());
             var4.setBoolean("isEnabled", target.getValue());

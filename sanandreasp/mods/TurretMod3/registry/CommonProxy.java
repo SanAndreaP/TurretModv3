@@ -37,21 +37,21 @@ public class CommonProxy {
 	public void initTM3PlayerTag(EntityPlayer player) {
 		NBTTagCompound playerNBT = player.getEntityData();
 		NBTTagCompound persNBT = new NBTTagCompound(EntityPlayer.PERSISTED_NBT_TAG);
-		if(!playerNBT.hasKey(EntityPlayer.PERSISTED_NBT_TAG)) {
+		if (!playerNBT.hasKey(EntityPlayer.PERSISTED_NBT_TAG)) {
 			playerNBT.setCompoundTag(EntityPlayer.PERSISTED_NBT_TAG, persNBT);
 		} else {
 			persNBT = player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG);
 		}
 		
-		if(!persNBT.hasKey("TurretMod3NBT")) {
+		if (!persNBT.hasKey("TurretMod3NBT")) {
 			persNBT.setCompoundTag("TurretMod3NBT", new NBTTagCompound("TM3NBT"));
 		}
 		
 		
-		if(MinecraftServer.getServer() != null) {
+		if (MinecraftServer.getServer() != null) {
 		}
 		
-		if(!player.worldObj.isRemote) {
+		if (!player.worldObj.isRemote) {
 			boolean b = MinecraftServer.getServer().getConfigurationManager().getOps().contains(player.username.trim().toLowerCase());
 			b = b || (MinecraftServer.getServer() != null 
 						&& MinecraftServer.getServer().getServerOwner() != null 

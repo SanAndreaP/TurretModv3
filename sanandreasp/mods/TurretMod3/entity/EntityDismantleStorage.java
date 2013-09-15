@@ -56,18 +56,18 @@ public class EntityDismantleStorage extends EntityLiving {
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		if(this.tbClass == null) {
+		if (this.tbClass == null) {
 			this.tbClass = TurretInfo.getTurretClass(this.dataWatcher.getWatchableObjectInt(20));
 		}
 		
-		if(this.checkForDestroy) {
+		if (this.checkForDestroy) {
 			List<Boolean> b = new ArrayList<Boolean>();
-			for(int i = 0; i < this.inventory.getSizeInventory(); i++) {
+			for (int i = 0; i < this.inventory.getSizeInventory(); i++) {
 				ItemStack is = this.inventory.getStackInSlot(i);
 				b.add(is != null && is.stackSize > 0);
 			}
-			if(!b.contains(true)) {
-				this.attackEntityFrom(DamageSource.magic, Math.max(this.health, this.getMaxHealth()));
+			if (!b.contains(true)) {
+				this.attackEntityFrom(DamageSource.magic, Math.max(this.health, this.func_110138_aP()));
 			}
 		}
 	}
@@ -86,11 +86,11 @@ public class EntityDismantleStorage extends EntityLiving {
             for (var1 = 0; var1 < 20 && this.worldObj.isRemote; ++var1)
             {
             	TurretInfo tInfo = TurretInfo.getTurretInfo(this.tbClass);
-            	for(Object obj : tInfo.getCrafting()) {
-            		if(obj != null && obj instanceof ItemStack) {
+            	for (Object obj : tInfo.getCrafting()) {
+            		if (obj != null && obj instanceof ItemStack) {
             			String s = "";
             			ItemStack is = ((ItemStack)obj);
-            			if(is.getItem() instanceof ItemBlock) {
+            			if (is.getItem() instanceof ItemBlock) {
             				s = "tilecrack_"+is.itemID+"_"+is.getItemDamage();
             			} else {
                 			s = "iconcrack_"+is.itemID;
@@ -103,7 +103,7 @@ public class EntityDismantleStorage extends EntityLiving {
 
             for (int i = 0; i < this.inventory.getSizeInventory(); i++) {
             	ItemStack is = this.inventory.getStackInSlot(i);
-            	if(is != null) {
+            	if (is != null) {
             		this.entityDropItem(is, 0.0F).setVelocity(0F, 0.2F, 0F);
             	}
             }
@@ -117,7 +117,7 @@ public class EntityDismantleStorage extends EntityLiving {
 	
 	@Override
 	public boolean interact(EntityPlayer par1EntityPlayer) {
-		if(!worldObj.isRemote) par1EntityPlayer.openGui(TM3ModRegistry.instance, 2, this.worldObj, this.entityId, 0, 0);
+		if (!worldObj.isRemote) par1EntityPlayer.openGui(TM3ModRegistry.instance, 2, this.worldObj, this.entityId, 0, 0);
 		return true;
 	}
 	
@@ -151,7 +151,7 @@ public class EntityDismantleStorage extends EntityLiving {
         for (int i = 0; i < this.inventory.getSizeInventory(); i++) {
         	NBTTagCompound var4 = new NBTTagCompound();
         	ItemStack is = this.inventory.getStackInSlot(i);
-        	if(is != null) {
+        	if (is != null) {
         		var4.setInteger("slot", i);
         		is.writeToNBT(var4);
         		var1.appendTag(var4);
@@ -162,7 +162,7 @@ public class EntityDismantleStorage extends EntityLiving {
 	}
 
 	@Override
-	public int getMaxHealth() {
+	public int func_110138_aP() {
 		return 1;
 	}
 

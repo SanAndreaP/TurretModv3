@@ -95,7 +95,7 @@ public class GuiLaptopMisc extends GuiLaptop_Base {
     	this.frequency.textboxKeyTyped(par1, par2);
     	this.customName.textboxKeyTyped(par1, par2);
 
-    	if((par2 == 28 || par2 == 1) && (this.frequency.isFocused() || this.customName.isFocused())) {
+    	if ((par2 == 28 || par2 == 1) && (this.frequency.isFocused() || this.customName.isFocused())) {
     		this.frequency.setFocused(false);
     		this.customName.setFocused(false);
     	}
@@ -107,7 +107,7 @@ public class GuiLaptopMisc extends GuiLaptop_Base {
 	@Override
 	protected void actionPerformed(GuiButton par1GuiButton) {
 		super.actionPerformed(par1GuiButton);
-		if(par1GuiButton.id == this.programTurret.id) {
+		if (par1GuiButton.id == this.programTurret.id) {
 			ByteArrayOutputStream b = new ByteArrayOutputStream();
 			try {
 				DataOutputStream o = new DataOutputStream(b);

@@ -29,9 +29,9 @@ public class ItemIconCache extends Item {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void updateIcons(IconRegister par1IconRegister) {
+	public void registerIcons(IconRegister par1IconRegister) {
 		this.itemIcons = new Icon[iconList.size()];
-		for(int i = 0; i < iconList.size(); i++) {
+		for (int i = 0; i < iconList.size(); i++) {
 			this.itemIcons[i] = par1IconRegister.registerIcon(iconList.get(i));
 		}
 	}

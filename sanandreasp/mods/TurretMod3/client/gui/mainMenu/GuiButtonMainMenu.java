@@ -54,7 +54,7 @@ public class GuiButtonMainMenu extends GuiButton {
             this.drawRect(this.xPosition + this.width - 1, this.yPosition + 1, this.xPosition + this.width, this.yPosition + this.height, var8Color);
             this.drawRect(this.xPosition, this.yPosition + this.height - 1, this.xPosition + this.width - 1, this.yPosition + this.height, var8Color);
             this.drawRect(this.xPosition, this.yPosition, this.xPosition + 1, this.yPosition + this.height - 1, var8Color);
-            if(var5 && this.enabled)
+            if (var5 && this.enabled)
             	this.drawRect(this.xPosition + 1, this.yPosition + 1, this.xPosition + this.width - 1, this.yPosition + this.height - 1, ((transparency << 24) & 0xFF000000) + this.color);
             this.drawRect(this.xPosition + 1, this.yPosition + 1, this.xPosition + this.width - 1, this.yPosition + this.height - 1, (transparency << 24) & 0xFF000000);
             this.drawRect(this.xPosition + 1, this.yPosition + this.height, this.xPosition + this.width + 1, this.yPosition + this.height + 1, ((transparency/2) << 24) & 0xFF000000);

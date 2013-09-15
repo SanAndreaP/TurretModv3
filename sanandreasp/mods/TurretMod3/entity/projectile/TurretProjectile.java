@@ -135,7 +135,7 @@ public class TurretProjectile extends EntityArrow {
         
     	if (!this.worldObj.isRemote)
         {
-    		if(this.isArrow())
+    		if (this.isArrow())
     			entity.setArrowCountInEntity(entity.getArrowCountInEntity() + 1);
         }
     	
@@ -149,7 +149,7 @@ public class TurretProjectile extends EntityArrow {
 //        {
 //            if (var26 > 0.0F)
 //            {
-    	if(moving.entityHit.onGround) {
+    	if (moving.entityHit.onGround) {
         	moving.entityHit.motionY = (double)(this.knockbackStrength / 3F);
         	moving.entityHit.isAirBorne = true;
     	}
@@ -195,11 +195,11 @@ public class TurretProjectile extends EntityArrow {
     @Override
     public void onUpdate()
     {
-    	if(!isMoving && !this.worldObj.isRemote) return;
+    	if (!isMoving && !this.worldObj.isRemote) return;
     	
     	this.onEntityUpdate();
     	
-    	if(!this.worldObj.isRemote && this.shootingEntity != null && (this.shootingEntity instanceof EntityTurret_Base) && this.getDistanceToEntity(this.shootingEntity) > 256D) {
+    	if (!this.worldObj.isRemote && this.shootingEntity != null && (this.shootingEntity instanceof EntityTurret_Base) && this.getDistanceToEntity(this.shootingEntity) > 256D) {
     		this.motionX = 0D;
     		this.motionY = 0D;
     		this.motionZ = 0D;
@@ -239,7 +239,7 @@ public class TurretProjectile extends EntityArrow {
 
             if (var18 == this.inTile && var19 == this.inData)
             {
-            	if(this.dieOnGround()) {
+            	if (this.dieOnGround()) {
             		this.setDead();
             	}
             	
@@ -254,7 +254,7 @@ public class TurretProjectile extends EntityArrow {
             {
                 this.inGround = false;
                 this.motionX *= (double)(this.rand.nextFloat() * 0.2F);
-                if(this.isArrow())
+                if (this.isArrow())
                 	this.motionY *= (double)(this.rand.nextFloat() * 0.2F);
                 else
                 	this.motionY = -this.getSpeedVal();
@@ -291,7 +291,7 @@ public class TurretProjectile extends EntityArrow {
                 
                 if (var10 instanceof EntityDragonPart) {
                 	IEntityMultiPart multiEntity = ((EntityDragonPart) var10).entityDragonObj;
-        			if(multiEntity instanceof EntityDragon) {
+        			if (multiEntity instanceof EntityDragon) {
         				drgPart = (EntityDragonPart) var10;
         				var10 = (EntityDragon)multiEntity;
         			}
@@ -351,7 +351,7 @@ public class TurretProjectile extends EntityArrow {
                     {
                         var21 = DamageSource.causeArrowDamage(this, this);
                     }
-                    else if(this.isEndermanDamageable && this.shootingEntity != null && this.shootingEntity instanceof EntityLiving)
+                    else if (this.isEndermanDamageable && this.shootingEntity != null && this.shootingEntity instanceof EntityLiving)
                     {
                     	var21 = DamageSource.causeMobDamage((EntityLiving)this.shootingEntity);
                     }
@@ -361,8 +361,8 @@ public class TurretProjectile extends EntityArrow {
                     }
                     
 //                    System.out.println (var4.entityHit);
-                    if(var4.entityHit instanceof EntityDragon && drgPart != null) {
-                    	if(((EntityDragon)var4.entityHit).attackEntityFromPart(drgPart, DamageSource.generic.setExplosion(), var23)) {
+                    if (var4.entityHit instanceof EntityDragon && drgPart != null) {
+                    	if (((EntityDragon)var4.entityHit).attackEntityFromPart(drgPart, DamageSource.generic.setExplosion(), var23)) {
                     		if (var4.entityHit instanceof EntityLiving)
                             {
                                 processHit(var4);
@@ -371,21 +371,21 @@ public class TurretProjectile extends EntityArrow {
 
                             this.playSound(getHitSound(), 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
 
-                            if(this.dieOnImpact()) this.setDead();
+                            if (this.dieOnImpact()) this.setDead();
                     	}
-//                    } else if(true) {
+//                    } else if (true) {
                     } else if (var4.entityHit.attackEntityFrom(var21, var23)) {
                         if (var4.entityHit instanceof EntityLiving)
                         {
                         	EntityLiving living = (EntityLiving)var4.entityHit;
-                        	if(this.shootingEntity != null && this.shootingEntity instanceof EntityTurret_Base) {
+                        	if (this.shootingEntity != null && this.shootingEntity instanceof EntityTurret_Base) {
                         		EntityTurret_Base turret = (EntityTurret_Base) this.shootingEntity;
-                        		if(turret.getDistanceToEntity(living) <= 16.0F) {
+                        		if (turret.getDistanceToEntity(living) <= 16.0F) {
 	                        		living.setRevengeTarget(turret);
 	                        		living.setAttackTarget(turret);
 	                        		living.setLastAttackingEntity(turret);
 	                        		ObfuscationReflectionHelper.setPrivateValue(EntityLiving.class, living, turret, "currentTarget", "field_70776_bF");
-                        		} else if(living instanceof EntityCreature && living instanceof IMob) {
+                        		} else if (living instanceof EntityCreature && living instanceof IMob) {
                         			PathEntity path = this.worldObj.getEntityPathToXYZ(living, (int)turret.posX, (int)turret.posY, (int)turret.posZ, (float) turret.wdtRange*2F, true, false, false, true);
                         			((EntityCreature)living).getNavigator().setPath(path, 0.35F);
                         			((EntityCreature)living).setPathToEntity(path);
@@ -399,10 +399,10 @@ public class TurretProjectile extends EntityArrow {
 
                         if (!(var4.entityHit instanceof EntityEnderman) || this.isEndermanDamageable)
                         {
-                        	if(this.dieOnImpact()) this.setDead();
+                        	if (this.dieOnImpact()) this.setDead();
                         }
                     }
-                    else if(this.shouldTargetOneType() ? (this.targetedEntity != null
+                    else if (this.shouldTargetOneType() ? (this.targetedEntity != null
                     		&& this.targetedEntity.getClass().isAssignableFrom(var4.entityHit.getClass())) 
                     	:
                     		(this.shootingEntity != null
@@ -429,7 +429,7 @@ public class TurretProjectile extends EntityArrow {
                     this.posZ -= this.motionZ / (double)var20 * 0.05000000074505806D;
                     this.playSound(this.getHitSound(), 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
                     this.inGround = true;
-//                    if(this.isArrow())
+//                    if (this.isArrow())
                     	this.arrowShake = 7;
                     this.setIsCritical(false);
 
@@ -497,7 +497,7 @@ public class TurretProjectile extends EntityArrow {
     }
     
     protected void processFailedHit(Entity hit) {
-    	if(this.isArrow()) {
+    	if (this.isArrow()) {
             this.motionX *= -0.10000000149011612D;
             this.motionY *= -0.10000000149011612D;
             this.motionZ *= -0.10000000149011612D;

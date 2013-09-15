@@ -26,7 +26,7 @@ public class TurretInfoT3Flamethrower extends TurretInfo {
 				'D', new ItemStack(Block.dispenser),
 				'L', new ItemStack(Item.enderPearl),
 				'O', new ItemStack(Block.obsidian),
-				'I', new ItemStack(Block.blockSteel),
+				'I', new ItemStack(Block.blockIron),
 				'B', new ItemStack(Item.ingotIron)
 		};
 		this.itemIcon = "TurretMod3:turret_06";
@@ -35,7 +35,7 @@ public class TurretInfoT3Flamethrower extends TurretInfo {
 		 this.addAmmo(i, new ItemStack(TM3ModRegistry.ammoItems, 1, 5), 4);
 		 this.addAmmo(i, new ItemStack(TM3ModRegistry.ammoItems, 1, 6), 32);
 		
-		this.healItems.put(new ItemStack(Block.blockSteel), 15);
+		this.healItems.put(new ItemStack(Block.blockIron), 15);
 		this.healItems.put(new ItemStack(Item.ingotIron), 1);
 		this.healItems.put(new ItemStack(Block.obsidian), 30);
 	}

@@ -26,7 +26,7 @@ public class TurretInfoT3Laser extends TurretInfo {
 				'D', new ItemStack(Block.dispenser),
 				'L', new ItemStack(Item.enderPearl),
 				'O', new ItemStack(Block.obsidian),
-				'I', new ItemStack(Block.blockSteel),
+				'I', new ItemStack(Block.blockIron),
 				'B', new ItemStack(Block.stone)
 		};
 		this.itemIcon = "TurretMod3:turret_05";
@@ -35,7 +35,7 @@ public class TurretInfoT3Laser extends TurretInfo {
 		 this.addAmmo(i, new ItemStack(Item.redstone), 1);
 		 this.addAmmo(i, new ItemStack(Block.blockRedstone), 9);
 		
-		this.healItems.put(new ItemStack(Block.blockSteel), 15);
+		this.healItems.put(new ItemStack(Block.blockIron), 15);
 		this.healItems.put(new ItemStack(Item.ingotIron), 1);
 		this.healItems.put(new ItemStack(Block.obsidian), 30);
 		this.healItems.put(new ItemStack(Block.stone, 1), 1);

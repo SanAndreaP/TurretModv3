@@ -53,9 +53,9 @@ public class EntityTurret_TSSnowball extends EntityTurret_Base {
 	
 	private int getSlowdownAmplifier() {
 		int amplifier = 0;
-		if(TurretUpgrades.hasUpgrade(TUpgSlowdownII.class, this.upgrades))
+		if (TurretUpgrades.hasUpgrade(TUpgSlowdownII.class, this.upgrades))
 			amplifier = 2;
-		if(TurretUpgrades.hasUpgrade(TUpgStopMove.class, this.upgrades))
+		if (TurretUpgrades.hasUpgrade(TUpgStopMove.class, this.upgrades))
 			amplifier = 6;
 		
 		return amplifier;

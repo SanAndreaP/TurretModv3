@@ -71,13 +71,13 @@ public abstract class TurretInfo {
 		return Maps.newHashMap(this.ammoItems);
 	}
 
-	public Map<ItemStack, Integer> getHealthItems() {
+	public Map<ItemStack, Integer> func_110143_aJItems() {
 		return Maps.newHashMap(this.healItems);
 	}
 
 	public int getAmmoFromItem(ItemStack is) {
 		for (Entry<ItemStack, Integer> ent : this.ammoItems.entrySet()) {
-			if(CUS.areStacksEqualWithWCV(ent.getKey(), is))
+			if (CUS.areStacksEqualWithWCV(ent.getKey(), is))
 //			if (ent.getKey().isItemEqual(is)
 //					|| (ent.getKey().getItemDamage() == OreDictionary.WILDCARD_VALUE && ent.getKey().itemID == is.itemID))
 				return ent.getValue();
@@ -100,14 +100,14 @@ public abstract class TurretInfo {
 	public int getAmmoTypeFromItem(ItemStack is) {
 		for (Entry<Integer, List<ItemStack>> ent : this.ammoTypeItems.entrySet()) {
 			for (ItemStack entIS : ent.getValue()) {
-				if(CUS.areStacksEqualWithWCV(entIS, is))
+				if (CUS.areStacksEqualWithWCV(entIS, is))
 //				if (entIS.isItemEqual(is)
 //						|| (entIS.getItemDamage() == OreDictionary.WILDCARD_VALUE && entIS.itemID == is.itemID))
 					return ent.getKey();
 			}
 		}
-		// for(Entry<Integer, ItemStack> ent : this.ammoTypes.entrySet()) {
-		// if(ent.getValue().isItemEqual(is) || (ent.getValue().getItemDamage()
+		// for (Entry<Integer, ItemStack> ent : this.ammoTypes.entrySet()) {
+		// if (ent.getValue().isItemEqual(is) || (ent.getValue().getItemDamage()
 		// < 0 && ent.getValue().itemID == is.itemID))
 		// return ent.getKey();
 		// }
@@ -125,7 +125,7 @@ public abstract class TurretInfo {
 	public ItemStack getAmmoTypeItemWithLowestScore(int amtype) {
 		int min = -1;
 		ItemStack curIS = null;
-		if(ammoTypeItems == null || ammoTypeItems.size() < 1)
+		if (ammoTypeItems == null || ammoTypeItems.size() < 1)
 			return null;
 		for (ItemStack is : ammoTypeItems.get(amtype)) {
 			int cur = this.getAmmoFromItem(is);
@@ -137,9 +137,9 @@ public abstract class TurretInfo {
 		return curIS;
 	}
 
-	public int getHealthFromItem(ItemStack is) {
+	public int func_110143_aJFromItem(ItemStack is) {
 		for (Entry<ItemStack, Integer> ent : this.healItems.entrySet()) {
-			if(CUS.areStacksEqualWithWCV(ent.getKey(), is))
+			if (CUS.areStacksEqualWithWCV(ent.getKey(), is))
 //			if (ent.getKey().isItemEqual(is)
 //					|| (ent.getKey().getItemDamage() == OreDictionary.WILDCARD_VALUE && ent.getKey().itemID == is.itemID))
 				return ent.getValue();
@@ -171,7 +171,7 @@ public abstract class TurretInfo {
 		return this.maxAmmo;
 	}
 
-	public int getMaxHealth() {
+	public int func_110138_aP() {
 		return this.maxHealth;
 	}
 

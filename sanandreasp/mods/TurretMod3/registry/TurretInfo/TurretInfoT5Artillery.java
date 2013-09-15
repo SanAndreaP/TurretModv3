@@ -31,7 +31,7 @@ public class TurretInfoT5Artillery extends TurretInfo {
 		};
 		this.itemIcon = "TurretMod3:turret_10";
 		
-		for(int j = 0; j < 10; j++) {
+		for (int j = 0; j < 10; j++) {
 			int i = this.registerNewAmmoType("turretmod3.turret.amtp"+ItemArtilleryShells.getRealNumber(j)+"t5a");
 			 this.addAmmo(i, new ItemStack(TM3ModRegistry.artilleryBall, 1, j), 1);
 		}

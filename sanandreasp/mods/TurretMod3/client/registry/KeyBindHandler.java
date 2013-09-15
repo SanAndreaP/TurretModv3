@@ -35,9 +35,9 @@ public class KeyBindHandler extends KeyHandler {
 
 	@Override
 	public void keyDown(EnumSet<TickType> types, KeyBinding kb, boolean tickEnd, boolean isRepeat) {
-		if(types.equals(EnumSet.of(TickType.CLIENT))) {
+		if (types.equals(EnumSet.of(TickType.CLIENT))) {
 			EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-			if(player != null && player.ridingEntity != null && player.ridingEntity instanceof EntityTurret_Base && Minecraft.getMinecraft().currentScreen == null) {
+			if (player != null && player.ridingEntity != null && player.ridingEntity instanceof EntityTurret_Base && Minecraft.getMinecraft().currentScreen == null) {
 				try {
 					ByteArrayOutputStream bos = new ByteArrayOutputStream();
 					DataOutputStream dos = new DataOutputStream(bos);

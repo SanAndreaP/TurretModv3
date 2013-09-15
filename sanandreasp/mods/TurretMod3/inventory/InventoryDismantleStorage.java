@@ -154,7 +154,7 @@ public class InventoryDismantleStorage extends InventoryBasic {
     @Override
     public void openChest() {
     	super.openChest();
-		if(this.dismStg.checkForDestroy)
+		if (this.dismStg.checkForDestroy)
 			this.dismStg.toggleCheckForDestroy();
     }
     

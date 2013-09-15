@@ -17,7 +17,7 @@ public class SchedTickHandlerWorld implements IScheduledTickHandler {
 
 	@Override
 	public void tickStart(EnumSet<TickType> type, Object... tickData) {
-		for(Object obj : ((World)tickData[0]).playerEntities) {
+		for (Object obj : ((World)tickData[0]).playerEntities) {
 			TM3ModRegistry.proxy.initTM3PlayerTag((EntityPlayer)obj);
 		}
 	}

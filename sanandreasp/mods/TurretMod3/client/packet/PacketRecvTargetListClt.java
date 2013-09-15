@@ -35,7 +35,7 @@ public class PacketRecvTargetListClt extends PacketBase {
 	        }
 			
 			GuiScreen gui = Minecraft.getMinecraft().currentScreen;
-			if(gui != null && gui instanceof GuiTCUBase) {
+			if (gui != null && gui instanceof GuiTCUBase) {
 				((GuiTCUBase)gui).turret = (EntityTurret_Base) Minecraft.getMinecraft().theWorld.getEntityByID(eID);
 				((GuiTCUBase)gui).turret.targets = tgt;
 			}

@@ -23,7 +23,7 @@ public class TurretInfoT2Revolver extends TurretInfo {
 		this.name = "turretmod3.turret.namet2r";
 		this.crafting = new Object[] {
 				"SDL", " I ", "BBB",
-				'S', new ItemStack(Block.blockSteel),
+				'S', new ItemStack(Block.blockIron),
 				'D', new ItemStack(Block.dispenser),
 				'L', new ItemStack(Item.dyePowder, 1, 4),
 				'I', new ItemStack(Block.stoneBrick),
@@ -35,7 +35,7 @@ public class TurretInfoT2Revolver extends TurretInfo {
 		 this.addAmmo(i, new ItemStack(TM3ModRegistry.ammoItems, 1, 3), 1);
 		 this.addAmmo(i, new ItemStack(TM3ModRegistry.ammoItems, 1, 4), 8);
 		
-		this.healItems.put(new ItemStack(Block.blockSteel), 20);
+		this.healItems.put(new ItemStack(Block.blockIron), 20);
 		this.healItems.put(new ItemStack(Item.ingotIron), 2);
 		this.healItems.put(new ItemStack(Item.dyePowder, 1, 4), 8);
 		this.healItems.put(new ItemStack(Block.stoneBrick, 1, OreDictionary.WILDCARD_VALUE), 2);

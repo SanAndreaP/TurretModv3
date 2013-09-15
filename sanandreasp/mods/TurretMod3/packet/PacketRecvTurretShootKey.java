@@ -10,7 +10,7 @@ public class PacketRecvTurretShootKey extends PacketBase {
 
 	@Override
 	public void handle(DataInputStream iStream, EntityPlayer player) {
-		if(player.ridingEntity != null && player.ridingEntity instanceof EntityTurret_Base) {
+		if (player.ridingEntity != null && player.ridingEntity instanceof EntityTurret_Base) {
 			EntityTurret_Base turret = (EntityTurret_Base)player.ridingEntity;
 			turret.tryToShoot(true);
 		}

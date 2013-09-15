@@ -48,7 +48,7 @@ public class EntityTurret_T2Revolver extends EntityTurret_Base {
 	}
 	
 	@Override
-	public int getMaxHealth() {
+	public int func_110138_aP() {
 		return 40;
 	}
 
@@ -73,7 +73,7 @@ public class EntityTurret_T2Revolver extends EntityTurret_Base {
 	public void onUpdate() {
 		super.onUpdate();
 		
-		if(!this.worldObj.isRemote) {
+		if (!this.worldObj.isRemote) {
 			this.dataWatcher.updateObject(18, Math.max(0, this.getRightBarrelOffset() - 1));
 			this.dataWatcher.updateObject(19, Math.max(0, this.getLeftBarrelOffset() - 1));
 		}
@@ -82,7 +82,7 @@ public class EntityTurret_T2Revolver extends EntityTurret_Base {
 	@Override
 	public int getMaxShootTicks() {
 		int maxShootTicks = 10;
-		if(!this.worldObj.isRemote) {
+		if (!this.worldObj.isRemote) {
 			this.dataWatcher.updateObject(isRight ? 18 : 19, maxShootTicks);
 			this.isRight = !this.isRight;
 		}

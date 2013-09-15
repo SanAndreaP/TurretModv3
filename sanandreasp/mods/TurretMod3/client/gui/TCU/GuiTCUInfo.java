@@ -16,7 +16,7 @@ public class GuiTCUInfo extends GuiTCUBase {
 	public void drawScreen(int par1, int par2, float par3) {
 		this.drawDefaultBackground();
 
-		this.mc.renderEngine.bindTexture(TM3ModRegistry.TEX_GUITCUDIR + "page_2.png");
+		this.mc.func_110434_K().func_110577_a(TM3ModRegistry.TEX_GUITCUDIR + "page_2.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, xSize, ySize);
         
@@ -26,19 +26,19 @@ public class GuiTCUInfo extends GuiTCUBase {
         s = langman.getTranslated("turretmod3.gui.tcu.titInfo");
         this.fontRenderer.drawString(s, this.guiLeft + 6, this.guiTop + 6, 0x808080);
         
-        if(this.turret != null) {
+        if (this.turret != null) {
         	TurretInfo tInf = TurretInfo.getTurretInfo(this.turret.getClass());
         	
 		    s = langman.getTranslated("turretmod3.gui.tcu.infoHealth");
 		    this.fontRenderer.drawString(s, this.guiLeft + 6, this.guiTop + 22, 0xAA0000);
 
 		    String s1 = langman.getTranslated("turretmod3.gui.tinfo.healthpts").split("\\|")[1];
-		    s = turret.getSrvHealth() + " / " + turret.getMaxHealth() + " " + s1;
+		    s = turret.getSrvHealth() + " / " + turret.func_110138_aP() + " " + s1;
 		    this.fontRenderer.drawString(s, this.guiLeft + 12, this.guiTop + 31, 0x600000);
 		    
 		    this.drawRect(this.guiLeft + 4, this.guiTop + 41, this.guiLeft + this.xSize - 4, this.guiTop + 42, 0xFFB0B0B0);
 		    
-		    if(this.turret instanceof EntityTurret_TSForcefield) {
+		    if (this.turret instanceof EntityTurret_TSForcefield) {
 			    s = langman.getTranslated("turretmod3.gui.tcu.infoShield");
 			    this.fontRenderer.drawString(s, this.guiLeft + 6, this.guiTop + 45, 0xAAAA00);
 			    
@@ -63,7 +63,7 @@ public class GuiTCUInfo extends GuiTCUBase {
 		    s = langman.getTranslated("turretmod3.gui.tcu.infoExp");
 		    this.fontRenderer.drawString(s, this.guiLeft + 6, this.guiTop + 86, 0x00AA00);
 		    boolean isRightPlayer = this.turret.hasPlayerAccess(this.mc.thePlayer);
-		    if(this.turret.canCollectXP() && isRightPlayer) {
+		    if (this.turret.canCollectXP() && isRightPlayer) {
 		    	s = (isRightPlayer ? this.turret.getExperience() : "-") + " / " + (isRightPlayer ? this.turret.getExpCap() : "-") + " XP";
 		    } else {
 		    	s = langman.getTranslated("turretmod3.gui.tcu.infoExpNo");

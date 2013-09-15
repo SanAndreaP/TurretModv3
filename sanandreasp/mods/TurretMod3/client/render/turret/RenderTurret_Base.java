@@ -40,11 +40,11 @@ public class RenderTurret_Base extends RenderLiving {
 	
 	@Override
 	protected int shouldRenderPass(EntityLiving par1EntityLiving, int par2, float par3) {
-		if(par1EntityLiving.hurtTime <= 0) {
+		if (par1EntityLiving.hurtTime <= 0) {
 			GL11.glScalef(1.001F, 1.001F, 1.001F);
 			GL11.glTranslatef(0F, -0.001F, 0F);
 		}
-		if(!(par1EntityLiving instanceof EntityTurret_Base)) {
+		if (!(par1EntityLiving instanceof EntityTurret_Base)) {
 			return -1;
 		}
 		EntityTurret_Base turret = (EntityTurret_Base)par1EntityLiving;
@@ -75,7 +75,7 @@ public class RenderTurret_Base extends RenderLiving {
     
     @Override
     public void doRenderLiving(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9) {
-    	if(!(par1EntityLiving.riddenByEntity != null && par1EntityLiving.riddenByEntity == Minecraft.getMinecraft().thePlayer && Minecraft.getMinecraft().gameSettings.thirdPersonView == 0))
+    	if (!(par1EntityLiving.riddenByEntity != null && par1EntityLiving.riddenByEntity == Minecraft.getMinecraft().thePlayer && Minecraft.getMinecraft().gameSettings.thirdPersonView == 0))
     		super.doRenderLiving(par1EntityLiving, par2, par4, par6, par8, par9);
     }
     
@@ -130,12 +130,12 @@ public class RenderTurret_Base extends RenderLiving {
                 var14.drawString(playerName, -var14.getStringWidth(playerName) / 2, 18, 0xBBBBBB);
                 GL11.glDisable(GL11.GL_TEXTURE_2D);
                 
-                double health = ((double)par1Turret.getSrvHealth() / (double)par1Turret.getMaxHealth()) * 50D - 25D;
+                double health = ((double)par1Turret.getSrvHealth() / (double)par1Turret.func_110138_aP()) * 50D - 25D;
                 double ammo = ((double)par1Turret.getAmmo() / (double)par1Turret.getMaxAmmo()) * 50D - 25D;
                 double exp = ((double)par1Turret.getExperience() / (double)par1Turret.getExpCap()) * 50D - 25D;
                 boolean hasXP = TurretUpgrades.hasUpgrade(TUpgExperience.class, par1Turret.upgrades) && par1Turret.hasPlayerAccess(Minecraft.getMinecraft().thePlayer);
                 
-                if(TurretUpgrades.hasUpgrade(TUpgInfAmmo.class, par1Turret.upgrades) && par1Turret.getAmmo() > 0) {
+                if (TurretUpgrades.hasUpgrade(TUpgInfAmmo.class, par1Turret.upgrades) && par1Turret.getAmmo() > 0) {
                 	ammo = 25D;
                 }
                 
@@ -183,7 +183,7 @@ public class RenderTurret_Base extends RenderLiving {
                 var15.addVertex(25D, 14D, 0D);
                 var15.addVertex(25D, 13.5D, 0D);
                 
-                if(hasXP) {
+                if (hasXP) {
                     var15.addVertex(exp, 14D, 0D);
                     var15.addVertex(exp, 16D, 0D);
                     var15.addVertex(25D, 16D, 0D);
@@ -218,7 +218,7 @@ public class RenderTurret_Base extends RenderLiving {
                 var15.addVertex(ammo, 11.5D, 0D);
                 
                 //exp bar
-                if(hasXP) {
+                if (hasXP) {
                     var15.setColorRGBA_F(0F, 1F, 0.5F, 1F);
                     var15.addVertex(-25D, 14D, 0D);
                     var15.addVertex(-25D, 16D, 0D);

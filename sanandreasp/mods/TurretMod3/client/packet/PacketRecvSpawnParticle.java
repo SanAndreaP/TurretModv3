@@ -24,37 +24,37 @@ public class PacketRecvSpawnParticle extends PacketBase {
 			Entity entity = eID > -1 ? Minecraft.getMinecraft().theWorld.getEntityByID(eID) : null;
 			switch(ID) {
 				case 0:
-					for(int i = 0; i < 5; i++) {
-						if(entity != null && entity.riddenByEntity != null && entity.riddenByEntity != player || Minecraft.getMinecraft().gameSettings.thirdPersonView > 0 || entity != null && entity.riddenByEntity == null)
+					for (int i = 0; i < 5; i++) {
+						if (entity != null && entity.riddenByEntity != null && entity.riddenByEntity != player || Minecraft.getMinecraft().gameSettings.thirdPersonView > 0 || entity != null && entity.riddenByEntity == null)
 							Minecraft.getMinecraft().effectRenderer.addEffect(new EntityBulletShotFX(Minecraft.getMinecraft().theWorld, posX + this.rand.nextFloat()*0.2F - 0.1F, posY - 0.1F, posZ + this.rand.nextFloat()*0.2F - 0.1F, 1F, 1F, 1F));
 					}
 					break;
 				case 1:
-					for(int i = 0; i < 5; i++) {
-						if(entity != null && entity.riddenByEntity != null && entity.riddenByEntity != player || Minecraft.getMinecraft().gameSettings.thirdPersonView > 0 || entity != null && entity.riddenByEntity == null)
+					for (int i = 0; i < 5; i++) {
+						if (entity != null && entity.riddenByEntity != null && entity.riddenByEntity != player || Minecraft.getMinecraft().gameSettings.thirdPersonView > 0 || entity != null && entity.riddenByEntity == null)
 							Minecraft.getMinecraft().effectRenderer.addEffect(new EntityBulletShotFX(Minecraft.getMinecraft().theWorld, posX + this.rand.nextFloat()*0.2F - 0.1F, posY - 0.1F, posZ + this.rand.nextFloat()*0.2F - 0.1F, 0.8F, 0.2F, 0.2F));
 					}
 					break;
 				case 2:
-					if(entity != null && entity.riddenByEntity != null && entity.riddenByEntity != player || Minecraft.getMinecraft().gameSettings.thirdPersonView > 0 || entity != null && entity.riddenByEntity == null)
+					if (entity != null && entity.riddenByEntity != null && entity.riddenByEntity != player || Minecraft.getMinecraft().gameSettings.thirdPersonView > 0 || entity != null && entity.riddenByEntity == null)
 						Minecraft.getMinecraft().effectRenderer.addEffect(new EntityLavaFX(Minecraft.getMinecraft().theWorld, posX + this.rand.nextFloat()*0.2F - 0.1F, posY - 0.1F, posZ + this.rand.nextFloat()*0.2F - 0.1F));
 					break;
 				case 3:
-					for(int i = 0; i < 5; i++) {
-						if(entity != null && entity.riddenByEntity != null && entity.riddenByEntity != player || Minecraft.getMinecraft().gameSettings.thirdPersonView > 0 || entity != null && entity.riddenByEntity == null)
+					for (int i = 0; i < 5; i++) {
+						if (entity != null && entity.riddenByEntity != null && entity.riddenByEntity != player || Minecraft.getMinecraft().gameSettings.thirdPersonView > 0 || entity != null && entity.riddenByEntity == null)
 							Minecraft.getMinecraft().effectRenderer.addEffect(new EntityBulletShotFX(Minecraft.getMinecraft().theWorld, posX + this.rand.nextFloat()*0.2F - 0.1F, posY - 0.1F, posZ + this.rand.nextFloat()*0.2F - 0.1F, 0.2F, 0.2F, 0.8F).setGlowing());
 					}
 					break;
 				case 4:
-					if(entity != null)
+					if (entity != null)
 						Minecraft.getMinecraft().effectRenderer.addEffect(new EntityBulletShotFX(Minecraft.getMinecraft().theWorld, entity.posX, entity.posY, entity.posZ, 0.2F, 0.2F, 0.8F).setGlowing());
 					break;
 				case 5:
-					if(entity != null)
+					if (entity != null)
 						Minecraft.getMinecraft().effectRenderer.addEffect(new EntityBulletShotFX(Minecraft.getMinecraft().theWorld, entity.posX, entity.posY, entity.posZ, 0.2F, 0.2F, 0.2F));
 					break;
 				case 6:
-					if(entity != null) {
+					if (entity != null) {
 						for (int i1 = 0; i1 < 20; i1++) {
 							double d4 = this.rand.nextGaussian() * 0.02D;
 							double d1 = this.rand.nextGaussian() * 0.02D;
@@ -74,13 +74,13 @@ public class PacketRecvSpawnParticle extends PacketBase {
 					}
 					break;
 				case 7:
-					for(int i = 0; i < 5; i++) {
-						if(entity != null && entity.riddenByEntity != null && entity.riddenByEntity != player || Minecraft.getMinecraft().gameSettings.thirdPersonView > 0 || entity != null && entity.riddenByEntity == null)
+					for (int i = 0; i < 5; i++) {
+						if (entity != null && entity.riddenByEntity != null && entity.riddenByEntity != player || Minecraft.getMinecraft().gameSettings.thirdPersonView > 0 || entity != null && entity.riddenByEntity == null)
 							Minecraft.getMinecraft().effectRenderer.addEffect(new EntityBulletShotFX(Minecraft.getMinecraft().theWorld, posX + this.rand.nextFloat()*0.2F - 0.1F, posY - 0.1F, posZ + this.rand.nextFloat()*0.2F - 0.1F, 0.106F, 0.482F, 0.419F).setGlowing());
 					}
 					break;
 				case 8:
-					if(entity != null)
+					if (entity != null)
 						Minecraft.getMinecraft().effectRenderer.addEffect(new EntityBulletShotFX(Minecraft.getMinecraft().theWorld, entity.posX, entity.posY, entity.posZ, 0.106F, 0.482F, 0.419F).setGlowing());
 					break;
 				case 9:
@@ -98,8 +98,8 @@ public class PacketRecvSpawnParticle extends PacketBase {
 					}
 					break;
 				case 10:
-					for(int i = 0; i < 20; i++) {
-						if(entity != null && entity.riddenByEntity != null && entity.riddenByEntity != player || Minecraft.getMinecraft().gameSettings.thirdPersonView > 0 || entity != null && entity.riddenByEntity == null)
+					for (int i = 0; i < 20; i++) {
+						if (entity != null && entity.riddenByEntity != null && entity.riddenByEntity != player || Minecraft.getMinecraft().gameSettings.thirdPersonView > 0 || entity != null && entity.riddenByEntity == null)
 							Minecraft.getMinecraft().effectRenderer.addEffect(new EntityBulletShotFX(Minecraft.getMinecraft().theWorld, posX + this.rand.nextFloat()*0.2F - 0.1F, posY - 0.1F, posZ + this.rand.nextFloat()*0.2F - 0.1F, 0.8F, 0.8F, 0.8F));
 					}
 					break;

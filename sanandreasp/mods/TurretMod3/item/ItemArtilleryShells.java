@@ -65,7 +65,7 @@ public class ItemArtilleryShells extends Item {
 				par3List.add(langman.getTranslated("turretmod3.item.artilleryInfo").split("\\|")[1]);
 				break;
 		}
-		if(par1ItemStack.getItemDamage() > 4) {
+		if (par1ItemStack.getItemDamage() > 4) {
 			par3List.add(langman.getTranslated("turretmod3.item.artilleryInfo").split("\\|")[3]);
 		}
 	}
@@ -79,14 +79,14 @@ public class ItemArtilleryShells extends Item {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List par3List) {
-		for(int i = 0; i < 10; i++) {
+		for (int i = 0; i < 10; i++) {
 			par3List.add(new ItemStack(this, 1, i));
 		}
 	}
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void updateIcons(IconRegister par1IconRegister) {
+	public void registerIcons(IconRegister par1IconRegister) {
 		this.itemIcons = new Icon[5];
 		this.itemIcons[0] = par1IconRegister.registerIcon("TurretMod3:artShell_small");
 		this.itemIcons[1] = par1IconRegister.registerIcon("TurretMod3:artShell_big");

@@ -48,10 +48,10 @@ public class GuiTInfoPG3 extends GuiTInfoBase {
 		this.healList.clear();
 		
         Iterator<ItemStack> dummyA = this.turretInf.getAmmoItems().keySet().iterator();
-        Iterator<ItemStack> dummyH = this.turretInf.getHealthItems().keySet().iterator();
+        Iterator<ItemStack> dummyH = this.turretInf.func_110143_aJItems().keySet().iterator();
         
-        for(int i = 0; dummyA.hasNext(); i++) this.ammoList.put(i, dummyA.next());
-        for(int i = 0; dummyH.hasNext(); i++) this.healList.put(i, dummyH.next());
+        for (int i = 0; dummyA.hasNext(); i++) this.ammoList.put(i, dummyA.next());
+        for (int i = 0; dummyH.hasNext(); i++) this.healList.put(i, dummyH.next());
         
         this.tabTurretItems.enabled = false;
         
@@ -64,7 +64,7 @@ public class GuiTInfoPG3 extends GuiTInfoBase {
 	public void drawScreen(int par1, int par2, float par3) {
         this.drawDefaultBackground();
 
-		this.mc.renderEngine.bindTexture(TM3ModRegistry.TEX_GUIINFO + "page_3.png");
+		this.mc.func_110434_K().func_110577_a(TM3ModRegistry.TEX_GUIINFO + "page_3.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, xSize, ySize);
         
@@ -79,7 +79,7 @@ public class GuiTInfoPG3 extends GuiTInfoBase {
         str = langman.getTranslated("turretmod3.gui.tinfo.healitems");
         this.fontRenderer.drawString(str, this.guiLeft + 8, this.guiTop + 130, 0x808080);
 
-		this.mc.renderEngine.bindTexture(TM3ModRegistry.TEX_GUIINFO + "page_3.png");
+		this.mc.func_110434_K().func_110577_a(TM3ModRegistry.TEX_GUIINFO + "page_3.png");
         int scrollX = 163;
         int scrollYA = 49 + (int)(69F * currScrollPosA);
         int scrollYH = 140 + (int)(69F * currScrollPosH);
@@ -92,19 +92,19 @@ public class GuiTInfoPG3 extends GuiTInfoBase {
 		int hoverID = -1;
 		int hoverType = -1;
 
-        for(int i = this.entryPosA; i < 4 + entryPosA && i < this.ammoList.size(); i++) {
-        	if(this.ammoList.get(i) != null) {
+        for (int i = this.entryPosA; i < 4 + entryPosA && i < this.ammoList.size(); i++) {
+        	if (this.ammoList.get(i) != null) {
 	        	int icnX = this.guiLeft + 8;
 	        	int icnY = this.guiTop + 50 + (i-entryPosA)*19;
 	        	RenderHelper.enableGUIStandardItemLighting();
 	        	GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 	        	ItemStack renderedItem = this.ammoList.get(i).copy();
-	        	if(renderedItem.getItemDamage() == OreDictionary.WILDCARD_VALUE) renderedItem.setItemDamage(0);
+	        	if (renderedItem.getItemDamage() == OreDictionary.WILDCARD_VALUE) renderedItem.setItemDamage(0);
 	        	this.drawItemStack(renderedItem, icnX, icnY);
 	        	RenderHelper.disableStandardItemLighting();
 	        	str = this.ammoList.get(i).getDisplayName();
 	        	this.fontRenderer.drawString(str, 26 + this.guiLeft, icnY + 4, 0xFFFFFF);
-	        	if(par1 >= this.guiLeft + 7 && par1 < this.guiLeft + 159 && par2 >= this.guiTop + 49 + (i-entryPosA)*19 && par2 < this.guiTop + 67 + (i-entryPosA)*19) {
+	        	if (par1 >= this.guiLeft + 7 && par1 < this.guiLeft + 159 && par2 >= this.guiTop + 49 + (i-entryPosA)*19 && par2 < this.guiTop + 67 + (i-entryPosA)*19) {
 	        		hoverID = i;
 	        		hoverX = icnX;
 	        		hoverY = icnY;
@@ -113,25 +113,25 @@ public class GuiTInfoPG3 extends GuiTInfoBase {
         	}
         }
         
-        for(int i = this.entryPosH; i < 4 + entryPosH && i < this.healList.size(); i++) {
-        	if(this.healList.get(i) != null) {
+        for (int i = this.entryPosH; i < 4 + entryPosH && i < this.healList.size(); i++) {
+        	if (this.healList.get(i) != null) {
 	        	int icnX = this.guiLeft + 8;
 	        	int icnY = this.guiTop + 141 + (i-entryPosH)*19;
 	        	RenderHelper.enableGUIStandardItemLighting();
 	        	GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 	        	ItemStack renderedItem = this.healList.get(i).copy();
-	        	if(renderedItem.getItemDamage() == OreDictionary.WILDCARD_VALUE) renderedItem.setItemDamage(0);
+	        	if (renderedItem.getItemDamage() == OreDictionary.WILDCARD_VALUE) renderedItem.setItemDamage(0);
 	        	this.drawItemStack(renderedItem, icnX, icnY);
 	        	RenderHelper.disableStandardItemLighting();
 	        	str = this.healList.get(i).getDisplayName();
 	        	this.fontRenderer.drawString(str, 26 + this.guiLeft, icnY + 4, 0xFFFFFF);
-	        	if(par1 >= this.guiLeft + 7 && par1 < this.guiLeft + 159 && par2 >= this.guiTop + 140 + (i-entryPosH)*19 && par2 < this.guiTop + 158 + (i-entryPosH)*19) {
+	        	if (par1 >= this.guiLeft + 7 && par1 < this.guiLeft + 159 && par2 >= this.guiTop + 140 + (i-entryPosH)*19 && par2 < this.guiTop + 158 + (i-entryPosH)*19) {
 	        		hoverID = i;
 	        		hoverX = icnX;
 	        		hoverY = icnY;
 	        		hoverType = 1;
 	        	}
-//	        	int hp = this.turretInf.getHealthFromItem(this.healList.get(i));
+//	        	int hp = this.turretInf.func_110143_aJFromItem(this.healList.get(i));
 //	        	str = langman.getTranslated("turretmod3.gui.tinfo.healthpts");
 //	        	str = hp + " " + str.substring(hp > 1 ? str.lastIndexOf('|')+1 : 0, hp > 1 ? str.length() : str.lastIndexOf('|'));
 //	        	this.fontRenderer.drawString(str, 26 + this.guiLeft, icnY + 9, 0xE0E0E0);
@@ -145,16 +145,16 @@ public class GuiTInfoPG3 extends GuiTInfoBase {
         int scrollMinY = this.guiTop + 49;
         int scrollMaxY = scrollMinY + 75;
         
-        if(!this.isScrollingA && var4 && par1 > scrollMinX && par1 < scrollMaxX && par2 > scrollMinY && par2 < scrollMaxY && this.ammoList.size() > 4) {
+        if (!this.isScrollingA && var4 && par1 > scrollMinX && par1 < scrollMaxX && par2 > scrollMinY && par2 < scrollMaxY && this.ammoList.size() > 4) {
         	this.isScrollingA = true;
-        } else if(!var4) {
+        } else if (!var4) {
         	this.isScrollingA = false;
         }
         
-        if(this.isScrollingA) {
+        if (this.isScrollingA) {
         	int sY = (int) (69F / (float)(this.ammoList.size() - 3));
-	        for(int y = 0; y < this.ammoList.size() - 3; y++) {
-	        	if(par2 > sY * y + this.guiTop + 49 || par1 < sY * y + this.guiTop + 49) {
+	        for (int y = 0; y < this.ammoList.size() - 3; y++) {
+	        	if (par2 > sY * y + this.guiTop + 49 || par1 < sY * y + this.guiTop + 49) {
 	        		this.entryPosA = y;
 	        	}
 	        }
@@ -164,41 +164,41 @@ public class GuiTInfoPG3 extends GuiTInfoBase {
         scrollMinY = this.guiTop + 140;
         scrollMaxY = scrollMinY + 75;
         
-        if(!this.isScrollingH && var4 && par1 > scrollMinX && par1 < scrollMaxX && par2 > scrollMinY && par2 < scrollMaxY && this.healList.size() > 4) {
+        if (!this.isScrollingH && var4 && par1 > scrollMinX && par1 < scrollMaxX && par2 > scrollMinY && par2 < scrollMaxY && this.healList.size() > 4) {
         	this.isScrollingH = true;
-        } else if(!var4) {
+        } else if (!var4) {
         	this.isScrollingH = false;
         }
         
-        if(this.isScrollingH) {
+        if (this.isScrollingH) {
         	int sY = (int) (69F / (float)(this.healList.size() - 3));
-        	for(int y = 0; y < this.healList.size() - 3; y++) {
-        		if(par2 > sY * y + this.guiTop + 140 || par1 < sY * y + this.guiTop + 140) {
+        	for (int y = 0; y < this.healList.size() - 3; y++) {
+        		if (par2 > sY * y + this.guiTop + 140 || par1 < sY * y + this.guiTop + 140) {
         			this.entryPosH = y;
         		}
         	}
         	this.currScrollPosH = ((float)(par2 - scrollMinY - 3) / 69F);
         }
         
-        if(this.currScrollPosA < 0.0F)
+        if (this.currScrollPosA < 0.0F)
         	this.currScrollPosA = 0.0F;
-        if(this.currScrollPosA > 1.0F)
+        if (this.currScrollPosA > 1.0F)
         	this.currScrollPosA = 1.0F;
-        if(this.currScrollPosH < 0.0F)
+        if (this.currScrollPosH < 0.0F)
         	this.currScrollPosH = 0.0F;
-        if(this.currScrollPosH > 1.0F)
+        if (this.currScrollPosH > 1.0F)
         	this.currScrollPosH = 1.0F;
         
 		super.drawScreen(par1, par2, par3);
         
-        if(hoverX >= 0 && hoverY >= 0 && hoverID >= 0 && hoverType >= 0) {
+        if (hoverX >= 0 && hoverY >= 0 && hoverID >= 0 && hoverType >= 0) {
         	this.drawRect(hoverX-1, hoverY-1, hoverX + 152, hoverY + 17, 0x40FFFFFF);
-        	if(hoverType == 0) {
+        	if (hoverType == 0) {
 //	        	int am = this.turretInf.getAmmoFromItem(this.ammoList.get(hoverID));
 	        	String type = this.turretInf.getAmmoTypeNameFromIndex(this.turretInf.getAmmoTypeFromItem(this.ammoList.get(hoverID)));
 	    		this.drawTooltip(type, this.ammoList.get(hoverID).copy(), par1, par2);
-        	} else if(hoverType == 1) {
-//        		int hp = this.turretInf.getHealthFromItem(this.healList.get(hoverID));
+        	} else if (hoverType == 1) {
+//        		int hp = this.turretInf.func_110143_aJFromItem(this.healList.get(hoverID));
         		this.drawTooltip("", this.healList.get(hoverID).copy(), par1, par2);
         	}
         }
@@ -219,10 +219,10 @@ public class GuiTInfoPG3 extends GuiTInfoBase {
         {
             if (var1 < 0)
             {
-            	if(mX >= this.guiLeft + 6 && mX < this.guiLeft + 170 && mY >= this.guiTop + 48 && mY < this.guiTop + 125 && this.ammoList.size() > 4) {
+            	if (mX >= this.guiLeft + 6 && mX < this.guiLeft + 170 && mY >= this.guiTop + 48 && mY < this.guiTop + 125 && this.ammoList.size() > 4) {
 	                this.entryPosA = Math.min(this.entryPosA + 1, this.ammoList.size() - 4);
 	    	        this.currScrollPosA = (float)this.entryPosA / ((float)(this.ammoList.size() - 4));
-            	} else if(mX >= this.guiLeft + 6 && mX < this.guiLeft + 170 && mY >= this.guiTop + 139 && mY < this.guiTop + 216 && this.healList.size() > 4) {
+            	} else if (mX >= this.guiLeft + 6 && mX < this.guiLeft + 170 && mY >= this.guiTop + 139 && mY < this.guiTop + 216 && this.healList.size() > 4) {
 	                this.entryPosH = Math.min(this.entryPosH + 1, this.healList.size() - 4);
 	    	        this.currScrollPosH = (float)this.entryPosH / ((float)(this.healList.size() - 4));
             	}
@@ -230,10 +230,10 @@ public class GuiTInfoPG3 extends GuiTInfoBase {
 
             if (var1 > 0)
             {
-            	if(mX >= this.guiLeft + 6 && mX < this.guiLeft + 170 && mY >= this.guiTop + 48 && mY < this.guiTop + 125 && this.ammoList.size() > 4) {
+            	if (mX >= this.guiLeft + 6 && mX < this.guiLeft + 170 && mY >= this.guiTop + 48 && mY < this.guiTop + 125 && this.ammoList.size() > 4) {
 	            	this.entryPosA = Math.max(this.entryPosA - 1, 0);
 	    	        this.currScrollPosA = (float)this.entryPosA / ((float)(this.ammoList.size() - 4));
-            	} else if(mX >= this.guiLeft + 6 && mX < this.guiLeft + 170 && mY >= this.guiTop + 139 && mY < this.guiTop + 216 && this.healList.size() > 4) {
+            	} else if (mX >= this.guiLeft + 6 && mX < this.guiLeft + 170 && mY >= this.guiTop + 139 && mY < this.guiTop + 216 && this.healList.size() > 4) {
 	                this.entryPosH = Math.max(this.entryPosH - 1, 0);
 	    	        this.currScrollPosH = (float)this.entryPosH / ((float)(this.healList.size() - 4));
             	}
@@ -260,23 +260,23 @@ public class GuiTInfoPG3 extends GuiTInfoBase {
         
         is.getItem().addInformation(is, this.mc.thePlayer, var4, false);
         
-        if(var4.size() > 0) {
+        if (var4.size() > 0) {
         	var4.add("\2477-------");
         }
         
         int count = 0;
         
-        if(aType.length() > 0) {
+        if (aType.length() > 0) {
         	count = this.turretInf.getAmmoFromItem(is);
 	    	str = langman.getTranslated("turretmod3.gui.tinfo.projectiles");
         } else {
-        	count = this.turretInf.getHealthFromItem(is);
+        	count = this.turretInf.func_110143_aJFromItem(is);
         	str = langman.getTranslated("turretmod3.gui.tinfo.healthpts");
         }
     	str = count + " " + str.substring(count > 1 ? str.lastIndexOf('|')+1 : 0, count > 1 ? str.length() : str.lastIndexOf('|'));
     	
         var4.add("\247b"+str);
-        if(aType.length() > 0) {
+        if (aType.length() > 0) {
         	String s = this.langman.getTranslated("turretmod3.gui.tcu.infoType");
         	var4.add("\2473" + s + ": " + aType);
         }
@@ -326,11 +326,11 @@ public class GuiTInfoPG3 extends GuiTInfoBase {
             this.drawGradientRect(var6 - 3, var7 - 3, var6 + var5 + 3, var7 - 3 + 1, var11, var11);
             this.drawGradientRect(var6 - 3, var7 + var9 + 2, var6 + var5 + 3, var7 + var9 + 3, var12, var12);
 
-            for(String s : var4) {
+            for (String s : var4) {
             	this.fontRenderer.drawStringWithShadow(s, var6, var7, 0xFFFFFF);
             	var7+=10;
             }
-//            if(aType.length() > 0) this.fontRenderer.drawStringWithShadow(var4.get(1), var6, var7+=10, 0xAAAAAA);
+//            if (aType.length() > 0) this.fontRenderer.drawStringWithShadow(var4.get(1), var6, var7+=10, 0xAAAAAA);
 
             this.zLevel = 0.0F;
             itemRenderer.zLevel = 0.0F;

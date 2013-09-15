@@ -29,7 +29,7 @@ public class GuiDismantledStorage extends GuiContainer {
 	
 	@Override
 	public void drawScreen(int par1, int par2, float par3) {
-		if(this.instance == null || this.instance.isDead ) {
+		if (this.instance == null || this.instance.isDead ) {
 			mc.thePlayer.closeScreen();
 			return;
 		}
@@ -41,7 +41,7 @@ public class GuiDismantledStorage extends GuiContainer {
     protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3)
     {
 //        int var4 = this.mc.renderEngine.getTexture("/gui/container.png");
-		this.mc.renderEngine.bindTexture("/gui/container.png");
+		this.mc.func_110434_K().func_110577_a("/gui/container.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         int var5 = (this.width - this.xSize) / 2;
         int var6 = (this.height - this.ySize) / 2;

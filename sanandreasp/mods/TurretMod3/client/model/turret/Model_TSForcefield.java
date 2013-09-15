@@ -175,7 +175,7 @@ public class Model_TSForcefield extends ModelTurret_Base {
 		GL11.glPushMatrix();
 		GL11.glRotatef(f3, 0F, 1F, 0F);
 		GL11.glRotatef(25F, 0F, 0F, 1F);
-		if(this.isGlowTexture) {
+		if (this.isGlowTexture) {
 			GL11.glScalef(1.01F, 1.0F, 1.0F);
 			GL11.glTranslatef(0.006F, 0.001F, 0.0F);
 		}
@@ -185,7 +185,7 @@ public class Model_TSForcefield extends ModelTurret_Base {
 		GL11.glPushMatrix();
 		GL11.glRotatef(f3 + (float)Math.PI/2F, 0F, 1F, 0F);
 		GL11.glRotatef(25F, 1F, 0F, 0F);
-		if(this.isGlowTexture) {
+		if (this.isGlowTexture) {
 			GL11.glScalef(1.0F, 1.0F, 1.01F);
 			GL11.glTranslatef(0.0F, 0.001F, -0.006F);
 		}
@@ -195,7 +195,7 @@ public class Model_TSForcefield extends ModelTurret_Base {
 		GL11.glPushMatrix();
 		GL11.glRotatef(f3 + (float)Math.PI, 0F, 1F, 0F);
 		GL11.glRotatef(25F, 0F, 0F, -1F);
-		if(this.isGlowTexture) {
+		if (this.isGlowTexture) {
 			GL11.glScalef(1.01F, 1.0F, 1.0F);
 			GL11.glTranslatef(-0.006F, 0.001F, 0.0F);
 		}
@@ -205,7 +205,7 @@ public class Model_TSForcefield extends ModelTurret_Base {
 		GL11.glPushMatrix();
 		GL11.glRotatef(f3 - (float)Math.PI/2F, 0F, 1F, 0F);
 		GL11.glRotatef(25F, -1F, 0F, 0F);
-		if(this.isGlowTexture) {
+		if (this.isGlowTexture) {
 			GL11.glScalef(1.0F, 1.0F, 1.01F);
 			GL11.glTranslatef(0.0F, 0.001F, 0.006F);
 		}
@@ -215,7 +215,7 @@ public class Model_TSForcefield extends ModelTurret_Base {
 		
 		AntennaBase.render(f5);
 		GL11.glPushMatrix();
-		if(this.isGlowTexture) {
+		if (this.isGlowTexture) {
 			GL11.glScalef(1.0F, 1.01F, 1.0F);
 			GL11.glTranslatef(0.0F, 0.009F, 0.0F);
 		}
@@ -223,7 +223,7 @@ public class Model_TSForcefield extends ModelTurret_Base {
 		GL11.glPopMatrix();
 		
 		GL11.glPushMatrix();
-		if(this.isGlowTexture) {
+		if (this.isGlowTexture) {
 			GL11.glScalef(1.1F, 1.1F, 1.1F);
 			GL11.glTranslatef(0.010F, -0.11F, -0.00F);
 		}
@@ -231,7 +231,7 @@ public class Model_TSForcefield extends ModelTurret_Base {
 		GL11.glPopMatrix();
 
 		GL11.glPushMatrix();
-		if(this.isGlowTexture) {
+		if (this.isGlowTexture) {
 			GL11.glScalef(1.1F, 1.1F, 1.1F);
 			GL11.glTranslatef(-0.010F, -0.11F, -0.00F);
 		}
@@ -260,11 +260,11 @@ public class Model_TSForcefield extends ModelTurret_Base {
         
         EntityTurret_TSForcefield turret = (EntityTurret_TSForcefield)entity;
         
-        float healthRot = -((float)Math.PI / 2F) * ((float)(turret.getMaxHealth() - turret.getSrvHealth()) / (float)turret.getMaxHealth());
+        float healthRot = -((float)Math.PI / 2F) * ((float)(turret.func_110138_aP() - turret.getSrvHealth()) / (float)turret.func_110138_aP());
         this.HealthBar.rotateAngleZ = healthRot;
         float ammoRot = ((float)Math.PI / 2F) * ((float)(turret.getMaxShieldPts() - turret.getShieldPts()) / (float)turret.getMaxShieldPts());
 
-        if(TurretUpgrades.hasUpgrade(TUpgInfAmmo.class, turret.upgrades) && turret.getAmmo() > 0) {
+        if (TurretUpgrades.hasUpgrade(TUpgInfAmmo.class, turret.upgrades) && turret.getAmmo() > 0) {
         	ammoRot = 0F;
         }
         this.AmmoBar.rotateAngleZ = ammoRot;

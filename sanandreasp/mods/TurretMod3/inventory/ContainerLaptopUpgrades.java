@@ -46,7 +46,7 @@ public class ContainerLaptopUpgrades extends Container {
         	});
         }
         
-        for(var4 = 0; var4 < 8; ++var4) {
+        for (var4 = 0; var4 < 8; ++var4) {
         	this.addSlotToContainer(new Slot(this.invBlock, var4 + 8, 57 + 18*var4, 56) {
         		@Override
         		public boolean isItemValid(ItemStack par1ItemStack) {
@@ -135,7 +135,7 @@ public class ContainerLaptopUpgrades extends Container {
         Slot slot;
         ItemStack itemstack1;
         
-        if(par1ItemStack.stackSize < 1)
+        if (par1ItemStack.stackSize < 1)
         	return false;
 
         while (k < par3) {

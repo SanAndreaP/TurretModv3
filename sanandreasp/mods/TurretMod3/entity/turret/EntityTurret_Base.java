@@ -105,19 +105,19 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 	}
 	
 	public void addExperience(int par1Xp) {
-		if(par1Xp < 0) {
+		if (par1Xp < 0) {
 			FMLLog.warning("XP value cannot be less than 0! XP value was %s", par1Xp);
 		}
-		if(par1Xp > this.getExpCap()) {
+		if (par1Xp > this.getExpCap()) {
 			FMLLog.warning("XP value cannot be greater than the current XP cap! XP cap is %s, XP value was %s", this.getExpCap(), par1Xp);
 		}
-		if(this.getExperience()+par1Xp <= this.getExpCap())
+		if (this.getExperience()+par1Xp <= this.getExpCap())
 			this.dataWatcher.updateObject(23, (short)(this.getExperience() + par1Xp));
 	}
 	
 	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, int par2) {
-		if(par1DamageSource.isFireDamage() && hasFireImmunity())
+		if (par1DamageSource.isFireDamage() && hasFireImmunity())
 			return false;
 		
 		return super.attackEntityFrom(par1DamageSource, par2);
@@ -150,30 +150,30 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
     }
 	
 	protected void checkForEnemies() {
-		if(this.currentTarget == null && !this.worldObj.isRemote) {
+		if (this.currentTarget == null && !this.worldObj.isRemote) {
 			List<Entity> rangedEntities = getRangedEntities();
-			for(Entity entity : rangedEntities) {
-				if(entity != null && entity instanceof EntityLiving && isTargetValid((EntityLiving)entity)) {
+			for (Entity entity : rangedEntities) {
+				if (entity != null && entity instanceof EntityLiving && isTargetValid((EntityLiving)entity)) {
 					this.currentTarget = (EntityLiving) entity;
 					break;
 				}
 			}
 		}
-		if(this.currentTarget != null && !this.worldObj.isRemote) {
-			if(!isTargetValid(this.currentTarget))
+		if (this.currentTarget != null && !this.worldObj.isRemote) {
+			if (!isTargetValid(this.currentTarget))
 				this.currentTarget = null;
 		}
 	}
 	
 	@Override
 	protected void collideWithEntity(Entity par1Entity) {
-		if(!(par1Entity instanceof EntityMobileBase)) super.collideWithEntity(par1Entity);
+		if (!(par1Entity instanceof EntityMobileBase)) super.collideWithEntity(par1Entity);
 	}
 	
 	protected void decrAmmo() {
 		this.isEconomied = !this.isEconomied && TurretUpgrades.hasUpgrade(TUpgEconomy.class, this.upgrades);
-		if(!isEconomied) {
-			if(!TurretUpgrades.hasUpgrade(TUpgInfAmmo.class, this.upgrades))
+		if (!isEconomied) {
+			if (!TurretUpgrades.hasUpgrade(TUpgInfAmmo.class, this.upgrades))
 				this.dataWatcher.updateObject(20, (short) Math.max(0, this.getAmmo()-1));
 		}
 	}
@@ -187,7 +187,7 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 	}
 	
 	public void setFrequency(int freq) {
-		if(freq < 0 || freq > 255) return;
+		if (freq < 0 || freq > 255) return;
 		this.dataWatcher.updateObject(29, (byte)freq);
 	}
 	
@@ -199,30 +199,30 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 		turretItem.stackSize = 1;
 		stg.inventory.addItemStackToInventory(turretItem);
 		
-		for(ItemStack is : this.upgrades.values()) {
-			if(is != null) stg.inventory.addItemStackToInventory(is.copy());
+		for (ItemStack is : this.upgrades.values()) {
+			if (is != null) stg.inventory.addItemStackToInventory(is.copy());
 		}
 		
 		ItemStack is = this.tInfo.getAmmoTypeItemWithLowestScore(this.getAmmoType());
-		if(is != null) {
+		if (is != null) {
 			ItemStack is1 = is.copy();
 			is1.stackSize = MathHelper.floor_double((double)this.getAmmo() / (double)this.tInfo.getAmmoFromItem(is1));
-			if(is1.getItemDamage() == OreDictionary.WILDCARD_VALUE) is1.setItemDamage(0);
+			if (is1.getItemDamage() == OreDictionary.WILDCARD_VALUE) is1.setItemDamage(0);
 			ItemStack[] splitIS = CUS.getGoodItemStacks(is1);
 			boolean b = true;
-			for(ItemStack is2 : splitIS) {
+			for (ItemStack is2 : splitIS) {
 				stg.inventory.addItemStackToInventory(is2);
 			}
 		}
 		
-		attackEntityFrom(DamageSource.magic, Math.max(this.getHealth(), this.getMaxHealth()));
+		attackEntityFrom(DamageSource.magic, Math.max(this.func_110143_aJ(), this.func_110138_aP()));
 		
 		this.worldObj.spawnEntityInWorld(stg);
 	}
 	
 	public void faceEntity(Entity par1Entity, float par2, float par3)
     {
-		if(par1Entity == null) return;
+		if (par1Entity == null) return;
         double var4 = par1Entity.posX - this.posX;
         double var8 = par1Entity.posZ - this.posZ;
         double var6;
@@ -245,7 +245,7 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
     }
 	
 	protected TileEntityChest getAdjacendChest(TileEntityChest par1Chest) {
-    	if(par1Chest == null) return null;
+    	if (par1Chest == null) return null;
 		return	par1Chest.adjacentChestXNeg != null ? par1Chest.adjacentChestXNeg :
 				par1Chest.adjacentChestXPos != null ? par1Chest.adjacentChestXPos :
 				par1Chest.adjacentChestZNeg != null ? par1Chest.adjacentChestZNeg :
@@ -258,23 +258,23 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
     	int y = MathHelper.floor_double(this.posY);
     	int z = MathHelper.floor_double(this.posZ);
     	TileEntity te = this.worldObj.getBlockTileEntity(x, y, z);
-    	if(te != null && te instanceof IInventory) inventories.add((IInventory) te);
+    	if (te != null && te instanceof IInventory) inventories.add((IInventory) te);
     	te = this.worldObj.getBlockTileEntity(x + 1, y, z);
-    	if(te != null && te instanceof IInventory) inventories.add((IInventory) te);
+    	if (te != null && te instanceof IInventory) inventories.add((IInventory) te);
     	te = this.worldObj.getBlockTileEntity(x, y, z + 1);
-    	if(te != null && te instanceof IInventory) inventories.add((IInventory) te);
+    	if (te != null && te instanceof IInventory) inventories.add((IInventory) te);
     	te = this.worldObj.getBlockTileEntity(x - 1, y, z);
-    	if(te != null && te instanceof IInventory) inventories.add((IInventory) te);
+    	if (te != null && te instanceof IInventory) inventories.add((IInventory) te);
     	te = this.worldObj.getBlockTileEntity(x, y, z - 1);
-    	if(te != null && te instanceof IInventory) inventories.add((IInventory) te);
+    	if (te != null && te instanceof IInventory) inventories.add((IInventory) te);
     	te = this.worldObj.getBlockTileEntity(x, y - 1, z);
-    	if(te != null && te instanceof IInventory) inventories.add((IInventory) te);
+    	if (te != null && te instanceof IInventory) inventories.add((IInventory) te);
     	int prevInd = inventories.size();
-    	for(int i = 0; i < prevInd; i++) {
+    	for (int i = 0; i < prevInd; i++) {
     		IInventory inv = inventories.get(i);
-    		if(inv instanceof TileEntityChest) {
+    		if (inv instanceof TileEntityChest) {
     			TileEntityChest adjChest = getAdjacendChest((TileEntityChest)inv);
-    			if(adjChest != null) {
+    			if (adjChest != null) {
     				inventories.add(adjChest);
     			}
     		}
@@ -333,7 +333,7 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 	}
 	
 	@Override
-	public int getMaxHealth() {
+	public int func_110138_aP() {
 		return 20;
 	}
 	
@@ -387,21 +387,21 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
     	boolean playSound = false;
     	
     	lblChest:
-    	for(IInventory chest : containers) {
-    		if(chest != null) {
-    			for(int i = 0; i < chest.getSizeInventory() && (this.getAmmo() < this.getMaxAmmo() || this.getSrvHealth() < this.getMaxHealth()); i++) {
+    	for (IInventory chest : containers) {
+    		if (chest != null) {
+    			for (int i = 0; i < chest.getSizeInventory() && (this.getAmmo() < this.getMaxAmmo() || this.getSrvHealth() < this.func_110138_aP()); i++) {
     				ItemStack cstSlot = chest.getStackInSlot(i);
-    				if(cstSlot != null) {
-    					if(tInfo.getHealthFromItem(cstSlot) > 0 && this.getHealth()+tInfo.getHealthFromItem(cstSlot) <= this.getMaxHealth()) {
-    						this.heal(tInfo.getHealthFromItem(cstSlot));
+    				if (cstSlot != null) {
+    					if (tInfo.func_110143_aJFromItem(cstSlot) > 0 && this.func_110143_aJ()+tInfo.func_110143_aJFromItem(cstSlot) <= this.func_110138_aP()) {
+    						this.heal(tInfo.func_110143_aJFromItem(cstSlot));
     						chest.decrStackSize(i, 1);
     						playSound = true;
     						break lblChest;
-    					} else if(tInfo.getAmmoFromItem(cstSlot) > 0 && this.getAmmo() < this.getMaxAmmo() && tInfo.getAmmoTypeFromItem(cstSlot) == this.getAmmoType()
+    					} else if (tInfo.getAmmoFromItem(cstSlot) > 0 && this.getAmmo() < this.getMaxAmmo() && tInfo.getAmmoTypeFromItem(cstSlot) == this.getAmmoType()
     					  && !(this.getAmmo() > 0 && TurretUpgrades.hasUpgrade(TUpgInfAmmo.class, this.upgrades))) {
     						int needed = this.getMaxAmmo() - this.getAmmo();
-    						if(needed >= tInfo.getAmmoFromItem(cstSlot)) {
-	    						if(cstSlot.stackSize * tInfo.getAmmoFromItem(cstSlot) > needed) {
+    						if (needed >= tInfo.getAmmoFromItem(cstSlot)) {
+	    						if (cstSlot.stackSize * tInfo.getAmmoFromItem(cstSlot) > needed) {
 	    							int decrStackSizeCnt = MathHelper.floor_double((double)needed / (double)tInfo.getAmmoFromItem(cstSlot));
 	    							this.incrAmmo(tInfo.getAmmoFromItem(cstSlot) * decrStackSizeCnt);
 	        						chest.decrStackSize(i, decrStackSizeCnt);
@@ -420,11 +420,11 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
     		}
     	}
     	
-    	if(playSound) this.worldObj.playSoundAtEntity(this, "turretmod3.collect.chest", 1.0F, 1.0F);
+    	if (playSound) this.worldObj.playSoundAtEntity(this, "turretmod3.collect.chest", 1.0F, 1.0F);
     }
 	
 	public boolean hasPlayerAccess(EntityPlayer player) {
-		if(player == null) return false;
+		if (player == null) return false;
 		
 		return this.getPlayerName().equals(player.username) || TM3ModRegistry.proxy.getPlayerTM3Data(player).getBoolean("isOP");
 	}
@@ -442,16 +442,16 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 	@Override
 	public boolean interact(EntityPlayer par1EntityPlayer) {
 		ItemStack held = par1EntityPlayer.getHeldItem();
-		if(held != null) {
-			if(tInfo.getHealthFromItem(held) > 0 && this.getHealth()+tInfo.getHealthFromItem(held) <= this.getMaxHealth()) {
-				this.heal(tInfo.getHealthFromItem(held));
+		if (held != null) {
+			if (tInfo.func_110143_aJFromItem(held) > 0 && this.func_110143_aJ()+tInfo.func_110143_aJFromItem(held) <= this.func_110138_aP()) {
+				this.heal(tInfo.func_110143_aJFromItem(held));
 				par1EntityPlayer.inventory.decrStackSize(par1EntityPlayer.inventory.currentItem, 1);
 				this.worldObj.playSoundAtEntity(this, "turretmod3.collect.ia_get", 1.0F, 1.0F);
 				return true;
-			} else if(tInfo.getAmmoFromItem(held) > 0 && this.getAmmo() < this.getMaxAmmo() && tInfo.getAmmoTypeFromItem(held) == this.getAmmoType()) {
+			} else if (tInfo.getAmmoFromItem(held) > 0 && this.getAmmo() < this.getMaxAmmo() && tInfo.getAmmoTypeFromItem(held) == this.getAmmoType()) {
 				int needed = this.getMaxAmmo() - this.getAmmo();
-				if(needed >= tInfo.getAmmoFromItem(held)) {
-					if(held.stackSize * tInfo.getAmmoFromItem(held) > needed) {
+				if (needed >= tInfo.getAmmoFromItem(held)) {
+					if (held.stackSize * tInfo.getAmmoFromItem(held) > needed) {
 						int decrStackSizeCnt = MathHelper.ceiling_double_int((double)needed / (double)tInfo.getAmmoFromItem(held));
 						this.incrAmmo(needed);
 						par1EntityPlayer.inventory.decrStackSize(par1EntityPlayer.inventory.currentItem, decrStackSizeCnt);
@@ -464,16 +464,16 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 						return true;
 					}
 				}
-			} else if(tInfo.getAmmoFromItem(held) > 0 && tInfo.getAmmoTypeFromItem(held) != this.getAmmoType() && this.getPlayerName().equals(par1EntityPlayer.username)) {
+			} else if (tInfo.getAmmoFromItem(held) > 0 && tInfo.getAmmoTypeFromItem(held) != this.getAmmoType() && this.getPlayerName().equals(par1EntityPlayer.username)) {
 				ItemStack is = this.tInfo.getAmmoTypeItemWithLowestScore(this.getAmmoType()).copy();
 				is.stackSize = MathHelper.floor_double((double)this.getAmmo() / (double)this.tInfo.getAmmoFromItem(is));
-				if(is.getItemDamage() < 0) is.setItemDamage(0);
+				if (is.getItemDamage() < 0) is.setItemDamage(0);
 				ItemStack[] splitIS = CUS.getGoodItemStacks(is);
 				boolean b = true;
-				for(ItemStack is1 : splitIS) {
+				for (ItemStack is1 : splitIS) {
 					b = b && par1EntityPlayer.inventory.addItemStackToInventory(is1);
 				}
-				if(b) {
+				if (b) {
 					int ammo = this.tInfo.getAmmoFromItem(held);
 					int needed = Math.min(this.getMaxAmmo() / ammo, held.stackSize);
 					this.setAmmo(needed * ammo);
@@ -482,13 +482,13 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 					this.worldObj.playSoundAtEntity(this, "turretmod3.collect.ia_get", 1.0F, 1.0F);
 					return true;
 				}
-			} else if(held.itemID == TM3ModRegistry.tcu.itemID) {
-				if(		(this.riddenByEntity != null
+			} else if (held.itemID == TM3ModRegistry.tcu.itemID) {
+				if (		(this.riddenByEntity != null
 							&& this.riddenByEntity == par1EntityPlayer
 							|| this.riddenByEntity == null && this.getPlayerName().equals(par1EntityPlayer.username)
 							&& par1EntityPlayer.isSneaking())
 						&& TurretUpgrades.hasUpgrade(TUpgControl.class, this.upgrades)) {
-					if(!worldObj.isRemote)
+					if (!worldObj.isRemote)
 						par1EntityPlayer.mountEntity(this);
 				} else {
 					par1EntityPlayer.openGui(TM3ModRegistry.instance, 0, this.worldObj, this.entityId, 0, 0);
@@ -497,25 +497,25 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 			} else {
 				int newUpgId = -1;
 				upgCounter:
-				for(int i = 0; i < TurretUpgrades.getUpgradeCount(); i++) {
+				for (int i = 0; i < TurretUpgrades.getUpgradeCount(); i++) {
 					TurretUpgrades upg = TurretUpgrades.getUpgradeFromID(i);
 					boolean isTurretInList = false;
-					for(Class tCls : upg.getTurrets()) {
-						if(tCls.isAssignableFrom(this.getClass())) {
+					for (Class tCls : upg.getTurrets()) {
+						if (tCls.isAssignableFrom(this.getClass())) {
 							isTurretInList = true;
 							break;
 						}
 					}
-					if(!isTurretInList) {
+					if (!isTurretInList) {
 						continue;
-					} else if(!this.upgrades.containsKey(i) || this.upgrades.get(i) == null) {
-						if(CUS.areStacksEqualWithWCV(upg.getItem(), held)) {
-							if(upg.getEnchantment() != null) {
+					} else if (!this.upgrades.containsKey(i) || this.upgrades.get(i) == null) {
+						if (CUS.areStacksEqualWithWCV(upg.getItem(), held)) {
+							if (upg.getEnchantment() != null) {
 								NBTTagList ench = held.getEnchantmentTagList();
 						        for (int j = 0; ench != null && j < ench.tagCount(); ++j)
 						        {
 						        	NBTTagCompound var4 = (NBTTagCompound)ench.tagAt(j);
-						        	if(var4.getShort("id") == upg.getEnchantment().effectId) {
+						        	if (var4.getShort("id") == upg.getEnchantment().effectId) {
 						        		newUpgId = i;
 						        		break upgCounter;
 						        	}
@@ -526,38 +526,38 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 								break;
 							}
 						}
-					} else if(this.upgrades.containsKey(i) 
+					} else if (this.upgrades.containsKey(i) 
 							&& CUS.areStacksEqualWithWCV(this.upgrades.get(i), held)) {
 						break;
 					}
 				}
-				if(newUpgId >= 0 && TurretUpgrades.getUpgradeFromID(newUpgId).hasRequiredUpgrade(this.upgrades)) {
+				if (newUpgId >= 0 && TurretUpgrades.getUpgradeFromID(newUpgId).hasRequiredUpgrade(this.upgrades)) {
 					ItemStack newUpgItem = held.copy();
 					newUpgItem.stackSize = 1;
 					this.upgrades.put(newUpgId, newUpgItem);
 					par1EntityPlayer.inventory.decrStackSize(par1EntityPlayer.inventory.currentItem, 1);
 					par1EntityPlayer.triggerAchievement(AchievementPageTM.upgrade);
 					this.worldObj.playSoundAtEntity(this, "turretmod3.collect.ia_get", 1.0F, 1.0F);
-					if(!this.worldObj.isRemote) PacketRecvUpgrades.send(this);
+					if (!this.worldObj.isRemote) PacketRecvUpgrades.send(this);
 					return true;
 				}
 			}
-		} else if(this.riddenByEntity != null && this.riddenByEntity == par1EntityPlayer) {
+		} else if (this.riddenByEntity != null && this.riddenByEntity == par1EntityPlayer) {
 			par1EntityPlayer.mountEntity(this);
 		}
 		return false;
 	}
 	
 	protected boolean isEntityTargeted(Entity entity) {
-		if(!this.useUniqueTargets())
+		if (!this.useUniqueTargets())
 			return false;
 		
         List<Entity> turrets = getRangedTurrets();
         boolean b = false;
-        for(Entity turret : turrets) {
-        	if(turret instanceof EntityTurret_Base && turret != this) {
+        for (Entity turret : turrets) {
+        	if (turret instanceof EntityTurret_Base && turret != this) {
         		b = ((EntityTurret_Base)turret).getCurrentTarget() == entity;
-        		if(b) break;
+        		if (b) break;
         	}
         }
         return b;
@@ -571,7 +571,7 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
         String entityStr = (String) EntityList.classToStringMapping.get(entity.getClass());
         boolean inList = this.targets.containsKey(entityStr) && this.targets.get(entityStr) && !isEntityTargeted(entity);
         
-        return !(entity.isDead || entity.getHealth() <= 0
+        return !(entity.isDead || entity.func_110143_aJ() <= 0
         		|| (!Double.isInfinite(wdtRng) && entity.getDistanceSqToEntity(this) > (double)(wdtRng * wdtRng))
         		|| !(this.canEntityBeSeen(entity) || seeThrough)
         		|| (!Double.isInfinite(hgtDRng) && this.posY - entity.posY > hgtDRng)
@@ -586,7 +586,7 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
     {
         ++this.deathTime;
         
-        if(this.riddenByEntity != null) {
+        if (this.riddenByEntity != null) {
         	this.riddenByEntity.mountEntity(this);
         }
 
@@ -594,7 +594,7 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
         {
             int var1;
 
-            if(!this.worldObj.isRemote) {
+            if (!this.worldObj.isRemote) {
 	            var1 = this.getExperience();
 	
 	            while (var1 > 0)
@@ -609,11 +609,11 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 
             for (var1 = 0; var1 < 20 && this.worldObj.isRemote; ++var1)
             {
-            	for(Object obj : this.tInfo.getCrafting()) {
-            		if(obj != null && obj instanceof ItemStack) {
+            	for (Object obj : this.tInfo.getCrafting()) {
+            		if (obj != null && obj instanceof ItemStack) {
             			String s = "";
             			ItemStack is = ((ItemStack)obj);
-            			if(is.getItem() instanceof ItemBlock) {
+            			if (is.getItem() instanceof ItemBlock) {
             				s = "tilecrack_"+is.itemID+"_"+is.getItemDamage();
             			} else {
                 			s = "iconcrack_"+is.itemID;
@@ -633,14 +633,14 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 	@Override
     public void onKillEntity(EntityLiving par1EntityLiving) {
     	super.onKillEntity(par1EntityLiving);
-    	if(this.canCollectXP()) {
+    	if (this.canCollectXP()) {
     		this.addExperience(par1EntityLiving.experienceValue);
     	}
     	EntityPlayer player = this.worldObj.getPlayerEntityByName(this.getPlayerName());
-    	if(player != null) {
-    		if(this.riddenByEntity == null)
+    	if (player != null) {
+    		if (this.riddenByEntity == null)
     			player.triggerAchievement(AchievementPageTM.firstStrike);
-    		else if(this.riddenByEntity == player)
+    		else if (this.riddenByEntity == player)
     			player.triggerAchievement(AchievementPageTM.camKill);
 //    		System.out.println("TRIGGER");
     	}
@@ -680,7 +680,7 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
             this.motionZ = 0.0D;
         }
         
-//        if(!this.onGround && this.ridingEntity == null) {
+//        if (!this.onGround && this.ridingEntity == null) {
 //        	this.motionY -= 0.05D;
 //        }
 
@@ -702,11 +702,11 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 
         this.worldObj.theProfiler.endSection();
         
-        if(this.worldObj.isRemote && this.ticksExisted == 5) {
+        if (this.worldObj.isRemote && this.ticksExisted == 5) {
         	PacketSendUpgrades.send(this);
         }
         
-        if(this.isActive() && !(this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayer) && (this.getCurrentTargetStr() == null || this.getCurrentTargetStr().length() < 1))
+        if (this.isActive() && !(this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayer) && (this.getCurrentTargetStr() == null || this.getCurrentTargetStr().length() < 1))
         {
             this.rotationYawHead += 1F;
             this.rotationPitch = 0F;
@@ -719,45 +719,45 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 		AxisAlignedBB AABBBlock[] = new AxisAlignedBB[2];
 		Block belowBlock = Block.blocksList[this.worldObj.getBlockId(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY)-1, MathHelper.floor_double(this.posZ))];
 		boolean intercept = false;
-		if(belowBlock != null) {
+		if (belowBlock != null) {
 			AxisAlignedBB aabb = belowBlock.getCollisionBoundingBoxFromPool(this.worldObj, MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY)-1, MathHelper.floor_double(this.posZ));
 			intercept = aabb != null && this.boundingBox.intersectsWith(aabb);
 		}
-		if(!intercept) {
+		if (!intercept) {
 			moveEntity(0F, this.motionY, 0F);
 		} else {
 			moveEntity(0F, 0F, 0F);
 			this.motionY = 0F;
 		}
 
-		if(!this.isActive()) {
-			if(this.riddenByEntity != null)
+		if (!this.isActive()) {
+			if (this.riddenByEntity != null)
 				this.riddenByEntity.mountEntity(null);
-			if(this.rotationPitch < 25) this.rotationPitch += 0.5F;
+			if (this.rotationPitch < 25) this.rotationPitch += 0.5F;
 			this.prevRotationYawHead = this.rotationYawHead;
 			super.onUpdate();
 			return;
 		}
 		
-		if(this.getShootTicks() > 0) this.decrShootTicks();
+		if (this.getShootTicks() > 0) this.decrShootTicks();
 		
 		EntityPlayer riddenPlayer = (this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayer) ? (EntityPlayer) this.riddenByEntity : null;
-		if(riddenPlayer != null) {
+		if (riddenPlayer != null) {
 			this.prevRotationPitch = this.rotationPitch = riddenPlayer.rotationPitch;
 		}
 		
 		super.onUpdate();
 		
-		if(riddenPlayer != null) {
+		if (riddenPlayer != null) {
 			this.prevRotationPitch = this.rotationPitch = riddenPlayer.rotationPitch;
 			this.rotationYawHead = riddenPlayer.rotationYawHead;
-			if(!this.worldObj.isRemote) this.dataWatcher.updateObject(26, "");
+			if (!this.worldObj.isRemote) this.dataWatcher.updateObject(26, "");
 		} else {
 			checkForEnemies();
 		
-			if(!this.worldObj.isRemote && this.currentTarget != null) {
+			if (!this.worldObj.isRemote && this.currentTarget != null) {
 				this.dataWatcher.updateObject(26, EntityList.getEntityString(this.currentTarget));
-			} else if(!this.worldObj.isRemote) {
+			} else if (!this.worldObj.isRemote) {
 				this.dataWatcher.updateObject(26, "");
 			}
 		
@@ -766,18 +766,18 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 			rotationYaw = prevRotationYaw = renderYawOffset = prevRenderYawOffset = 0F;
 		}
 		
-		if(!this.worldObj.isRemote) {
-			if(this.ticksExisted % 5 == 0 && TurretUpgrades.hasUpgrade(TUpgChestGrabbing.class, this.upgrades))
+		if (!this.worldObj.isRemote) {
+			if (this.ticksExisted % 5 == 0 && TurretUpgrades.hasUpgrade(TUpgChestGrabbing.class, this.upgrades))
 				this.grabContentFromChests();
 			this.dataWatcher.updateObject(21, this.health);
 		}
 		
-		if(this.ridingEntity == null) {
-			if(this.posX > Math.floor(posX) + 0.501F || this.posX < Math.floor(posX) + 0.499F) {
+		if (this.ridingEntity == null) {
+			if (this.posX > Math.floor(posX) + 0.501F || this.posX < Math.floor(posX) + 0.499F) {
 				this.posX = Math.floor(posX) + 0.5;
 				this.setPositionAndUpdate(this.posX, this.posY, this.posZ);
 			}
-			if(this.posZ > Math.floor(posZ) + 0.501F || this.posZ < Math.floor(posZ) + 0.499F) {
+			if (this.posZ > Math.floor(posZ) + 0.501F || this.posZ < Math.floor(posZ) + 0.499F) {
 				this.posZ = Math.floor(posZ) + 0.5;
 				this.setPositionAndUpdate(this.posX, this.posY, this.posZ);
 			}
@@ -818,7 +818,7 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
     	this.isEconomied = par1nbtTagCompound.getBoolean("isEconomied");
     	this.setFrequency(par1nbtTagCompound.hasKey("frequency") ? par1nbtTagCompound.getInteger("frequency") : 0);
     	
-		if(!this.worldObj.isRemote) PacketRecvUpgrades.send(this);
+		if (!this.worldObj.isRemote) PacketRecvUpgrades.send(this);
     }
 	
 	public void remExperience() {
@@ -834,9 +834,9 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 	}
 	
     public void setPlayerName(String par1Player) {
-		for(Object obj : this.worldObj.playerEntities) {
+		for (Object obj : this.worldObj.playerEntities) {
 			EntityPlayer player = (EntityPlayer)obj;
-			if(player.username.equals(par1Player)) {
+			if (player.username.equals(par1Player)) {
 				this.dataWatcher.updateObject(24, par1Player);
 				return;
 			}
@@ -849,7 +849,7 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 	}
 
     public void setTurretName(String par1Name) {
-    	if(par1Name.length() < 64)
+    	if (par1Name.length() < 64)
     		this.dataWatcher.updateObject(25, par1Name);
 	}
     
@@ -863,7 +863,7 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
         TurretProjectile var2 = this.getProjectile();
         var2.isPickupable = !TurretUpgrades.hasUpgrade(TUpgInfAmmo.class, this.upgrades) && !this.isEconomied;
         var2.ammoType = this.getAmmoType();
-        if(isRidden) {
+        if (isRidden) {
         	EntityPlayer player = (EntityPlayer) this.riddenByEntity;
         	var2.hasNoTarget = var2.isEndermanDamageable = true;
         	var2.setLocationAndAngles(this.posX, this.posY + (double)this.getEyeHeight(), this.posZ, player.rotationYaw, player.rotationPitch);
@@ -896,9 +896,9 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
     }
     
     public void tryToShoot(boolean isRidden) {
-		if((this.currentTarget != null || isRidden) && !this.worldObj.isRemote && this.health > 0) {
-			if(this.getShootTicks() <= 0) {
-				if(this.getAmmo() > 0) {
+		if ((this.currentTarget != null || isRidden) && !this.worldObj.isRemote && this.health > 0) {
+			if (this.getShootTicks() <= 0) {
+				if (this.getAmmo() > 0) {
 					this.shootProjectile(isRidden);
 			        this.decrAmmo();
 				} else {
@@ -917,14 +917,14 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
         this.moveForward = 0.0F;
         float var1 = (float)wdtRange;
 
-        if(!this.isActive())
+        if (!this.isActive())
         	return;
         
         if (this.currentTarget != null)
         {
             this.faceEntity(this.currentTarget, 10.0F, (float)this.getVerticalFaceSpeed());
         }
-        else if(this.worldObj.isRemote && !(this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayer))
+        else if (this.worldObj.isRemote && !(this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayer))
         {
             this.rotationYawHead += 1F;
             this.rotationPitch = 0F;
@@ -960,7 +960,7 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 		double z = this.posZ + 0.5 * -(Math.cos(this.rotationYawHead / 180.0F * (float)Math.PI));
 		
         this.riddenByEntity.setPosition(x, this.posY + this.getMountedYOffset() + this.riddenByEntity.getYOffset(), z);
-        if(this.riddenByEntity.isEntityInsideOpaqueBlock())
+        if (this.riddenByEntity.isEntityInsideOpaqueBlock())
             this.riddenByEntity.setPosition(this.posX, this.posY + this.getMountedYOffset() + this.riddenByEntity.getYOffset(), this.posZ);
 	}
     

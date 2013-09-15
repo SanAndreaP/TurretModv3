@@ -83,7 +83,7 @@ public class RenderLaptop extends TileEntitySpecialRenderer {
         
 	    this.bindTextureByName(TM3ModRegistry.TEX_LAPGLOW + "(" + Integer.toString(par1TileEntityLaptop.randomLightmap) + ").png");
         
-        if(par1TileEntityLaptop.screenAngle >= 0.9999F) {
+        if (par1TileEntityLaptop.screenAngle >= 0.9999F) {
 	        GL11.glPushMatrix();
 	        GL11.glDisable(GL11.GL_LIGHTING);
 	        GL11.glEnable(GL11.GL_BLEND);
@@ -99,24 +99,6 @@ public class RenderLaptop extends TileEntitySpecialRenderer {
 			GL11.glPopMatrix();
         }
 
-//            GL11.glDisable(GL11.GL_LIGHTING);
-//            GL11.glEnable(GL11.GL_BLEND);
-//            GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE);
-//    		char var5 = 0x000F0;
-//    		int var9 = var5 % 65536;
-//    		int var7 = var5 / 65536;
-//    		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit,
-//    				var9 / 1.0F, var7 / 1.0F);
-//            renderRay(0F + currAngle, te.renderCurrHeight, var10);
-//            renderRay(180F + currAngle, te.renderCurrHeight, var10);
-//            renderRay(90F + currAngle, te.renderCurrHeight, var10);
-//            renderRay(270F + currAngle, te.renderCurrHeight, var10);
-//            
-//            GL11.glDisable(GL11.GL_BLEND);
-//            GL11.glEnable(GL11.GL_LIGHTING);
-//            GL11.glEnable(GL11.GL_TEXTURE_2D);
-//            GL11.glPopMatrix();
-        
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
         GL11.glPopMatrix();
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);

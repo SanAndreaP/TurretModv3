@@ -31,24 +31,24 @@ public class PacketRecvTurretSettings extends PacketBase {
 					break;
 				case 0x3:
 					EntityMobileBase base = (EntityMobileBase) (turret.ridingEntity instanceof EntityMobileBase ? turret.ridingEntity : null);
-					if(base != null) {
+					if (base != null) {
 						turret.mountEntity(null);
 						turret.posY -= 0.8D;
 						lblPos:
-						for(int x = -1; x <= 1; x++) {
-							for(int z = -1; z <= 1; z++) {
-								if(Math.abs(x) + Math.abs(z) != 0) {
+						for (int x = -1; x <= 1; x++) {
+							for (int z = -1; z <= 1; z++) {
+								if (Math.abs(x) + Math.abs(z) != 0) {
 									double pX = turret.posX + x;
 									double pZ = turret.posZ + z;
 									double pY = turret.posY;
 
 									base.setPosition(pX, pY, pZ);
-									if(!base.isEntityInsideOpaqueBlock())
+									if (!base.isEntityInsideOpaqueBlock())
 										break lblPos;
 								}
 							}
 						}
-						if(base.isEntityInsideOpaqueBlock())
+						if (base.isEntityInsideOpaqueBlock())
 							base.setPosition(turret.posX, turret.posY, turret.posZ);
 					}
 					break;

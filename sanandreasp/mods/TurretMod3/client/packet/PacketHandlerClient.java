@@ -8,7 +8,7 @@ import java.util.Map;
 
 import com.google.common.collect.Maps;
 
-import sanandreasp.mods.EnderStuffPlus.tileentity.TileEntity_BiomeChanger;
+import sanandreasp.mods.EnderStuffPlus.tileentity.TileEntityBiomeChanger;
 import sanandreasp.mods.TurretMod3.client.gui.TCU.GuiTCUBase;
 import sanandreasp.mods.TurretMod3.client.gui.TCU.GuiTCUTargets;
 import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_Base;

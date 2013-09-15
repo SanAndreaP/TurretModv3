@@ -42,7 +42,7 @@ public class GuiLaptopTargets extends GuiLaptop_Base {
         this.targetList = trTargets.getTargetList();
 		List<String> entities = new ArrayList<String>(EntityList.classToStringMapping.values());
 		List<String> stdTargets = trTargets.getTargetStrings();
-		for(String entityName : entities) {
+		for (String entityName : entities) {
 			checkedTargets.put(entityName, stdTargets.contains(entityName));
 		}
 		this.tabTargets.enabled = false;
@@ -57,7 +57,7 @@ public class GuiLaptopTargets extends GuiLaptop_Base {
 	public void drawScreen(int par1, int par2, float par3) {
 		super.drawScreen(par1, par2, par3);
 		
-		this.mc.renderEngine.bindTexture(TM3ModRegistry.TEX_GUITCUDIR + "page_1.png");
+		this.mc.func_110434_K().func_110577_a(TM3ModRegistry.TEX_GUITCUDIR + "page_1.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         int scrollX = 203;
         int scrollY = 18 + (int)(91F * currScrollPos);
@@ -65,37 +65,37 @@ public class GuiLaptopTargets extends GuiLaptop_Base {
         
         this.fontRenderer.drawString(langman.getTranslated("turretmod3.gui.laptop.titTargets"), this.guiLeft + 6, this.guiTop + 6, 0x808080);
 
-		for(int i = this.entryPos; i < 7 + this.entryPos; i++) {
+		for (int i = this.entryPos; i < 7 + this.entryPos; i++) {
 	        int x = this.guiLeft + 48, y = this.guiTop + 21 + 13*(i-this.entryPos);
-			if(i + entryPos < this.targetList.size() || this.targetList.size() > 7) {
+			if (i + entryPos < this.targetList.size() || this.targetList.size() > 7) {
 				boolean title = false;
 				String s = targetList.get(i);
 				boolean checked = this.checkedTargets.containsKey(s) && this.checkedTargets.get(s);
 				boolean hovering = par1 < x + 11 && par1 >= x && par2 < y + 11 && par2 >= y;
-				if(s.startsWith("\n")) {
+				if (s.startsWith("\n")) {
 					title = true;
 					s = "\247e\247o" + langman.getTranslated(s.replaceAll("\n", "")) + "\247r";
 					this.drawRect(x, y-1, x + this.xSize - 104, y, 0xFFFFFF66);
 					this.drawRect(x, y + 11, x + this.xSize - 104, y + 12, 0xFFFFFF66);
 				}
-			    if(!title) {
+			    if (!title) {
 			        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-					this.mc.renderEngine.bindTexture(TM3ModRegistry.TEX_GUITCUDIR + "page_1.png");
-			    	if(!checked) {
-			    		if(hovering)
+					this.mc.func_110434_K().func_110577_a(TM3ModRegistry.TEX_GUITCUDIR + "page_1.png");
+			    	if (!checked) {
+			    		if (hovering)
 			    			drawTexturedModalRect(x, y, 176, 14, 11, 11);
 			    		else
 			    			drawTexturedModalRect(x, y, 176, 47, 11, 11);
 			    	} else  {
-			    		if(hovering)
+			    		if (hovering)
 			    			drawTexturedModalRect(x, y, 176, 25, 11, 11);
 			    		else
 			    			drawTexturedModalRect(x, y, 176, 36, 11, 11);
 			    	}
 			    } else {
 			        GL11.glColor4f(1.0F, 1.0F, 0.0F, 1.0F);
-					this.mc.renderEngine.bindTexture(TM3ModRegistry.TEX_GUITCUDIR + "page_1.png");
-		    		if(hovering)
+					this.mc.func_110434_K().func_110577_a(TM3ModRegistry.TEX_GUITCUDIR + "page_1.png");
+		    		if (hovering)
 		    			drawTexturedModalRect(x, y, 176, 14, 11, 11);
 		    		else
 		    			drawTexturedModalRect(x, y, 176, 47, 11, 11);
@@ -105,7 +105,7 @@ public class GuiLaptopTargets extends GuiLaptop_Base {
 				this.fontRenderer.drawString(name.contains(".") ? name.substring(name.lastIndexOf('.')+1) : name, x + (title ? 25 : 15), y + 2, 0xFFFFFF);
 			} else {
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-				this.mc.renderEngine.bindTexture(TM3ModRegistry.TEX_GUITCUDIR + "page_1.png");
+				this.mc.func_110434_K().func_110577_a(TM3ModRegistry.TEX_GUITCUDIR + "page_1.png");
 		        drawTexturedModalRect(x, y, 148, 192, 11, 11);
 			}
 		}
@@ -117,24 +117,24 @@ public class GuiLaptopTargets extends GuiLaptop_Base {
         int scrollMinY = this.guiTop + 19;
         int scrollMaxY = scrollMinY + 97;
         
-        if(!this.isScrolling && var4 && par1 > scrollMinX && par1 < scrollMaxX && par2 > scrollMinY && par2 < scrollMaxY) {
+        if (!this.isScrolling && var4 && par1 > scrollMinX && par1 < scrollMaxX && par2 > scrollMinY && par2 < scrollMaxY) {
         	this.isScrolling = true;
-        } else if(!var4) {
+        } else if (!var4) {
         	this.isScrolling = false;
         }
         
-        for(int i = 0; i < 7 && Mouse.isButtonDown(0) && !this.isMousePressed; i++) {
+        for (int i = 0; i < 7 && Mouse.isButtonDown(0) && !this.isMousePressed; i++) {
         	int x = this.guiLeft + 48, y = this.guiTop + 21 + 13*i;
-        	if(par1 < x + 11 && par1 >= x && par2 < y + 11 && par2 >= y) {
+        	if (par1 < x + 11 && par1 >= x && par2 < y + 11 && par2 >= y) {
         		int tgID = i + this.entryPos;
         		boolean title = targetList.get(tgID).startsWith("\n");
-        		if(!title) {
+        		if (!title) {
 		    		boolean tgSel = this.checkedTargets.get(targetList.get(tgID));
 		    		this.checkedTargets.put(targetList.get(tgID), !tgSel);
         		} else {
         			String nm = "";
 		    		boolean tgSel = !this.getGroupMajority(tgID);
-        			for(int j = tgID + 1; !nm.startsWith("\n") && j < this.targetList.size(); j++) {
+        			for (int j = tgID + 1; !nm.startsWith("\n") && j < this.targetList.size(); j++) {
     		    		nm = targetList.get(j);
     		    		this.checkedTargets.put(nm, tgSel);
     		    		nm = j+1 < this.targetList.size() ? targetList.get(j+1) : "";
@@ -146,33 +146,33 @@ public class GuiLaptopTargets extends GuiLaptop_Base {
         
         this.isMousePressed = var4;
         
-        if(this.isScrolling) {
+        if (this.isScrolling) {
         	float sY = (91F / (float)(this.targetList.size() - 7));
-	        for(int y = 0; y < this.targetList.size() - 6; y++) {
-	        	if(par2 > sY * y + this.guiTop + 18) {
+	        for (int y = 0; y < this.targetList.size() - 6; y++) {
+	        	if (par2 > sY * y + this.guiTop + 18) {
 	        		this.entryPos = y;
 	        	}
 	        }
 	        this.currScrollPos = ((float)(par2 - scrollMinY) / 91F);
         }
         
-        if(this.currScrollPos < 0.0F)
+        if (this.currScrollPos < 0.0F)
         	this.currScrollPos = 0.0F;
-        if(this.currScrollPos > 1.0F)
+        if (this.currScrollPos > 1.0F)
         	this.currScrollPos = 1.0F;
 	}
 	
 	private boolean getGroupMajority(int start) {
 		List<Boolean> b = new ArrayList<Boolean>();
-		for(int i = start+1; i < this.targetList.size(); i++) {
+		for (int i = start+1; i < this.targetList.size(); i++) {
 			String name = this.targetList.get(i);
-			if(name.length() < 1 || name.startsWith("\n")) break;
+			if (name.length() < 1 || name.startsWith("\n")) break;
 			boolean b1 = this.checkedTargets.get(name);
 			b.add(b1);
 		}
 		int trues = 0;
-		for(int i = 0; i < b.size(); i++) {
-			if(b.get(i)) trues++;
+		for (int i = 0; i < b.size(); i++) {
+			if (b.get(i)) trues++;
 		}
 		return trues > b.size() / 2;
 	}
@@ -202,7 +202,7 @@ public class GuiLaptopTargets extends GuiLaptop_Base {
 	@Override
 	protected void actionPerformed(GuiButton par1GuiButton) {
 		super.actionPerformed(par1GuiButton);
-		if(par1GuiButton.id == this.programTurret.id) {
+		if (par1GuiButton.id == this.programTurret.id) {
         	PacketRecvLaptopTargets.sendServer(this.checkedTargets, this.laptop);
         	this.inventorySlots.detectAndSendChanges();
 		}

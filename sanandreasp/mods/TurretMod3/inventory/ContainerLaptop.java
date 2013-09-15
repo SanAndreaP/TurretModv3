@@ -126,7 +126,7 @@ public class ContainerLaptop extends Container {
         Slot slot;
         ItemStack itemstack1;
         
-        if(par1ItemStack.stackSize < 1)
+        if (par1ItemStack.stackSize < 1)
         	return false;
 
         while (k < par3)

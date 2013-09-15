@@ -78,7 +78,7 @@ public class TileEntityLaptop extends TileEntity implements IInventory {
                 this.worldObj.playSoundEffect(d0, (double)this.yCoord + 0.5D, d2, "random.chestclosed", 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
             }
             
-            if(this.screenAngle >= 0.999F) {
+            if (this.screenAngle >= 0.999F) {
             	this.worldObj.markBlockForRenderUpdate(this.xCoord, this.yCoord, this.zCoord);
             	this.worldObj.updateLightByType(EnumSkyBlock.Block, this.xCoord, this.yCoord, this.zCoord);
             	this.worldObj.func_96440_m(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID);
@@ -154,13 +154,13 @@ public class TileEntityLaptop extends TileEntity implements IInventory {
 	
 	private void readData(NBTTagCompound par1nbtTagCompound) {
 		this.isOpen = par1nbtTagCompound.getBoolean("isOpen");
-		if(par1nbtTagCompound.hasKey("randomLightmap"))
+		if (par1nbtTagCompound.hasKey("randomLightmap"))
 			this.randomLightmap = par1nbtTagCompound.getByte("randomLightmap");
 	}
 	
 	public void programItemsTargets(Map<String, Boolean> list) {
-		for(ItemStack is : this.inventory) {
-			if(is != null && is.stackSize > 0) {
+		for (ItemStack is : this.inventory) {
+			if (is != null && is.stackSize > 0) {
 				ItemTurret.setTargets(is, list);
 				this.onInventoryChanged();
 			}
@@ -168,8 +168,8 @@ public class TileEntityLaptop extends TileEntity implements IInventory {
 	}
 	
 	public void programItemsNameAndFreq(String name, int freq) {
-		for(ItemStack is : this.inventory) {
-			if(is != null && is.stackSize > 0) {
+		for (ItemStack is : this.inventory) {
+			if (is != null && is.stackSize > 0) {
 				ItemTurret.addCustmNameAndFreq(is, name, freq);
 				this.onInventoryChanged();
 			}

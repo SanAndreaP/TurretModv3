@@ -10,17 +10,17 @@ import sanandreasp.mods.TurretMod3.registry.TurretInfo.TurretInfo;
 public final class CraftingRegistry {
 	public static void initCraftings() {
 		// Turret Items
-		for(int i = 0; i < TurretInfo.getTurretCount(); i++) {
+		for (int i = 0; i < TurretInfo.getTurretCount(); i++) {
 			TurretInfo tinf = TurretInfo.getTurretInfo(TurretInfo.getTurretClass(i));
 			GameRegistry.addRecipe(tinf.getTurretItem(), tinf.getCrafting());
 		}
 		
 		// laptops
-		for(int i = 0; i < 2; i++) {
+		for (int i = 0; i < 2; i++) {
 			GameRegistry.addRecipe(new ItemStack(TM3ModRegistry.laptop, 1, i*8),
 					"  #", "QRT", "###",
 					'#', i == 0 ? new ItemStack(Block.blockNetherQuartz, 1, OreDictionary.WILDCARD_VALUE) : new ItemStack(Block.obsidian),
-					'Q', new ItemStack(Item.field_94583_ca),
+					'Q', new ItemStack(Item.netherQuartz),
 					'R', new ItemStack(Item.redstone),
 					'T', new ItemStack(Block.torchRedstoneActive)
 			);
@@ -74,7 +74,7 @@ public final class CraftingRegistry {
 		
 		// Rockets
 		ItemStack[] is = new ItemStack[] {new ItemStack(Item.coal), new ItemStack(Item.ingotIron), new ItemStack(Item.ingotGold)};
-		for(int i = 0; i < 3; i++) {
+		for (int i = 0; i < 3; i++) {
 			GameRegistry.addRecipe(new ItemStack(TM3ModRegistry.rocket, 2, i),
 				" T ", "IGI",
 				'T', is[i],
@@ -124,7 +124,7 @@ public final class CraftingRegistry {
 				new ItemStack(Item.lightStoneDust)
 		);
 		  // Griefing Art. Shells
-		for(int i = 0; i < 5; i++) {
+		for (int i = 0; i < 5; i++) {
 			GameRegistry.addShapelessRecipe(new ItemStack(TM3ModRegistry.artilleryBall, 1, 5+i),
 					new ItemStack(TM3ModRegistry.artilleryBall, 1, i),
 					new ItemStack(Item.magmaCream)
@@ -165,12 +165,12 @@ public final class CraftingRegistry {
 		
 		// Pebble -> Pebbles
 		Object[] objArr = new ItemStack[5];
-		for(int i = 0; i < 5; i++) objArr[i] = new ItemStack(TM3ModRegistry.ammoItems, 1, 2);
+		for (int i = 0; i < 5; i++) objArr[i] = new ItemStack(TM3ModRegistry.ammoItems, 1, 2);
 		GameRegistry.addShapelessRecipe(new ItemStack(TM3ModRegistry.ammoItems, 1, 1), objArr);
 		
 		// Pebbles -> Gravel
 		objArr = new ItemStack[8];
-		for(int i = 0; i < 8; i++) objArr[i] = new ItemStack(TM3ModRegistry.ammoItems, 1, 1);
+		for (int i = 0; i < 8; i++) objArr[i] = new ItemStack(TM3ModRegistry.ammoItems, 1, 1);
 		GameRegistry.addShapelessRecipe(new ItemStack(Block.gravel, 1), objArr);
 		
 		// Arrow Pack -> Arrows

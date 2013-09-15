@@ -30,7 +30,7 @@ public class PacketRecvLaptopUpgrades extends PacketBase {
 	public void handle(DataInputStream iStream, EntityPlayer player) {
 		try {
 	        TileEntity te = player.worldObj.getBlockTileEntity(iStream.readInt(), iStream.readInt(), iStream.readInt());
-	        if(te != null && te instanceof TileEntityLaptop) {
+	        if (te != null && te instanceof TileEntityLaptop) {
 	        	TileEntityLaptop lap = ((TileEntityLaptop)te);
 	        	
 	        	int turretSlot = iStream.readInt();
@@ -39,7 +39,7 @@ public class PacketRecvLaptopUpgrades extends PacketBase {
 				ItemStack turretItem = lap.getStackInSlot(turretSlot);
 				ItemStack upgradeItem = lap.getStackInSlot(upgradeSlot);
 				
-				if(ItemTurret.isUpgradeValid(turretItem, upgradeItem, ItemTurret.getUpgItems(turretItem))) {
+				if (ItemTurret.isUpgradeValid(turretItem, upgradeItem, ItemTurret.getUpgItems(turretItem))) {
 					ItemTurret.addUpgItem(turretItem, upgradeItem);
 					lap.decrStackSize(upgradeSlot, 1);
 					player.openContainer.detectAndSendChanges();

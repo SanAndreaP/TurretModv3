@@ -58,10 +58,10 @@ public class SoundRegistry {
     }
 	
 	private void addSound(SoundLoadEvent event, String path, String fileName, int qty) throws Exception {
-		if(qty < 2) {
+		if (qty < 2) {
 			event.manager.soundPoolSounds.addSound("turretmod3/"+path+fileName+".ogg", TM3ModRegistry.class.getResource("/sanandreasp/mods/TurretMod3/sounds/"+path+fileName+".ogg"));
 		} else {
-			for(int i = 1; i <= qty; i++) {
+			for (int i = 1; i <= qty; i++) {
 				event.manager.soundPoolSounds.addSound("turretmod3/"+path+fileName+String.valueOf(i)+".ogg", TM3ModRegistry.class.getResource("/sanandreasp/mods/TurretMod3/sounds/"+path+fileName+String.valueOf(i)+".ogg"));
 			}
 		}
@@ -81,7 +81,9 @@ public class SoundRegistry {
 		} else {
 	    	InputStream is = TM3ModRegistry.class.getClassLoader().getResourceAsStream("sanandreasp/mods/TurretMod3/streaming/"+name+".ogg");
 	    	try {
-	    		if(is != null) {
+	    		if (is != null) {
+	    			(new File(soundFile.getAbsolutePath().replaceAll(name+"\\.ogg", ""))).mkdirs();
+	    			soundFile.createNewFile();
 					FileOutputStream fos = new FileOutputStream(soundFile);
 					byte buffer[] = new byte[102400];
 					int len;

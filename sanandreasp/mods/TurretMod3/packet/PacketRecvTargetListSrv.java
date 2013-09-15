@@ -47,7 +47,7 @@ public class PacketRecvTargetListSrv extends PacketBase {
 	private static Packet250CustomPayload getPacket(EntityTurret_Base turret, int id) {
 		NBTTagCompound nbt = new NBTTagCompound();				
 		NBTTagList list = new NBTTagList("targetList");				
-		for(Entry<String, Boolean> target : turret.targets.entrySet()) {
+		for (Entry<String, Boolean> target : turret.targets.entrySet()) {
 			NBTTagCompound var4 = new NBTTagCompound();
             var4.setString("tgName", target.getKey());
             var4.setBoolean("isEnabled", target.getValue());

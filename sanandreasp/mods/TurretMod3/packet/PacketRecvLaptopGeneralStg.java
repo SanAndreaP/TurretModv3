@@ -48,14 +48,14 @@ public class PacketRecvLaptopGeneralStg extends PacketBase {
 						int freq = iStream.readShort();
 						boolean active = iStream.readBoolean();
 						List<Entity> entities = player.worldObj.loadedEntityList;
-						for(Entity e : entities) {
-							if(e instanceof EntityTurret_Base) {
+						for (Entity e : entities) {
+							if (e instanceof EntityTurret_Base) {
 								EntityTurret_Base turret = (EntityTurret_Base) e;
-								if(turret.getPlayerName().equalsIgnoreCase(player.username)) {
-									if(freq == -1) {
+								if (turret.getPlayerName().equalsIgnoreCase(player.username)) {
+									if (freq == -1) {
 										turret.setActiveState(active);
-									} else if(freq >= 0) {
-										if(turret.getFrequency() == freq) {
+									} else if (freq >= 0) {
+										if (turret.getFrequency() == freq) {
 											turret.setActiveState(active);
 										}
 									}
@@ -67,14 +67,14 @@ public class PacketRecvLaptopGeneralStg extends PacketBase {
 				case 0x03: {
 						int freq = iStream.readShort();
 						List<Entity> entities = player.worldObj.loadedEntityList;
-						for(Entity e : entities) {
-							if(e instanceof EntityTurret_Base) {
+						for (Entity e : entities) {
+							if (e instanceof EntityTurret_Base) {
 								EntityTurret_Base turret = (EntityTurret_Base) e;
-								if(turret.getPlayerName().equalsIgnoreCase(player.username)) {
-									if(freq == -1) {
+								if (turret.getPlayerName().equalsIgnoreCase(player.username)) {
+									if (freq == -1) {
 										turret.resetCurrentTarget();
-									} else if(freq >= 0) {
-										if(turret.getFrequency() == freq) {
+									} else if (freq >= 0) {
+										if (turret.getFrequency() == freq) {
 											turret.resetCurrentTarget();
 										}
 									}
@@ -87,14 +87,14 @@ public class PacketRecvLaptopGeneralStg extends PacketBase {
 						int freq = iStream.readShort();
 						boolean unique = iStream.readBoolean();
 						List<Entity> entities = player.worldObj.loadedEntityList;
-						for(Entity e : entities) {
-							if(e instanceof EntityTurret_Base) {
+						for (Entity e : entities) {
+							if (e instanceof EntityTurret_Base) {
 								EntityTurret_Base turret = (EntityTurret_Base) e;
-								if(turret.getPlayerName().equalsIgnoreCase(player.username)) {
-									if(freq == -1) {
+								if (turret.getPlayerName().equalsIgnoreCase(player.username)) {
+									if (freq == -1) {
 										turret.setUniqueTargets(unique);
-									} else if(freq >= 0) {
-										if(turret.getFrequency() == freq) {
+									} else if (freq >= 0) {
+										if (turret.getFrequency() == freq) {
 											turret.setUniqueTargets(unique);
 										}
 									}

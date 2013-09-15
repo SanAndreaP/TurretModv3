@@ -29,11 +29,11 @@ public class GuiTCUUpgrades extends GuiTCUBase {
 	public void initGui() {
 		super.initGui();
         this.upgrades.clear();
-		for(int i = 0; i < TurretUpgrades.getUpgradeCount(); i++) {
-			if(this.turret == null) break;
+		for (int i = 0; i < TurretUpgrades.getUpgradeCount(); i++) {
+			if (this.turret == null) break;
 			WeakReference<TurretUpgrades> upg = new WeakReference<TurretUpgrades>(TurretUpgrades.getUpgradeFromID(i));
-			for(Class cls : upg.get().getTurrets()) {
-				if(cls.isAssignableFrom(this.turret.getClass())) {
+			for (Class cls : upg.get().getTurrets()) {
+				if (cls.isAssignableFrom(this.turret.getClass())) {
 					this.upgrades.put(this.upgrades.size(), upg.get());
 					break;
 				}
@@ -45,12 +45,12 @@ public class GuiTCUUpgrades extends GuiTCUBase {
 	public void drawScreen(int par1, int par2, float par3) {
         this.drawDefaultBackground();
         
-        if(this.upgrades.size() < 1) {
+        if (this.upgrades.size() < 1) {
             this.buttonList.clear();
         	this.initGui();
         }
 
-		this.mc.renderEngine.bindTexture(TM3ModRegistry.TEX_GUITCUDIR + "page_4.png");
+		this.mc.func_110434_K().func_110577_a(TM3ModRegistry.TEX_GUITCUDIR + "page_4.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, xSize, ySize);
 
@@ -63,23 +63,23 @@ public class GuiTCUUpgrades extends GuiTCUBase {
         int scrollX = 163;
         int scrollY = 19 + (int)(164F * currScrollPos);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.mc.renderEngine.bindTexture(TM3ModRegistry.TEX_GUITCUDIR + "page_4.png");
+		this.mc.func_110434_K().func_110577_a(TM3ModRegistry.TEX_GUITCUDIR + "page_4.png");
         drawTexturedModalRect(scrollX + this.guiLeft, scrollY + this.guiTop, 176,  this.upgrades.size() > 9 ? 0 : 6, 6, 6);
         
-        for(int i = this.entryPos; i < 9 + entryPos && i < this.upgrades.size(); i++) {
-        	if(this.upgrades.get(i) != null) {
+        for (int i = this.entryPos; i < 9 + entryPos && i < this.upgrades.size(); i++) {
+        	if (this.upgrades.get(i) != null) {
 	        	int icnX = this.guiLeft + 8;
 	        	int icnY = this.guiTop + 20 + (i-entryPos)*19;
 	        	RenderHelper.enableGUIStandardItemLighting();
 	        	GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 	        	ItemStack renderedItem = this.upgrades.get(i).getItem().copy();
-	        	if(renderedItem.getItemDamage() == OreDictionary.WILDCARD_VALUE) renderedItem.setItemDamage(0);
-	        	if(this.upgrades.get(i).getEnchantment() != null) renderedItem.addEnchantment(this.upgrades.get(i).getEnchantment(), 1);
+	        	if (renderedItem.getItemDamage() == OreDictionary.WILDCARD_VALUE) renderedItem.setItemDamage(0);
+	        	if (this.upgrades.get(i).getEnchantment() != null) renderedItem.addEnchantment(this.upgrades.get(i).getEnchantment(), 1);
 	        	this.drawItemStack(renderedItem, icnX, icnY);
 	        	RenderHelper.disableStandardItemLighting();
 	        	boolean taken = TurretUpgrades.hasUpgrade(this.upgrades.get(i).getClass(), this.turret.upgrades);
 	        	
-	        	if(taken) {
+	        	if (taken) {
 	        		this.drawRect(this.guiLeft + 7, this.guiTop + 19 + (i-entryPos)*19, this.guiLeft + 159, this.guiTop + 37 + (i-entryPos)*19, 0x3000FF00);
 	        	}
 	        	
@@ -95,25 +95,25 @@ public class GuiTCUUpgrades extends GuiTCUBase {
         int scrollMinY = this.guiTop + 19;
         int scrollMaxY = scrollMinY + 170;
         
-        if(!this.isScrolling && var4 && par1 > scrollMinX && par1 < scrollMaxX && par2 > scrollMinY && par2 < scrollMaxY && this.upgrades.size() > 9) {
+        if (!this.isScrolling && var4 && par1 > scrollMinX && par1 < scrollMaxX && par2 > scrollMinY && par2 < scrollMaxY && this.upgrades.size() > 9) {
         	this.isScrolling = true;
-        } else if(!var4) {
+        } else if (!var4) {
         	this.isScrolling = false;
         }
         
-        if(this.isScrolling) {
+        if (this.isScrolling) {
         	int sY = (int) (164F / (float)(this.upgrades.size() - 9));
-	        for(int y = 0; y < this.upgrades.size() - 5; y++) {
-	        	if(par2 > sY * y + this.guiTop + 19 || par1 < sY * y + this.guiTop + 19) {
+	        for (int y = 0; y < this.upgrades.size() - 5; y++) {
+	        	if (par2 > sY * y + this.guiTop + 19 || par1 < sY * y + this.guiTop + 19) {
 	        		this.entryPos = y;
 	        	}
 	        }
 	        this.currScrollPos = ((float)(par2 - scrollMinY - 9) / 164F);
         }
         
-        if(this.currScrollPos < 0.0F)
+        if (this.currScrollPos < 0.0F)
         	this.currScrollPos = 0.0F;
-        if(this.currScrollPos > 1.0F)
+        if (this.currScrollPos > 1.0F)
         	this.currScrollPos = 1.0F;
         
 		super.drawScreen(par1, par2, par3);

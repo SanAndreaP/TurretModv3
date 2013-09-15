@@ -43,10 +43,10 @@ public class GuiTInfoPG4 extends GuiTInfoBase {
 	public void initGui() {
 		super.initGui();
         this.upgrades.clear();
-		for(int i = 0; i < TurretUpgrades.getUpgradeCount(); i++) {
+		for (int i = 0; i < TurretUpgrades.getUpgradeCount(); i++) {
 			WeakReference<TurretUpgrades> upg = new WeakReference<TurretUpgrades>(TurretUpgrades.getUpgradeFromID(i));
-			for(Class cls : upg.get().getTurrets()) {
-				if(cls.isAssignableFrom(this.turretCls)) {
+			for (Class cls : upg.get().getTurrets()) {
+				if (cls.isAssignableFrom(this.turretCls)) {
 					this.upgrades.put(this.upgrades.size(), upg.get());
 					break;
 				}
@@ -66,7 +66,7 @@ public class GuiTInfoPG4 extends GuiTInfoBase {
 	public void drawScreen(int par1, int par2, float par3) {
         this.drawDefaultBackground();
 
-		this.mc.renderEngine.bindTexture(TM3ModRegistry.TEX_GUIINFO + "page_4.png");
+		this.mc.func_110434_K().func_110577_a(TM3ModRegistry.TEX_GUIINFO + "page_4.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, xSize, ySize);
         
@@ -76,7 +76,7 @@ public class GuiTInfoPG4 extends GuiTInfoBase {
         str = this.turretInf.getTurretName();
         this.fontRenderer.drawString(str, this.guiLeft + (this.xSize - this.fontRenderer.getStringWidth(str))/2, this.guiTop + 21, 0x00FF00);
 
-		this.mc.renderEngine.bindTexture(TM3ModRegistry.TEX_GUIINFO + "page_4.png");
+		this.mc.func_110434_K().func_110577_a(TM3ModRegistry.TEX_GUIINFO + "page_4.png");
         int scrollX = 163;
         int scrollY = 49 + (int)(69F * currScrollPos);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -85,20 +85,20 @@ public class GuiTInfoPG4 extends GuiTInfoBase {
         int hover = -1;
         int hovY = 0;
 
-        for(int i = this.entryPos; i < 4 + entryPos && i < this.upgrades.size(); i++) {
-        	if(this.upgrades.get(i) != null) {
+        for (int i = this.entryPos; i < 4 + entryPos && i < this.upgrades.size(); i++) {
+        	if (this.upgrades.get(i) != null) {
 	        	int icnX = this.guiLeft + 8;
 	        	int icnY = this.guiTop + 50 + (i-entryPos)*19;
 	        	RenderHelper.enableGUIStandardItemLighting();
 	        	GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 	        	ItemStack renderedItem = this.upgrades.get(i).getItem().copy();
-	        	if(renderedItem.getItemDamage() == OreDictionary.WILDCARD_VALUE) renderedItem.setItemDamage(0);
-	        	if(this.upgrades.get(i).getEnchantment() != null) renderedItem.addEnchantment(this.upgrades.get(i).getEnchantment(), 1);
+	        	if (renderedItem.getItemDamage() == OreDictionary.WILDCARD_VALUE) renderedItem.setItemDamage(0);
+	        	if (this.upgrades.get(i).getEnchantment() != null) renderedItem.addEnchantment(this.upgrades.get(i).getEnchantment(), 1);
 	        	this.drawItemStack(renderedItem, icnX, icnY);
 	        	RenderHelper.disableStandardItemLighting();
 	        	this.fontRenderer.drawString(this.upgrades.get(i).getName(), this.guiLeft + 26, this.guiTop + 54 + (i-entryPos)*19, 0xFFFFFF);
 	        	
-	        	if(par1 >= this.guiLeft + 7 && par1 < this.guiLeft + 159 && par2 >= this.guiTop + 49 + (i-entryPos)*19 && par2 < this.guiTop + 67 + (i-entryPos)*19) {
+	        	if (par1 >= this.guiLeft + 7 && par1 < this.guiLeft + 159 && par2 >= this.guiTop + 49 + (i-entryPos)*19 && par2 < this.guiTop + 67 + (i-entryPos)*19) {
 	        		this.drawRect(this.guiLeft + 7, this.guiTop + 49 + (i-entryPos)*19, this.guiLeft + 159, this.guiTop + 67 + (i-entryPos)*19, 0x3000A0FF);
 	        		this.customFR.drawSplitString(this.upgrades.get(i).getDesc(), this.guiLeft + 11, this.guiTop + 131, 154, 0x000000);
 	        		hover = i;
@@ -107,7 +107,7 @@ public class GuiTInfoPG4 extends GuiTInfoBase {
         	}
         }
         
-        if(hover < 0) {
+        if (hover < 0) {
     		this.customFR.drawSplitString(langman.getTranslated("turretmod3.gui.tinfo.hoverPG4"), this.guiLeft + 11, this.guiTop + 131, 154, 0x808080);
         }
         
@@ -118,30 +118,30 @@ public class GuiTInfoPG4 extends GuiTInfoBase {
         int scrollMinY = this.guiTop + 49;
         int scrollMaxY = scrollMinY + 75;
         
-        if(!this.isScrolling && var4 && par1 > scrollMinX && par1 < scrollMaxX && par2 > scrollMinY && par2 < scrollMaxY && this.upgrades.size() > 4) {
+        if (!this.isScrolling && var4 && par1 > scrollMinX && par1 < scrollMaxX && par2 > scrollMinY && par2 < scrollMaxY && this.upgrades.size() > 4) {
         	this.isScrolling = true;
-        } else if(!var4) {
+        } else if (!var4) {
         	this.isScrolling = false;
         }
         
-        if(this.isScrolling) {
+        if (this.isScrolling) {
         	int sY = (int) (69F / (float)(this.upgrades.size() - 4));
-	        for(int y = 0; y < this.upgrades.size() - 3; y++) {
-	        	if(par2 > sY * y + this.guiTop + 49 || par1 < sY * y + this.guiTop + 49) {
+	        for (int y = 0; y < this.upgrades.size() - 3; y++) {
+	        	if (par2 > sY * y + this.guiTop + 49 || par1 < sY * y + this.guiTop + 49) {
 	        		this.entryPos = y;
 	        	}
 	        }
 	        this.currScrollPos = ((float)(par2 - scrollMinY - 4) / 69F);
         }
         
-        if(this.currScrollPos < 0.0F)
+        if (this.currScrollPos < 0.0F)
         	this.currScrollPos = 0.0F;
-        if(this.currScrollPos > 1.0F)
+        if (this.currScrollPos > 1.0F)
         	this.currScrollPos = 1.0F;
         
 		super.drawScreen(par1, par2, par3);
 		
-		if(hover > -1) {
+		if (hover > -1) {
     		drawUpgradeTooltip(this.upgrades.get(hover).getItem().getDisplayName(),
     				this.upgrades.get(hover).getEnchantment() != null ? this.upgrades.get(hover).getEnchantment().getTranslatedName(1) : "",
     				this.upgrades.get(hover).getReqUpgradeName(), par1, par2);
@@ -190,8 +190,8 @@ public class GuiTInfoPG4 extends GuiTInfoBase {
     	String s[] = this.langman.getTranslated("turretmod3.gui.tinfo.upgToolTip").split("\\|");
     	
         var4.add(s[1] + ": " + itemName);
-        if(ench.length() > 0) var4.add("  " + ench);
-        if(required.length() > 0) var4.add(s[2] + ": " + required);
+        if (ench.length() > 0) var4.add("  " + ench);
+        if (required.length() > 0) var4.add(s[2] + ": " + required);
 
         if (!var4.isEmpty())
         {
@@ -239,9 +239,9 @@ public class GuiTInfoPG4 extends GuiTInfoBase {
             this.drawGradientRect(var6 - 3, var7 + var9 + 2, var6 + var5 + 3, var7 + var9 + 3, var12, var12);
 
             this.fontRenderer.drawStringWithShadow(var4.get(0), var6, var7, 0xFFFF33);
-            if(ench.length() > 0) this.fontRenderer.drawStringWithShadow(var4.get(1), var6, var7+=10, 0xAAAA33);
-            if(required.length() > 0) {
-            	if(ench.length() > 0)
+            if (ench.length() > 0) this.fontRenderer.drawStringWithShadow(var4.get(1), var6, var7+=10, 0xAAAA33);
+            if (required.length() > 0) {
+            	if (ench.length() > 0)
             		this.fontRenderer.drawStringWithShadow(var4.get(2), var6, var7+=10, 0x33FFFF);
             	else
             		this.fontRenderer.drawStringWithShadow(var4.get(1), var6, var7+=10, 0x33FFFF);

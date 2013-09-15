@@ -38,7 +38,7 @@ public class BlockLaptop extends BlockContainer {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getBlockTextureFromSideAndMetadata(int par1, int par2) {
+	public Icon getIcon(int par1, int par2) {
 		int i = getType(par1);
 		switch(i) {
 			case 1: return this.blackIcon;
@@ -93,14 +93,14 @@ public class BlockLaptop extends BlockContainer {
 	@Override
 	public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
 		TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
-		if(te instanceof TileEntityLaptop) {
+		if (te instanceof TileEntityLaptop) {
 			TileEntityLaptop lap = (TileEntityLaptop)te;
-			if(lap.isUsedByPlayer)
+			if (lap.isUsedByPlayer)
 				return false;
-			if(par5EntityPlayer.isSneaking() || !lap.isOpen) {
+			if (par5EntityPlayer.isSneaking() || !lap.isOpen) {
 				par1World.addBlockEvent(par2, par3, par4, this.blockID, 2, lap.isOpen ? 0 : 1);
 				return true;
-			} else if(lap.isOpen) {
+			} else if (lap.isOpen) {
 				par5EntityPlayer.openGui(TM3ModRegistry.instance, 3, par1World, par2, par3, par4);
 				return true;
 			}
@@ -131,16 +131,16 @@ public class BlockLaptop extends BlockContainer {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister) {
-		this.whiteIcon = Block.blockNetherQuartz.getBlockTextureFromSideAndMetadata(0,0);
-		this.blackIcon = Block.obsidian.getBlockTextureFromSideAndMetadata(0,0);
+		this.whiteIcon = Block.blockNetherQuartz.getIcon(0,0);
+		this.blackIcon = Block.obsidian.getIcon(0,0);
 	}
 	
 	@Override
 	public int getLightValue(IBlockAccess world, int x, int y, int z) {
 		TileEntity te = world.getBlockTileEntity(x, y, z);
-		if(te != null && te instanceof TileEntityLaptop) {
+		if (te != null && te instanceof TileEntityLaptop) {
 			TileEntityLaptop lap = (TileEntityLaptop)te;
-			if(lap.isOpen && lap.screenAngle >= 0.999F)
+			if (lap.isOpen && lap.screenAngle >= 0.999F)
 				return 5;
 		}
 		return 0;
@@ -149,16 +149,16 @@ public class BlockLaptop extends BlockContainer {
 	@Override
 	public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6) {
 		TileEntity tile = par1World.getBlockTileEntity(par2, par3, par4);
-		if(tile != null && tile instanceof TileEntityLaptop && !par1World.isRemote) {
+		if (tile != null && tile instanceof TileEntityLaptop && !par1World.isRemote) {
 			TileEntityLaptop telap = (TileEntityLaptop)tile;
-			for(int i = 0; i < telap.getSizeInventory(); i++) {
+			for (int i = 0; i < telap.getSizeInventory(); i++) {
 				ItemStack var3Stack = telap.getStackInSlot(i);
-				if(var3Stack != null && var3Stack.stackSize > 0) {
+				if (var3Stack != null && var3Stack.stackSize > 0) {
 					par1World.spawnEntityInWorld(new EntityItem(par1World, par2 + 0.5F, par3 + 0.5F, par4 + 0.5F, var3Stack));
 				}
 			}
 		}
-		if(tile != null)
+		if (tile != null)
 			tile.invalidate();
 		super.breakBlock(par1World, par2, par3, par4, par5, par6);
 	}

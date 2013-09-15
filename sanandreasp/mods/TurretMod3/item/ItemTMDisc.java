@@ -21,8 +21,8 @@ public class ItemTMDisc extends ItemRecord {
 
     @SideOnly(Side.CLIENT)
 	@Override
-    public void updateIcons(IconRegister par1IconRegister)
+    public void registerIcons(IconRegister par1IconRegister)
     {
-        this.iconIndex = par1IconRegister.registerIcon("TurretMod3:record_" + this.recordName);
+        this.itemIcon = par1IconRegister.registerIcon("TurretMod3:record_" + this.recordName);
     }
 }

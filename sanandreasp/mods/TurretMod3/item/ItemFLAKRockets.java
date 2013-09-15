@@ -62,14 +62,14 @@ public class ItemFLAKRockets extends Item {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List par3List) {
-		for(int i = 0; i < 6; i++) {
+		for (int i = 0; i < 6; i++) {
 			par3List.add(new ItemStack(this, 1, i));
 		}
 	}
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void updateIcons(IconRegister par1IconRegister) {
+	public void registerIcons(IconRegister par1IconRegister) {
 		this.itemIcons = new Icon[6];
 		this.itemIcons[0] = par1IconRegister.registerIcon("TurretMod3:rktTB50");
 		this.itemIcons[1] = par1IconRegister.registerIcon("TurretMod3:rktTB100");

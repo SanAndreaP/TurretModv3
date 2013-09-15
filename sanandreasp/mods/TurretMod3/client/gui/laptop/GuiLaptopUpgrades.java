@@ -54,13 +54,13 @@ public class GuiLaptopUpgrades extends GuiLaptop_Base {
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
 		super.drawGuiContainerBackgroundLayer(par1, par2, par3);
-		for(int k = 0; k < 8; k++) {
+		for (int k = 0; k < 8; k++) {
 			int tsID = (k < 4) ? k*2 : 7-(k%4)*2;
 			ItemStack turretSlot = this.laptop.getStackInSlot(tsID);
 			ItemStack upgSlot = this.laptop.getStackInSlot(k+8);
 			
-			if(ItemTurret.isUpgradeValid(turretSlot, upgSlot, ItemTurret.getUpgItems(turretSlot))) {
-				for(int i = 0; i < this.greenHighlight[k].length; i++) {
+			if (ItemTurret.isUpgradeValid(turretSlot, upgSlot, ItemTurret.getUpgItems(turretSlot))) {
+				for (int i = 0; i < this.greenHighlight[k].length; i++) {
 					drawRect(
 							this.guiLeft + this.greenHighlight[k][i][0],
 							this.guiTop + this.greenHighlight[k][i][1],
@@ -69,8 +69,8 @@ public class GuiLaptopUpgrades extends GuiLaptop_Base {
 							0x80008000
 					);
 				}
-			} else if(turretSlot != null && upgSlot != null) {
-				for(int i = 0; i < this.greenHighlight[k].length; i++) {
+			} else if (turretSlot != null && upgSlot != null) {
+				for (int i = 0; i < this.greenHighlight[k].length; i++) {
 					drawRect(
 							this.guiLeft + this.greenHighlight[k][i][0],
 							this.guiTop + this.greenHighlight[k][i][1],
@@ -93,19 +93,19 @@ public class GuiLaptopUpgrades extends GuiLaptop_Base {
 	@Override
 	protected void actionPerformed(GuiButton par1GuiButton) {
 		super.actionPerformed(par1GuiButton);
-		if(par1GuiButton.id == this.programTurret.id) {
+		if (par1GuiButton.id == this.programTurret.id) {
 			this.checkUpgradesAndApply();
         	this.inventorySlots.detectAndSendChanges();
 		}
 	}
 	
 	private void checkUpgradesAndApply() {
-		for(int k = 0; k < 8; k++) {
+		for (int k = 0; k < 8; k++) {
 			int tsID = (k < 4) ? k*2 : 7-(k%4)*2;
 			ItemStack turretSlot = this.laptop.getStackInSlot(tsID);
 			ItemStack upgSlot = this.laptop.getStackInSlot(k+8);
 			
-			if(turretSlot != null && upgSlot != null && ItemTurret.isUpgradeValid(turretSlot, upgSlot, ItemTurret.getUpgItems(turretSlot))) {
+			if (turretSlot != null && upgSlot != null && ItemTurret.isUpgradeValid(turretSlot, upgSlot, ItemTurret.getUpgItems(turretSlot))) {
 				ByteArrayOutputStream b = new ByteArrayOutputStream();
 				try {
 					DataOutputStream o = new DataOutputStream(b);

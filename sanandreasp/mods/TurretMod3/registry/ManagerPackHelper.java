@@ -30,17 +30,17 @@ public class ManagerPackHelper {
 	public void checkManPack(String modname) {
 		try {
 			Class cls = Class.forName("sanandreasp.mods.managers.SAP_ManagerRegistry");
-			if(cls == null) {
+			if (cls == null) {
 				loading = false;
 				stopLoad(String.format("You forgot to install the Manager Pack!\nPlease download the latest version from http://goo.gl/WZwtZ\n- Minecraft will load without this mod: >> %s <<! -", modname), "No Manager Pack!");
 			}
 	    	Mod s = (Mod) cls.getAnnotation(Mod.class);
 	        if (s != null) {
 	        	int verErr = checkVersion(s.version(), "1.4.2");
-	        	if(verErr > 1) {
+	        	if (verErr > 1) {
 	        		loading = false;
 	        		stopLoad(String.format("Wrong version of the Manager Pack!\nPlease download the latest version from http://goo.gl/WZwtZ\n- Minecraft will load without this mod: >> %s <<! -", modname), "Manager Pack outdated!");
-	        	} else if(verErr == 1) {
+	        	} else if (verErr == 1) {
 	        		FMLLog.warning("No up-to-date SAP Manager Pack!\nPlease get the latest version now at: http://goo.gl/WZwtZ\n- Expect bugs and crashes!");
 	        	}
 	        }
@@ -70,7 +70,7 @@ public class ManagerPackHelper {
 
 	private void stopLoad(final String msg, final String title) {
 		FMLLog.severe(title + " Please get the latest version now at: http://goo.gl/WZwtZ");
-		if(FMLCommonHandler.instance().getSide().isClient()) {
+		if (FMLCommonHandler.instance().getSide().isClient()) {
 			new Thread(new Runnable() {
 				@Override
 				public void run() {
@@ -91,11 +91,11 @@ public class ManagerPackHelper {
 		int minDiff = Integer.parseInt(currSplit[1]) - Integer.parseInt(exptSplit[1]);
 		int revDiff = (currSplit.length < 3 ? 0 : Integer.parseInt(currSplit[2])) - (exptSplit.length < 3 ? 0 : Integer.parseInt(exptSplit[2]));
 		
-		if(majDiff < 0) {
+		if (majDiff < 0) {
 			return 3;
-		} else if(minDiff < 0 && majDiff == 0) {
+		} else if (minDiff < 0 && majDiff == 0) {
 			return 2;
-		} else if(revDiff < 0 && minDiff == 0 && majDiff == 0) {
+		} else if (revDiff < 0 && minDiff == 0 && majDiff == 0) {
 			return 1;
 		}
 		

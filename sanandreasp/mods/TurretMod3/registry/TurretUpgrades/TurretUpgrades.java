@@ -39,13 +39,13 @@ public abstract class TurretUpgrades {
 	}
 	
 	public boolean hasRequiredUpgrade(Map<Integer, ItemStack> upgMap) {
-		if(this.requiredUpg == null)
+		if (this.requiredUpg == null)
 			return true;
 		return hasUpgrade(this.requiredUpg, upgMap);
 	}
 	
 	public boolean hasRequiredUpgrade(List<ItemStack> upgMap) {
-		if(this.requiredUpg == null)
+		if (this.requiredUpg == null)
 			return true;
 		return hasUpgrade(this.requiredUpg, upgMap);
 	}
@@ -67,10 +67,10 @@ public abstract class TurretUpgrades {
 	}
 	
 	public static boolean isUpgradeForTurret(TurretUpgrades upg, Class<? extends EntityTurret_Base> turretCls) {
-		if(turretCls == null)
+		if (turretCls == null)
 			return false;
-		for(Class<? extends EntityTurret_Base> upgCls : upg.getTurrets()) {
-			if(upgCls.isAssignableFrom(turretCls))
+		for (Class<? extends EntityTurret_Base> upgCls : upg.getTurrets()) {
+			if (upgCls.isAssignableFrom(turretCls))
 				return true;
 		}
 		return false;
@@ -91,10 +91,10 @@ public abstract class TurretUpgrades {
 	}
 	
 	public static TurretUpgrades getUpgradeFromItem(ItemStack stack, Class<? extends EntityTurret_Base> turretCls) {
-		if(stack == null) return null;
-		for(int i = 0; i < upgradeListINT.size(); i++) {
+		if (stack == null) return null;
+		for (int i = 0; i < upgradeListINT.size(); i++) {
 			TurretUpgrades upg = getUpgradeFromID(i);
-			if(CUS.areStacksEqualWithWCV(upg.getItem(), stack) && (turretCls == null || isUpgradeForTurret(upg, turretCls)))
+			if (CUS.areStacksEqualWithWCV(upg.getItem(), stack) && (turretCls == null || isUpgradeForTurret(upg, turretCls)))
 				return getUpgradeFromID(i);
 		}
 		return null;
@@ -105,26 +105,26 @@ public abstract class TurretUpgrades {
 	}
 	
 	public static boolean hasUpgrade(Class<? extends TurretUpgrades> tUpg, Map<Integer, ItemStack> upgMap) {
-		if(upgMap == null || tUpg == null)
+		if (upgMap == null || tUpg == null)
 			return false;
 		
 		TurretUpgrades chkUpg = upgradeListCLT.get(tUpg);
 		
-		if(!upgMap.containsKey(chkUpg.getUpgradeID()) || (upgMap.containsKey(chkUpg.getUpgradeID()) && upgMap.get(chkUpg.getUpgradeID()) == null))
+		if (!upgMap.containsKey(chkUpg.getUpgradeID()) || (upgMap.containsKey(chkUpg.getUpgradeID()) && upgMap.get(chkUpg.getUpgradeID()) == null))
 			return false;
 		
-		if(upgMap.containsKey(chkUpg.getUpgradeID()) && upgMap.get(chkUpg.getUpgradeID()) != null) {
+		if (upgMap.containsKey(chkUpg.getUpgradeID()) && upgMap.get(chkUpg.getUpgradeID()) != null) {
 			ItemStack is = upgMap.get(chkUpg.getUpgradeID());
-			if(CUS.areStacksEqualWithWCV(chkUpg.getItem(), is)) {
-				if(is.isItemEnchanted() && chkUpg.getEnchantment() != null) {
+			if (CUS.areStacksEqualWithWCV(chkUpg.getItem(), is)) {
+				if (is.isItemEnchanted() && chkUpg.getEnchantment() != null) {
 					NBTTagList ench = is.getEnchantmentTagList();
 					for (int j = 0; j < ench.tagCount(); ++j) {
 						NBTTagCompound var4 = (NBTTagCompound)ench.tagAt(j);
-						if(var4.getShort("id") == chkUpg.getEnchantment().effectId) {
+						if (var4.getShort("id") == chkUpg.getEnchantment().effectId) {
 							return true;
 						}
 					}
-				} else if(chkUpg.getEnchantment() == null) {
+				} else if (chkUpg.getEnchantment() == null) {
 					return true;
 				}
 			}
@@ -134,22 +134,22 @@ public abstract class TurretUpgrades {
 	}
 	
 	public static boolean hasUpgrade(Class<? extends TurretUpgrades> tUpg, List<ItemStack> upgMap) {
-		if(upgMap == null || tUpg == null)
+		if (upgMap == null || tUpg == null)
 			return false;
 		
 		TurretUpgrades chkUpg = upgradeListCLT.get(tUpg);
 		
-		for(ItemStack is : upgMap) {
-			if(CUS.areStacksEqualWithWCV(chkUpg.getItem(), is)) {
-				if(is.isItemEnchanted() && chkUpg.getEnchantment() != null) {
+		for (ItemStack is : upgMap) {
+			if (CUS.areStacksEqualWithWCV(chkUpg.getItem(), is)) {
+				if (is.isItemEnchanted() && chkUpg.getEnchantment() != null) {
 					NBTTagList ench = is.getEnchantmentTagList();
 					for (int j = 0; j < ench.tagCount(); ++j) {
 						NBTTagCompound var4 = (NBTTagCompound)ench.tagAt(j);
-						if(var4.getShort("id") == chkUpg.getEnchantment().effectId) {
+						if (var4.getShort("id") == chkUpg.getEnchantment().effectId) {
 							return true;
 						}
 					}
-				} else if(chkUpg.getEnchantment() == null) {
+				} else if (chkUpg.getEnchantment() == null) {
 					return true;
 				}
 			}

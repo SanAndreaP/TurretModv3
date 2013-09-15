@@ -38,8 +38,8 @@ public class TickHandlerClientRnd implements ITickHandler {
 
 	@Override
 	public void tickEnd(EnumSet<TickType> type, Object... tickData) {
-		if(type.equals(EnumSet.of(TickType.RENDER))) {
-			if(this.mc.thePlayer != null 
+		if (type.equals(EnumSet.of(TickType.RENDER))) {
+			if (this.mc.thePlayer != null 
 					&& this.mc.thePlayer.ridingEntity != null 
 					&& this.mc.thePlayer.ridingEntity instanceof EntityTurret_Base
 					&& this.mc.currentScreen == null 
@@ -49,10 +49,10 @@ public class TickHandlerClientRnd implements ITickHandler {
 				EntityTurret_Base turret = (EntityTurret_Base) this.mc.thePlayer.ridingEntity;
 				TurretInfo tInf = TurretInfo.getTurretInfo(turret.getClass());
 				
-				this.mc.renderEngine.bindTexture(TM3ModRegistry.TEX_TURRETCAM);
+				this.mc.func_110434_K().func_110577_a(TM3ModRegistry.TEX_TURRETCAM);
 				
 		        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-				float perc = (float)turret.getSrvHealth() / (float)turret.getMaxHealth();
+				float perc = (float)turret.getSrvHealth() / (float)turret.func_110138_aP();
 				this.drawTexturedModalRect(5, 7, 0, 0, 183, 5, -1);
 				this.drawTexturedModalRect(5, 7, 0, 5, MathHelper.ceiling_float_int(183F * perc), 5, 1);
 				
@@ -67,13 +67,13 @@ public class TickHandlerClientRnd implements ITickHandler {
 				this.drawTexturedModalRect(5, 31, 0, 35, MathHelper.ceiling_float_int(183F * perc), 5, 1);
 				
 				boolean xpRender = TurretUpgrades.hasUpgrade(TUpgExperience.class, turret.upgrades);	
-				if(xpRender) {
+				if (xpRender) {
 					perc = (float)turret.getExperience() / (float)turret.getExpCap();
 					this.drawTexturedModalRect(5, 43, 0, 20, 183, 5, -1);
 					this.drawTexturedModalRect(5, 43, 0, 25, MathHelper.ceiling_float_int(183F * perc), 5, 1);
 				}
 				
-				String s = turret.getSrvHealth() + " / " + turret.getMaxHealth();
+				String s = turret.getSrvHealth() + " / " + turret.func_110138_aP();
 				drawStringWithFrame(this.nbFont, s, 190, 6, 0xDD0000, 0x000000);
 				
 				s = inf ? "INF" : turret.getAmmo() + " / " + turret.getMaxAmmo();
@@ -82,7 +82,7 @@ public class TickHandlerClientRnd implements ITickHandler {
 				s = (turret.getMaxShootTicks() - turret.getShootTicks()) + " / " + turret.getMaxShootTicks();
 				drawStringWithFrame(this.nbFont, s, 190, 30, 0xFFFFFF, 0x000000);
 				
-				if(xpRender) {
+				if (xpRender) {
 					s = turret.getExperience() + " / " + turret.getExpCap();
 					drawStringWithFrame(this.nbFont, s, 190, 42, 0x00FF33, 0x000000);
 				}
@@ -95,14 +95,14 @@ public class TickHandlerClientRnd implements ITickHandler {
 		        if (!this.mc.playerController.enableEverythingIsScrewedUpMode())
 		        {
 		        	int icon = 0;
-		        	if(TM3ModRegistry.proxy.getPlayerTM3Data(this.mc.thePlayer).hasKey("tcCrosshair"))
+		        	if (TM3ModRegistry.proxy.getPlayerTM3Data(this.mc.thePlayer).hasKey("tcCrosshair"))
 		        		icon = TM3ModRegistry.proxy.getPlayerTM3Data(this.mc.thePlayer).getByte("tcCrosshair");
 		        	GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		            this.mc.renderEngine.bindTexture("/gui/icons.png");
+		            this.mc.func_110434_K().func_110577_a("/gui/icons.png");
 		            GL11.glEnable(GL11.GL_BLEND);
 		            GL11.glBlendFunc(GL11.GL_ONE_MINUS_DST_COLOR, GL11.GL_ONE_MINUS_SRC_COLOR);
 		            this.drawTexturedModalRect(scaledRes.getScaledWidth() / 2 - 7, scaledRes.getScaledHeight() / 2 - 7, 0, 0, 16, 16, 1);
-		            this.mc.renderEngine.bindTexture(TM3ModRegistry.TEX_TURRETCAM);
+		            this.mc.func_110434_K().func_110577_a(TM3ModRegistry.TEX_TURRETCAM);
 		            this.drawTexturedModalRect(scaledRes.getScaledWidth() / 2 - 7, scaledRes.getScaledHeight() / 2 - 7, icon * 16, 40, 16, 16, 1);
 		            GL11.glDisable(GL11.GL_BLEND);
 		        }

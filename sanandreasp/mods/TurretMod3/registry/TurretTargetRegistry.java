@@ -62,15 +62,15 @@ public class TurretTargetRegistry {
 		List<Class> entities = new ArrayList<Class>();
 		
 		tgtListLabel:
-		for(Class entityCls : allEntities) {
-			for(Class excludes : excludedEntities) {
-				if(excludes!= null && excludes.isAssignableFrom(entityCls)) continue tgtListLabel;
+		for (Class entityCls : allEntities) {
+			for (Class excludes : excludedEntities) {
+				if (excludes!= null && excludes.isAssignableFrom(entityCls)) continue tgtListLabel;
 			}
 			String eStr = (String) EntityList.classToStringMapping.get(entityCls);
-			if(eStr.equals("Mob") || eStr.equals("Monster"))
+			if (eStr.equals("Mob") || eStr.equals("Monster"))
 				continue tgtListLabel;
 
-			if((EntityLiving.class.isAssignableFrom(entityCls) || IMob.class.isAssignableFrom(entityCls) || IAnimals.class.isAssignableFrom(entityCls))
+			if ((EntityLiving.class.isAssignableFrom(entityCls) || IMob.class.isAssignableFrom(entityCls) || IAnimals.class.isAssignableFrom(entityCls))
 					&& EntityLiving.class.isAssignableFrom(entityCls)) {
 				entities.add(entityCls);
 			}
@@ -81,8 +81,8 @@ public class TurretTargetRegistry {
 	
 	private static List<String> initStandardCreatures() {
 		List<String> retVal = new ArrayList<String>();
-		for(Class entityCls : initTargetableCreatures()) {
-			if(IMob.class.isAssignableFrom(entityCls)) {
+		for (Class entityCls : initTargetableCreatures()) {
+			if (IMob.class.isAssignableFrom(entityCls)) {
 				retVal.add((String) EntityList.classToStringMapping.get(entityCls));
 			}
 		}
@@ -94,25 +94,25 @@ public class TurretTargetRegistry {
 		int index = 0;
 		
 		tList.put(index++, "\nturretmod3.gui.tcu.tgtMonster");
-		for(Iterator<Class> tCreatures = targetCreatures.iterator();tCreatures.hasNext();) {
+		for (Iterator<Class> tCreatures = targetCreatures.iterator();tCreatures.hasNext();) {
 			Class entity = tCreatures.next();
-			if(IMob.class.isAssignableFrom(entity)) {
+			if (IMob.class.isAssignableFrom(entity)) {
 				tList.put(index++, (String) EntityList.classToStringMapping.get(entity));
 			}
 		}
 		
 		tList.put(index++, "\nturretmod3.gui.tcu.tgtAnimals");
-		for(Iterator<Class> tCreatures = targetCreatures.iterator();tCreatures.hasNext();) {
+		for (Iterator<Class> tCreatures = targetCreatures.iterator();tCreatures.hasNext();) {
 			Class entity = tCreatures.next();
-			if(IAnimals.class.isAssignableFrom(entity) && !IMob.class.isAssignableFrom(entity)) {
+			if (IAnimals.class.isAssignableFrom(entity) && !IMob.class.isAssignableFrom(entity)) {
 				tList.put(index++, (String) EntityList.classToStringMapping.get(entity));
 			}
 		}
 		
 		tList.put(index++, "\nturretmod3.gui.tcu.tgtOthers");
-		for(Iterator<Class> tCreatures = targetCreatures.iterator();tCreatures.hasNext();) {
+		for (Iterator<Class> tCreatures = targetCreatures.iterator();tCreatures.hasNext();) {
 			Class entity = tCreatures.next();
-			if(!IAnimals.class.isAssignableFrom(entity) && !IMob.class.isAssignableFrom(entity)) {
+			if (!IAnimals.class.isAssignableFrom(entity) && !IMob.class.isAssignableFrom(entity)) {
 				tList.put(index++, (String) EntityList.classToStringMapping.get(entity));
 			}
 		}

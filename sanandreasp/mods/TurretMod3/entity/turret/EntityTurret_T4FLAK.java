@@ -60,7 +60,7 @@ public class EntityTurret_T4FLAK extends EntityTurret_Base {
 	}
 
 	@Override
-	public int getMaxHealth() {
+	public int func_110138_aP() {
 		return 80;
 	}
 	
@@ -77,13 +77,13 @@ public class EntityTurret_T4FLAK extends EntityTurret_Base {
 	@Override
 	public int getMaxShootTicks() {
 		int shootTicks = 10;
-		if(!this.worldObj.isRemote) {
+		if (!this.worldObj.isRemote) {
 			++this.shoots;
 			this.dataWatcher.updateObject(19, this.shoots);
 		}
-		if(this.getShoots() >= 4) {
+		if (this.getShoots() >= 4) {
 			shootTicks = 50;
-			if(!this.worldObj.isRemote)
+			if (!this.worldObj.isRemote)
 				this.shoots = 0;
 		}
 		return shootTicks;

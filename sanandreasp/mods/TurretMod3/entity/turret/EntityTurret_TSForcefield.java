@@ -77,7 +77,7 @@ public class EntityTurret_TSForcefield extends EntityTurret_Base {
 	}
 	
 	@Override
-	public int getMaxHealth() {
+	public int func_110138_aP() {
 		return 40;
 	}
 	
@@ -152,12 +152,12 @@ public class EntityTurret_TSForcefield extends EntityTurret_Base {
 	}
 	
 	public void decrShieldPts(int amount) {
-		if(amount > 0)
+		if (amount > 0)
 			this.dataWatcher.updateObject(30, (short)Math.max((this.getShieldPts() - amount), 0));
 	}
 	
 	public void incrShieldPts(int amount) {
-		if(amount > 0)
+		if (amount > 0)
 			this.dataWatcher.updateObject(30, (short)Math.min((this.getShieldPts() + amount), this.getMaxShieldPts()));
 	}
 	
@@ -169,17 +169,17 @@ public class EntityTurret_TSForcefield extends EntityTurret_Base {
 	public void onUpdate() {
 		super.onUpdate();
 		
-		if(this.hasHighRngI() && this.wdtRange < 16D) {
+		if (this.hasHighRngI() && this.wdtRange < 16D) {
 			this.wdtRange = this.hgtRangeU = 16.5D;
-		} else if(this.hasHighRngII() && this.wdtRange < 32D) {
+		} else if (this.hasHighRngII() && this.wdtRange < 32D) {
 			this.wdtRange = this.hgtRangeU = 32.5D;
 		}
 		
-		if(!this.worldObj.isRemote && this.isActive() ) {
+		if (!this.worldObj.isRemote && this.isActive() ) {
 			boolean isDamaging = false;
 			
-			if(this.isShieldOnline()) {
-				if(this.ticksExisted % 10 == 0)
+			if (this.isShieldOnline()) {
+				if (this.ticksExisted % 10 == 0)
 					TM3ModRegistry.proxy.spawnParticle(11, this.posX-0.5D, this.posY+1.0D, this.posZ-0.5D, 128, this.dimension, this);
 			
 				AxisAlignedBB aabb =  AxisAlignedBB.getBoundingBox(
@@ -191,10 +191,10 @@ public class EntityTurret_TSForcefield extends EntityTurret_Base {
 						this.posZ + this.wdtRange
 					);
 				
-				if(TurretUpgrades.hasUpgrade(TUpgShieldMobPush.class, this.upgrades)) {
+				if (TurretUpgrades.hasUpgrade(TUpgShieldMobPush.class, this.upgrades)) {
 					List<EntityLiving> entities = this.worldObj.getEntitiesWithinAABB(EntityLiving.class, aabb);
-					for(EntityLiving entity : entities) {
-						if(this.isTargetValid(entity, this.wdtRange, this.hgtRangeU, this.hgtRangeD, true) && this.getDistanceToEntity(entity) <= this.wdtRange) {
+					for (EntityLiving entity : entities) {
+						if (this.isTargetValid(entity, this.wdtRange, this.hgtRangeU, this.hgtRangeD, true) && this.getDistanceToEntity(entity) <= this.wdtRange) {
 							double motion = (2.0D - (this.getDistanceSqToEntity(entity) / Math.pow(this.wdtRange, 2.0D))) * 0.4D;
 							double motX = (entity.posX - this.posX);
 							double motZ = (entity.posZ - this.posZ);					
@@ -202,8 +202,8 @@ public class EntityTurret_TSForcefield extends EntityTurret_Base {
 							motZ /= Math.max(Math.abs(motX), Math.abs(motZ));
 							motX *= motion;
 							motZ *= motion;
-							if(Double.isNaN(motX) || Double.isInfinite(motX)) motX = 0.0D;
-							if(Double.isNaN(motZ) || Double.isInfinite(motZ)) motZ = 0.0D;
+							if (Double.isNaN(motX) || Double.isInfinite(motX)) motX = 0.0D;
+							if (Double.isNaN(motZ) || Double.isInfinite(motZ)) motZ = 0.0D;
 							
 							entity.motionX = motX;
 							entity.motionZ = motZ;
@@ -216,18 +216,18 @@ public class EntityTurret_TSForcefield extends EntityTurret_Base {
 				}
 				
 				List<IProjectile> projectiles = this.worldObj.getEntitiesWithinAABB(IProjectile.class, aabb);
-				for(IProjectile proj : projectiles) {
-					if(proj instanceof EntityArrow) {
+				for (IProjectile proj : projectiles) {
+					if (proj instanceof EntityArrow) {
 						EntityArrow arrow = (EntityArrow)proj;
-						if(arrow.shootingEntity != null && arrow.shootingEntity instanceof EntityLiving && this.isTargetValidINF((EntityLiving)arrow.shootingEntity) && this.getDistanceToEntity(arrow) <= this.wdtRange) {
+						if (arrow.shootingEntity != null && arrow.shootingEntity instanceof EntityLiving && this.isTargetValidINF((EntityLiving)arrow.shootingEntity) && this.getDistanceToEntity(arrow) <= this.wdtRange) {
 							arrow.setDead();					
 							this.decrShieldPts(10);
 							isDamaging = true;
 						}
-					} else if(proj instanceof EntityThrowable) {
+					} else if (proj instanceof EntityThrowable) {
 						EntityThrowable throwed = (EntityThrowable)proj;
-						if(throwed.getThrower() != null && this.isTargetValidINF(throwed.getThrower()) && this.getDistanceToEntity(throwed) <= this.wdtRange) {
-							if(!this.onThrowableImpact(throwed))
+						if (throwed.getThrower() != null && this.isTargetValidINF(throwed.getThrower()) && this.getDistanceToEntity(throwed) <= this.wdtRange) {
+							if (!this.onThrowableImpact(throwed))
 								throwed.setDead();
 							this.decrShieldPts(3);
 							isDamaging = true;
@@ -236,9 +236,9 @@ public class EntityTurret_TSForcefield extends EntityTurret_Base {
 				}
 				
 				List<EntityFireball> fireballs = this.worldObj.getEntitiesWithinAABB(EntityFireball.class, aabb);
-				for(EntityFireball proj : fireballs) {
-					if(proj.shootingEntity != null && this.isTargetValidINF(proj.shootingEntity) && this.getDistanceToEntity(proj) <= this.wdtRange) {
-						if(!this.onFireballImpact(proj))
+				for (EntityFireball proj : fireballs) {
+					if (proj.shootingEntity != null && this.isTargetValidINF(proj.shootingEntity) && this.getDistanceToEntity(proj) <= this.wdtRange) {
+						if (!this.onFireballImpact(proj))
 							proj.setDead();
 						this.decrShieldPts(6);
 						isDamaging = true;
@@ -246,12 +246,12 @@ public class EntityTurret_TSForcefield extends EntityTurret_Base {
 				}
 			}
 			
-			if(!isDamaging)
+			if (!isDamaging)
 				this.incrShieldPts(TurretUpgrades.hasUpgrade(TUpgShieldRepairIncr.class, this.upgrades) ? 10 : 2);
 			
-			if(this.getShieldPts() == 0 && this.isShieldOnline())
+			if (this.getShieldPts() == 0 && this.isShieldOnline())
 				this.toggleShield(false);
-			if(this.getShieldPts() >= this.getMaxShieldPts()/2 && !this.isShieldOnline()) {
+			if (this.getShieldPts() >= this.getMaxShieldPts()/2 && !this.isShieldOnline()) {
 				this.toggleShield(true);
 				this.playSound("turretmod3.misc.shieldActive", 1.0F, 1.0F);
 				TM3ModRegistry.proxy.spawnParticle(12, this.posX-0.5D, this.posY+1.0D, this.posZ-0.5D, 128, this.dimension, this);
@@ -322,7 +322,7 @@ public class EntityTurret_TSForcefield extends EntityTurret_Base {
 	@Override
 	public void readEntityFromNBT(NBTTagCompound par1nbtTagCompound) {
 		super.readEntityFromNBT(par1nbtTagCompound);
-		if(par1nbtTagCompound.hasKey("shieldPts"))
+		if (par1nbtTagCompound.hasKey("shieldPts"))
 			this.dataWatcher.updateObject(30, (short)par1nbtTagCompound.getInteger("shieldPts"));
 	}
 }

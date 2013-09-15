@@ -52,7 +52,7 @@ public class GuiItemTab extends GuiButton {
             
             this.drawItemStack(this.renderedItem, this.xPosition + 5, this.yPosition + 5, var4, par1Minecraft);
 
-            if(this.field_82253_i)
+            if (this.field_82253_i)
             	this.drawTabHoveringText(this.displayString, this.xPosition - (this.isRight ? var4.getStringWidth(this.displayString) + 5 : - 5), this.yPosition + 21, var4);
             RenderHelper.disableStandardItemLighting();
         }

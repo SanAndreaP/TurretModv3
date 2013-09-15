@@ -27,7 +27,7 @@ public class RenderTurretCollector extends RenderTurret_Base {
 	@Override
 	public void doRenderLiving(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9) {
 		super.doRenderLiving(par1EntityLiving, par2, par4, par6, par8, par9);
-		if(!((EntityTurret_Base)par1EntityLiving).isActive() || ((EntityTurret_Base)par1EntityLiving).isInGui())
+		if (!((EntityTurret_Base)par1EntityLiving).isActive() || ((EntityTurret_Base)par1EntityLiving).isInGui())
 			return;
 		rndSeed++;
         Random random = new Random(rndSeed);
@@ -221,7 +221,7 @@ public class RenderTurretCollector extends RenderTurret_Base {
                 var14.drawString(var131, -var14.getStringWidth(var131) / 2, 18, 0xBBBBBB);
                 GL11.glDisable(GL11.GL_TEXTURE_2D);
                 
-                double health = ((double)par1Turret.getSrvHealth() / (double)par1Turret.getMaxHealth()) * 50D - 25D;
+                double health = ((double)par1Turret.getSrvHealth() / (double)par1Turret.func_110138_aP()) * 50D - 25D;
                 double exp = ((double)par1Turret.getExperience() / (double)par1Turret.getExpCap()) * 50D - 25D;
                 
                 //bars bkg

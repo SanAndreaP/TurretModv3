@@ -25,7 +25,6 @@ import net.minecraftforge.common.MinecraftForge;
 import sanandreasp.mods.TurretMod3.CreativeTabTurrets;
 import sanandreasp.mods.TurretMod3.block.BlockLaptop;
 import sanandreasp.mods.TurretMod3.block.ItemBlockLaptop;
-import sanandreasp.mods.TurretMod3.client.gui.mainMenu.MainMenuTM3;
 import sanandreasp.mods.TurretMod3.client.packet.PacketHandlerClient;
 import sanandreasp.mods.TurretMod3.client.registry.KeyBindHandler;
 import sanandreasp.mods.TurretMod3.client.registry.SoundRegistry;
@@ -223,7 +222,7 @@ public class TM3ModRegistry {
 		manHelper.checkManPack(evt.getModMetadata().name);
 	
 	// If Manager Pack is installed, then...
-		if(manHelper.loading) {
+		if (manHelper.loading) {
 			
 		// init managers
 			String[] ver = evt.getModMetadata().version.split("\\.");
@@ -253,10 +252,10 @@ public class TM3ModRegistry {
 		// load Config
 			cfgman.loadConfig();
 			
-			for(String propName : itemIDs.keySet()) {
+			for (String propName : itemIDs.keySet()) {
 				itemIDs.put(propName, cfgman.getItemID(propName));
 			}
-			for(String propName : blockIDs.keySet()) {
+			for (String propName : blockIDs.keySet()) {
 				blockIDs.put(propName, cfgman.getBlockID(propName));
 			}
 			
@@ -268,7 +267,7 @@ public class TM3ModRegistry {
 			canCollectorGetXP = b;
 			
 		// register Forge Events and Handlers
-			if(FMLCommonHandler.instance().getSide().isClient()) {
+			if (FMLCommonHandler.instance().getSide().isClient()) {
 				MinecraftForge.EVENT_BUS.register(new SoundRegistry());
 				TickRegistry.registerTickHandler(new TickHandlerClientRnd(), Side.CLIENT);
 				KeyBindingRegistry.registerKeyBinding(new KeyBindHandler());
@@ -326,16 +325,14 @@ public class TM3ModRegistry {
 	/** registers the TurretMod Main Menu */
 	private void registerMainMenu() {
 		try {
-			if(FMLCommonHandler.instance().getSide().isClient())
-				net.aetherteam.mainmenu_api.MainMenuAPI.registerMenu("TurretMod3Menu", MainMenuTM3.class);
+//			if (FMLCommonHandler.instance().getSide().isClient())
+//				net.aetherteam.mainmenu_api.MainMenuAPI.registerMenu("TurretMod3Menu", sanandreasp.mods.TurretMod3.client.gui.mainMenu.MainMenuTM3.class);
 		} catch (Exception e) {
 			FMLLog.log(TM3ModRegistry.modID, Level.INFO, "kingbdogz' Main Menu API not found. Skipping Main Menu registration!");
 		} catch (NoClassDefFoundError error) {
 			FMLLog.log(TM3ModRegistry.modID, Level.INFO, "kingbdogz' Main Menu API not found. Skipping Main Menu registration!");
 		}
 	}
-	
-	
 	
 	/** initializes the items **/
 	public void initItems() {
@@ -376,7 +373,6 @@ public class TM3ModRegistry {
 							.setCreativeTab(tabTurret);
 		
 		this.registerItems(turretItem, ammoItems, tcu, tInfoBook, mobileBase, iconCache, httm, rocket, artilleryBall, turretRec1);
-//		this.registerBlocks();
 		
 		GameRegistry.registerBlock(laptop, ItemBlockLaptop.class, "tm3.laptopBLK");
 
@@ -385,7 +381,7 @@ public class TM3ModRegistry {
 
 	@Init
 	public void init(FMLInitializationEvent evt) {
-		if(!manHelper.loading) return;
+		if (!manHelper.loading) return;
 		
 	// register Turret-Informations
 		TurretInfo.addTurretInfo(EntityTurret_T1Arrow.class, new TurretInfoT1Arrow());
@@ -472,7 +468,7 @@ public class TM3ModRegistry {
 	
 	@PostInit
 	public void postInit(FMLPostInitializationEvent evt) {
-		if(!manHelper.loading) return;
+		if (!manHelper.loading) return;
 		
 	// create helper instance for the Language Manager (LangMan)
 		SAP_LanguageManager langman = manHelper.getLangMan();
@@ -484,7 +480,7 @@ public class TM3ModRegistry {
 		
 		DefLangs.setupLang(langman);
 		
-		for(int i = 0; i < TurretInfo.getTurretCount(); i++) {
+		for (int i = 0; i < TurretInfo.getTurretCount(); i++) {
 			TurretInfo tinf = TurretInfo.getTurretInfo(TurretInfo.getTurretClass(i));
 			langman.addLangProp(tinf.getTurretItem().copy(), langman.getTranslatedEn(tinf.getTurretName()));
 		}
@@ -503,7 +499,7 @@ public class TM3ModRegistry {
 		langman.addLangProp(laptop, "Turret Laptop");
 		
 		langman.addLangProp(new ItemStack(ammoItems, 1, -1), "Ammo Items");
-		for(int id : ItemAmmunitions.dmgLangMapping.keySet())
+		for (int id : ItemAmmunitions.dmgLangMapping.keySet())
 			langman.addLangProp(new ItemStack(ammoItems, 1, id), ItemAmmunitions.dmgNameMapping.get(id));
 		
 		langman.addLangProp(mobileBase, "Mobile Base");
@@ -521,7 +517,7 @@ public class TM3ModRegistry {
 			"TG75 Guided Rocket",
 			"TG100 Guided Rocket"
 		};
-		for(int i = 0; i < 6; i++) {
+		for (int i = 0; i < 6; i++) {
 			langman.addLangProp(new ItemStack(rocket, 1, i), itemNames[i]);
 		}
 		itemNames = new String[] {
@@ -531,7 +527,7 @@ public class TM3ModRegistry {
 				"Big Napalm Artillery Shell",
 				"Frag Artillery Shell",
 		};
-		for(int i = 0; i < 5; i++) {
+		for (int i = 0; i < 5; i++) {
 			langman.addLangProp(new ItemStack(artilleryBall, 1, i), itemNames[i]);
 			langman.addLangProp("turretmod3.turret.amtp"+i+"t5a", itemNames[i]);
 		}
@@ -545,7 +541,7 @@ public class TM3ModRegistry {
 	
 	@ServerStarting
 	public void startingServer(FMLServerStartingEvent evt) {
-		if(!manHelper.loading) return;
+		if (!manHelper.loading) return;
 	
 	// register commands
 		evt.registerServerCommand(new CommandTurretMod());
@@ -553,11 +549,11 @@ public class TM3ModRegistry {
 	
 	/** registers the Items **/
 	private void registerItems(Item... items) {
-		for(int i = 0; i < items.length; i++) GameRegistry.registerItem(items[i], "tm3.item_"+i);
+		for (int i = 0; i < items.length; i++) GameRegistry.registerItem(items[i], "tm3.item_"+i);
 	}
 	
 	/** registers the Blocks **/
 	private void registerBlocks(Block... blocks) {
-		for(int i = 0; i < blocks.length; i++) GameRegistry.registerBlock(blocks[i], "tm3.block_"+i);
+		for (int i = 0; i < blocks.length; i++) GameRegistry.registerBlock(blocks[i], "tm3.block_"+i);
 	}
 }

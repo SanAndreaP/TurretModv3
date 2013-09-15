@@ -35,7 +35,7 @@ public class ItemAmmunitions extends Item {
 	@Override
 	public String getUnlocalizedName(ItemStack par1ItemStack) {
 		int dmg = par1ItemStack.getItemDamage();
-		if(dmg >= dmgLangMapping.size() || dmg < 0)
+		if (dmg >= dmgLangMapping.size() || dmg < 0)
 			return super.getUnlocalizedName(par1ItemStack);
 		else
 			return "tm3." + dmgLangMapping.get(dmg);
@@ -44,7 +44,7 @@ public class ItemAmmunitions extends Item {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List par3List) {
-		for(int id : dmgLangMapping.keySet())
+		for (int id : dmgLangMapping.keySet())
 			par3List.add(new ItemStack(this.itemID, 1, id));
 	}
 	
@@ -55,8 +55,8 @@ public class ItemAmmunitions extends Item {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void updateIcons(IconRegister par1IconRegister) {
-		for(int i = 0; i < dmgLangMapping.size(); i++) {
+	public void registerIcons(IconRegister par1IconRegister) {
+		for (int i = 0; i < dmgLangMapping.size(); i++) {
 			dmgIconMapping.put(i, par1IconRegister.registerIcon("TurretMod3:"+dmgLangMapping.get(i)));
 		}
 	}

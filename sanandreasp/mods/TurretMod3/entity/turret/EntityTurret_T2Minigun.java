@@ -49,7 +49,7 @@ public class EntityTurret_T2Minigun extends EntityTurret_Base {
 	}
 
 	@Override
-	public int getMaxHealth() {
+	public int func_110138_aP() {
 		return 40;
 	}
 	
@@ -79,17 +79,17 @@ public class EntityTurret_T2Minigun extends EntityTurret_Base {
 	public void onUpdate() {
 		super.onUpdate();
 		
-		if(this.getShootTicks() == 1) {
+		if (this.getShootTicks() == 1) {
 			barrelRot += 45D;
-			if(MathHelper.floor_double(barrelRot) == 180)
+			if (MathHelper.floor_double(barrelRot) == 180)
 				barrelRot = 0F;
 			
 			isRight = MathHelper.floor_double(barrelRot) % 90 != 0;
 		}
-		if(this.ticksExisted % 200 == 0) {
-			if(this.killsWithin10sec >= 10){
+		if (this.ticksExisted % 200 == 0) {
+			if (this.killsWithin10sec >= 10){
 				EntityPlayer player = this.worldObj.getPlayerEntityByName(this.getPlayerName());
-				if(player != null) {
+				if (player != null) {
 					player.triggerAchievement(AchievementPageTM.piercing);
 				}
 			}

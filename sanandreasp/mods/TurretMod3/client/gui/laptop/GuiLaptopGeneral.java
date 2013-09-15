@@ -86,13 +86,13 @@ public class GuiLaptopGeneral extends GuiLaptop_Base {
 		this.statLabel.displayString = (!statEnabled ? split[1] : split[2]) + " " + split[0];
 		
     	int icon = 0;
-    	if(TM3ModRegistry.proxy.getPlayerTM3Data(this.mc.thePlayer).hasKey("tcCrosshair"))
+    	if (TM3ModRegistry.proxy.getPlayerTM3Data(this.mc.thePlayer).hasKey("tcCrosshair"))
     		icon = TM3ModRegistry.proxy.getPlayerTM3Data(this.mc.thePlayer).getByte("tcCrosshair");
     	int chX = this.guiLeft + (this.xSize - 150) / 2 + 159;
     	int chY = this.guiTop + 48;
         this.drawRect(chX, chY, chX + 11, chY + 11, 0xFF000000);
     	GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.renderEngine.bindTexture(TM3ModRegistry.TEX_TURRETCAM);
+        this.mc.func_110434_K().func_110577_a(TM3ModRegistry.TEX_TURRETCAM);
         this.drawTexturedModalRect(chX-2, chY-2, icon * 16, 40, 16, 16);
         
 		String s = langman.getTranslated("turretmod3.gui.tcu.frequency");
@@ -120,7 +120,7 @@ public class GuiLaptopGeneral extends GuiLaptop_Base {
     {
     	this.frequency.textboxKeyTyped(par1, par2);
 
-    	if((par2 == 28 || par2 == 1) && this.frequency.isFocused()) {
+    	if ((par2 == 28 || par2 == 1) && this.frequency.isFocused()) {
     		this.frequency.setFocused(false);
     	}
     	else if ((par2 == 1 || par2 == this.mc.gameSettings.keyBindInventory.keyCode) && !this.frequency.isFocused()) {
@@ -132,23 +132,23 @@ public class GuiLaptopGeneral extends GuiLaptop_Base {
 	protected void actionPerformed(GuiButton par1GuiButton) {
 		super.actionPerformed(par1GuiButton);
 		try {
-			if(par1GuiButton.id == this.programTurret.id) {
+			if (par1GuiButton.id == this.programTurret.id) {
 	        	this.inventorySlots.detectAndSendChanges();
-			} else if(par1GuiButton.id == this.statLabel.id) {
+			} else if (par1GuiButton.id == this.statLabel.id) {
 		    	ByteArrayOutputStream b = new ByteArrayOutputStream();
 				DataOutputStream o = new DataOutputStream(b);
 		    	o.writeInt(0x006);
 		    	o.writeInt(0x00);
 		    	
 		    	PacketDispatcher.sendPacketToServer(new Packet250CustomPayload(PacketHandlerCommon.getChannel(), b.toByteArray()));
-			} else if(par1GuiButton.id == this.chngTCCrosshair.id) {
+			} else if (par1GuiButton.id == this.chngTCCrosshair.id) {
 				ByteArrayOutputStream b = new ByteArrayOutputStream();
 				DataOutputStream o = new DataOutputStream(b);
 				o.writeInt(0x006);
 				o.writeInt(0x01);
 				
 				PacketDispatcher.sendPacketToServer(new Packet250CustomPayload(PacketHandlerCommon.getChannel(), b.toByteArray()));
-			} else if(par1GuiButton.id == this.activateTurret.id || par1GuiButton.id == this.deactivateTurret.id) {
+			} else if (par1GuiButton.id == this.activateTurret.id || par1GuiButton.id == this.deactivateTurret.id) {
 				ByteArrayOutputStream b = new ByteArrayOutputStream();
 				DataOutputStream o = new DataOutputStream(b);
 				o.writeInt(0x006);
@@ -161,7 +161,7 @@ public class GuiLaptopGeneral extends GuiLaptop_Base {
 				o.writeBoolean(par1GuiButton.id == this.activateTurret.id);
 				
 				PacketDispatcher.sendPacketToServer(new Packet250CustomPayload(PacketHandlerCommon.getChannel(), b.toByteArray()));
-			} else if(par1GuiButton.id == this.resetTarget.id) {
+			} else if (par1GuiButton.id == this.resetTarget.id) {
 				ByteArrayOutputStream b = new ByteArrayOutputStream();
 				DataOutputStream o = new DataOutputStream(b);
 				o.writeInt(0x006);
@@ -173,7 +173,7 @@ public class GuiLaptopGeneral extends GuiLaptop_Base {
 				}
 				
 				PacketDispatcher.sendPacketToServer(new Packet250CustomPayload(PacketHandlerCommon.getChannel(), b.toByteArray()));
-			} else if(par1GuiButton.id == this.uniqueTargetOn.id || par1GuiButton.id == this.uniqueTargetOff.id) {
+			} else if (par1GuiButton.id == this.uniqueTargetOn.id || par1GuiButton.id == this.uniqueTargetOff.id) {
 				ByteArrayOutputStream b = new ByteArrayOutputStream();
 				DataOutputStream o = new DataOutputStream(b);
 				o.writeInt(0x006);

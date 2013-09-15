@@ -48,7 +48,7 @@ public class GuiHandler implements IGuiHandler {
 		switch(ID) {
 			case 0:
 				Entity e = world.getEntityByID(x);
-				if(e instanceof EntityTurret_Base) {
+				if (e instanceof EntityTurret_Base) {
 					EntityTurret_Base turret = (EntityTurret_Base)e;
 					PacketRecvTargetListSrv.sendClient(turret, player);
 					player.triggerAchievement(AchievementPageTM.control);
@@ -59,7 +59,7 @@ public class GuiHandler implements IGuiHandler {
 				break;
 			case 2:
 				Entity e1 = world.getEntityByID(x);
-				if(e1 instanceof EntityDismantleStorage) {
+				if (e1 instanceof EntityDismantleStorage) {
 					EntityDismantleStorage dismStg = (EntityDismantleStorage)e1;
 					return new ContainerDismantleStorage(player.inventory, dismStg.inventory);
 				}
@@ -69,7 +69,7 @@ public class GuiHandler implements IGuiHandler {
 			case 6:
 				{
 					TileEntity te = world.getBlockTileEntity(x, y, z);
-					if(te != null && te instanceof TileEntityLaptop) {
+					if (te != null && te instanceof TileEntityLaptop) {
 						TileEntityLaptop telap = (TileEntityLaptop) te;
 						return new ContainerLaptop(telap, player.inventory);
 					}
@@ -78,7 +78,7 @@ public class GuiHandler implements IGuiHandler {
 			case 5:
 				{
 					TileEntity te = world.getBlockTileEntity(x, y, z);
-					if(te != null && te instanceof TileEntityLaptop) {
+					if (te != null && te instanceof TileEntityLaptop) {
 						TileEntityLaptop telap = (TileEntityLaptop) te;
 						return new ContainerLaptopUpgrades(telap, player.inventory);
 					}
@@ -103,14 +103,14 @@ public class GuiHandler implements IGuiHandler {
 			case 5: // FALL-THROUGH
 			case 6:
 				TileEntity te = world.getBlockTileEntity(x, y, z);
-				if(te != null && te instanceof TileEntityLaptop) {
-					if(ID == 3)
+				if (te != null && te instanceof TileEntityLaptop) {
+					if (ID == 3)
 						return new GuiLaptopGeneral((ContainerLaptop)getServerGuiElement(ID, player, world, x, y, z), (TileEntityLaptop)te);
-					else if(ID == 4)
+					else if (ID == 4)
 						return new GuiLaptopTargets((ContainerLaptop)getServerGuiElement(ID, player, world, x, y, z), (TileEntityLaptop)te);
-					else if(ID == 5)
+					else if (ID == 5)
 						return new GuiLaptopUpgrades((ContainerLaptopUpgrades)getServerGuiElement(ID, player, world, x, y, z), (TileEntityLaptop)te);
-					else if(ID == 6)
+					else if (ID == 6)
 						return new GuiLaptopMisc((ContainerLaptop)getServerGuiElement(ID, player, world, x, y, z), (TileEntityLaptop)te);
 				}
 		}

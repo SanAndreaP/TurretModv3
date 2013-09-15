@@ -40,13 +40,13 @@ public class EntityMobileBase extends EntityLiving implements IHealable {
 	}
 
 	@Override
-	public int getMaxHealth() {
+	public int func_110138_aP() {
 		return 20;
 	}
 	
 	@Override
 	public void onLivingUpdate() {
-		if(this.riddenByEntity != null) {
+		if (this.riddenByEntity != null) {
 			this.riddenByEntity.onUpdate();
 		}
 		
@@ -104,21 +104,21 @@ public class EntityMobileBase extends EntityLiving implements IHealable {
 
         this.worldObj.theProfiler.endSection();
         
-        if(!this.worldObj.isRemote) this.dataWatcher.updateObject(20, (byte) (this.isRidden() ? 1 : 0));
+        if (!this.worldObj.isRemote) this.dataWatcher.updateObject(20, (byte) (this.isRidden() ? 1 : 0));
 	}
 	
 	@Override
 	public void onEntityUpdate() {
 		super.onEntityUpdate();
 		
-		if(this.riddenByEntity != null && ticksExisted == 20) {
+		if (this.riddenByEntity != null && ticksExisted == 20) {
 			this.riddenByEntity.mountEntity(null);
 		}
-		if(this.ridingEntity != null && ticksExisted == 15) {
+		if (this.ridingEntity != null && ticksExisted == 15) {
 			this.mountEntity(null);
 		}
 		
-		if(this.isRidden()) {
+		if (this.isRidden()) {
 			this.setSize(0.3F, 1.4F);
 		} else {
 			this.setSize(0.99F, this.stdHeight);
@@ -127,10 +127,10 @@ public class EntityMobileBase extends EntityLiving implements IHealable {
 	
 	@Override
 	public AxisAlignedBB getCollisionBox(Entity par1Entity) {
-		if(!this.worldObj.isRemote && this.riddenByEntity == null && par1Entity instanceof EntityTurret_Base) {
+		if (!this.worldObj.isRemote && this.riddenByEntity == null && par1Entity instanceof EntityTurret_Base) {
 			par1Entity.mountEntity(this);
 		}
-		if(par1Entity instanceof EntityTurret_Base)
+		if (par1Entity instanceof EntityTurret_Base)
 			return null;
 		return this.boundingBox;
 	}
@@ -156,7 +156,7 @@ public class EntityMobileBase extends EntityLiving implements IHealable {
 	
 	@Override
 	protected void collideWithEntity(Entity par1Entity) {
-//		if(!(par1Entity instanceof EntityTurret_Base))
+//		if (!(par1Entity instanceof EntityTurret_Base))
 			super.collideWithEntity(par1Entity);
 	}
 	
@@ -167,12 +167,12 @@ public class EntityMobileBase extends EntityLiving implements IHealable {
 	
 	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, int par2) {
-		if(this.riddenByEntity != null) {
+		if (this.riddenByEntity != null) {
 			((EntityTurret_Base)this.riddenByEntity).attackEntityFrom(par1DamageSource, par2);
 			return false;
 		}
-		if(par1DamageSource.getSourceOfDamage() instanceof EntityPlayer) {
-			if(!((EntityPlayer)par1DamageSource.getSourceOfDamage()).capabilities.isCreativeMode && !this.worldObj.isRemote)
+		if (par1DamageSource.getSourceOfDamage() instanceof EntityPlayer) {
+			if (!((EntityPlayer)par1DamageSource.getSourceOfDamage()).capabilities.isCreativeMode && !this.worldObj.isRemote)
 				this.entityDropItem(new ItemStack(TM3ModRegistry.mobileBase, 1), 0.0F);
 			this.playSound("turretmod3.hit.turretDeath", 1.0F, 1.0F);
 			onDeathUpdate();

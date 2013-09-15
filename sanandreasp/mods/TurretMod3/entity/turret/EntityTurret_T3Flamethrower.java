@@ -44,13 +44,13 @@ public class EntityTurret_T3Flamethrower extends EntityTurret_Base {
 	}
 	
 	@Override
-	public int getMaxHealth() {
+	public int func_110138_aP() {
 		return 60;
 	}
 	
 	@Override
 	protected void decrAmmo() {
-		if(shouldWasteAmmo)
+		if (shouldWasteAmmo)
 			super.decrAmmo();
 		this.shouldWasteAmmo = !this.shouldWasteAmmo;
 	}
@@ -62,12 +62,12 @@ public class EntityTurret_T3Flamethrower extends EntityTurret_Base {
 	
 	@Override
 	public void shootProjectile(boolean isRidden) {
-		for(int i = 0; i < 5; i++) {
+		for (int i = 0; i < 5; i++) {
 			TurretProj_Flame var2 = (TurretProj_Flame) this.getProjectile();
 	        var2.isPickupable = false;
-	        if(TurretUpgrades.hasUpgrade(TUpgPurify.class, this.upgrades))
+	        if (TurretUpgrades.hasUpgrade(TUpgPurify.class, this.upgrades))
 	        	var2.setPurified();
-	        if(isRidden) {
+	        if (isRidden) {
 	        	EntityPlayer player = (EntityPlayer) this.riddenByEntity;
 	        	var2.hasNoTarget = true;
 	        	var2.setLocationAndAngles(this.posX, this.posY + (double)this.getEyeHeight(), this.posZ, player.rotationYaw, player.rotationPitch);
@@ -112,7 +112,7 @@ public class EntityTurret_T3Flamethrower extends EntityTurret_Base {
 		super.onUpdate();
 		
 		this.soundTicks++;
-		if(this.soundTicks == 4)
+		if (this.soundTicks == 4)
 			this.soundTicks = 0;
 	}
 	

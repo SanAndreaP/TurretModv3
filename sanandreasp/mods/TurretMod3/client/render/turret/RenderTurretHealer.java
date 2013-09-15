@@ -23,7 +23,7 @@ public class RenderTurretHealer extends RenderTurret_Base {
 	public void doRenderLiving(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9) {
 		super.doRenderLiving(par1EntityLiving, par2, par4, par6, par8, par9);
 		EntityTurret_TSHealer healer = (EntityTurret_TSHealer)par1EntityLiving;
-		if(healer.getCurrentTargetStr() != null && healer.getCurrentTargetStr().length() > 0 && healer.getAmmo() > 0) {
+		if (healer.getCurrentTargetStr() != null && healer.getCurrentTargetStr().length() > 0 && healer.getAmmo() > 0) {
 			renderHealBeam(healer, par2, par4, par6, par8, par9);
 		}
 	}
@@ -31,7 +31,7 @@ public class RenderTurretHealer extends RenderTurret_Base {
 	public void renderHealBeam(EntityTurret_TSHealer par1Entity, double par2, double par4, double par6, float par8, float par9)
     {
 		EntityLiving target = (EntityLiving) Minecraft.getMinecraft().theWorld.getEntityByID(par1Entity.getTargetEID());
-		if(target == null) return;
+		if (target == null) return;
 		
 		float rotYaw = par1Entity.rotationYawHead;
 		float rotPtc = par1Entity.rotationPitch;

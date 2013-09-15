@@ -37,16 +37,16 @@ public class GuiTCUBase extends GuiScreen {
         
         tabTurretInfo = new GuiItemTab(buttonList.size(), this.guiLeft - 23, this.guiTop + 10, new ItemStack(Item.sign), langman.getTranslated("turretmod3.gui.tcu.btninfo"), false);
         buttonList.add(tabTurretInfo);
-        if(this instanceof GuiTCUInfo) tabTurretInfo.enabled = false;
+        if (this instanceof GuiTCUInfo) tabTurretInfo.enabled = false;
         tabTurretTargets = new GuiItemTab(buttonList.size(), this.guiLeft - 23, this.guiTop + 36, new ItemStack(Item.swordDiamond), langman.getTranslated("turretmod3.gui.tcu.btntarg"), false);
         buttonList.add(tabTurretTargets);
-        if(this instanceof GuiTCUTargets) tabTurretTargets.enabled = false;
+        if (this instanceof GuiTCUTargets) tabTurretTargets.enabled = false;
         tabTurretSettings = new GuiItemTab(buttonList.size(), this.guiLeft - 23, this.guiTop + 62, new ItemStack(Item.writableBook), langman.getTranslated("turretmod3.gui.tcu.btnsetg"), false);
         buttonList.add(tabTurretSettings);
-        if(this instanceof GuiTCUSettings) tabTurretSettings.enabled = false;
+        if (this instanceof GuiTCUSettings) tabTurretSettings.enabled = false;
         tabTurretUpgrades = new GuiItemTab(buttonList.size(), this.guiLeft - 23, this.guiTop + 88, new ItemStack(Item.saddle), langman.getTranslated("turretmod3.gui.tinfo.btnupgd"), false);
         buttonList.add(tabTurretUpgrades);
-        if(this instanceof GuiTCUUpgrades) tabTurretUpgrades.enabled = false;
+        if (this instanceof GuiTCUUpgrades) tabTurretUpgrades.enabled = false;
 	}
 	
 	@Override
@@ -56,7 +56,7 @@ public class GuiTCUBase extends GuiScreen {
 	
 	@Override
 	public void drawScreen(int par1, int par2, float par3) {
-		if(this.turret != null && !this.turret.hasPlayerAccess(this.mc.thePlayer)) {
+		if (this.turret != null && !this.turret.hasPlayerAccess(this.mc.thePlayer)) {
 			buttonList.remove(this.tabTurretSettings);
 			buttonList.remove(this.tabTurretTargets);
 			buttonList.remove(this.tabTurretUpgrades);
@@ -68,17 +68,17 @@ public class GuiTCUBase extends GuiScreen {
 	@Override
 	protected void actionPerformed(GuiButton par1GuiButton) {
 		GuiTCUBase gui = null;
-		if(par1GuiButton.id == tabTurretInfo.id) {
+		if (par1GuiButton.id == tabTurretInfo.id) {
 			gui = new GuiTCUInfo();
-		} else if(par1GuiButton.id == tabTurretTargets.id) {
+		} else if (par1GuiButton.id == tabTurretTargets.id) {
 			gui = new GuiTCUTargets();
-		} else if(par1GuiButton.id == tabTurretSettings.id) {
+		} else if (par1GuiButton.id == tabTurretSettings.id) {
 			gui = new GuiTCUSettings();
-		} else if(par1GuiButton.id == tabTurretUpgrades.id) {
+		} else if (par1GuiButton.id == tabTurretUpgrades.id) {
 			gui = new GuiTCUUpgrades();
 		}
 		
-		if(gui != null) {
+		if (gui != null) {
 			gui.turret = this.turret;
 			this.mc.displayGuiScreen(gui);
 		}

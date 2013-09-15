@@ -25,7 +25,7 @@ public class TurretInfoT2Minigun extends TurretInfo {
 				'G', new ItemStack(Item.ingotGold),
 				'D', new ItemStack(Block.dispenser),
 				'L', new ItemStack(Item.dyePowder, 1, 4),
-				'I', new ItemStack(Block.blockSteel),
+				'I', new ItemStack(Block.blockIron),
 				'B', new ItemStack(Block.stoneBrick)
 		};
 		this.itemIcon = "TurretMod3:turret_03";
@@ -40,7 +40,7 @@ public class TurretInfoT2Minigun extends TurretInfo {
 		 this.addAmmo(i, new ItemStack(Item.pumpkinSeeds), 1);
 		 this.addAmmo(i, new ItemStack(Block.pumpkin), 4);
 		
-		this.healItems.put(new ItemStack(Block.blockSteel), 20);
+		this.healItems.put(new ItemStack(Block.blockIron), 20);
 		this.healItems.put(new ItemStack(Item.ingotIron), 2);
 		this.healItems.put(new ItemStack(Item.ingotGold), 8);
 		this.healItems.put(new ItemStack(Item.dyePowder, 1, 4), 8);

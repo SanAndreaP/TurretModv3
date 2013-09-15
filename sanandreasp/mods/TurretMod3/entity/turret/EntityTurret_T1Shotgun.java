@@ -45,10 +45,10 @@ public class EntityTurret_T1Shotgun extends EntityTurret_Base {
 	public void shootProjectile(boolean isRidden) {
 		boolean isPickupable = !TurretUpgrades.hasUpgrade(TUpgInfAmmo.class, this.upgrades) && !this.isEconomied;
         boolean isEndermanDamageable = TurretUpgrades.hasUpgrade(TUpgEnderHitting.class, this.upgrades);
-		for(int i = 0; i < 5; i++) {
+		for (int i = 0; i < 5; i++) {
 	        TurretProjectile var2 = this.getProjectile();
 	        var2.isPickupable = isPickupable;
-	        if(isRidden) {
+	        if (isRidden) {
 	        	EntityPlayer player = (EntityPlayer) this.riddenByEntity;
 	        	var2.hasNoTarget = true;
 	        	var2.setLocationAndAngles(this.posX, this.posY + (double)this.getEyeHeight(), this.posZ, player.rotationYaw, player.rotationPitch);
@@ -102,9 +102,9 @@ public class EntityTurret_T1Shotgun extends EntityTurret_Base {
 	@Override
 	public void onKillEntity(EntityLiving par1EntityLiving) {
 		super.onKillEntity(par1EntityLiving);
-		if(this.firstStrike && this.riddenByEntity == null) {
+		if (this.firstStrike && this.riddenByEntity == null) {
 			EntityPlayer player = this.worldObj.getPlayerEntityByName(this.getPlayerName());
-			if(player != null)
+			if (player != null)
 				player.triggerAchievement(AchievementPageTM.multiDeath);
 		}
 		this.firstStrike = true;

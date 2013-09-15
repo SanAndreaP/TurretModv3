@@ -64,14 +64,14 @@ public class GuiTInfoBase extends GuiScreen {
         buttonList.add(this.tabNavDn);
         
         this.leftTabs = new GuiButton[this.turretInf.getTurretCount()];        
-        for(int i = 0; i < TurretInfo.getTurretCount(); i++) {
+        for (int i = 0; i < TurretInfo.getTurretCount(); i++) {
         	TurretInfo tinf = TurretInfo.getTurretInfo(TurretInfo.getTurretClass(i));
         	this.leftTabs[i] = new GuiItemTab(buttonList.size(), this.guiLeft - 23, this.guiTop + 15 + i*26, tinf.getTurretItem(), tinf.getTurretName(), false);
         	buttonList.add(this.leftTabs[i]);
-        	if(!this.leftTabs[i].enabled && this.tabInd+6 < i) {
+        	if (!this.leftTabs[i].enabled && this.tabInd+6 < i) {
         		this.tabInd = i - 6;
         	}
-        	if(!this.leftTabs[i].enabled && this.tabInd > i) {
+        	if (!this.leftTabs[i].enabled && this.tabInd > i) {
         		this.tabInd = i;
         	}
         }
@@ -81,9 +81,9 @@ public class GuiTInfoBase extends GuiScreen {
 	
 	@Override
 	public void drawScreen(int par1, int par2, float par3) {
-        for(int i = 0; i < this.leftTabs.length ;i++) {
+        for (int i = 0; i < this.leftTabs.length ;i++) {
         	GuiButton btn = this.leftTabs[i];
-        	if(i < this.tabInd || i > this.tabInd + 6) {
+        	if (i < this.tabInd || i > this.tabInd + 6) {
         		btn.drawButton = btn.enabled = false;
         	} else {
         		btn.yPosition = this.guiTop + 15 + (i-tabInd)*26;
@@ -101,29 +101,29 @@ public class GuiTInfoBase extends GuiScreen {
 	@Override
 	protected void actionPerformed(GuiButton par1GuiButton) {
 		int id = par1GuiButton.id;
-		if(id == this.tabNavUp.id && this.tabInd > 0)
+		if (id == this.tabNavUp.id && this.tabInd > 0)
 			this.tabInd--;
-		else if(id == this.tabNavDn.id && this.tabInd+6 < this.leftTabs.length)
+		else if (id == this.tabNavDn.id && this.tabInd+6 < this.leftTabs.length)
 			this.tabInd++;
-		else if(id == this.tabTurretDesc.id) {
+		else if (id == this.tabTurretDesc.id) {
 			GuiTInfoBase gs = new GuiTInfoPG1(this.site);
 			gs.tabInd = this.tabInd;
 			this.mc.displayGuiScreen(gs);
-		} else if(id == this.tabTurretValues.id) {
+		} else if (id == this.tabTurretValues.id) {
 			GuiTInfoBase gs = new GuiTInfoPG2(this.site);
 			gs.tabInd = this.tabInd;
 			this.mc.displayGuiScreen(gs);
-		} else if(id == this.tabTurretItems.id) {
+		} else if (id == this.tabTurretItems.id) {
 			GuiTInfoBase gs = new GuiTInfoPG3(this.site);
 			gs.tabInd = this.tabInd;
 			this.mc.displayGuiScreen(gs);
-		} else if(id == this.tabTurretUpgrades.id) {
+		} else if (id == this.tabTurretUpgrades.id) {
 			GuiTInfoBase gs = new GuiTInfoPG4(this.site);
 			gs.tabInd = this.tabInd;
 			this.mc.displayGuiScreen(gs);
 		} else {
-			for(int i = this.tabInd; i < this.tabInd + 7 && i < this.leftTabs.length; i++) {
-				if(id == this.leftTabs[i].id) {
+			for (int i = this.tabInd; i < this.tabInd + 7 && i < this.leftTabs.length; i++) {
+				if (id == this.leftTabs[i].id) {
 					this.site = i;
 					this.initGui();
 				}

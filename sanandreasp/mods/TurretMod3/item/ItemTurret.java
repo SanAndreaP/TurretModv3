@@ -93,15 +93,15 @@ public class ItemTurret extends Item {
             Map<Integer, ItemStack> upgMap = Maps.newHashMap();
             List<ItemStack> upgList = getUpgItems(par1);
 	    	Class<? extends EntityTurret_Base> turretCls = TurretInfo.getTurretClass(par1.getItemDamage());
-            for(ItemStack is : upgList) {
+            for (ItemStack is : upgList) {
             	upgMap.put(TurretUpgrades.getUpgradeFromItem(is, turretCls).getUpgradeID(), is);
             }
             var10.upgrades = upgMap;
             
             String s = getCustomName(par1);
-            if(s != null && s.length() > 0)
+            if (s != null && s.length() > 0)
             	var10.setTurretName(s);
-            else if(par1.hasTagCompound() && par1.getTagCompound().hasKey("display") && par1.getTagCompound().getCompoundTag("display").hasKey("Name"))
+            else if (par1.hasTagCompound() && par1.getTagCompound().hasKey("display") && par1.getTagCompound().getCompoundTag("display").hasKey("Name"))
             	var10.setTurretName(par1.getTagCompound().getCompoundTag("display").getString("Name"));
             
             int freq = getFrequency(par1);
@@ -127,7 +127,7 @@ public class ItemTurret extends Item {
     @Override
     @SideOnly(Side.CLIENT)
     public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List par3List) {
-    	for(int i = 0; i < TurretInfo.getTurretCount(); i++) {
+    	for (int i = 0; i < TurretInfo.getTurretCount(); i++) {
 			TurretInfo tinf = TurretInfo.getTurretInfo(TurretInfo.getTurretClass(i));
     		par3List.add(tinf.getTurretItem().copy());
     	}
@@ -135,7 +135,7 @@ public class ItemTurret extends Item {
     
     @Override
     public String getItemDisplayName(ItemStack par1ItemStack) {
-    	if(this.hasEffect(par1ItemStack))
+    	if (this.hasEffect(par1ItemStack))
     		return "\247d" + super.getItemDisplayName(par1ItemStack) + "\247r";
     	return super.getItemDisplayName(par1ItemStack);
     }
@@ -145,19 +145,19 @@ public class ItemTurret extends Item {
     public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
     	super.addInformation(par1ItemStack, par2EntityPlayer, par3List, par4);
     	String[] infos = TM3ModRegistry.manHelper.getLangMan().getTranslated("turretmod3.item.turretInfo").split("\\|");
-    	if(getProgramTag(par1ItemStack).hasKey("progName"))
+    	if (getProgramTag(par1ItemStack).hasKey("progName"))
     		par3List.add("\247o" + String.format(infos[0], getCustomName(par1ItemStack)) + "\247r");
-    	if(getProgramTag(par1ItemStack).hasKey("progFreq"))
+    	if (getProgramTag(par1ItemStack).hasKey("progFreq"))
     		par3List.add("\247o" + String.format(infos[1], getFrequency(par1ItemStack)) + "\247r");
-    	if(getProgramTag(par1ItemStack).hasKey("progTargets"))
+    	if (getProgramTag(par1ItemStack).hasKey("progTargets"))
     		par3List.add("\247o" + infos[2] + "\247r");
-    	if(getProgramTag(par1ItemStack).hasKey("progUpgrades")) {
+    	if (getProgramTag(par1ItemStack).hasKey("progUpgrades")) {
     		par3List.add("\247o" + infos[3] + "\247r");
-    		if(par2EntityPlayer.openContainer instanceof ContainerLaptopUpgrades) {
+    		if (par2EntityPlayer.openContainer instanceof ContainerLaptopUpgrades) {
     	    	Class<? extends EntityTurret_Base> turretCls = TurretInfo.getTurretClass(par1ItemStack.getItemDamage());
-				for(ItemStack is : getUpgItems(par1ItemStack)) {
+				for (ItemStack is : getUpgItems(par1ItemStack)) {
 					TurretUpgrades upgCls = TurretUpgrades.getUpgradeFromItem(is, turretCls);
-					if(upgCls != null)
+					if (upgCls != null)
 						par3List.add(" - " + upgCls.getName());
 				}
     		}
@@ -166,7 +166,7 @@ public class ItemTurret extends Item {
     
     private static NBTTagCompound getProgramTag(ItemStack is) {
     	NBTTagCompound isTag = is.hasTagCompound() ? is.getTagCompound() : new NBTTagCompound("tag");
-    	if(isTag.hasKey("tm3_program")) {
+    	if (isTag.hasKey("tm3_program")) {
     		return (NBTTagCompound) isTag.getTag("tm3_program");
     	} else {
     		return new NBTTagCompound();
@@ -174,7 +174,7 @@ public class ItemTurret extends Item {
     }
     
     private static void setProgramTag(ItemStack is, NBTTagCompound nbt) {
-    	if(!nbt.hasKey("progTargets") && !nbt.hasKey("progName") && !nbt.hasKey("progFreq") && !nbt.hasKey("progUpgrades") && is.getTagCompound() != null)
+    	if (!nbt.hasKey("progTargets") && !nbt.hasKey("progName") && !nbt.hasKey("progFreq") && !nbt.hasKey("progUpgrades") && is.getTagCompound() != null)
     		is.getTagCompound().removeTag("tm3_program");
     	else
     		is.setTagInfo("tm3_program", nbt);
@@ -200,7 +200,7 @@ public class ItemTurret extends Item {
     public static Map<String, Boolean> getTargets(ItemStack is) {
     	NBTTagCompound nbt = getProgramTag(is);
     	Map<String, Boolean> returningList = Maps.newHashMap();
-    	if(nbt.hasKey("progTargets")) {
+    	if (nbt.hasKey("progTargets")) {
     		NBTTagList var1 = nbt.getTagList("progTargets");
 
             for (int var2 = 0; var2 < var1.tagCount(); ++var2)
@@ -212,10 +212,10 @@ public class ItemTurret extends Item {
             }
     	}
     	
-    	if(returningList.size() < 1) {
+    	if (returningList.size() < 1) {
 			List<String> entities = new ArrayList<String>(EntityList.classToStringMapping.values());
 			List<String> stdTargets = trTargets.getTargetStrings();
-			for(String entityName : entities) {
+			for (String entityName : entities) {
 				returningList.put(entityName, stdTargets.contains(entityName));
 			}
     	}
@@ -224,17 +224,17 @@ public class ItemTurret extends Item {
     }
     
     public static boolean isUpgradeValid(ItemStack turretItm, ItemStack upgItm, List<ItemStack> upgList) {
-    	if(turretItm == null || upgItm == null)
+    	if (turretItm == null || upgItm == null)
     		return false;
-    	if(turretItm.stackSize <= 0 || upgItm.stackSize <= 0)
+    	if (turretItm.stackSize <= 0 || upgItm.stackSize <= 0)
     		return false;
     	Class<? extends EntityTurret_Base> turretCls = TurretInfo.getTurretClass(turretItm.getItemDamage());
     	
 		TurretUpgrades upg = TurretUpgrades.getUpgradeFromItem(upgItm, turretCls);
-		if(upg == null) {
+		if (upg == null) {
     		return false;
 		}
-		if(!upg.hasRequiredUpgrade(upgList)) {
+		if (!upg.hasRequiredUpgrade(upgList)) {
 			return false;
 		}
 		
@@ -248,9 +248,9 @@ public class ItemTurret extends Item {
     	List<ItemStack> preUpgList = getUpgItems(turretItm.copy());
     	List<ItemStack> newUpgList = new ArrayList<ItemStack>(preUpgList);
     	
-    	if(isUpgradeValid(turretItm, upgItm, preUpgList)) newUpgList.add(upgItm.copy());
+    	if (isUpgradeValid(turretItm, upgItm, preUpgList)) newUpgList.add(upgItm.copy());
     	
-    	for(ItemStack item : newUpgList) {
+    	for (ItemStack item : newUpgList) {
 			NBTTagCompound innerNBT = new NBTTagCompound();
 			item.writeToNBT(innerNBT);
 			nbtList.appendTag(innerNBT);
@@ -264,13 +264,13 @@ public class ItemTurret extends Item {
     public static void addCustmNameAndFreq(ItemStack turretItm, String name, int freq) {
     	NBTTagCompound nbt = getProgramTag(turretItm);
     	
-    	if(name.length() < 256 && name.length() > 0)
+    	if (name.length() < 256 && name.length() > 0)
     		nbt.setString("progName", name);
-    	else if(nbt.hasKey("progName"))
+    	else if (nbt.hasKey("progName"))
     		nbt.removeTag("progName");
-    	if(freq < 256 && freq > 0)
+    	if (freq < 256 && freq > 0)
     		nbt.setShort("progFreq", (short)freq);
-    	else if(freq == 0 && nbt.hasKey("progFreq"))
+    	else if (freq == 0 && nbt.hasKey("progFreq"))
     		nbt.removeTag("progFreq");
     	
     	setProgramTag(turretItm, nbt);
@@ -278,7 +278,7 @@ public class ItemTurret extends Item {
     
     public static String getCustomName(ItemStack turretItm) {
     	NBTTagCompound nbt = getProgramTag(turretItm);
-    	if(nbt.hasKey("progName"))
+    	if (nbt.hasKey("progName"))
     		return nbt.getString("progName");
     	
     	return null;
@@ -286,7 +286,7 @@ public class ItemTurret extends Item {
     
     public static int getFrequency(ItemStack turretItm) {
     	NBTTagCompound nbt = getProgramTag(turretItm);
-    	if(nbt.hasKey("progFreq"))
+    	if (nbt.hasKey("progFreq"))
     		return nbt.getShort("progFreq");
     	
     	return 0;
@@ -295,7 +295,7 @@ public class ItemTurret extends Item {
     public static List<ItemStack> getUpgItems(ItemStack turretItm) {
     	List<ItemStack> retList = new ArrayList<ItemStack>();
     	
-    	if(turretItm == null) return retList;
+    	if (turretItm == null) return retList;
 
         NBTTagList upgList = getProgramTag(turretItm).getTagList("progUpgrades");
 
@@ -326,9 +326,9 @@ public class ItemTurret extends Item {
     
     @Override
     @SideOnly(Side.CLIENT)
-    public void updateIcons(IconRegister par1IconRegister) {
+    public void registerIcons(IconRegister par1IconRegister) {
     	this.turretIcons = new Icon[TurretInfo.getTurretCount()];
-    	for(int i = 0; i < TurretInfo.getTurretCount(); i++) {
+    	for (int i = 0; i < TurretInfo.getTurretCount(); i++) {
     		TurretInfo tinf = TurretInfo.getTurretInfo(TurretInfo.getTurretClass(i));
     		this.turretIcons[i] = par1IconRegister.registerIcon(tinf != null ? tinf.getIconFile() : "TurretMod3:turret_01");
     	}

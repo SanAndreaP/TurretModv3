@@ -55,7 +55,7 @@ public class GuiTCUSettings extends GuiTCUBase {
 	public void drawScreen(int par1, int par2, float par3) {
 		this.drawDefaultBackground();
 
-		this.mc.renderEngine.bindTexture(TM3ModRegistry.TEX_GUITCUDIR + "page_2.png");
+		this.mc.func_110434_K().func_110577_a(TM3ModRegistry.TEX_GUITCUDIR + "page_2.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, xSize, ySize);
         
@@ -65,7 +65,7 @@ public class GuiTCUSettings extends GuiTCUBase {
         s = langman.getTranslated("turretmod3.gui.tcu.titSettings");
         this.fontRenderer.drawString(s, this.guiLeft + 6, this.guiTop + 6, 0x808080);
         
-        if(this.turret != null) {
+        if (this.turret != null) {
         	this.dismantleTurret.enabled = true;
         	this.toggleUniqueTarget.enabled = true;
         	this.switchOnOff.enabled = true;
@@ -114,9 +114,9 @@ public class GuiTCUSettings extends GuiTCUBase {
     {
     	this.frequency.textboxKeyTyped(par1, par2);
 
-    	if((par2 == 28 || par2 == 1) && this.frequency.isFocused()) {
+    	if ((par2 == 28 || par2 == 1) && this.frequency.isFocused()) {
     		this.frequency.setFocused(false);
-    		if(!this.frequency.getText().isEmpty()) {
+    		if (!this.frequency.getText().isEmpty()) {
     			this.writeFrequency();
     		}
     	}
@@ -145,12 +145,12 @@ public class GuiTCUSettings extends GuiTCUBase {
 	@Override
 	protected void actionPerformed(GuiButton par1GuiButton) {
 		byte b = 0x7;
-		if(par1GuiButton.id == this.dismantleTurret.id) b = 0x0;
-		else if(par1GuiButton.id == this.toggleUniqueTarget.id) b = 0x1;
-		else if(par1GuiButton.id == this.getExperience.id) b = 0x2;
-		else if(par1GuiButton.id == this.dismountFromBase.id) b = 0x3;
-		else if(par1GuiButton.id == this.rideTurret.id) b = 0x4;
-		else if(par1GuiButton.id == this.switchOnOff.id) b = 0x6;
+		if (par1GuiButton.id == this.dismantleTurret.id) b = 0x0;
+		else if (par1GuiButton.id == this.toggleUniqueTarget.id) b = 0x1;
+		else if (par1GuiButton.id == this.getExperience.id) b = 0x2;
+		else if (par1GuiButton.id == this.dismountFromBase.id) b = 0x3;
+		else if (par1GuiButton.id == this.rideTurret.id) b = 0x4;
+		else if (par1GuiButton.id == this.switchOnOff.id) b = 0x6;
 		
 		try {
 			ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -165,7 +165,7 @@ public class GuiTCUSettings extends GuiTCUBase {
 			e.printStackTrace();
 		}
 		
-		if(b == 0x0 || b == 0x4 || (b == 0x6 && this.turret.isActive())) {
+		if (b == 0x0 || b == 0x4 || (b == 0x6 && this.turret.isActive())) {
 			this.mc.thePlayer.closeScreen();
 			return;
 		}

@@ -30,11 +30,11 @@ public class RenderTurretForcefield extends RenderTurret_Base {
 	public void doRenderLiving(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9) {
 		super.doRenderLiving(par1EntityLiving, par2, par4, par6, par8, par9);
 		EntityTurret_TSForcefield fsTurret = ((EntityTurret_TSForcefield)par1EntityLiving);
-		if(!fsTurret.isActive() || fsTurret.isInGui())
+		if (!fsTurret.isActive() || fsTurret.isInGui())
 			return;
         Tessellator tessellator = Tessellator.instance;
         
-        if(fsTurret.isShieldOnline()) {
+        if (fsTurret.isShieldOnline()) {
 			rndSeed++;
 	        Random random = new Random(rndSeed);
 	        GL11.glPushMatrix();
@@ -69,7 +69,7 @@ public class RenderTurretForcefield extends RenderTurret_Base {
 	
 	public static void renderShield(Tessellator tess, double size, EntityTurret_TSForcefield fsTurret, double partialTicks) {
 		
-		Minecraft.getMinecraft().renderEngine.bindTexture(TM3ModRegistry.TEX_SHIELD);
+		Minecraft.getMinecraft().func_110434_K().func_110577_a(TM3ModRegistry.TEX_SHIELD);
 		double texScaleX = 1.25D;
 		double texScaleY = 1.25D;
 		double ticks = (double)fsTurret.ticksExisted + partialTicks;
@@ -77,13 +77,13 @@ public class RenderTurretForcefield extends RenderTurret_Base {
 		float alpha = Math.min(0.50F, fsTurret.isShieldOnline() ? 1F : ((float)fsTurret.getShieldPts() / ((float)fsTurret.getMaxShieldPts()/2F))*0.5F);
 		float whiteness = 1F;
 		
-		if((float)fsTurret.getShieldPts() / (float)fsTurret.getMaxShieldPts() < 0.2F && fsTurret.isShieldOnline()) {
+		if ((float)fsTurret.getShieldPts() / (float)fsTurret.getMaxShieldPts() < 0.2F && fsTurret.isShieldOnline()) {
 			whiteness = 1F - (float) Math.abs(Math.sin((ticks * 0.1D) % 180D) * 0.6F);
-		} else if(!fsTurret.isShieldOnline()) {
+		} else if (!fsTurret.isShieldOnline()) {
 			whiteness = 0F;
 		}
 		
-		for(int i = 0; i < 8; i++) {
+		for (int i = 0; i < 8; i++) {
 			GL11.glPushMatrix();              
 			  GL11.glRotatef(45F*(float)i - (float)(ticks * 0.5D), 0F, 1F, 0F);
               GL11.glDisable(GL11.GL_LIGHTING);
@@ -309,7 +309,7 @@ public class RenderTurretForcefield extends RenderTurret_Base {
                 var14.drawString(var131, -var14.getStringWidth(var131) / 2, 18, 0xBBBBBB);
                 GL11.glDisable(GL11.GL_TEXTURE_2D);
                 
-                double health = ((double)par1Turret.getSrvHealth() / (double)par1Turret.getMaxHealth()) * 50D - 25D;
+                double health = ((double)par1Turret.getSrvHealth() / (double)par1Turret.func_110138_aP()) * 50D - 25D;
                 double shield = ((double)par1Turret.getShieldPts() / (double)par1Turret.getMaxShieldPts()) * 50D - 25D;
                 
                 //bars bkg

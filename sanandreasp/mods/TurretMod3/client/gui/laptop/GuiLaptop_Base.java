@@ -76,7 +76,7 @@ public class GuiLaptop_Base extends GuiContainer {
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.renderEngine.bindTexture(TM3ModRegistry.TEX_GUILAP + "page_" + Integer.toString(site) + ".png");
+        this.mc.func_110434_K().func_110577_a(TM3ModRegistry.TEX_GUILAP + "page_" + Integer.toString(site) + ".png");
         int k = (this.width - this.xSize) / 2;
         int l = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
@@ -133,13 +133,13 @@ public class GuiLaptop_Base extends GuiContainer {
 	@Override
 	protected void actionPerformed(GuiButton par1GuiButton) {
 		GuiLaptop_Base gui = null;
-		if(par1GuiButton.id == tabGeneral.id) {
+		if (par1GuiButton.id == tabGeneral.id) {
 			PacketRecvLaptopGUICng.sendServer(3, this.laptop);
-		} else if(par1GuiButton.id == tabTargets.id) {
+		} else if (par1GuiButton.id == tabTargets.id) {
 			PacketRecvLaptopGUICng.sendServer(4, this.laptop);
-		} else if(par1GuiButton.id == tabUpgrades.id) {
+		} else if (par1GuiButton.id == tabUpgrades.id) {
 			PacketRecvLaptopGUICng.sendServer(5, this.laptop);
-		} else if(par1GuiButton.id == tabMisc.id) {
+		} else if (par1GuiButton.id == tabMisc.id) {
 			PacketRecvLaptopGUICng.sendServer(6, this.laptop);
 		}
 	}

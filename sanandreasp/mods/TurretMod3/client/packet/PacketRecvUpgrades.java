@@ -47,7 +47,7 @@ public class PacketRecvUpgrades extends PacketBase {
 			
 			WorldClient clientWorld = (WorldClient) ((EntityPlayer)player).worldObj;
 			EntityTurret_Base turret = (EntityTurret_Base) clientWorld.getEntityByID(entityID);
-			if(turret != null)
+			if (turret != null)
 				turret.upgrades = upgrades;
 		} catch (IOException e) {
 			e.printStackTrace();

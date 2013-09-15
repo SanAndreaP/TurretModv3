@@ -44,11 +44,11 @@ public class EntityTurret_TSHealer extends EntityTurret_Base {
 	@Override
 	public void shootProjectile(boolean isRidden) {
 		this.currentTarget.heal(1);
-		if(this.soundTicks == 0) {
+		if (this.soundTicks == 0) {
 	        this.worldObj.playSoundAtEntity(this, this.getShootSound(), 1.5F, 1.0F / (float)(this.getRNG().nextFloat() * 0.2F + 0.8F));
 		}
 		this.soundTicks++;
-		if(this.soundTicks > 3)
+		if (this.soundTicks > 3)
 			this.soundTicks = 0;
 	}
 	
@@ -66,11 +66,11 @@ public class EntityTurret_TSHealer extends EntityTurret_Base {
 	public void onUpdate() {
 		super.onUpdate();
 		
-		if(!this.worldObj.isRemote && this.currentTarget != null) {
+		if (!this.worldObj.isRemote && this.currentTarget != null) {
 			this.dataWatcher.updateObject(19, this.currentTarget.entityId);
 		}
 		
-		if(this.currentTarget == null || this.getAmmo() <= 0) {
+		if (this.currentTarget == null || this.getAmmo() <= 0) {
 			this.soundTicks = 0;
 		}
 	}
@@ -89,7 +89,7 @@ public class EntityTurret_TSHealer extends EntityTurret_Base {
 		float var1 = (float)wdtRange;
         boolean inList = !isEntityTargeted(entity) && entity instanceof IHealable;
         
-        return !(entity.isDead || entity.getHealth() <= 0 || entity.getHealth() >= entity.getMaxHealth()
+        return !(entity.isDead || entity.func_110143_aJ() <= 0 || entity.func_110143_aJ() >= entity.func_110138_aP()
         		|| entity.getDistanceSqToEntity(this) > (double)(var1 * var1) 
         		|| !this.canEntityBeSeen(entity)
         		|| this.posY - entity.posY > this.hgtRangeD

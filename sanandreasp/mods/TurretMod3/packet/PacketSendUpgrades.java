@@ -24,7 +24,7 @@ public class PacketSendUpgrades extends PacketBase {
 		try {
 			int eID = iStream.readInt();
 			EntityTurret_Base turret = (EntityTurret_Base) ((WorldServer)player.worldObj).getEntityByID(eID);
-			if(turret == null || turret.upgrades == null) return;
+			if (turret == null || turret.upgrades == null) return;
 	    	ByteArrayOutputStream b = new ByteArrayOutputStream();
 	    	DataOutputStream o = new DataOutputStream(b);
 	    	o.writeInt(0x100);

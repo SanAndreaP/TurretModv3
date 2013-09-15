@@ -34,7 +34,7 @@ public class RenderDismantleStorage extends RenderLiving {
 	@Override
 	protected void renderModel(EntityLiving par1EntityLiving, float par2, float par3, float par4, float par5, float par6, float par7) {
 		EntityDismantleStorage stg = (EntityDismantleStorage)par1EntityLiving;
-        if (!par1EntityLiving.getHasActivePotion())
+        if (!par1EntityLiving.isInvisible())
         {
             this.loadDownloadableImageTexture(par1EntityLiving.skinUrl, par1EntityLiving.getTexture());
     		GL11.glPushMatrix();
@@ -45,13 +45,13 @@ public class RenderDismantleStorage extends RenderLiving {
             try {
             	EntityTurret_Base turret = (EntityTurret_Base) (stg.tbClass.getConstructor(World.class).newInstance(stg.worldObj));
                 this.loadDownloadableImageTexture(turret.skinUrl, turret.getTexture());
-                if(stg.tbRender == null) {
+                if (stg.tbRender == null) {
                 	Map<Class<? extends Entity>, Render> map = Maps.newHashMap();
                 	RenderingRegistry.instance().loadEntityRenderers(map);
                 	Iterator<Class<? extends Entity>> it = map.keySet().iterator();
                 	while(it.hasNext()) {
                 		Class<? extends Entity> eC = it.next();
-                		if(stg.tbClass.isAssignableFrom(eC)) {
+                		if (stg.tbClass.isAssignableFrom(eC)) {
                 			stg.tbRender = map.get(eC);
                 		}
                 	}

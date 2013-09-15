@@ -72,7 +72,7 @@ public class TurretProj_Rocket extends TurretProjectile {
 
 		if (this.ammoType == 3 || this.ammoType == 4 || this.ammoType == 5) {
 			if (this.targetedEntity != null) {
-				if(this.targetedEntity.isDead) {
+				if (this.targetedEntity.isDead) {
 					this.setDead();
 				}
 				double d = (this.targetedEntity.boundingBox.minX + (this.targetedEntity.boundingBox.maxX - this.targetedEntity.boundingBox.minX) / 2D)
@@ -85,7 +85,7 @@ public class TurretProj_Rocket extends TurretProjectile {
 			}
 		}
 		
-		if(this.worldObj.isRemote)
+		if (this.worldObj.isRemote)
 			TM3ModRegistry.proxy.spawnParticle(5, this.posX, this.posY, this.posZ, 128, this.worldObj.getWorldInfo().getDimension(), this);
 	}
 	

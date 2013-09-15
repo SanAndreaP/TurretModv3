@@ -35,7 +35,7 @@ public class ItemRenderLaptop implements IItemRenderer {
 	
 	private void renderLaptop(float x, float y, float z, int type){
 		Tessellator tesselator = Tessellator.instance;
-		Minecraft.getMinecraft().renderEngine.bindTexture(type == 1 ? TM3ModRegistry.TEX_BLACKLAP : TM3ModRegistry.TEX_WHITELAP);
+		Minecraft.getMinecraft().func_110434_K().func_110577_a(type == 1 ? TM3ModRegistry.TEX_BLACKLAP : TM3ModRegistry.TEX_WHITELAP);
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y+1.6F, z);
 		GL11.glRotatef(180F, 1F, 0F, 0F);

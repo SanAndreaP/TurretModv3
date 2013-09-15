@@ -51,7 +51,7 @@ public class GuiTInfoPG1 extends GuiTInfoBase {
 	public void drawScreen(int par1, int par2, float par3) {
         this.drawDefaultBackground();
 
-		this.mc.renderEngine.bindTexture(TM3ModRegistry.TEX_GUIINFO + "page_1.png");
+		this.mc.func_110434_K().func_110577_a(TM3ModRegistry.TEX_GUIINFO + "page_1.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, xSize, ySize);
         
@@ -71,7 +71,7 @@ public class GuiTInfoPG1 extends GuiTInfoBase {
         
 		super.drawScreen(par1, par2, par3);
 		
-        if(itmNm.length() > 0) {
+        if (itmNm.length() > 0) {
 			this.drawTooltip(itmNm, par1, par2);
         }
 	}
@@ -85,7 +85,7 @@ public class GuiTInfoPG1 extends GuiTInfoBase {
 			return;
 		}
 		
-		if(turret == null) return;
+		if (turret == null) return;
 		
 		turret.setInGui();
 		
@@ -105,7 +105,7 @@ public class GuiTInfoPG1 extends GuiTInfoBase {
         turret.renderYawOffset = renderYaw;
         turret.rotationYaw = renderYaw;
         turret.rotationYawHead = renderYaw;
-        turret.getDataWatcher().updateObject(21, turret.getMaxHealth() / 2);
+        turret.getDataWatcher().updateObject(21, turret.func_110138_aP() / 2);
         turret.getDataWatcher().updateObject(20, (short) (turret.getMaxAmmo() / 2));
         GL11.glTranslatef(0.0F, turret.yOffset, 0.0F);
         RenderManager.instance.playerViewY = 180.0F;
@@ -122,15 +122,15 @@ public class GuiTInfoPG1 extends GuiTInfoBase {
 		Object crf[] = this.turretInf.getCrafting();
 		ItemStack crfIS[] = new ItemStack[9];
 		int ind = 0;
-		for(int i = 0; i < 3; i++) {
+		for (int i = 0; i < 3; i++) {
 			char[] shape = ((String) crf[i]).toCharArray();
-			for(char src : shape) {
-				if(src == ' ') {
+			for (char src : shape) {
+				if (src == ' ') {
 					crfIS[ind++] = null;
 					continue;
 				}
-				for(int j = 3; j < crf.length; j+=2) {
-					if(crf[j].equals(src)) {
+				for (int j = 3; j < crf.length; j+=2) {
+					if (crf[j].equals(src)) {
 						crfIS[ind++] = (ItemStack)crf[j+1];
 						break;
 					}
@@ -143,13 +143,13 @@ public class GuiTInfoPG1 extends GuiTInfoBase {
         
         String itmName = "";
         
-		for(int i = 0; i < 3; i++) {
-			for(int j = 0; j < 3; j++) {
-				if(crfIS[i*3 + j] == null) continue;
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
+				if (crfIS[i*3 + j] == null) continue;
 				ItemStack item = crfIS[i*3 + j].copy();
-				if(item.getItemDamage() == OreDictionary.WILDCARD_VALUE) item.setItemDamage(0);
+				if (item.getItemDamage() == OreDictionary.WILDCARD_VALUE) item.setItemDamage(0);
 				drawItemStack(item, this.guiLeft + 67 + j*18, this.guiTop + 52 + i*18);
-				if(mX >= this.guiLeft + 67 + j*18 && mX < this.guiLeft + 67 + j*18 + 16 && mY >= this.guiTop + 52 + i*18 && mY < this.guiTop + 52 + i*18 + 16) {
+				if (mX >= this.guiLeft + 67 + j*18 && mX < this.guiLeft + 67 + j*18 + 16 && mY >= this.guiTop + 52 + i*18 && mY < this.guiTop + 52 + i*18 + 16) {
 			        RenderHelper.disableStandardItemLighting();
 			        GL11.glDisable(GL11.GL_DEPTH_TEST);
 					this.drawRect(this.guiLeft + 67 + j*18, this.guiTop + 52 + i*18, this.guiLeft + 67 + j*18 + 16, this.guiTop + 52 + i*18 + 16, 0x80FFFFFF);

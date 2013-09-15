@@ -153,7 +153,7 @@ public class Model_T2Revolver extends ModelTurret_Base {
 		LeftBarrel.render(f5);
 		
 		GL11.glPushMatrix();
-		if(this.isGlowTexture) {
+		if (this.isGlowTexture) {
 			GL11.glScalef(1.1F, 1.1F, 1.1F);
 			GL11.glTranslatef(0.010F, -0.11F, -0.00F);
 		}
@@ -161,7 +161,7 @@ public class Model_T2Revolver extends ModelTurret_Base {
 		GL11.glPopMatrix();
 
 		GL11.glPushMatrix();
-		if(this.isGlowTexture) {
+		if (this.isGlowTexture) {
 			GL11.glScalef(1.1F, 1.1F, 1.1F);
 			GL11.glTranslatef(-0.010F, -0.11F, -0.00F);
 		}
@@ -195,11 +195,11 @@ public class Model_T2Revolver extends ModelTurret_Base {
         
         EntityTurret_T2Revolver turret = (EntityTurret_T2Revolver)entity;
         
-        float healthRot = -((float)Math.PI / 2F) * ((float)(turret.getMaxHealth() - turret.getSrvHealth()) / (float)turret.getMaxHealth());
+        float healthRot = -((float)Math.PI / 2F) * ((float)(turret.func_110138_aP() - turret.getSrvHealth()) / (float)turret.func_110138_aP());
         this.HealthBar.rotateAngleZ = healthRot;
         float ammoRot = ((float)Math.PI / 2F) * ((float)(turret.getMaxAmmo() - turret.getAmmo()) / (float)turret.getMaxAmmo());
 
-        if(TurretUpgrades.hasUpgrade(TUpgInfAmmo.class, turret.upgrades) && turret.getAmmo() > 0) {
+        if (TurretUpgrades.hasUpgrade(TUpgInfAmmo.class, turret.upgrades) && turret.getAmmo() > 0) {
         	ammoRot = 0F;
         }
         this.AmmoBar.rotateAngleZ = ammoRot;
@@ -217,7 +217,7 @@ public class Model_T2Revolver extends ModelTurret_Base {
         xL *= (Math.cos(turret.rotationPitch / (180F / (float)Math.PI)));
         zL *= (Math.cos(turret.rotationPitch / (180F / (float)Math.PI)));
         
-        if(turret.getAmmo() <= 0) {
+        if (turret.getAmmo() <= 0) {
         	xR = 0D;
         	yR = 0D;
         	zR = 0D;

@@ -39,7 +39,7 @@ public class EntityTurret_T3Laser extends EntityTurret_Base {
 	}
 	
 	@Override
-	public int getMaxHealth() {
+	public int func_110138_aP() {
 		return 60;
 	}
 
@@ -63,7 +63,7 @@ public class EntityTurret_T3Laser extends EntityTurret_Base {
 	@Override
 	public int getMaxShootTicks() {
 		int maxShootTicks = 5;
-		if(!this.worldObj.isRemote) {
+		if (!this.worldObj.isRemote) {
 			this.isRight = !this.isRight;
 		}
 		return maxShootTicks;

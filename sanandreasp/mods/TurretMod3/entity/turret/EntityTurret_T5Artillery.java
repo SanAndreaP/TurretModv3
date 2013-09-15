@@ -37,7 +37,7 @@ public class EntityTurret_T5Artillery extends EntityTurret_Base {
 	}
 	
 	@Override
-	public int getMaxHealth() {
+	public int func_110138_aP() {
 		return 100;
 	}
 

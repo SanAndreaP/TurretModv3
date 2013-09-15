@@ -49,7 +49,7 @@ public class TurretProj_Explosive extends TurretProjectile {
 	@Override
 	public float getSpeedVal() {
 		float speed = 1.2F;
-		if(this.shootingEntity != null && this.targetedEntity != null) {
+		if (this.shootingEntity != null && this.targetedEntity != null) {
 			speed *= (float)this.shootingEntity.getDistanceToEntity(this.targetedEntity) / 30F;
 			speed -= (float)this.shootingEntity.getDistanceSqToEntity(this.targetedEntity) / 3500F;
 			speed += ((float)this.targetedEntity.posY - (float)this.shootingEntity.posY) / 70F;
@@ -70,7 +70,7 @@ public class TurretProj_Explosive extends TurretProjectile {
 		if (!this.worldObj.isRemote && this.isExploding)
         {
             boolean var2 = this.worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing") && this.isGriefing;
-            if(this.isNapalm) {
+            if (this.isNapalm) {
             	this.worldObj.newExplosion(this, this.posX, this.posY, this.posZ, this.explosionRadius, true, var2);
         	} else {
             	this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, this.explosionRadius, var2);
@@ -84,8 +84,8 @@ public class TurretProj_Explosive extends TurretProjectile {
 		
 		super.onUpdate();
 		
-		if(this.isFragmentating && this.motionY < -0.2F && !this.worldObj.isRemote) {
-			for(int i = 0; i < 5; i++) {
+		if (this.isFragmentating && this.motionY < -0.2F && !this.worldObj.isRemote) {
+			for (int i = 0; i < 5; i++) {
 				TurretProj_Explosive var2 = new TurretProj_Explosive(this.worldObj);
 		        var2.isPickupable = false;
 		        var2.hasNoTarget = true;

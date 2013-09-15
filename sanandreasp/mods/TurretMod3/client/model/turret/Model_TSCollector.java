@@ -150,7 +150,7 @@ public class Model_TSCollector extends ModelTurret_Base {
 		TurretThroatV.render(f5);
 		PlateBase.render(f5);
 		PlateHead.render(f5);
-		if(this.isGlowTexture) {
+		if (this.isGlowTexture) {
 			GL11.glPushMatrix();
 			GL11.glScalef(1.002F, 1F, 1.002F);
 			GL11.glTranslatef(0.001F, 0F, -0.001F);
@@ -170,7 +170,7 @@ public class Model_TSCollector extends ModelTurret_Base {
 		}
 		
 		GL11.glPushMatrix();
-		if(this.isGlowTexture) {
+		if (this.isGlowTexture) {
 			GL11.glScalef(1.1F, 1.1F, 1.1F);
 			GL11.glTranslatef(0.010F, -0.11F, -0.00F);
 		}
@@ -178,7 +178,7 @@ public class Model_TSCollector extends ModelTurret_Base {
 		GL11.glPopMatrix();
 
 		GL11.glPushMatrix();
-		if(this.isGlowTexture) {
+		if (this.isGlowTexture) {
 			GL11.glScalef(1.1F, 1.1F, 1.1F);
 			GL11.glTranslatef(-0.010F, -0.11F, -0.00F);
 		}
@@ -199,11 +199,11 @@ public class Model_TSCollector extends ModelTurret_Base {
         
         EntityTurret_Base turret = (EntityTurret_Base)entity;
         
-        float healthRot = -((float)Math.PI / 2F) * ((float)(turret.getMaxHealth() - turret.getSrvHealth()) / (float)turret.getMaxHealth());
+        float healthRot = -((float)Math.PI / 2F) * ((float)(turret.func_110138_aP() - turret.getSrvHealth()) / (float)turret.func_110138_aP());
         this.HealthBar.rotateAngleZ = healthRot;
         float ammoRot = ((float)Math.PI / 2F) * ((float)(turret.getExpCap() - turret.getExperience()) / (float)turret.getExpCap());
 
-//        if(TurretUpgrades.hasUpgrade(TUpgInfAmmo.class, turret.upgrades) && turret.getAmmo() > 0) {
+//        if (TurretUpgrades.hasUpgrade(TUpgInfAmmo.class, turret.upgrades) && turret.getAmmo() > 0) {
 //        	ammoRot = 0F;
 //        }
         this.ExpBar.rotateAngleZ = ammoRot;

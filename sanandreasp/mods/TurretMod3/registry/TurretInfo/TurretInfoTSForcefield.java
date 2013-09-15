@@ -32,7 +32,7 @@ public class TurretInfoTSForcefield extends TurretInfo {
 		this.healItems.put(new ItemStack(Item.redstone), 1);
 		this.healItems.put(new ItemStack(Block.blockRedstone), 9);
 		this.healItems.put(new ItemStack(Block.obsidian), 20);
-		this.healItems.put(new ItemStack(Item.field_94583_ca), 2);
+		this.healItems.put(new ItemStack(Item.netherQuartz), 2);
 		this.healItems.put(new ItemStack(Block.blockNetherQuartz), 18);
 	}
 }

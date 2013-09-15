@@ -21,7 +21,7 @@ public class PacketRecvLaptopMisc extends PacketBase {
 	public void handle(DataInputStream iStream, EntityPlayer player) {
 		try {
 	        TileEntity te = player.worldObj.getBlockTileEntity(iStream.readInt(), iStream.readInt(), iStream.readInt());
-	        if(te != null && te instanceof TileEntityLaptop) {
+	        if (te != null && te instanceof TileEntityLaptop) {
 	        	((TileEntityLaptop)te).programItemsNameAndFreq(iStream.readUTF(), iStream.readShort());
 	        	player.openContainer.detectAndSendChanges();
 	        }
