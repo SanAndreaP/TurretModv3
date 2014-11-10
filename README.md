@@ -9,4 +9,5 @@ The JAR file here goes into the mods folder from /mcp/jars/<br>
 The /sanandreasp/ folder goes into /mcp/src/minecraft/<br>
 The content of the /assets/ folder goes into /mcp/src/minecraft/assets/<br>
 <br>
-<b>ALWAYS USE THE LATEST FORGE VERSION!</b>
+<b>LICENSE:</b>
+http://creativecommons.org/licenses/by-nc-sa/3.0/
