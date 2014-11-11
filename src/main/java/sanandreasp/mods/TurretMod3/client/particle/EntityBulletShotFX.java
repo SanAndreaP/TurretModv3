@@ -1,4 +1,4 @@
-package sanandreasp.mods.TurretMod3.client.particle;
+package sanandreasp.mods.turretmod3.client.particle;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

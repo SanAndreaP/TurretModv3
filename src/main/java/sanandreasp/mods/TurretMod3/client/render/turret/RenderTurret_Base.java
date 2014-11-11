@@ -1,14 +1,13 @@
-package sanandreasp.mods.TurretMod3.client.render.turret;
+package sanandreasp.mods.turretmod3.client.render.turret;
 
 import org.lwjgl.opengl.GL11;
 
-import sanandreasp.mods.TurretMod3.client.model.turret.ModelTurret_Base;
-import sanandreasp.mods.TurretMod3.client.model.turret.Model_T1Arrow;
-import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_Base;
-import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
-import sanandreasp.mods.TurretMod3.registry.TurretUpgrades.TUpgExperience;
-import sanandreasp.mods.TurretMod3.registry.TurretUpgrades.TUpgInfAmmo;
-import sanandreasp.mods.TurretMod3.registry.TurretUpgrades.TurretUpgrades;
+import sanandreasp.mods.turretmod3.client.model.turret.ModelTurret_Base;
+import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
+import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgExperience;
+import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgInfAmmo;
+import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TurretUpgrades;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.model.ModelBase;
@@ -16,12 +15,10 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.MathHelper;
 
 public class RenderTurret_Base extends RenderLiving {
-	public RenderTurret_Base(ModelBase par1ModelBase, float par2) {
-		super(par1ModelBase, par2);
+	public RenderTurret_Base(ModelBase par1ModelBase) {
+		super(par1ModelBase, 0.3F);
 		
 		try {
 			Class baseModelC = par1ModelBase.getClass();

@@ -1,8 +1,7 @@
-package sanandreasp.mods.TurretMod3.client.packet;
+package sanandreasp.mods.turretmod3.client.packet;
 
 import java.io.DataInputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.util.Map;
 
 import com.google.common.collect.Maps;
@@ -13,10 +12,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import sanandreasp.mods.TurretMod3.client.gui.TCU.GuiTCUBase;
-import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_Base;
-import sanandreasp.mods.TurretMod3.packet.PacketBase;
-import sanandreasp.mods.TurretMod3.registry.TurretTargetRegistry;
+import sanandreasp.mods.turretmod3.client.gui.TCU.GuiTCUBase;
+import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
+import sanandreasp.mods.turretmod3.packet.PacketBase;
 
 public class PacketRecvTargetListClt extends PacketBase {
 

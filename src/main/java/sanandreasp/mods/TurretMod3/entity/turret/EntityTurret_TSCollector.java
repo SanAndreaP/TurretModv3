@@ -1,26 +1,20 @@
-package sanandreasp.mods.TurretMod3.entity.turret;
+package sanandreasp.mods.turretmod3.entity.turret;
 
-import java.util.AbstractMap.SimpleEntry;
 import java.util.List;
 
-import sanandreasp.mods.TurretMod3.entity.projectile.TurretProj_Arrow;
-import sanandreasp.mods.TurretMod3.entity.projectile.TurretProjectile;
-import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
-import sanandreasp.mods.TurretMod3.registry.TurretUpgrades.TUpgExpStorageC;
-import sanandreasp.mods.TurretMod3.registry.TurretUpgrades.TUpgItemCollect;
-import sanandreasp.mods.TurretMod3.registry.TurretUpgrades.TUpgRangeIncr;
-import sanandreasp.mods.TurretMod3.registry.TurretUpgrades.TUpgTurretCollect;
-import sanandreasp.mods.TurretMod3.registry.TurretUpgrades.TurretUpgrades;
+import sanandreasp.mods.turretmod3.entity.projectile.TurretProjectile;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
+import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgExpStorageC;
+import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgItemCollect;
+import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgRangeIncr;
+import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgTurretCollect;
+import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TurretUpgrades;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
-import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;

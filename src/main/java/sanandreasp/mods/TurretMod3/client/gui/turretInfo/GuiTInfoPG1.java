@@ -1,32 +1,18 @@
-package sanandreasp.mods.TurretMod3.client.gui.turretInfo;
+package sanandreasp.mods.turretmod3.client.gui.turretInfo;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.lang.ref.WeakReference;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.util.StatCollector;
-import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import sanandreasp.mods.TurretMod3.client.gui.GuiItemTab;
-import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_Base;
-import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_T4Sniper;
-import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
-import sanandreasp.mods.TurretMod3.registry.TurretTargetRegistry;
-import sanandreasp.mods.TurretMod3.registry.TurretInfo.TurretInfo;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
+import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;

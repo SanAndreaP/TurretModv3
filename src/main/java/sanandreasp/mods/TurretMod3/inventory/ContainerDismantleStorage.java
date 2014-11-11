@@ -1,4 +1,4 @@
-package sanandreasp.mods.TurretMod3.inventory;
+package sanandreasp.mods.turretmod3.inventory;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;

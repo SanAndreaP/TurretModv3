@@ -1,6 +1,6 @@
-package sanandreasp.mods.TurretMod3.client.gui.laptop;
+package sanandreasp.mods.turretmod3.client.gui.laptop;
 
-import static sanandreasp.mods.TurretMod3.registry.TurretTargetRegistry.trTargets;
+import static sanandreasp.mods.turretmod3.registry.TurretTargetRegistry.trTargets;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,11 +15,9 @@ import com.google.common.collect.Maps;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.EntityList;
 import net.minecraft.inventory.Container;
-import sanandreasp.mods.TurretMod3.packet.PacketRecvLaptopTargets;
-import sanandreasp.mods.TurretMod3.packet.PacketRecvTargetListSrv;
-import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
-import sanandreasp.mods.TurretMod3.registry.TurretTargetRegistry;
-import sanandreasp.mods.TurretMod3.tileentity.TileEntityLaptop;
+import sanandreasp.mods.turretmod3.packet.PacketRecvLaptopTargets;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
+import sanandreasp.mods.turretmod3.tileentity.TileEntityLaptop;
 
 public class GuiLaptopTargets extends GuiLaptop_Base {
 	

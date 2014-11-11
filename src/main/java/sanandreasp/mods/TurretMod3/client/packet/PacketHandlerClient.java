@@ -1,34 +1,17 @@
-package sanandreasp.mods.TurretMod3.client.packet;
+package sanandreasp.mods.turretmod3.client.packet;
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.util.Map;
 
 import com.google.common.collect.Maps;
 
 import sanandreasp.mods.EnderStuffPlus.tileentity.TileEntityBiomeChanger;
-import sanandreasp.mods.TurretMod3.client.gui.TCU.GuiTCUBase;
-import sanandreasp.mods.TurretMod3.client.gui.TCU.GuiTCUTargets;
-import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_Base;
-import sanandreasp.mods.TurretMod3.packet.PacketSendUpgrades;
-import sanandreasp.mods.TurretMod3.packet.PacketBase;
-import sanandreasp.mods.TurretMod3.registry.CommonProxy;
-import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
-import sanandreasp.mods.TurretMod3.registry.TurretTargetRegistry;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.multiplayer.WorldClient;
+import sanandreasp.mods.turretmod3.packet.PacketBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
-import net.minecraft.world.WorldServer;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
 import cpw.mods.fml.relauncher.Side;

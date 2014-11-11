@@ -1,23 +1,20 @@
-package sanandreasp.mods.TurretMod3.client.render.projectile;
+package sanandreasp.mods.turretmod3.client.render.projectile;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.projectile.EntityPotion;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionHelper;
 import net.minecraft.util.IIcon;
 
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import sanandreasp.mods.TurretMod3.client.registry.ClientProxy;
-import sanandreasp.mods.TurretMod3.entity.projectile.TurretProj_Flame;
-import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
+import sanandreasp.mods.turretmod3.client.registry.ClientProxy;
+import sanandreasp.mods.turretmod3.client.registry.TextureRegistry;
+import sanandreasp.mods.turretmod3.entity.projectile.TurretProj_Flame;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 
 @SideOnly(Side.CLIENT)
 public class RenderFlame extends Render
@@ -30,7 +27,7 @@ public class RenderFlame extends Render
         GL11.glScalef(0.5F, 0.5F, 0.5F);
         this.bindEntityTexture(par1Entity);
         Tessellator var10 = Tessellator.instance;
-        this.func_77026_a(var10, ((TurretProj_Flame)par1Entity).isPurified() ? TM3ModRegistry.iconCache.getIconFromDamage(2) : TM3ModRegistry.iconCache.getIconFromDamage(1));
+        this.func_77026_a(var10, ((TurretProj_Flame)par1Entity).isPurified() ? TextureRegistry.iconCache[2] : TextureRegistry.iconCache[1]);
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
         GL11.glPopMatrix();
     }

@@ -1,24 +1,15 @@
-package sanandreasp.mods.TurretMod3.entity;
+package sanandreasp.mods.turretmod3.entity;
 
-import java.util.Iterator;
-import java.util.List;
-
-import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_Base;
-import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
+import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class EntityMobileBase extends EntityLiving implements IHealable {

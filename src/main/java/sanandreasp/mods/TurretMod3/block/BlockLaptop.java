@@ -1,30 +1,30 @@
-package sanandreasp.mods.TurretMod3.block;
+package sanandreasp.mods.turretmod3.block;
 
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
-import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
-import sanandreasp.mods.TurretMod3.tileentity.TileEntityLaptop;
+import net.minecraft.item.Item;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
+import sanandreasp.mods.turretmod3.tileentity.TileEntityLaptop;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import java.util.List;
+
 public class BlockLaptop extends BlockContainer {
-	
-	@SideOnly(Side.CLIENT)
-	public IIcon whiteIcon;
 	@SideOnly(Side.CLIENT)
 	public IIcon blackIcon;
 	
@@ -43,9 +43,8 @@ public class BlockLaptop extends BlockContainer {
 		int i = getType(par1);
 		switch(i) {
 			case 1: return this.blackIcon;
-			case 0:
 			default:
-				return this.whiteIcon;
+				return this.blockIcon;
 		}
 	}
 	
@@ -66,7 +65,7 @@ public class BlockLaptop extends BlockContainer {
 	}
 	
 	@Override
-	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving, ItemStack par6ItemStack)
+	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLiving, ItemStack par6ItemStack)
 	{
         byte b0 = 0;
         int l1 = MathHelper.floor_double((double)(par5EntityLiving.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
@@ -132,10 +131,18 @@ public class BlockLaptop extends BlockContainer {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister par1IconRegister) {
-		this.whiteIcon = Blocks.quartz_block.getIcon(0,0);
-		this.blackIcon = Blocks.obsidian.getIcon(0,0);
+		this.blockIcon = par1IconRegister.registerIcon(getTextureName()+"White");
+		this.blackIcon = par1IconRegister.registerIcon(getTextureName() + "Black");
 	}
-	
+
+    @SuppressWarnings("unchecked")
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
+        par3List.add(new ItemStack(par1, 1, 0 << 3));
+        par3List.add(new ItemStack(par1, 1, 1 << 3));
+    }
+
 	@Override
 	public int getLightValue(IBlockAccess world, int x, int y, int z) {
 		TileEntity te = world.getTileEntity(x, y, z);

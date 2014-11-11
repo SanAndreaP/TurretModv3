@@ -1,18 +1,15 @@
-package sanandreasp.mods.TurretMod3.entity;
+package sanandreasp.mods.turretmod3.entity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import sanandreasp.mods.TurretMod3.inventory.InventoryDismantleStorage;
-import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
-import sanandreasp.mods.TurretMod3.registry.TurretInfo.TurretInfo;
+import sanandreasp.mods.turretmod3.inventory.InventoryDismantleStorage;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
+import sanandreasp.mods.turretmod3.registry.TurretInfo.TurretInfo;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

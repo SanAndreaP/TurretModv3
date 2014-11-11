@@ -1,22 +1,18 @@
-package sanandreasp.mods.TurretMod3.client.render.projectile;
+package sanandreasp.mods.turretmod3.client.render.projectile;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.projectile.EntityPotion;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionHelper;
 import net.minecraft.util.IIcon;
 
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import sanandreasp.mods.TurretMod3.client.registry.ClientProxy;
-import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
+import sanandreasp.mods.turretmod3.client.registry.ClientProxy;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 
 @SideOnly(Side.CLIENT)
 public class RenderPebble extends Render

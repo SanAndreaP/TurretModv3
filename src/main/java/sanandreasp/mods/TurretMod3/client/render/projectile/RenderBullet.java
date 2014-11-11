@@ -1,4 +1,4 @@
-package sanandreasp.mods.TurretMod3.client.render.projectile;
+package sanandreasp.mods.turretmod3.client.render.projectile;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -10,8 +10,6 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
-
-import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
 
 @SideOnly(Side.CLIENT)
 public class RenderBullet extends Render

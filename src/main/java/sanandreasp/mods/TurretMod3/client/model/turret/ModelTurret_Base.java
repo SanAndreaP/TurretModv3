@@ -1,4 +1,4 @@
-package sanandreasp.mods.TurretMod3.client.model.turret;
+package sanandreasp.mods.turretmod3.client.model.turret;
 
 import net.minecraft.client.model.ModelBase;
 

@@ -1,15 +1,13 @@
-package sanandreasp.mods.TurretMod3.client.render.tileentity;
+package sanandreasp.mods.turretmod3.client.render.tileentity;
 
+import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import cpw.mods.fml.common.FMLLog;
-import sanandreasp.mods.TurretMod3.block.BlockLaptop;
-import sanandreasp.mods.TurretMod3.client.model.ModelLaptop;
-import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
-import sanandreasp.mods.TurretMod3.tileentity.TileEntityLaptop;
-import net.minecraft.block.Block;
-import net.minecraft.client.model.ModelChest;
+import sanandreasp.mods.turretmod3.block.BlockLaptop;
+import sanandreasp.mods.turretmod3.client.model.ModelLaptop;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
+import sanandreasp.mods.turretmod3.tileentity.TileEntityLaptop;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
@@ -18,10 +16,6 @@ public class RenderLaptop extends TileEntitySpecialRenderer {
 	
 	public ModelLaptop base = new ModelLaptop();
 	public ModelLaptop illuminated = new ModelLaptop();
-
-	public RenderLaptop() {
-		// TODO Auto-generated constructor stub
-	}
 
 	public void renderTileEntityLapAt(TileEntityLaptop par1TileEntityLaptop, double par2, double par4, double par6, float par8)
     {
@@ -35,10 +29,10 @@ public class RenderLaptop extends TileEntitySpecialRenderer {
         
         switch(BlockLaptop.getType(par1TileEntityLaptop.getBlockMetadata())) {
 	        case 0:
-	        	this.bindTextureByName(TM3ModRegistry.TEX_WHITELAP);
+	        	this.bindTexture(TM3ModRegistry.TEX_WHITELAP);
 	        	break;
 	        case 1:
-	        	this.bindTextureByName(TM3ModRegistry.TEX_BLACKLAP);
+	        	this.bindTexture(TM3ModRegistry.TEX_BLACKLAP);
 	        	break;
         }
 
@@ -81,7 +75,7 @@ public class RenderLaptop extends TileEntitySpecialRenderer {
         this.illuminated.LaptopScreen.rotateAngleX = -(f1 * (float)Math.PI / 2.0F) + ((float)Math.PI / 2F);
         this.base.renderBlock();
         
-	    this.bindTextureByName(TM3ModRegistry.TEX_LAPGLOW + "(" + Integer.toString(par1TileEntityLaptop.randomLightmap) + ").png");
+	    this.bindTexture(new ResourceLocation(TM3ModRegistry.TEX_LAPGLOW + "(" + Integer.toString(par1TileEntityLaptop.randomLightmap) + ").png"));
         
         if (par1TileEntityLaptop.screenAngle >= 0.9999F) {
 	        GL11.glPushMatrix();
@@ -104,6 +98,7 @@ public class RenderLaptop extends TileEntitySpecialRenderer {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
     }
 
+    @Override
     public void renderTileEntityAt(TileEntity par1TileEntity, double par2, double par4, double par6, float par8)
     {
         this.renderTileEntityLapAt((TileEntityLaptop)par1TileEntity, par2, par4, par6, par8);

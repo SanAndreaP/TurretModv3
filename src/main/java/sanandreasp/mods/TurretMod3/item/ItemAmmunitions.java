@@ -1,4 +1,4 @@
-package sanandreasp.mods.TurretMod3.item;
+package sanandreasp.mods.turretmod3.item;
 
 import java.util.List;
 import java.util.Map;
@@ -17,7 +17,6 @@ import net.minecraft.util.IIcon;
 public class ItemAmmunitions extends Item {
 	
 	public static Map<Integer, String> dmgLangMapping = Maps.newHashMap();
-	public static Map<Integer, String> dmgNameMapping = Maps.newHashMap();
 	private static Map<Integer, IIcon> dmgIconMapping = Maps.newHashMap();
 
 	public ItemAmmunitions() {
@@ -48,9 +47,8 @@ public class ItemAmmunitions extends Item {
 			par3List.add(new ItemStack(this, 1, id));
 	}
 	
-	public static void addAmmoItem(int dmg, String langStr, String name) {
+	public static void addAmmoItem(int dmg, String langStr) {
 		dmgLangMapping.put(dmg, langStr);
-		dmgNameMapping.put(dmg, name);
 	}
 	
 	@Override

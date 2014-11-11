@@ -1,32 +1,36 @@
-package sanandreasp.mods.TurretMod3.client.registry;
-
-import java.util.EnumSet;
+package sanandreasp.mods.turretmod3.client.registry;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.InputEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
+import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.IIcon;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.event.TextureStitchEvent;
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
-import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_Base;
-import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_TSHealer;
-import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
-import sanandreasp.mods.TurretMod3.registry.TurretInfo.TurretInfo;
-import sanandreasp.mods.TurretMod3.registry.TurretUpgrades.TUpgExperience;
-import sanandreasp.mods.TurretMod3.registry.TurretUpgrades.TUpgInfAmmo;
-import sanandreasp.mods.TurretMod3.registry.TurretUpgrades.TurretUpgrades;
+import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
+import sanandreasp.mods.turretmod3.packet.PacketHandlerCommon;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
+import sanandreasp.mods.turretmod3.registry.TurretInfo.TurretInfo;
+import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgExperience;
+import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgInfAmmo;
+import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TurretUpgrades;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
-import cpw.mods.fml.common.ITickHandler;
-import cpw.mods.fml.common.TickType;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 
 public class TickHandlerClientRnd {
+    private final static ResourceLocation GUI_ICONS = new ResourceLocation("/gui/icons.png");
 	private FontRenderer nbFont;
 
 	public TickHandlerClientRnd() {
@@ -46,7 +50,7 @@ public class TickHandlerClientRnd {
 				EntityTurret_Base turret = (EntityTurret_Base) mc.thePlayer.ridingEntity;
 				TurretInfo tInf = TurretInfo.getTurretInfo(turret.getClass());
 				
-				this.mc.getTextureManager().bindTexture(TM3ModRegistry.TEX_TURRETCAM);
+				mc.getTextureManager().bindTexture(TM3ModRegistry.TEX_TURRETCAM);
 				
 		        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 				float perc = (float)turret.getSrvHealth() / (float)turret.func_110138_aP();
@@ -95,7 +99,7 @@ public class TickHandlerClientRnd {
 		        	if (TM3ModRegistry.proxy.getPlayerTM3Data(mc.thePlayer).hasKey("tcCrosshair"))
 		        		icon = TM3ModRegistry.proxy.getPlayerTM3Data(mc.thePlayer).getByte("tcCrosshair");
 		        	GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		            mc.getTextureManager().bindTexture("/gui/icons.png");
+		            mc.getTextureManager().bindTexture(GUI_ICONS);
 		            GL11.glEnable(GL11.GL_BLEND);
 		            GL11.glBlendFunc(GL11.GL_ONE_MINUS_DST_COLOR, GL11.GL_ONE_MINUS_SRC_COLOR);
 		            this.drawTexturedModalRect(scaledRes.getScaledWidth() / 2 - 7, scaledRes.getScaledHeight() / 2 - 7, 0, 0, 16, 16, 1);
@@ -126,5 +130,24 @@ public class TickHandlerClientRnd {
         var9.addVertexWithUV((double)(par1 + par5), (double)(par2 + 0), (double)zLevel, (double)((float)(par3 + par5) * var7), (double)((float)(par4 + 0) * var8));
         var9.addVertexWithUV((double)(par1 + 0), (double)(par2 + 0), (double)zLevel, (double)((float)(par3 + 0) * var7), (double)((float)(par4 + 0) * var8));
         var9.draw();
+    }
+
+    public static KeyBinding turretShootKey = new KeyBinding("turretmod3.keys.turretShoot", Keyboard.KEY_F);
+
+    @SubscribeEvent
+    public void keyDown(InputEvent.KeyInputEvent event) {
+        EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+        if (player != null && player.ridingEntity instanceof EntityTurret_Base && Minecraft.getMinecraft().currentScreen == null) {
+            try {
+                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                DataOutputStream dos = new DataOutputStream(bos);
+
+                dos.writeInt(0x003);
+
+                PacketDispatcher.sendPacketToServer(new Packet250CustomPayload(PacketHandlerCommon.getChannel(), bos.toByteArray()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

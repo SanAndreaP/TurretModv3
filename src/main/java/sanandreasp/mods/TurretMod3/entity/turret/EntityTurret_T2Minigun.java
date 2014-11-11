@@ -1,25 +1,15 @@
-package sanandreasp.mods.TurretMod3.entity.turret;
+package sanandreasp.mods.turretmod3.entity.turret;
 
-import java.util.AbstractMap.SimpleEntry;
-
-import sanandreasp.mods.TurretMod3.entity.projectile.TurretProj_Arrow;
-import sanandreasp.mods.TurretMod3.entity.projectile.TurretProj_Pebble;
-import sanandreasp.mods.TurretMod3.entity.projectile.TurretProj_Seed;
-import sanandreasp.mods.TurretMod3.entity.projectile.TurretProjectile;
-import sanandreasp.mods.TurretMod3.registry.AchievementPageTM;
-import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
-import sanandreasp.mods.TurretMod3.registry.TurretUpgrades.TUpgInfAmmo;
-import sanandreasp.mods.TurretMod3.registry.TurretUpgrades.TUpgPiercing;
-import sanandreasp.mods.TurretMod3.registry.TurretUpgrades.TurretUpgrades;
+import sanandreasp.mods.turretmod3.entity.projectile.TurretProj_Seed;
+import sanandreasp.mods.turretmod3.entity.projectile.TurretProjectile;
+import sanandreasp.mods.turretmod3.registry.AchievementPageTM;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
+import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgPiercing;
+import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TurretUpgrades;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 

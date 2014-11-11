@@ -1,20 +1,17 @@
-package sanandreasp.mods.TurretMod3.registry.TurretInfo;
+package sanandreasp.mods.turretmod3.registry.TurretInfo;
 
-import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_T1Arrow;
-import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_T1Shotgun;
-import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
+import net.minecraftforge.oredict.OreDictionary;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 
 import com.google.common.collect.Maps;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
-import net.minecraft.util.StringTranslate;
 
 public abstract class TurretInfo {
 
@@ -75,9 +72,8 @@ public abstract class TurretInfo {
 
 	public int getAmmoFromItem(ItemStack is) {
 		for (Entry<ItemStack, Integer> ent : this.ammoItems.entrySet()) {
-			if (CUS.areStacksEqualWithWCV(ent.getKey(), is))
-//			if (ent.getKey().isItemEqual(is)
-//					|| (ent.getKey().getItemDamage() == OreDictionary.WILDCARD_VALUE && ent.getKey().itemID == is.itemID))
+			if (ent.getKey().isItemEqual(is)
+					|| (ent.getKey().getItemDamage() == OreDictionary.WILDCARD_VALUE && ent.getKey().getItem() == is.getItem()))
 				return ent.getValue();
 		}
 		return 0;
@@ -98,9 +94,8 @@ public abstract class TurretInfo {
 	public int getAmmoTypeFromItem(ItemStack is) {
 		for (Entry<Integer, List<ItemStack>> ent : this.ammoTypeItems.entrySet()) {
 			for (ItemStack entIS : ent.getValue()) {
-				if (CUS.areStacksEqualWithWCV(entIS, is))
-//				if (entIS.isItemEqual(is)
-//						|| (entIS.getItemDamage() == OreDictionary.WILDCARD_VALUE && entIS.itemID == is.itemID))
+				if (entIS.isItemEqual(is)
+						|| (entIS.getItemDamage() == OreDictionary.WILDCARD_VALUE && entIS.getItem() == is.getItem()))
 					return ent.getKey();
 			}
 		}
@@ -137,9 +132,8 @@ public abstract class TurretInfo {
 
 	public int func_110143_aJFromItem(ItemStack is) {
 		for (Entry<ItemStack, Integer> ent : this.healItems.entrySet()) {
-			if (CUS.areStacksEqualWithWCV(ent.getKey(), is))
-//			if (ent.getKey().isItemEqual(is)
-//					|| (ent.getKey().getItemDamage() == OreDictionary.WILDCARD_VALUE && ent.getKey().itemID == is.itemID))
+			if (ent.getKey().isItemEqual(is)
+					|| (ent.getKey().getItemDamage() == OreDictionary.WILDCARD_VALUE && ent.getKey().getItem() == is.getItem()))
 				return ent.getValue();
 		}
 		return 0;

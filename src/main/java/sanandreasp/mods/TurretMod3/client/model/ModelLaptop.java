@@ -1,4 +1,4 @@
-package sanandreasp.mods.TurretMod3.client.model;
+package sanandreasp.mods.turretmod3.client.model;
 
 import org.lwjgl.opengl.GL11;
 

@@ -1,6 +1,6 @@
-package sanandreasp.mods.TurretMod3.command;
+package sanandreasp.mods.turretmod3.command;
 
-import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;

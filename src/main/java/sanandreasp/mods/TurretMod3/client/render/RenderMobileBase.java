@@ -1,4 +1,4 @@
-package sanandreasp.mods.TurretMod3.client.render;
+package sanandreasp.mods.turretmod3.client.render;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;

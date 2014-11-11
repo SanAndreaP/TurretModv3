@@ -1,14 +1,13 @@
-package sanandreasp.mods.TurretMod3.client.packet;
+package sanandreasp.mods.turretmod3.client.packet;
 
 import java.io.DataInputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
-import sanandreasp.mods.TurretMod3.packet.PacketBase;
-import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
+import sanandreasp.mods.turretmod3.packet.PacketBase;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 
 public class PacketRecvPlayerNBT extends PacketBase {
 

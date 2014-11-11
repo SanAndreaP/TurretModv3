@@ -1,8 +1,8 @@
-package sanandreasp.mods.TurretMod3.registry.TurretUpgrades;
+package sanandreasp.mods.turretmod3.registry.TurretUpgrades;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_TSSnowball;
+import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_TSSnowball;
 
 public class TUpgStopMove extends TurretUpgrades {
 

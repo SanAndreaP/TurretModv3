@@ -1,8 +1,8 @@
-package sanandreasp.mods.TurretMod3.client.gui;
+package sanandreasp.mods.turretmod3.client.gui;
 
 import org.lwjgl.opengl.GL11;
 
-import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -24,8 +24,8 @@ public class GuiTurretButton extends GuiButton {
         	GL11.glPushMatrix();
         	par1Minecraft.getTextureManager().bindTexture(TM3ModRegistry.TEX_GUIBUTTONS);
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-            this.field_82253_i = par2 >= this.xPosition && par3 >= this.yPosition && par2 < this.xPosition + this.width && par3 < this.yPosition + this.height;
-            int var5 = this.getHoverState(this.field_82253_i);
+            this.field_146123_n = par2 >= this.xPosition && par3 >= this.yPosition && par2 < this.xPosition + this.width && par3 < this.yPosition + this.height;
+            int var5 = this.getHoverState(this.field_146123_n);
             this.drawTexturedModalRect(this.xPosition, this.yPosition, 0, 78 + var5 * 12, this.width, this.height);
             this.mouseDragged(par1Minecraft, par2, par3);
             int var6 = 14737632;
@@ -34,7 +34,7 @@ public class GuiTurretButton extends GuiButton {
             {
                 var6 = -6250336;
             }
-            else if (this.field_82253_i)
+            else if (this.field_146123_n)
             {
                 var6 = 16777120;
             }

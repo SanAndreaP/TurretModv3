@@ -1,7 +1,6 @@
-package sanandreasp.mods.TurretMod3.packet;
+package sanandreasp.mods.turretmod3.packet;
 
 import java.io.DataInputStream;
-import java.io.ObjectInputStream;
 import java.util.Random;
 
 import net.minecraft.entity.player.EntityPlayer;

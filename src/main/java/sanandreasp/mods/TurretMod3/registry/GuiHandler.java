@@ -1,35 +1,23 @@
-package sanandreasp.mods.TurretMod3.registry;
+package sanandreasp.mods.turretmod3.registry;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.util.Map.Entry;
-
-import sanandreasp.mods.TurretMod3.client.gui.GuiDismantledStorage;
-import sanandreasp.mods.TurretMod3.client.gui.TCU.GuiTCUInfo;
-import sanandreasp.mods.TurretMod3.client.gui.TCU.GuiTCUTargets;
-import sanandreasp.mods.TurretMod3.client.gui.laptop.GuiLaptopGeneral;
-import sanandreasp.mods.TurretMod3.client.gui.laptop.GuiLaptopMisc;
-import sanandreasp.mods.TurretMod3.client.gui.laptop.GuiLaptopTargets;
-import sanandreasp.mods.TurretMod3.client.gui.laptop.GuiLaptopUpgrades;
-import sanandreasp.mods.TurretMod3.client.gui.laptop.GuiLaptop_Base;
-import sanandreasp.mods.TurretMod3.client.gui.turretInfo.GuiTInfoPG1;
-import sanandreasp.mods.TurretMod3.entity.EntityDismantleStorage;
-import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_Base;
-import sanandreasp.mods.TurretMod3.inventory.ContainerDismantleStorage;
-import sanandreasp.mods.TurretMod3.inventory.ContainerLaptop;
-import sanandreasp.mods.TurretMod3.inventory.ContainerLaptopUpgrades;
-import sanandreasp.mods.TurretMod3.packet.PacketRecvTargetListSrv;
-import sanandreasp.mods.TurretMod3.tileentity.TileEntityLaptop;
+import sanandreasp.mods.turretmod3.client.gui.GuiDismantledStorage;
+import sanandreasp.mods.turretmod3.client.gui.TCU.GuiTCUInfo;
+import sanandreasp.mods.turretmod3.client.gui.laptop.GuiLaptopGeneral;
+import sanandreasp.mods.turretmod3.client.gui.laptop.GuiLaptopMisc;
+import sanandreasp.mods.turretmod3.client.gui.laptop.GuiLaptopTargets;
+import sanandreasp.mods.turretmod3.client.gui.laptop.GuiLaptopUpgrades;
+import sanandreasp.mods.turretmod3.client.gui.turretInfo.GuiTInfoPG1;
+import sanandreasp.mods.turretmod3.entity.EntityDismantleStorage;
+import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
+import sanandreasp.mods.turretmod3.inventory.ContainerDismantleStorage;
+import sanandreasp.mods.turretmod3.inventory.ContainerLaptop;
+import sanandreasp.mods.turretmod3.inventory.ContainerLaptopUpgrades;
+import sanandreasp.mods.turretmod3.packet.PacketRecvTargetListSrv;
+import sanandreasp.mods.turretmod3.tileentity.TileEntityLaptop;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 import cpw.mods.fml.common.network.IGuiHandler;
 
 public class GuiHandler implements IGuiHandler {

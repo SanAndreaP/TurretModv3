@@ -1,8 +1,8 @@
-package sanandreasp.mods.TurretMod3.registry.TurretUpgrades;
+package sanandreasp.mods.turretmod3.registry.TurretUpgrades;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_T5Artillery;
+import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_T5Artillery;
 
 public class TUpgPrecision extends TurretUpgrades {
 

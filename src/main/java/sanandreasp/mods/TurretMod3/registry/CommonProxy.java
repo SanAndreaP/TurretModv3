@@ -1,30 +1,19 @@
-package sanandreasp.mods.TurretMod3.registry;
+package sanandreasp.mods.turretmod3.registry;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
-import java.util.Map;
 
 import net.minecraftforge.common.MinecraftForge;
-import sanandreasp.mods.TurretMod3.client.packet.PacketHandlerClient;
-import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_TSHealer;
-import sanandreasp.mods.TurretMod3.packet.PacketHandlerCommon;
-
-import com.google.common.collect.Maps;
+import sanandreasp.mods.turretmod3.packet.PacketHandlerCommon;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.management.ServerConfigurationManager;
 
 public class CommonProxy {
 	

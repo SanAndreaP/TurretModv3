@@ -1,9 +1,8 @@
-package sanandreasp.mods.TurretMod3.registry;
+package sanandreasp.mods.turretmod3.registry;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.world.World;
 
 public class SchedTickHandlerWorld {
 

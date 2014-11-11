@@ -1,11 +1,9 @@
-package sanandreasp.mods.TurretMod3.registry.TurretInfo;
-
-import java.util.Map;
+package sanandreasp.mods.turretmod3.registry.TurretInfo;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import sanandreasp.mods.TurretMod3.item.ItemArtilleryShells;
-import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
+import sanandreasp.mods.turretmod3.item.ItemArtilleryShells;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 import net.minecraft.item.ItemStack;
 
 public class TurretInfoT5Artillery extends TurretInfo {

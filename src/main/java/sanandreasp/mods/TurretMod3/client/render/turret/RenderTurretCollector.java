@@ -1,15 +1,11 @@
-package sanandreasp.mods.TurretMod3.client.render.turret;
+package sanandreasp.mods.turretmod3.client.render.turret;
 
 import java.util.Random;
 
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
 
-import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_Base;
-import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
-import sanandreasp.mods.TurretMod3.registry.TurretUpgrades.TUpgExperience;
-import sanandreasp.mods.TurretMod3.registry.TurretUpgrades.TUpgInfAmmo;
-import sanandreasp.mods.TurretMod3.registry.TurretUpgrades.TurretUpgrades;
+import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -20,8 +16,8 @@ import net.minecraft.entity.EntityLiving;
 public class RenderTurretCollector extends RenderTurret_Base {
 	private static long rndSeed = 0L;
 
-	public RenderTurretCollector(ModelBase par1ModelBase, float par2) {
-		super(par1ModelBase, par2);
+	public RenderTurretCollector(ModelBase par1ModelBase) {
+		super(par1ModelBase);
 	}
 	
 	@Override

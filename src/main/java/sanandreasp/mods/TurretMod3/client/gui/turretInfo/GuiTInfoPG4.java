@@ -1,11 +1,9 @@
-package sanandreasp.mods.TurretMod3.client.gui.turretInfo;
+package sanandreasp.mods.turretmod3.client.gui.turretInfo;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.WeakHashMap;
 
 import net.minecraft.util.StatCollector;
 import org.lwjgl.input.Mouse;
@@ -15,15 +13,13 @@ import org.lwjgl.opengl.GL12;
 import com.google.common.collect.Maps;
 
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
-import sanandreasp.mods.TurretMod3.registry.TurretUpgrades.TurretUpgrades;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
+import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TurretUpgrades;
 
 public class GuiTInfoPG4 extends GuiTInfoBase {
     protected static RenderItem itemRenderer = new RenderItem();

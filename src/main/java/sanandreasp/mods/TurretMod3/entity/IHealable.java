@@ -1,4 +1,4 @@
-package sanandreasp.mods.TurretMod3.entity;
+package sanandreasp.mods.turretmod3.entity;
 
 public interface IHealable {
 

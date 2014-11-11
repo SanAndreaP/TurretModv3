@@ -1,9 +1,8 @@
-package sanandreasp.mods.TurretMod3.item;
+package sanandreasp.mods.turretmod3.item;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import sanandreasp.mods.TurretMod3.entity.EntityMobileBase;
-import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_Base;
+import sanandreasp.mods.turretmod3.entity.EntityMobileBase;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
@@ -65,11 +64,4 @@ public class ItemMobileBase extends Item {
         }
         return var8;
     }
-    
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister par1IconRegister) {
-    	this.itemIcon = par1IconRegister.registerIcon("TurretMod3:mobileBase");
-    }
-
 }

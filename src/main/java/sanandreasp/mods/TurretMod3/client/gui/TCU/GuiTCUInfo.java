@@ -1,15 +1,11 @@
-package sanandreasp.mods.TurretMod3.client.gui.TCU;
-
-import net.minecraft.entity.EntityList;
+package sanandreasp.mods.turretmod3.client.gui.TCU;
 
 import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
 
-import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_TSForcefield;
-import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
-import sanandreasp.mods.TurretMod3.registry.TurretInfo.TurretInfo;
-import sanandreasp.mods.TurretMod3.registry.TurretUpgrades.TUpgExperience;
-import sanandreasp.mods.TurretMod3.registry.TurretUpgrades.TurretUpgrades;
+import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_TSForcefield;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
+import sanandreasp.mods.turretmod3.registry.TurretInfo.TurretInfo;
 
 public class GuiTCUInfo extends GuiTCUBase {
 	

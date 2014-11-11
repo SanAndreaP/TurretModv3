@@ -1,8 +1,6 @@
-package sanandreasp.mods.TurretMod3.registry;
+package sanandreasp.mods.turretmod3.registry;
 
 import net.minecraft.init.Items;
-import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
 import net.minecraftforge.common.AchievementPage;

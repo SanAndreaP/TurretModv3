@@ -1,4 +1,4 @@
-package sanandreasp.mods.TurretMod3.client.gui.TCU;
+package sanandreasp.mods.turretmod3.client.gui.TCU;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -7,11 +7,11 @@ import java.io.IOException;
 import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
 
-import sanandreasp.mods.TurretMod3.client.gui.GuiTurretButton;
-import sanandreasp.mods.TurretMod3.packet.PacketHandlerCommon;
-import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
-import sanandreasp.mods.TurretMod3.registry.TurretUpgrades.TUpgControl;
-import sanandreasp.mods.TurretMod3.registry.TurretUpgrades.TurretUpgrades;
+import sanandreasp.mods.turretmod3.client.gui.GuiTurretButton;
+import sanandreasp.mods.turretmod3.packet.PacketHandlerCommon;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
+import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgControl;
+import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TurretUpgrades;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
 

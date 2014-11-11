@@ -1,22 +1,22 @@
-package sanandreasp.mods.TurretMod3.client.render.turret;
+package sanandreasp.mods.turretmod3.client.render.turret;
 
+import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_TSHealer;
-import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
+import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_TSHealer;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.util.MathHelper;
 
 public class RenderTurretHealer extends RenderTurret_Base {
+    public static final ResourceLocation TEX_HEALBEAM = new ResourceLocation("turretmod3:textures/entities/healBeam.png");
 
-	public RenderTurretHealer(ModelBase par1ModelBase, float par2) {
-		super(par1ModelBase, par2);
+	public RenderTurretHealer(ModelBase par1ModelBase) {
+		super(par1ModelBase);
 	}
 	
 	@Override
@@ -38,7 +38,7 @@ public class RenderTurretHealer extends RenderTurret_Base {
 		
 		par1Entity.faceEntity(target, 10.0F, par1Entity.getVerticalFaceSpeed());
         float var4 = (float)par1Entity.ticksExisted * 8;
-        this.bindTexture(TM3ModRegistry.TEX_HEALBEAM);
+        this.bindTexture(TEX_HEALBEAM);
         GL11.glPushMatrix();
         GL11.glDisable(GL11.GL_LIGHTING);
 		char var8 = 0x000F0;

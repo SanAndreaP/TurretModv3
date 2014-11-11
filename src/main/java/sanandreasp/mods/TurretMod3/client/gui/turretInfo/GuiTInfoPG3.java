@@ -1,4 +1,4 @@
-package sanandreasp.mods.TurretMod3.client.gui.turretInfo;
+package sanandreasp.mods.turretmod3.client.gui.turretInfo;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -12,15 +12,10 @@ import org.lwjgl.opengl.GL12;
 
 import com.google.common.collect.Maps;
 
-import sanandreasp.mods.TurretMod3.client.gui.GuiItemTab;
-import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
-import sanandreasp.mods.TurretMod3.registry.TurretInfo.TurretInfo;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 

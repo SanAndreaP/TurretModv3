@@ -1,4 +1,4 @@
-package sanandreasp.mods.TurretMod3.client.packet;
+package sanandreasp.mods.turretmod3.client.packet;
 
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -7,9 +7,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityLavaFX;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import sanandreasp.mods.TurretMod3.client.particle.EntityBulletShotFX;
-import sanandreasp.mods.TurretMod3.client.particle.EntityForcefieldFX;
-import sanandreasp.mods.TurretMod3.packet.PacketBase;
+import sanandreasp.mods.turretmod3.client.particle.EntityBulletShotFX;
+import sanandreasp.mods.turretmod3.client.particle.EntityForcefieldFX;
+import sanandreasp.mods.turretmod3.packet.PacketBase;
 
 public class PacketRecvSpawnParticle extends PacketBase {
 

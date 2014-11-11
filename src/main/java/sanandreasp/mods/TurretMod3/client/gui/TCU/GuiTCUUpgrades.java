@@ -1,4 +1,4 @@
-package sanandreasp.mods.TurretMod3.client.gui.TCU;
+package sanandreasp.mods.turretmod3.client.gui.TCU;
 
 import java.lang.ref.WeakReference;
 import java.util.Map;
@@ -12,8 +12,8 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
-import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
-import sanandreasp.mods.TurretMod3.registry.TurretUpgrades.TurretUpgrades;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
+import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TurretUpgrades;
 
 import com.google.common.collect.Maps;
 

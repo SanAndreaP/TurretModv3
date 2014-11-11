@@ -1,15 +1,12 @@
-package sanandreasp.mods.TurretMod3.packet;
+package sanandreasp.mods.turretmod3.packet;
 
 import java.io.DataInputStream;
 import java.io.IOException;
 
-import cpw.mods.fml.common.FMLLog;
-
-import sanandreasp.mods.TurretMod3.entity.EntityMobileBase;
-import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_Base;
+import sanandreasp.mods.turretmod3.entity.EntityMobileBase;
+import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.MathHelper;
 
 public class PacketRecvTurretSettings extends PacketBase {
 

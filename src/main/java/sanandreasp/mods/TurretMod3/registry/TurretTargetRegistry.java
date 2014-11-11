@@ -1,27 +1,21 @@
-package sanandreasp.mods.TurretMod3.registry;
+package sanandreasp.mods.turretmod3.registry;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import sanandreasp.mods.TurretMod3.entity.EntityDismantleStorage;
-import sanandreasp.mods.TurretMod3.entity.EntityMobileBase;
-import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_Base;
+import sanandreasp.mods.turretmod3.entity.EntityDismantleStorage;
+import sanandreasp.mods.turretmod3.entity.EntityMobileBase;
+import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
 
 import com.google.common.collect.Maps;
 
-import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.IAnimals;
-import net.minecraft.network.rcon.IServer;
 
 public class TurretTargetRegistry {
 	public static TurretTargetRegistry trTargets;
@@ -64,7 +58,8 @@ public class TurretTargetRegistry {
 		tgtListLabel:
 		for (Class entityCls : allEntities) {
 			for (Class excludes : excludedEntities) {
-				if (excludes!= null && excludes.isAssignableFrom(entityCls)) continue tgtListLabel;
+				if (excludes!= null && excludes.isAssignableFrom(entityCls))
+                    continue tgtListLabel;
 			}
 			String eStr = (String) EntityList.classToStringMapping.get(entityCls);
 			if (eStr.equals("Mob") || eStr.equals("Monster"))

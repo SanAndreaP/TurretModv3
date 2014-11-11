@@ -1,10 +1,10 @@
-package sanandreasp.mods.TurretMod3.client.render.tileentity;
+package sanandreasp.mods.turretmod3.client.render.tileentity;
 
 import org.lwjgl.opengl.GL11;
 
-import sanandreasp.mods.TurretMod3.block.BlockLaptop;
-import sanandreasp.mods.TurretMod3.client.model.ModelLaptop;
-import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
+import sanandreasp.mods.turretmod3.block.BlockLaptop;
+import sanandreasp.mods.turretmod3.client.model.ModelLaptop;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.item.ItemStack;

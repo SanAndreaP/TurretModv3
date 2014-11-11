@@ -1,8 +1,5 @@
-package sanandreasp.mods.TurretMod3.client.gui.TCU;
+package sanandreasp.mods.turretmod3.client.gui.TCU;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -10,11 +7,9 @@ import java.util.Map;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
-import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_Base;
-import sanandreasp.mods.TurretMod3.packet.PacketRecvTargetListSrv;
-import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
-import sanandreasp.mods.TurretMod3.registry.TurretTargetRegistry;
-import net.minecraft.client.gui.GuiScreen;
+import sanandreasp.mods.turretmod3.packet.PacketRecvTargetListSrv;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
+import sanandreasp.mods.turretmod3.registry.TurretTargetRegistry;
 import net.minecraft.util.StatCollector;
 
 public class GuiTCUTargets extends GuiTCUBase {

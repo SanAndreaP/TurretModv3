@@ -1,4 +1,4 @@
-package sanandreasp.mods.TurretMod3.client.gui.mainMenu;
+package sanandreasp.mods.turretmod3.client.gui.mainMenu;
 
 import org.lwjgl.opengl.GL11;
 

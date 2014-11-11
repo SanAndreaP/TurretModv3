@@ -1,4 +1,4 @@
-package sanandreasp.mods.TurretMod3.client.gui.laptop;
+package sanandreasp.mods.turretmod3.client.gui.laptop;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,25 +6,16 @@ import java.util.List;
 import net.minecraft.init.Items;
 import org.lwjgl.opengl.GL11;
 
-import sanandreasp.mods.TurretMod3.client.gui.GuiItemTab;
-import sanandreasp.mods.TurretMod3.client.gui.TCU.GuiTCUBase;
-import sanandreasp.mods.TurretMod3.client.gui.TCU.GuiTCUInfo;
-import sanandreasp.mods.TurretMod3.client.gui.TCU.GuiTCUSettings;
-import sanandreasp.mods.TurretMod3.client.gui.TCU.GuiTCUTargets;
-import sanandreasp.mods.TurretMod3.client.gui.TCU.GuiTCUUpgrades;
-import sanandreasp.mods.TurretMod3.inventory.ContainerLaptop;
-import sanandreasp.mods.TurretMod3.packet.PacketRecvLaptopGUICng;
-import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
-import sanandreasp.mods.TurretMod3.tileentity.TileEntityLaptop;
+import sanandreasp.mods.turretmod3.client.gui.GuiItemTab;
+import sanandreasp.mods.turretmod3.packet.PacketRecvLaptopGUICng;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
+import sanandreasp.mods.turretmod3.tileentity.TileEntityLaptop;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntityDispenser;
 import net.minecraft.util.StatCollector;
 
 public class GuiLaptop_Base extends GuiContainer {

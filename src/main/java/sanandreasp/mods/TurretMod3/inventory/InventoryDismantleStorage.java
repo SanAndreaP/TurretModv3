@@ -1,7 +1,7 @@
-package sanandreasp.mods.TurretMod3.inventory;
+package sanandreasp.mods.turretmod3.inventory;
 
 import net.minecraft.item.Item;
-import sanandreasp.mods.TurretMod3.entity.EntityDismantleStorage;
+import sanandreasp.mods.turretmod3.entity.EntityDismantleStorage;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

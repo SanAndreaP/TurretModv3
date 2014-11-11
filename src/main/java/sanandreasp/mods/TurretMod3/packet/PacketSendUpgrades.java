@@ -1,4 +1,4 @@
-package sanandreasp.mods.TurretMod3.packet;
+package sanandreasp.mods.turretmod3.packet;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
@@ -8,7 +8,7 @@ import java.io.IOException;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.common.network.Player;
 
-import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_Base;
+import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTBase;

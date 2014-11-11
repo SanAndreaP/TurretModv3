@@ -1,13 +1,10 @@
-package sanandreasp.mods.TurretMod3.client.model.turret;
+package sanandreasp.mods.turretmod3.client.model.turret;
 
 import org.lwjgl.opengl.GL11;
 
-import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_Base;
-import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_T1Arrow;
-import sanandreasp.mods.TurretMod3.registry.TurretUpgrades.TUpgInfAmmo;
-import sanandreasp.mods.TurretMod3.registry.TurretUpgrades.TurretUpgrades;
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelBox;
+import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
+import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgInfAmmo;
+import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TurretUpgrades;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 

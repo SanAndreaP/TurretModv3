@@ -1,34 +1,16 @@
-package sanandreasp.mods.TurretMod3.client.gui.laptop;
-
-import static sanandreasp.mods.TurretMod3.registry.TurretTargetRegistry.trTargets;
+package sanandreasp.mods.turretmod3.client.gui.laptop;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 import net.minecraft.util.StatCollector;
-import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.GL11;
-
-import com.google.common.collect.Maps;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
-import net.minecraft.entity.EntityList;
 import net.minecraft.inventory.Container;
-import net.minecraft.item.ItemStack;
-import sanandreasp.mods.TurretMod3.client.gui.GuiTurretButton;
-import sanandreasp.mods.TurretMod3.item.ItemTurret;
-import sanandreasp.mods.TurretMod3.packet.PacketHandlerCommon;
-import sanandreasp.mods.TurretMod3.packet.PacketRecvLaptopTargets;
-import sanandreasp.mods.TurretMod3.packet.PacketRecvTargetListSrv;
-import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
-import sanandreasp.mods.TurretMod3.registry.TurretTargetRegistry;
-import sanandreasp.mods.TurretMod3.tileentity.TileEntityLaptop;
+import sanandreasp.mods.turretmod3.packet.PacketHandlerCommon;
+import sanandreasp.mods.turretmod3.tileentity.TileEntityLaptop;
 
 public class GuiLaptopMisc extends GuiLaptop_Base {
 	private GuiTextField frequency;

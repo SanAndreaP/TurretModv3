@@ -1,9 +1,8 @@
-package sanandreasp.mods.TurretMod3;
+package sanandreasp.mods.turretmod3;
 
 import net.minecraft.item.Item;
-import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemStack;
 
 public class CreativeTabTurrets extends CreativeTabs {
 

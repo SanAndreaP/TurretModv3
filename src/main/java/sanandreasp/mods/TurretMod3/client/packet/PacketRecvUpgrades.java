@@ -1,11 +1,9 @@
-package sanandreasp.mods.TurretMod3.client.packet;
+package sanandreasp.mods.turretmod3.client.packet;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.util.Map;
 
 import com.google.common.collect.Maps;
@@ -20,9 +18,9 @@ import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet250CustomPayload;
-import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_Base;
-import sanandreasp.mods.TurretMod3.packet.PacketBase;
-import sanandreasp.mods.TurretMod3.packet.PacketHandlerCommon;
+import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
+import sanandreasp.mods.turretmod3.packet.PacketBase;
+import sanandreasp.mods.turretmod3.packet.PacketHandlerCommon;
 
 public class PacketRecvUpgrades extends PacketBase {
 

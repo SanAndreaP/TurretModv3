@@ -1,16 +1,13 @@
-package sanandreasp.mods.TurretMod3.client.render.turret;
+package sanandreasp.mods.turretmod3.client.render.turret;
 
 import java.util.Random;
 
+import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
 
-import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_Base;
-import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_TSForcefield;
-import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
-import sanandreasp.mods.TurretMod3.registry.TurretUpgrades.TUpgExperience;
-import sanandreasp.mods.TurretMod3.registry.TurretUpgrades.TUpgInfAmmo;
-import sanandreasp.mods.TurretMod3.registry.TurretUpgrades.TurretUpgrades;
+import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
+import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_TSForcefield;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -21,9 +18,10 @@ import net.minecraft.entity.EntityLiving;
 
 public class RenderTurretForcefield extends RenderTurret_Base {
 	private static long rndSeed = 0L;
+    public static final ResourceLocation TEX_SHIELD		= new ResourceLocation("turretmod3:textures/entities/shield.png");
 
-	public RenderTurretForcefield(ModelBase par1ModelBase, float par2) {
-		super(par1ModelBase, par2);
+	public RenderTurretForcefield(ModelBase par1ModelBase) {
+		super(par1ModelBase);
 	}
 	
 	@Override
@@ -69,7 +67,7 @@ public class RenderTurretForcefield extends RenderTurret_Base {
 	
 	public static void renderShield(Tessellator tess, double size, EntityTurret_TSForcefield fsTurret, double partialTicks) {
 		
-		Minecraft.getMinecraft().getTextureManager().bindTexture(TM3ModRegistry.TEX_SHIELD);
+		Minecraft.getMinecraft().getTextureManager().bindTexture(TEX_SHIELD);
 		double texScaleX = 1.25D;
 		double texScaleY = 1.25D;
 		double ticks = (double)fsTurret.ticksExisted + partialTicks;

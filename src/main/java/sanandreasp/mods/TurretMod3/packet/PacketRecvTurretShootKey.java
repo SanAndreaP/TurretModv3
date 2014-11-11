@@ -1,8 +1,8 @@
-package sanandreasp.mods.TurretMod3.packet;
+package sanandreasp.mods.turretmod3.packet;
 
 import java.io.DataInputStream;
 
-import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_Base;
+import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
 
 import net.minecraft.entity.player.EntityPlayer;
 

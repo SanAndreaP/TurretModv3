@@ -1,9 +1,6 @@
-package sanandreasp.mods.TurretMod3.entity.projectile;
+package sanandreasp.mods.turretmod3.entity.projectile;
 
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 

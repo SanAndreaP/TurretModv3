@@ -1,32 +1,27 @@
-package sanandreasp.mods.TurretMod3.entity.turret;
+package sanandreasp.mods.turretmod3.entity.turret;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.AbstractMap.SimpleEntry;
 import java.util.Map;
-import java.util.Map.Entry;
 
-import sanandreasp.mods.TurretMod3.client.packet.PacketRecvUpgrades;
-import sanandreasp.mods.TurretMod3.entity.EntityDismantleStorage;
-import sanandreasp.mods.TurretMod3.entity.EntityMobileBase;
-import sanandreasp.mods.TurretMod3.entity.IHealable;
-import sanandreasp.mods.TurretMod3.entity.projectile.TurretProjectile;
-import sanandreasp.mods.TurretMod3.packet.PacketHandlerCommon;
-import sanandreasp.mods.TurretMod3.packet.PacketSendUpgrades;
-import sanandreasp.mods.TurretMod3.registry.AchievementPageTM;
-import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
-import sanandreasp.mods.TurretMod3.registry.TurretTargetRegistry;
-import sanandreasp.mods.TurretMod3.registry.TurretInfo.TurretInfo;
-import sanandreasp.mods.TurretMod3.registry.TurretUpgrades.TUpgChestGrabbing;
-import sanandreasp.mods.TurretMod3.registry.TurretUpgrades.TUpgControl;
-import sanandreasp.mods.TurretMod3.registry.TurretUpgrades.TUpgEconomy;
-import sanandreasp.mods.TurretMod3.registry.TurretUpgrades.TUpgEnderHitting;
-import sanandreasp.mods.TurretMod3.registry.TurretUpgrades.TUpgExpStorage;
-import sanandreasp.mods.TurretMod3.registry.TurretUpgrades.TUpgExperience;
-import sanandreasp.mods.TurretMod3.registry.TurretUpgrades.TUpgFireImmunity;
-import sanandreasp.mods.TurretMod3.registry.TurretUpgrades.TUpgInfAmmo;
-import sanandreasp.mods.TurretMod3.registry.TurretUpgrades.TurretUpgrades;
+import sanandreasp.mods.turretmod3.client.packet.PacketRecvUpgrades;
+import sanandreasp.mods.turretmod3.entity.EntityDismantleStorage;
+import sanandreasp.mods.turretmod3.entity.EntityMobileBase;
+import sanandreasp.mods.turretmod3.entity.IHealable;
+import sanandreasp.mods.turretmod3.entity.projectile.TurretProjectile;
+import sanandreasp.mods.turretmod3.packet.PacketSendUpgrades;
+import sanandreasp.mods.turretmod3.registry.AchievementPageTM;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
+import sanandreasp.mods.turretmod3.registry.TurretInfo.TurretInfo;
+import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgChestGrabbing;
+import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgControl;
+import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgEconomy;
+import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgEnderHitting;
+import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgExpStorage;
+import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgExperience;
+import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgFireImmunity;
+import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgInfAmmo;
+import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TurretUpgrades;
 
 import com.google.common.collect.Maps;
 
@@ -34,21 +29,14 @@ import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.network.PacketDispatcher;
 
 import net.minecraft.block.Block;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet250CustomPayload;
@@ -60,11 +48,9 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumMovingObjectType;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 
-import static sanandreasp.mods.TurretMod3.registry.TurretTargetRegistry.trTargets;
 import static sanandreasp.mods.managers.CommonUsedStuff.CUS;
 
 public abstract class EntityTurret_Base extends EntityLiving implements IHealable {

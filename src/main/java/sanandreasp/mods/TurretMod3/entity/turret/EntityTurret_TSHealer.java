@@ -1,23 +1,11 @@
-package sanandreasp.mods.TurretMod3.entity.turret;
+package sanandreasp.mods.turretmod3.entity.turret;
 
-import java.lang.reflect.Method;
-import java.util.AbstractMap.SimpleEntry;
-
-import sanandreasp.mods.TurretMod3.entity.IHealable;
-import sanandreasp.mods.TurretMod3.entity.projectile.TurretProj_Arrow;
-import sanandreasp.mods.TurretMod3.entity.projectile.TurretProjectile;
-import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
-import cpw.mods.fml.common.ObfuscationReflectionHelper;
+import sanandreasp.mods.turretmod3.entity.IHealable;
+import sanandreasp.mods.turretmod3.entity.projectile.TurretProjectile;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
-import net.minecraft.entity.DataWatcher;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class EntityTurret_TSHealer extends EntityTurret_Base {

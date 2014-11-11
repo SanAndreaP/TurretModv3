@@ -1,23 +1,13 @@
-package sanandreasp.mods.TurretMod3.packet;
+package sanandreasp.mods.turretmod3.packet;
 
-import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.util.Map;
-import java.util.Map.Entry;
 
-import com.google.common.collect.Maps;
-
-import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_Base;
-import sanandreasp.mods.TurretMod3.item.ItemTurret;
-import sanandreasp.mods.TurretMod3.tileentity.TileEntityLaptop;
+import sanandreasp.mods.turretmod3.item.ItemTurret;
+import sanandreasp.mods.turretmod3.tileentity.TileEntityLaptop;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
 public class PacketRecvLaptopUpgrades extends PacketBase {

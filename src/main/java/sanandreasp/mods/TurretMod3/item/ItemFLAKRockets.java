@@ -1,9 +1,8 @@
-package sanandreasp.mods.TurretMod3.item;
+package sanandreasp.mods.turretmod3.item;
 
 import java.util.List;
 
 import net.minecraft.util.StatCollector;
-import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

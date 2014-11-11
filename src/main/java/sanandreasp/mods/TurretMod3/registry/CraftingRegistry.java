@@ -1,13 +1,11 @@
-package sanandreasp.mods.TurretMod3.registry;
+package sanandreasp.mods.turretmod3.registry;
 
-import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.registry.GameRegistry;
-import sanandreasp.mods.TurretMod3.registry.TurretInfo.TurretInfo;
+import sanandreasp.mods.turretmod3.registry.TurretInfo.TurretInfo;
 
 public final class CraftingRegistry {
 	public static void initCraftings() {

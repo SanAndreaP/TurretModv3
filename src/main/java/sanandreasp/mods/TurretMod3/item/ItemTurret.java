@@ -1,9 +1,7 @@
-package sanandreasp.mods.TurretMod3.item;
+package sanandreasp.mods.turretmod3.item;
 
-import static sanandreasp.mods.TurretMod3.registry.TurretTargetRegistry.trTargets;
+import static sanandreasp.mods.turretmod3.registry.TurretTargetRegistry.trTargets;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -13,20 +11,16 @@ import com.google.common.collect.Maps;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.util.StatCollector;
-import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_Base;
-import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_T1Arrow;
-import sanandreasp.mods.TurretMod3.inventory.ContainerLaptop;
-import sanandreasp.mods.TurretMod3.inventory.ContainerLaptopUpgrades;
-import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
-import sanandreasp.mods.TurretMod3.registry.TurretTargetRegistry;
-import sanandreasp.mods.TurretMod3.registry.TurretInfo.TurretInfo;
-import sanandreasp.mods.TurretMod3.registry.TurretUpgrades.TurretUpgrades;
+import net.minecraftforge.common.util.Constants;
+import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
+import sanandreasp.mods.turretmod3.inventory.ContainerLaptopUpgrades;
+import sanandreasp.mods.turretmod3.registry.TurretInfo.TurretInfo;
+import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TurretUpgrades;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -202,11 +196,11 @@ public class ItemTurret extends Item {
     	NBTTagCompound nbt = getProgramTag(is);
     	Map<String, Boolean> returningList = Maps.newHashMap();
     	if (nbt.hasKey("progTargets")) {
-    		NBTTagList var1 = nbt.getTagList("progTargets");
+    		NBTTagList var1 = nbt.getTagList("progTargets", Constants.NBT.TAG_COMPOUND);
 
             for (int var2 = 0; var2 < var1.tagCount(); ++var2)
             {
-                NBTTagCompound var3 = (NBTTagCompound)var1.tagAt(var2);
+                NBTTagCompound var3 = var1.getCompoundTagAt(var2);
                 String var4 = var3.getString("TgName");
                 boolean var5 = var3.getBoolean("TgActive");
                 returningList.put(var4, var5);
@@ -298,11 +292,11 @@ public class ItemTurret extends Item {
     	
     	if (turretItm == null) return retList;
 
-        NBTTagList upgList = getProgramTag(turretItm).getTagList("progUpgrades");
+        NBTTagList upgList = getProgramTag(turretItm).getTagList("progUpgrades", Constants.NBT.TAG_COMPOUND);
 
         for (int ind = 0; ind < upgList.tagCount(); ++ind)
         {
-            NBTTagCompound innerNBT = (NBTTagCompound)upgList.tagAt(ind);
+            NBTTagCompound innerNBT = upgList.getCompoundTagAt(ind);
             retList.add(ItemStack.loadItemStackFromNBT(innerNBT));
         }
     	
@@ -343,6 +337,6 @@ public class ItemTurret extends Item {
 	
 	@Override
 	public String getUnlocalizedName(ItemStack par1ItemStack) {
-		return "turretitem"+par1ItemStack.getItemDamage();
+		return super.getUnlocalizedName(par1ItemStack)+par1ItemStack.getItemDamage();
 	}
 }

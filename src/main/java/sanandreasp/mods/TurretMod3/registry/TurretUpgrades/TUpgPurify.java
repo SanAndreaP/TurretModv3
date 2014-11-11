@@ -1,8 +1,7 @@
-package sanandreasp.mods.TurretMod3.registry.TurretUpgrades;
+package sanandreasp.mods.turretmod3.registry.TurretUpgrades;
 
 import net.minecraft.init.Blocks;
-import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_T3Flamethrower;
-import net.minecraft.enchantment.Enchantment;
+import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_T3Flamethrower;
 import net.minecraft.item.ItemStack;
 
 public class TUpgPurify extends TurretUpgrades {

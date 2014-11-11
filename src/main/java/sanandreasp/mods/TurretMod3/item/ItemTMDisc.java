@@ -1,4 +1,4 @@
-package sanandreasp.mods.TurretMod3.item;
+package sanandreasp.mods.turretmod3.item;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -13,8 +13,8 @@ public class ItemTMDisc extends ItemRecord {
 		this.author = par3Str;
 	}
 
-	@Override
-    public String getRecordTitle()
+    @SideOnly(Side.CLIENT)
+    public String getRecordNameLocal()
     {
         return this.author + " - " + this.recordName;
     }

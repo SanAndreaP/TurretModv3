@@ -1,10 +1,10 @@
-package sanandreasp.mods.TurretMod3.tileentity;
+package sanandreasp.mods.turretmod3.tileentity;
 
 import java.util.Map;
 import java.util.Random;
 
 import net.minecraft.network.Packet;
-import sanandreasp.mods.TurretMod3.item.ItemTurret;
+import sanandreasp.mods.turretmod3.item.ItemTurret;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
