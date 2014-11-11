@@ -4,9 +4,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.common.network.PacketDispatcher;
 
 import sanandreasp.mods.TurretMod3.client.gui.GuiTurretButton;
 import sanandreasp.mods.TurretMod3.packet.PacketHandlerCommon;
@@ -15,7 +14,6 @@ import sanandreasp.mods.TurretMod3.registry.TurretUpgrades.TUpgControl;
 import sanandreasp.mods.TurretMod3.registry.TurretUpgrades.TurretUpgrades;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
-import net.minecraft.network.packet.Packet250CustomPayload;
 
 public class GuiTCUSettings extends GuiTCUBase {
 	private GuiButton dismantleTurret;
@@ -33,19 +31,19 @@ public class GuiTCUSettings extends GuiTCUBase {
         this.guiLeft = (this.width - this.xSize) / 2;
         this.guiTop = (this.height - this.ySize) / 2;
         
-		this.dismantleTurret = new GuiTurretButton(this.buttonList.size(), this.guiLeft + 9, this.guiTop + 30, langman.getTranslated("turretmod3.gui.tcu.stgDismantle"));
+		this.dismantleTurret = new GuiTurretButton(this.buttonList.size(), this.guiLeft + 9, this.guiTop + 30, StatCollector.translateToLocal("gui.tcu.stgDismantle"));
 		this.buttonList.add(this.dismantleTurret);
-		this.toggleUniqueTarget = new GuiTurretButton(this.buttonList.size(), this.guiLeft + 9, this.guiTop + 46, langman.getTranslated("turretmod3.gui.tcu.stgUniqueTarget").split("\\|")[0]);
+		this.toggleUniqueTarget = new GuiTurretButton(this.buttonList.size(), this.guiLeft + 9, this.guiTop + 46, StatCollector.translateToLocal("gui.tcu.stgUniqueTarget").split("\\|")[0]);
 		this.buttonList.add(this.toggleUniqueTarget);
-		this.getExperience = new GuiTurretButton(this.buttonList.size(), this.guiLeft + 9, this.guiTop + 62, langman.getTranslated("turretmod3.gui.tcu.stgGetExp"));
+		this.getExperience = new GuiTurretButton(this.buttonList.size(), this.guiLeft + 9, this.guiTop + 62, StatCollector.translateToLocal("gui.tcu.stgGetExp"));
 		this.buttonList.add(this.getExperience);
-		this.dismountFromBase = new GuiTurretButton(this.buttonList.size(), this.guiLeft + 9, this.guiTop + 78, langman.getTranslated("turretmod3.gui.tcu.stgDismountBase"));
+		this.dismountFromBase = new GuiTurretButton(this.buttonList.size(), this.guiLeft + 9, this.guiTop + 78, StatCollector.translateToLocal("gui.tcu.stgDismountBase"));
 		this.buttonList.add(this.dismountFromBase);
-		this.rideTurret = new GuiTurretButton(this.buttonList.size(), this.guiLeft + 9, this.guiTop + 94, langman.getTranslated("turretmod3.gui.tcu.rideTurret"));
+		this.rideTurret = new GuiTurretButton(this.buttonList.size(), this.guiLeft + 9, this.guiTop + 94, StatCollector.translateToLocal("gui.tcu.rideTurret"));
 		this.buttonList.add(this.rideTurret);
-		this.frequency = new GuiTextField(this.fontRenderer, this.guiLeft + 9, this.guiTop + 119, 158, 12);
+		this.frequency = new GuiTextField(this.fontRendererObj, this.guiLeft + 9, this.guiTop + 119, 158, 12);
 		this.frequency.setText(Integer.toString(this.turret.getFrequency()));
-		this.switchOnOff = new GuiTurretButton(this.buttonList.size(), this.guiLeft + 9, this.guiTop + 136, langman.getTranslated("turretmod3.gui.tcu.turretOnOff").split("\\|")[0]);
+		this.switchOnOff = new GuiTurretButton(this.buttonList.size(), this.guiLeft + 9, this.guiTop + 136, StatCollector.translateToLocal("gui.tcu.turretOnOff").split("\\|")[0]);
 		this.buttonList.add(this.switchOnOff);
 		
 		super.initGui();
@@ -55,15 +53,15 @@ public class GuiTCUSettings extends GuiTCUBase {
 	public void drawScreen(int par1, int par2, float par3) {
 		this.drawDefaultBackground();
 
-		this.mc.func_110434_K().func_110577_a(TM3ModRegistry.TEX_GUITCUDIR + "page_2.png");
+		this.mc.getTextureManager().bindTexture(TM3ModRegistry.TEX_GUITCUDIR + "page_2.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, xSize, ySize);
         
         String s = this.turret != null ? this.turret.tInfo.getTurretName() : "";
-        this.fontRenderer.drawString("\247a"+s, this.guiLeft + (this.xSize - this.fontRenderer.getStringWidth(s))/2, this.guiTop + 207, 0xFFFFFF);
+        this.fontRendererObj.drawString("\247a"+s, this.guiLeft + (this.xSize - this.fontRendererObj.getStringWidth(s))/2, this.guiTop + 207, 0xFFFFFF);
         
-        s = langman.getTranslated("turretmod3.gui.tcu.titSettings");
-        this.fontRenderer.drawString(s, this.guiLeft + 6, this.guiTop + 6, 0x808080);
+        s = StatCollector.translateToLocal("gui.tcu.titSettings");
+        this.fontRendererObj.drawString(s, this.guiLeft + 6, this.guiTop + 6, 0x808080);
         
         if (this.turret != null) {
         	this.dismantleTurret.enabled = true;
@@ -73,10 +71,10 @@ public class GuiTCUSettings extends GuiTCUBase {
         	this.dismountFromBase.enabled = this.turret.isRiding();
         	this.rideTurret.enabled = TurretUpgrades.hasUpgrade(TUpgControl.class, this.turret.upgrades) && this.turret.ridingEntity == null;
         	
-        	String s1[] = langman.getTranslated("turretmod3.gui.tcu.stgUniqueTarget").split("\\|");
+        	String s1[] = StatCollector.translateToLocal("gui.tcu.stgUniqueTarget").split("\\|");
         	this.toggleUniqueTarget.displayString = s1[0] + ": " + (this.turret.useUniqueTargets() ? s1[1] : s1[2]);
         	
-        	s1 = langman.getTranslated("turretmod3.gui.tcu.turretOnOff").split("\\|");
+        	s1 = StatCollector.translateToLocal("gui.tcu.turretOnOff").split("\\|");
         	this.switchOnOff.displayString = (this.turret.isActive() ? s1[1] : s1[0]);
         } else {
         	this.dismantleTurret.enabled = false;
@@ -89,8 +87,8 @@ public class GuiTCUSettings extends GuiTCUBase {
         
 		super.drawScreen(par1, par2, par3);
 		
-		s = langman.getTranslated("turretmod3.gui.tcu.frequency");
-		this.fontRenderer.drawString(s, this.guiLeft + 9, this.guiTop + 110, 0x606060);
+		s = StatCollector.translateToLocal("gui.tcu.frequency");
+		this.fontRendererObj.drawString(s, this.guiLeft + 9, this.guiTop + 110, 0x606060);
 		
 		this.frequency.drawTextBox();
 	}
@@ -120,7 +118,7 @@ public class GuiTCUSettings extends GuiTCUBase {
     			this.writeFrequency();
     		}
     	}
-    	else if ((par2 == 1 || par2 == this.mc.gameSettings.keyBindInventory.keyCode) && !this.frequency.isFocused()) {
+    	else if ((par2 == 1 || par2 == this.mc.gameSettings.keyBindInventory.getKeyCode()) && !this.frequency.isFocused()) {
     		this.mc.thePlayer.closeScreen();
     		this.writeFrequency();
     	}

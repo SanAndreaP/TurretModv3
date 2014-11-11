@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import net.minecraft.util.StatCollector;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
@@ -57,13 +58,13 @@ public class GuiLaptopTargets extends GuiLaptop_Base {
 	public void drawScreen(int par1, int par2, float par3) {
 		super.drawScreen(par1, par2, par3);
 		
-		this.mc.func_110434_K().func_110577_a(TM3ModRegistry.TEX_GUITCUDIR + "page_1.png");
+		this.mc.getTextureManager().bindTexture(TM3ModRegistry.TEX_GUITCUDIR + "page_1.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         int scrollX = 203;
         int scrollY = 18 + (int)(91F * currScrollPos);
         drawTexturedModalRect(scrollX + this.guiLeft, scrollY + this.guiTop, 176, 0, 6, 6);
         
-        this.fontRenderer.drawString(langman.getTranslated("turretmod3.gui.laptop.titTargets"), this.guiLeft + 6, this.guiTop + 6, 0x808080);
+        this.fontRendererObj.drawString(StatCollector.translateToLocal("gui.laptop.titTargets"), this.guiLeft + 6, this.guiTop + 6, 0x808080);
 
 		for (int i = this.entryPos; i < 7 + this.entryPos; i++) {
 	        int x = this.guiLeft + 48, y = this.guiTop + 21 + 13*(i-this.entryPos);
@@ -74,13 +75,13 @@ public class GuiLaptopTargets extends GuiLaptop_Base {
 				boolean hovering = par1 < x + 11 && par1 >= x && par2 < y + 11 && par2 >= y;
 				if (s.startsWith("\n")) {
 					title = true;
-					s = "\247e\247o" + langman.getTranslated(s.replaceAll("\n", "")) + "\247r";
+					s = "\247e\247o" + StatCollector.translateToLocal(s.replaceAll("\n", "")) + "\247r";
 					this.drawRect(x, y-1, x + this.xSize - 104, y, 0xFFFFFF66);
 					this.drawRect(x, y + 11, x + this.xSize - 104, y + 12, 0xFFFFFF66);
 				}
 			    if (!title) {
 			        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-					this.mc.func_110434_K().func_110577_a(TM3ModRegistry.TEX_GUITCUDIR + "page_1.png");
+					this.mc.getTextureManager().bindTexture(TM3ModRegistry.TEX_GUITCUDIR + "page_1.png");
 			    	if (!checked) {
 			    		if (hovering)
 			    			drawTexturedModalRect(x, y, 176, 14, 11, 11);
@@ -94,18 +95,18 @@ public class GuiLaptopTargets extends GuiLaptop_Base {
 			    	}
 			    } else {
 			        GL11.glColor4f(1.0F, 1.0F, 0.0F, 1.0F);
-					this.mc.func_110434_K().func_110577_a(TM3ModRegistry.TEX_GUITCUDIR + "page_1.png");
+					this.mc.getTextureManager().bindTexture(TM3ModRegistry.TEX_GUITCUDIR + "page_1.png");
 		    		if (hovering)
 		    			drawTexturedModalRect(x, y, 176, 14, 11, 11);
 		    		else
 		    			drawTexturedModalRect(x, y, 176, 47, 11, 11);
 			    }
-				String name = langman.getTranslated("entity."+s+".name");
+				String name = StatCollector.translateToLocal("entity."+s+".name");
 				name = name.length() > 0 && !title && !name.contains("entity.") ? name : s;
-				this.fontRenderer.drawString(name.contains(".") ? name.substring(name.lastIndexOf('.')+1) : name, x + (title ? 25 : 15), y + 2, 0xFFFFFF);
+				this.fontRendererObj.drawString(name.contains(".") ? name.substring(name.lastIndexOf('.')+1) : name, x + (title ? 25 : 15), y + 2, 0xFFFFFF);
 			} else {
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-				this.mc.func_110434_K().func_110577_a(TM3ModRegistry.TEX_GUITCUDIR + "page_1.png");
+				this.mc.getTextureManager().bindTexture(TM3ModRegistry.TEX_GUITCUDIR + "page_1.png");
 		        drawTexturedModalRect(x, y, 148, 192, 11, 11);
 			}
 		}

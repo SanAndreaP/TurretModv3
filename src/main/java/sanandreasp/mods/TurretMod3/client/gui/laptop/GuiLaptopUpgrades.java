@@ -47,7 +47,7 @@ public class GuiLaptopUpgrades extends GuiLaptop_Base {
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
 		super.drawGuiContainerForegroundLayer(par1, par2);
 		RenderHelper.disableStandardItemLighting();
-        this.fontRenderer.drawString(StatCollector.translateToLocal("turretmod3.gui.laptop.upgItems"), 57, 45, 0x808080);
+        this.fontRendererObj.drawString(StatCollector.translateToLocal("gui.laptop.upgItems"), 57, 45, 0x808080);
         RenderHelper.enableGUIStandardItemLighting();
 	}
 	
@@ -87,7 +87,7 @@ public class GuiLaptopUpgrades extends GuiLaptop_Base {
 	public void drawScreen(int par1, int par2, float par3) {
 		super.drawScreen(par1, par2, par3);
 		
-        this.fontRenderer.drawString(langman.getTranslated("turretmod3.gui.laptop.titUpgrades"), this.guiLeft + 6, this.guiTop + 6, 0x808080);
+        this.fontRendererObj.drawString(StatCollector.translateToLocal("gui.laptop.titUpgrades"), this.guiLeft + 6, this.guiTop + 6, 0x808080);
 	}
 	
 	@Override

@@ -24,10 +24,11 @@ public class GuiTabNav extends GuiButton {
 		this.height = 13;
 		this.isUp = par6;
 	}
-	
+
+    @Override
     public void drawButton(Minecraft par1Minecraft, int par2, int par3)
     {
-        if (this.drawButton)
+        if (this.visible)
         {
         	FontRenderer var4 = par1Minecraft.fontRenderer;
             GL11.glBindTexture(GL11.GL_TEXTURE_2D, par1Minecraft.renderEngine.getTexture(TM3ModRegistry.TEX_GUIBUTTONS));

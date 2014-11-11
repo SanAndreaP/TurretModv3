@@ -31,7 +31,7 @@ public class TurretProj_Shard extends TurretProjectile {
 	
 	@Override
 	public String getHitSound() {
-		return "turretmod3.ricochet.splash";
+		return "ricochet.splash";
 	}
 	
 	@Override
@@ -88,7 +88,7 @@ public class TurretProj_Shard extends TurretProjectile {
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		TM3ModRegistry.proxy.spawnParticle(8, this.posX, this.posY, this.posZ, 128, this.worldObj.getWorldInfo().getDimension(), this);
+		TM3ModRegistry.proxy.spawnParticle(8, this.posX, this.posY, this.posZ, 128, this.worldObj.provider.dimensionId, this);
 	}
 	
 	@Override

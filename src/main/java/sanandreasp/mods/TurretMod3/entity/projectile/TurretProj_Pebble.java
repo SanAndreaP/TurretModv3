@@ -19,7 +19,7 @@ public class TurretProj_Pebble extends TurretProjectile {
 	
 	@Override
 	public String getHitSound() {
-		return "turretmod3.ricochet.bullet";
+		return "ricochet.bullet";
 	}
 	
 	@Override

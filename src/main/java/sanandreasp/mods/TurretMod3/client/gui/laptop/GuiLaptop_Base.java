@@ -3,6 +3,7 @@ package sanandreasp.mods.TurretMod3.client.gui.laptop;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.init.Items;
 import org.lwjgl.opengl.GL11;
 
 import sanandreasp.mods.TurretMod3.client.gui.GuiItemTab;
@@ -15,7 +16,6 @@ import sanandreasp.mods.TurretMod3.inventory.ContainerLaptop;
 import sanandreasp.mods.TurretMod3.packet.PacketRecvLaptopGUICng;
 import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
 import sanandreasp.mods.TurretMod3.tileentity.TileEntityLaptop;
-import sanandreasp.mods.managers.SAP_LanguageManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -30,7 +30,6 @@ import net.minecraft.util.StatCollector;
 public class GuiLaptop_Base extends GuiContainer {
 	protected TileEntityLaptop laptop;
 	protected int site = 1;
-	protected static SAP_LanguageManager langman = TM3ModRegistry.manHelper.getLangMan();
     protected GuiButton programTurret;
     
     protected GuiButton tabGeneral;
@@ -54,29 +53,29 @@ public class GuiLaptop_Base extends GuiContainer {
 	public void initGui() {
 		super.initGui();
 		
-		programTurret = new GuiItemTab(buttonList2.size(), this.guiLeft - 23, this.guiTop + this.ySize - 32, new ItemStack(TM3ModRegistry.tcu), langman.getTranslated("turretmod3.gui.laptop.btnprog"), false);
+		programTurret = new GuiItemTab(buttonList2.size(), this.guiLeft - 23, this.guiTop + this.ySize - 32, new ItemStack(TM3ModRegistry.tcu), StatCollector.translateToLocal("gui.laptop.btnprog"), false);
 		buttonList2.add(programTurret);
-        tabGeneral = new GuiItemTab(buttonList2.size(), this.guiLeft - 23, this.guiTop + 10, new ItemStack(Item.redstone), langman.getTranslated("turretmod3.gui.laptop.btngenrl"), false);
+        tabGeneral = new GuiItemTab(buttonList2.size(), this.guiLeft - 23, this.guiTop + 10, new ItemStack(Items.redstone), StatCollector.translateToLocal("gui.laptop.btngenrl"), false);
         buttonList2.add(tabGeneral);
-        tabTargets = new GuiItemTab(buttonList2.size(), this.guiLeft - 23, this.guiTop + 36, new ItemStack(Item.swordDiamond), langman.getTranslated("turretmod3.gui.tcu.btntarg"), false);
+        tabTargets = new GuiItemTab(buttonList2.size(), this.guiLeft - 23, this.guiTop + 36, new ItemStack(Items.diamond_sword), StatCollector.translateToLocal("gui.tcu.btntarg"), false);
         buttonList2.add(tabTargets);
-        tabUpgrades = new GuiItemTab(buttonList2.size(), this.guiLeft - 23, this.guiTop + 62, new ItemStack(Item.saddle), langman.getTranslated("turretmod3.gui.tinfo.btnupgd"), false);
+        tabUpgrades = new GuiItemTab(buttonList2.size(), this.guiLeft - 23, this.guiTop + 62, new ItemStack(Items.saddle), StatCollector.translateToLocal("gui.tinfo.btnupgd"), false);
         buttonList2.add(tabUpgrades);
-        tabMisc = new GuiItemTab(buttonList2.size(), this.guiLeft - 23, this.guiTop + 88, new ItemStack(Item.sign), langman.getTranslated("turretmod3.gui.tcu.misc"), false);
+        tabMisc = new GuiItemTab(buttonList2.size(), this.guiLeft - 23, this.guiTop + 88, new ItemStack(Items.sign), StatCollector.translateToLocal("gui.tcu.misc"), false);
         buttonList2.add(tabMisc);
 	}
 	
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
 		RenderHelper.disableStandardItemLighting();
-        this.fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 48, this.ySize - 92, 0x808080);
+        this.fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 48, this.ySize - 92, 0x808080);
         RenderHelper.enableGUIStandardItemLighting();
 	}
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.func_110434_K().func_110577_a(TM3ModRegistry.TEX_GUILAP + "page_" + Integer.toString(site) + ".png");
+        this.mc.getTextureManager().bindTexture(TM3ModRegistry.TEX_GUILAP + "page_" + Integer.toString(site) + ".png");
         int k = (this.width - this.xSize) / 2;
         int l = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
@@ -106,7 +105,7 @@ public class GuiLaptop_Base extends GuiContainer {
                 if (guibutton.mousePressed(this.mc, par1, par2))
                 {
                     this.selectedButton = guibutton;
-                    this.mc.sndManager.playSoundFX("random.click", 1.0F, 1.0F);
+                    this.mc.getSoundHandler().playSoundFX("random.click", 1.0F, 1.0F);
                     this.actionPerformed(guibutton);
                 }
             }
@@ -132,7 +131,6 @@ public class GuiLaptop_Base extends GuiContainer {
 	
 	@Override
 	protected void actionPerformed(GuiButton par1GuiButton) {
-		GuiLaptop_Base gui = null;
 		if (par1GuiButton.id == tabGeneral.id) {
 			PacketRecvLaptopGUICng.sendServer(3, this.laptop);
 		} else if (par1GuiButton.id == tabTargets.id) {

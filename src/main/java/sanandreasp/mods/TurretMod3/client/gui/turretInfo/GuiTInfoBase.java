@@ -1,9 +1,10 @@
 package sanandreasp.mods.TurretMod3.client.gui.turretInfo;
 
+import net.minecraft.init.Items;
+import net.minecraft.util.StatCollector;
 import sanandreasp.mods.TurretMod3.client.gui.GuiItemTab;
 import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
 import sanandreasp.mods.TurretMod3.registry.TurretInfo.TurretInfo;
-import sanandreasp.mods.managers.SAP_LanguageManager;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -35,8 +36,6 @@ public class GuiTInfoBase extends GuiScreen {
 	protected Class turretCls;
 	protected TurretInfo turretInf;
 	
-	protected static SAP_LanguageManager langman = TM3ModRegistry.manHelper.getLangMan();
-	
 	@Override
 	public void initGui() {
 		this.buttonList.clear();
@@ -49,13 +48,13 @@ public class GuiTInfoBase extends GuiScreen {
 		turretCls = TurretInfo.getTurretClass(site);
         turretInf = TurretInfo.getTurretInfo(turretCls);
         
-        tabTurretDesc = new GuiItemTab(buttonList.size(), this.guiLeft + this.xSize-3, this.guiTop + 10, new ItemStack(Item.book), langman.getTranslated("turretmod3.gui.tinfo.btndesc"), true);
+        tabTurretDesc = new GuiItemTab(buttonList.size(), this.guiLeft + this.xSize-3, this.guiTop + 10, new ItemStack(Items.book), StatCollector.translateToLocal("gui.tinfo.btndesc"), true);
         buttonList.add(tabTurretDesc);
-        tabTurretValues = new GuiItemTab(buttonList.size(), this.guiLeft + this.xSize-3, this.guiTop + 36, new ItemStack(Item.sign), langman.getTranslated("turretmod3.gui.tinfo.btnbval"), true);
+        tabTurretValues = new GuiItemTab(buttonList.size(), this.guiLeft + this.xSize-3, this.guiTop + 36, new ItemStack(Items.sign), StatCollector.translateToLocal("gui.tinfo.btnbval"), true);
         buttonList.add(tabTurretValues);
-        tabTurretItems = new GuiItemTab(buttonList.size(), this.guiLeft + this.xSize-3, this.guiTop + 62, new ItemStack(Item.arrow), langman.getTranslated("turretmod3.gui.tinfo.btnahit"), true);
+        tabTurretItems = new GuiItemTab(buttonList.size(), this.guiLeft + this.xSize-3, this.guiTop + 62, new ItemStack(Items.arrow), StatCollector.translateToLocal("gui.tinfo.btnahit"), true);
         buttonList.add(tabTurretItems);
-        tabTurretUpgrades = new GuiItemTab(buttonList.size(), this.guiLeft + this.xSize-3, this.guiTop + 88, new ItemStack(Item.enchantedBook), langman.getTranslated("turretmod3.gui.tinfo.btnupgd"), true);
+        tabTurretUpgrades = new GuiItemTab(buttonList.size(), this.guiLeft + this.xSize-3, this.guiTop + 88, new ItemStack(Items.enchanted_book), StatCollector.translateToLocal("gui.tinfo.btnupgd"), true);
         buttonList.add(tabTurretUpgrades);
         
         this.tabNavUp = new GuiTabNav(buttonList.size(), this.guiLeft-23, this.guiTop + 2, true);
@@ -84,10 +83,10 @@ public class GuiTInfoBase extends GuiScreen {
         for (int i = 0; i < this.leftTabs.length ;i++) {
         	GuiButton btn = this.leftTabs[i];
         	if (i < this.tabInd || i > this.tabInd + 6) {
-        		btn.drawButton = btn.enabled = false;
+        		btn.visible = btn.enabled = false;
         	} else {
         		btn.yPosition = this.guiTop + 15 + (i-tabInd)*26;
-        		btn.drawButton = true;
+        		btn.visible = true;
         		btn.enabled = i != this.site;
         	}
         }
@@ -139,7 +138,7 @@ public class GuiTInfoBase extends GuiScreen {
 	@Override
     protected void keyTyped(char par1, int par2)
     {
-        if (par2 == 1 || par2 == this.mc.gameSettings.keyBindInventory.keyCode)
+        if (par2 == 1 || par2 == this.mc.gameSettings.keyBindInventory.getKeyCode())
         {
             this.mc.thePlayer.closeScreen();
         }

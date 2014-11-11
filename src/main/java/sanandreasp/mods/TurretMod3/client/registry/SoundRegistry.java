@@ -17,14 +17,9 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.SoundManager;
-import net.minecraft.src.ModLoader;
 import net.minecraftforge.client.event.sound.SoundLoadEvent;
-import net.minecraftforge.event.ForgeSubscribe;
 
 public class SoundRegistry {
-	
-	@ForgeSubscribe
-	@SideOnly(Side.CLIENT)
     public void onSound(SoundLoadEvent event)
     {
         try
@@ -53,7 +48,6 @@ public class SoundRegistry {
         catch (Exception e)
         {
             System.err.println("Failed to register one or more sounds.");
-            e.printStackTrace();
         }
     }
 	
@@ -66,10 +60,6 @@ public class SoundRegistry {
 			}
 		}
     }
-	
-	private void addSound(SoundLoadEvent event, String path, String fileName, String name) throws Exception {
-		event.manager.soundPoolSounds.addSound(name+".ogg", TM3ModRegistry.class.getResource("/sanandreasp/mods/TurretMod3/"+path+fileName+".ogg"));
-	}
     
     private void registerStreaming(SoundManager manager, String name)
     {
@@ -77,7 +67,6 @@ public class SoundRegistry {
     	
     	if (soundFile.canRead() && soundFile.isFile()) {
     		Minecraft.getMinecraft().installResource("streaming/"+name+".ogg", soundFile);
-			FMLLog.log("TurretMod3", Level.INFO, "Sound Stream registered: %s", name);
 		} else {
 	    	InputStream is = TM3ModRegistry.class.getClassLoader().getResourceAsStream("sanandreasp/mods/TurretMod3/streaming/"+name+".ogg");
 	    	try {
@@ -101,10 +90,8 @@ public class SoundRegistry {
 	    	soundFile = new File(Minecraft.getMinecraftDir(), "/resources/streaming/"+name+".ogg");
 	    	
 	    	if (soundFile.canRead() && soundFile.isFile()) {
-	    		Minecraft.getMinecraft().installResource("streaming/"+name+".ogg", soundFile);
-				FMLLog.log("TurretMod3", Level.INFO, "Sound Stream registered: %s", name);
+	    		Minecraft.getMinecraft().installResource("streaming/"+name+".ogg", soundFile);7
 			} else {
-				FMLLog.log("TurretMod3", Level.WARNING, "Sound Stream failed to register: %s", name);
 			}
 		}
     }

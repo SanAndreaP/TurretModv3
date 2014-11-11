@@ -3,6 +3,7 @@ package sanandreasp.mods.TurretMod3.client.gui.TCU;
 import java.lang.ref.WeakReference;
 import java.util.Map;
 
+import net.minecraft.util.StatCollector;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
@@ -50,20 +51,20 @@ public class GuiTCUUpgrades extends GuiTCUBase {
         	this.initGui();
         }
 
-		this.mc.func_110434_K().func_110577_a(TM3ModRegistry.TEX_GUITCUDIR + "page_4.png");
+		this.mc.getTextureManager().bindTexture(TM3ModRegistry.TEX_GUITCUDIR + "page_4.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, xSize, ySize);
 
         String s = this.turret != null ? this.turret.tInfo.getTurretName() : "";
-        this.fontRenderer.drawString("\247a"+s, this.guiLeft + (this.xSize - this.fontRenderer.getStringWidth(s))/2, this.guiTop + 207, 0xFFFFFF);
+        this.fontRendererObj.drawString("\247a"+s, this.guiLeft + (this.xSize - this.fontRendererObj.getStringWidth(s))/2, this.guiTop + 207, 0xFFFFFF);
         
-        s = langman.getTranslated("turretmod3.gui.tcu.titUpgrades");
-        this.fontRenderer.drawString(s, this.guiLeft + 6, this.guiTop + 6, 0x808080);
+        s = StatCollector.translateToLocal("gui.tcu.titUpgrades");
+        this.fontRendererObj.drawString(s, this.guiLeft + 6, this.guiTop + 6, 0x808080);
         
         int scrollX = 163;
         int scrollY = 19 + (int)(164F * currScrollPos);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.mc.func_110434_K().func_110577_a(TM3ModRegistry.TEX_GUITCUDIR + "page_4.png");
+		this.mc.getTextureManager().bindTexture(TM3ModRegistry.TEX_GUITCUDIR + "page_4.png");
         drawTexturedModalRect(scrollX + this.guiLeft, scrollY + this.guiTop, 176,  this.upgrades.size() > 9 ? 0 : 6, 6, 6);
         
         for (int i = this.entryPos; i < 9 + entryPos && i < this.upgrades.size(); i++) {
@@ -84,7 +85,7 @@ public class GuiTCUUpgrades extends GuiTCUBase {
 	        	}
 	        	
 	        	String str = this.upgrades.get(i).getName();
-	        	this.fontRenderer.drawString(str, this.guiLeft + 26, icnY + 4, taken ? 0xAAFFAA : 0xFFFFFF);
+	        	this.fontRendererObj.drawString(str, this.guiLeft + 26, icnY + 4, taken ? 0xAAFFAA : 0xFFFFFF);
         	}
         }
         
@@ -124,8 +125,8 @@ public class GuiTCUUpgrades extends GuiTCUBase {
         GL11.glTranslatef(0.0F, 0.0F, 32.0F);
         this.zLevel = 200.0F;
         itemRenderer.zLevel = 200.0F;
-        itemRenderer.renderItemAndEffectIntoGUI(this.fontRenderer, this.mc.renderEngine, par1ItemStack, par2, par3);
-        itemRenderer.renderItemOverlayIntoGUI(this.fontRenderer, this.mc.renderEngine, par1ItemStack, par2, par3);
+        itemRenderer.renderItemAndEffectIntoGUI(this.fontRendererObj, this.mc.renderEngine, par1ItemStack, par2, par3);
+        itemRenderer.renderItemOverlayIntoGUI(this.fontRendererObj, this.mc.renderEngine, par1ItemStack, par2, par3);
         this.zLevel = 0.0F;
         itemRenderer.zLevel = 0.0F;
     }

@@ -16,8 +16,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 import net.minecraft.util.StringTranslate;
 
-import static sanandreasp.mods.managers.CommonUsedStuff.CUS;
-
 public abstract class TurretInfo {
 
 	protected static Map<Class, TurretInfo> turrets = Maps.newHashMap();

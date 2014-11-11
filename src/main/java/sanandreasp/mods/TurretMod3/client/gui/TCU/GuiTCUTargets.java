@@ -10,15 +10,11 @@ import java.util.Map;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
-import cpw.mods.fml.common.network.PacketDispatcher;
-
 import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_Base;
 import sanandreasp.mods.TurretMod3.packet.PacketRecvTargetListSrv;
 import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
 import sanandreasp.mods.TurretMod3.registry.TurretTargetRegistry;
-import sanandreasp.mods.managers.SAP_LanguageManager;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.util.StatCollector;
 
 public class GuiTCUTargets extends GuiTCUBase {
@@ -40,7 +36,7 @@ public class GuiTCUTargets extends GuiTCUBase {
 	public void drawScreen(int par1, int par2, float par3) {
 		this.drawDefaultBackground();
 
-		this.mc.func_110434_K().func_110577_a(TM3ModRegistry.TEX_GUITCUDIR + "page_1.png");
+		this.mc.getTextureManager().bindTexture(TM3ModRegistry.TEX_GUITCUDIR + "page_1.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, xSize, ySize);
         
@@ -49,9 +45,9 @@ public class GuiTCUTargets extends GuiTCUBase {
         drawTexturedModalRect(scrollX + this.guiLeft, scrollY + this.guiTop, 176, 0, 6, 6);
         
         String tn = this.turret != null ? this.turret.tInfo.getTurretName() : "";
-        this.fontRenderer.drawString("\247a"+tn, this.guiLeft + (this.xSize - this.fontRenderer.getStringWidth(tn))/2, this.guiTop + 207, 0xFFFFFF);
+        this.fontRendererObj.drawString("\247a"+tn, this.guiLeft + (this.xSize - this.fontRendererObj.getStringWidth(tn))/2, this.guiTop + 207, 0xFFFFFF);
         
-        this.fontRenderer.drawString(langman.getTranslated("turretmod3.gui.tcu.titTargets"), this.guiLeft + 6, this.guiTop + 6, 0x808080);
+        this.fontRendererObj.drawString(StatCollector.translateToLocal("gui.tcu.titTargets"), this.guiLeft + 6, this.guiTop + 6, 0x808080);
 
 		for (int i = this.entryPos; i < 14 + this.entryPos; i++) {
 	        int x = this.guiLeft + 8, y = this.guiTop + 21 + 13*(i-this.entryPos);
@@ -62,13 +58,13 @@ public class GuiTCUTargets extends GuiTCUBase {
 				boolean hovering = par1 < x + 11 && par1 >= x && par2 < y + 11 && par2 >= y;
 				if (s.startsWith("\n")) {
 					title = true;
-					s = "\247e\247o" + langman.getTranslated(s.replaceAll("\n", "")) + "\247r";
+					s = "\247e\247o" + StatCollector.translateToLocal(s.replaceAll("\n", "")) + "\247r";
 					this.drawRect(x, y-1, x + this.xSize - 27, y, 0xFFFFFF66);
 					this.drawRect(x, y + 11, x + this.xSize - 27, y + 12, 0xFFFFFF66);
 				}
 			    if (!title) {
 			        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-					this.mc.func_110434_K().func_110577_a(TM3ModRegistry.TEX_GUITCUDIR + "page_1.png");
+					this.mc.getTextureManager().bindTexture(TM3ModRegistry.TEX_GUITCUDIR + "page_1.png");
 			    	if (!checked) {
 			    		if (hovering)
 			    			drawTexturedModalRect(x, y, 176, 14, 11, 11);
@@ -82,18 +78,18 @@ public class GuiTCUTargets extends GuiTCUBase {
 			    	}
 			    } else {
 			        GL11.glColor4f(1.0F, 1.0F, 0.0F, 1.0F);
-					this.mc.func_110434_K().func_110577_a(TM3ModRegistry.TEX_GUITCUDIR + "page_1.png");
+					this.mc.getTextureManager().bindTexture(TM3ModRegistry.TEX_GUITCUDIR + "page_1.png");
 		    		if (hovering)
 		    			drawTexturedModalRect(x, y, 176, 14, 11, 11);
 		    		else
 		    			drawTexturedModalRect(x, y, 176, 47, 11, 11);
 			    }
-				String name = langman.getTranslated("entity."+s+".name");
+				String name = StatCollector.translateToLocal("entity."+s+".name");
 				name = name.length() > 0 && !title && !name.contains("entity.") ? name : s;
-				this.fontRenderer.drawString(name.contains(".") ? name.substring(name.lastIndexOf('.')+1) : name, x + (title ? 25 : 15), y + 2, 0xFFFFFF);
+				this.fontRendererObj.drawString(name.contains(".") ? name.substring(name.lastIndexOf('.')+1) : name, x + (title ? 25 : 15), y + 2, 0xFFFFFF);
 			} else {
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-				this.mc.func_110434_K().func_110577_a(TM3ModRegistry.TEX_GUITCUDIR + "page_1.png");
+				this.mc.getTextureManager().bindTexture(TM3ModRegistry.TEX_GUITCUDIR + "page_1.png");
 		        drawTexturedModalRect(x, y, 148, 192, 11, 11);
 			}
 		}
@@ -201,7 +197,7 @@ public class GuiTCUTargets extends GuiTCUBase {
 	
     protected void keyTyped(char par1, int par2)
     {
-        if (par2 == 1 || par2 == this.mc.gameSettings.keyBindInventory.keyCode)
+        if (par2 == 1 || par2 == this.mc.gameSettings.keyBindInventory.getKeyCode())
         {
         	PacketRecvTargetListSrv.sendServer(turret);
             this.mc.thePlayer.closeScreen();

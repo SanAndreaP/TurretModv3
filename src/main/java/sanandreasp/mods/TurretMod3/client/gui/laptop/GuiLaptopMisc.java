@@ -10,20 +10,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.bouncycastle.util.test.NumberParsing;
+import net.minecraft.util.StatCollector;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
 import com.google.common.collect.Maps;
-
-import cpw.mods.fml.common.network.PacketDispatcher;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.entity.EntityList;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.packet.Packet250CustomPayload;
 import sanandreasp.mods.TurretMod3.client.gui.GuiTurretButton;
 import sanandreasp.mods.TurretMod3.item.ItemTurret;
 import sanandreasp.mods.TurretMod3.packet.PacketHandlerCommon;
@@ -47,9 +44,9 @@ public class GuiLaptopMisc extends GuiLaptop_Base {
 		super.initGui();
 		this.tabMisc.enabled = false;
 		
-		this.frequency = new GuiTextField(this.fontRenderer, this.guiLeft + (this.xSize-150)/2, this.guiTop + 40, 150, 10);
+		this.frequency = new GuiTextField(this.fontRendererObj, this.guiLeft + (this.xSize-150)/2, this.guiTop + 40, 150, 10);
 		this.frequency.setText("0");
-		this.customName = new GuiTextField(this.fontRenderer, this.guiLeft + (this.xSize-150)/2, this.guiTop + 70, 150, 10);
+		this.customName = new GuiTextField(this.fontRendererObj, this.guiLeft + (this.xSize-150)/2, this.guiTop + 70, 150, 10);
 		this.customName.setText("");
 	}
 	
@@ -62,12 +59,12 @@ public class GuiLaptopMisc extends GuiLaptop_Base {
 	public void drawScreen(int par1, int par2, float par3) {
 		super.drawScreen(par1, par2, par3);
 		
-        this.fontRenderer.drawString(langman.getTranslated("turretmod3.gui.laptop.titMisc"), this.guiLeft + 6, this.guiTop + 6, 0x808080);
+        this.fontRendererObj.drawString(StatCollector.translateToLocal("gui.laptop.titMisc"), this.guiLeft + 6, this.guiTop + 6, 0x808080);
 		
-		String s = langman.getTranslated("turretmod3.gui.tcu.frequency");
-		this.fontRenderer.drawString(s, this.guiLeft + 40, this.guiTop + 30, 0x606060);
-		s = langman.getTranslated("turretmod3.gui.laptop.customName");
-		this.fontRenderer.drawString(s, this.guiLeft + 40, this.guiTop + 60, 0x606060);
+		String s = StatCollector.translateToLocal("gui.tcu.frequency");
+		this.fontRendererObj.drawString(s, this.guiLeft + 40, this.guiTop + 30, 0x606060);
+		s = StatCollector.translateToLocal("gui.laptop.customName");
+		this.fontRendererObj.drawString(s, this.guiLeft + 40, this.guiTop + 60, 0x606060);
 		
 		this.frequency.drawTextBox();
 		this.customName.drawTextBox();
@@ -99,7 +96,7 @@ public class GuiLaptopMisc extends GuiLaptop_Base {
     		this.frequency.setFocused(false);
     		this.customName.setFocused(false);
     	}
-    	else if ((par2 == 1 || par2 == this.mc.gameSettings.keyBindInventory.keyCode) && !this.frequency.isFocused() && !this.customName.isFocused()) {
+    	else if ((par2 == 1 || par2 == this.mc.gameSettings.keyBindInventory.getKeyCode()) && !this.frequency.isFocused() && !this.customName.isFocused()) {
     		this.mc.thePlayer.closeScreen();
     	}
     }

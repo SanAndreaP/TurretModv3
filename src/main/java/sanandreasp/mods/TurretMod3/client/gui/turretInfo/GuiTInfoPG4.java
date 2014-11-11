@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
 
+import net.minecraft.util.StatCollector;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
@@ -66,17 +67,17 @@ public class GuiTInfoPG4 extends GuiTInfoBase {
 	public void drawScreen(int par1, int par2, float par3) {
         this.drawDefaultBackground();
 
-		this.mc.func_110434_K().func_110577_a(TM3ModRegistry.TEX_GUIINFO + "page_4.png");
+		this.mc.getTextureManager().bindTexture(TM3ModRegistry.TEX_GUIINFO + "page_4.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, xSize, ySize);
         
-        String str = langman.getTranslated("turretmod3.gui.tinfo.titpg4");
-        this.fontRenderer.drawString(str, this.guiLeft + (this.xSize - this.fontRenderer.getStringWidth(str))/2, this.guiTop + 6, 0x808080);
+        String str = StatCollector.translateToLocal("gui.tinfo.titpg4");
+        this.fontRendererObj.drawString(str, this.guiLeft + (this.xSize - this.fontRendererObj.getStringWidth(str))/2, this.guiTop + 6, 0x808080);
         
         str = this.turretInf.getTurretName();
-        this.fontRenderer.drawString(str, this.guiLeft + (this.xSize - this.fontRenderer.getStringWidth(str))/2, this.guiTop + 21, 0x00FF00);
+        this.fontRendererObj.drawString(str, this.guiLeft + (this.xSize - this.fontRendererObj.getStringWidth(str))/2, this.guiTop + 21, 0x00FF00);
 
-		this.mc.func_110434_K().func_110577_a(TM3ModRegistry.TEX_GUIINFO + "page_4.png");
+		this.mc.getTextureManager().bindTexture(TM3ModRegistry.TEX_GUIINFO + "page_4.png");
         int scrollX = 163;
         int scrollY = 49 + (int)(69F * currScrollPos);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -96,7 +97,7 @@ public class GuiTInfoPG4 extends GuiTInfoBase {
 	        	if (this.upgrades.get(i).getEnchantment() != null) renderedItem.addEnchantment(this.upgrades.get(i).getEnchantment(), 1);
 	        	this.drawItemStack(renderedItem, icnX, icnY);
 	        	RenderHelper.disableStandardItemLighting();
-	        	this.fontRenderer.drawString(this.upgrades.get(i).getName(), this.guiLeft + 26, this.guiTop + 54 + (i-entryPos)*19, 0xFFFFFF);
+	        	this.fontRendererObj.drawString(this.upgrades.get(i).getName(), this.guiLeft + 26, this.guiTop + 54 + (i-entryPos)*19, 0xFFFFFF);
 	        	
 	        	if (par1 >= this.guiLeft + 7 && par1 < this.guiLeft + 159 && par2 >= this.guiTop + 49 + (i-entryPos)*19 && par2 < this.guiTop + 67 + (i-entryPos)*19) {
 	        		this.drawRect(this.guiLeft + 7, this.guiTop + 49 + (i-entryPos)*19, this.guiLeft + 159, this.guiTop + 67 + (i-entryPos)*19, 0x3000A0FF);
@@ -108,7 +109,7 @@ public class GuiTInfoPG4 extends GuiTInfoBase {
         }
         
         if (hover < 0) {
-    		this.customFR.drawSplitString(langman.getTranslated("turretmod3.gui.tinfo.hoverPG4"), this.guiLeft + 11, this.guiTop + 131, 154, 0x808080);
+    		this.customFR.drawSplitString(StatCollector.translateToLocal("gui.tinfo.hoverPG4"), this.guiLeft + 11, this.guiTop + 131, 154, 0x808080);
         }
         
         boolean var4 = Mouse.isButtonDown(0);
@@ -153,8 +154,8 @@ public class GuiTInfoPG4 extends GuiTInfoBase {
         GL11.glTranslatef(0.0F, 0.0F, 32.0F);
         this.zLevel = 200.0F;
         itemRenderer.zLevel = 200.0F;
-        itemRenderer.renderItemAndEffectIntoGUI(this.fontRenderer, this.mc.renderEngine, par1ItemStack, par2, par3);
-        itemRenderer.renderItemOverlayIntoGUI(this.fontRenderer, this.mc.renderEngine, par1ItemStack, par2, par3);
+        itemRenderer.renderItemAndEffectIntoGUI(this.fontRendererObj, this.mc.renderEngine, par1ItemStack, par2, par3);
+        itemRenderer.renderItemOverlayIntoGUI(this.fontRendererObj, this.mc.renderEngine, par1ItemStack, par2, par3);
         this.zLevel = 0.0F;
         itemRenderer.zLevel = 0.0F;
     }
@@ -187,7 +188,7 @@ public class GuiTInfoPG4 extends GuiTInfoBase {
         GL11.glDisable(GL11.GL_DEPTH_TEST);
         List<String> var4 = new ArrayList<String>();
         
-    	String s[] = this.langman.getTranslated("turretmod3.gui.tinfo.upgToolTip").split("\\|");
+    	String s[] = StatCollector.translateToLocal("gui.tinfo.upgToolTip").split("\\|");
     	
         var4.add(s[1] + ": " + itemName);
         if (ench.length() > 0) var4.add("  " + ench);
@@ -201,7 +202,7 @@ public class GuiTInfoPG4 extends GuiTInfoBase {
 
             for (var6 = 0; var6 < var4.size(); ++var6)
             {
-                var7 = this.fontRenderer.getStringWidth(var4.get(var6));
+                var7 = this.fontRendererObj.getStringWidth(var4.get(var6));
 
                 if (var7 > var5)
                 {
@@ -238,13 +239,13 @@ public class GuiTInfoPG4 extends GuiTInfoBase {
             this.drawGradientRect(var6 - 3, var7 - 3, var6 + var5 + 3, var7 - 3 + 1, var11, var11);
             this.drawGradientRect(var6 - 3, var7 + var9 + 2, var6 + var5 + 3, var7 + var9 + 3, var12, var12);
 
-            this.fontRenderer.drawStringWithShadow(var4.get(0), var6, var7, 0xFFFF33);
-            if (ench.length() > 0) this.fontRenderer.drawStringWithShadow(var4.get(1), var6, var7+=10, 0xAAAA33);
+            this.fontRendererObj.drawStringWithShadow(var4.get(0), var6, var7, 0xFFFF33);
+            if (ench.length() > 0) this.fontRendererObj.drawStringWithShadow(var4.get(1), var6, var7+=10, 0xAAAA33);
             if (required.length() > 0) {
             	if (ench.length() > 0)
-            		this.fontRenderer.drawStringWithShadow(var4.get(2), var6, var7+=10, 0x33FFFF);
+            		this.fontRendererObj.drawStringWithShadow(var4.get(2), var6, var7+=10, 0x33FFFF);
             	else
-            		this.fontRenderer.drawStringWithShadow(var4.get(1), var6, var7+=10, 0x33FFFF);
+            		this.fontRendererObj.drawStringWithShadow(var4.get(1), var6, var7+=10, 0x33FFFF);
             }
 
             this.zLevel = 0.0F;

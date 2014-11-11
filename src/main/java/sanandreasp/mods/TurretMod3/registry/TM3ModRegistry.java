@@ -6,11 +6,10 @@ import java.util.HashMap;
 import java.util.logging.Level;
 
 import javax.management.ReflectionException;
-import javax.swing.JDialog;
-import javax.swing.JOptionPane;
 
 import com.google.common.collect.Maps;
 
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.crash.CrashReport;
@@ -22,13 +21,10 @@ import net.minecraft.util.ReportedException;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Configuration;
 import sanandreasp.mods.TurretMod3.CreativeTabTurrets;
 import sanandreasp.mods.TurretMod3.block.BlockLaptop;
 import sanandreasp.mods.TurretMod3.block.ItemBlockLaptop;
-import sanandreasp.mods.TurretMod3.client.packet.PacketHandlerClient;
-import sanandreasp.mods.TurretMod3.client.registry.KeyBindHandler;
-import sanandreasp.mods.TurretMod3.client.registry.SoundRegistry;
-import sanandreasp.mods.TurretMod3.client.registry.TickHandlerClientRnd;
 import sanandreasp.mods.TurretMod3.command.CommandTurretMod;
 import sanandreasp.mods.TurretMod3.entity.EntityDismantleStorage;
 import sanandreasp.mods.TurretMod3.entity.EntityMobileBase;
@@ -107,40 +103,22 @@ import sanandreasp.mods.TurretMod3.registry.TurretUpgrades.TUpgStopMove;
 import sanandreasp.mods.TurretMod3.registry.TurretUpgrades.TUpgTurretCollect;
 import sanandreasp.mods.TurretMod3.registry.TurretUpgrades.TurretUpgrades;
 import sanandreasp.mods.TurretMod3.tileentity.TileEntityLaptop;
-import sanandreasp.mods.managers.SAP_ConfigManagerII;
-import sanandreasp.mods.managers.SAP_LanguageManager;
-import sanandreasp.mods.managers.SAP_UpdateManager;
-import sanandreasp.mods.managers.SAP_ConfigManagerII.DataTypes;
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.PostInit;
-import cpw.mods.fml.common.Mod.PreInit;
-import cpw.mods.fml.common.Mod.ServerStarting;
+import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.network.NetworkMod.SidedPacketHandler;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
-import cpw.mods.fml.common.registry.TickRegistry;
-import cpw.mods.fml.relauncher.FMLRelauncher;
 import cpw.mods.fml.relauncher.Side;
 
 @Mod(modid=TM3ModRegistry.modID, name="Turret Mod 3", version="3.0.1", dependencies="after:sanandreasp.mods.managers.SAP_ManagerRegistry")
-@NetworkMod(clientSideRequired=true, serverSideRequired=false,
-	clientPacketHandlerSpec = @SidedPacketHandler(channels={"TurretMod3"}, packetHandler=PacketHandlerClient.class),
-	serverPacketHandlerSpec = @SidedPacketHandler(channels={"TurretMod3"}, packetHandler=PacketHandlerCommon.class))
 public class TM3ModRegistry {
 	
 	/** modID field for the @Mod annotation and other references (for example the FML logging system) */
@@ -154,27 +132,24 @@ public class TM3ModRegistry {
 	@Instance(TM3ModRegistry.modID)
 	public static TM3ModRegistry instance;
 	
-	/** The field for the ManagerPackHelper instance. */
-	public static ManagerPackHelper manHelper = new ManagerPackHelper();
-	
 	// Texture fields
-	public static final String TEX_TURRETDIR	= "/mods/TurretMod3/textures/entities/turrets/";
-	public static final String TEX_MOBILEBASE	= "/mods/TurretMod3/textures/entities/mobileBase.png";
-	public static final String TEX_SHIELD		= "/mods/TurretMod3/textures/entities/shield.png";
-	public static final String TEX_GUITCUDIR	= "/mods/TurretMod3/textures/guis/tcu_gui/";
-	public static final String TEX_GUILAP		= "/mods/TurretMod3/textures/guis/laptop/";
-	public static final String TEX_BULLET		= "/mods/TurretMod3/textures/entities/bullet.png";
-	public static final String TEX_LASER		= "/mods/TurretMod3/textures/entities/laser.png";
-	public static final String TEX_PLASMA		= "/mods/TurretMod3/textures/entities/plasma.png";
-	public static final String TEX_ROCKET		= "/mods/TurretMod3/textures/entities/rocket.png";
-	public static final String TEX_SHARD		= "/mods/TurretMod3/textures/entities/shard.png";
-	public static final String TEX_GUIINFO		= "/mods/TurretMod3/textures/guis/turretinfo_gui/";
-	public static final String TEX_GUIBUTTONS	= "/mods/TurretMod3/textures/guis/guis_buttons.png";
-	public static final String TEX_TURRETCAM	= "/mods/TurretMod3/textures/guis/turretCam.png";
-	public static final String TEX_HEALBEAM		= "/mods/TurretMod3/textures/entities/healBeam.png";
-	public static final String TEX_WHITELAP		= "/mods/TurretMod3/textures/blocks/laptopWhite.png";
-	public static final String TEX_BLACKLAP		= "/mods/TurretMod3/textures/blocks/laptopBlack.png";
-	public static final String TEX_LAPGLOW		= "/mods/TurretMod3/textures/blocks/laptopGlow";
+	public static final String TEX_TURRETDIR	= "turretmod3:textures/entities/turrets/";
+	public static final String TEX_MOBILEBASE	= "turretmod3:textures/entities/mobileBase.png";
+	public static final String TEX_SHIELD		= "turretmod3:textures/entities/shield.png";
+	public static final String TEX_GUITCUDIR	= "turretmod3:textures/guis/tcu_gui/";
+	public static final String TEX_GUILAP		= "turretmod3:textures/guis/laptop/";
+	public static final String TEX_BULLET		= "turretmod3:textures/entities/bullet.png";
+	public static final String TEX_LASER		= "turretmod3:textures/entities/laser.png";
+	public static final String TEX_PLASMA		= "turretmod3:textures/entities/plasma.png";
+	public static final String TEX_ROCKET		= "turretmod3:textures/entities/rocket.png";
+	public static final String TEX_SHARD		= "turretmod3:textures/entities/shard.png";
+	public static final String TEX_GUIINFO		= "turretmod3:textures/guis/turretinfo_gui/";
+	public static final String TEX_GUIBUTTONS	= "turretmod3:textures/guis/guis_buttons.png";
+	public static final String TEX_TURRETCAM	= "turretmod3:textures/guis/turretCam.png";
+	public static final String TEX_HEALBEAM		= "turretmod3:textures/entities/healBeam.png";
+	public static final String TEX_WHITELAP		= "turretmod3:textures/blocks/laptopWhite.png";
+	public static final String TEX_BLACKLAP		= "turretmod3:textures/blocks/laptopBlack.png";
+	public static final String TEX_LAPGLOW		= "turretmod3:textures/blocks/laptopGlow";
 	
 	// Block fields
 	public static Block laptop;
@@ -198,66 +173,22 @@ public class TM3ModRegistry {
 	
 	public static boolean canCollectorGetXP = true;
 	
-	public static HashMap<String, Integer> blockIDs = Maps.newHashMap();
-	public static HashMap<String, Integer> itemIDs = Maps.newHashMap();
-	static {
-		blockIDs.put("Turret Laptop", 2000);
-		
-		itemIDs.put("Turret Item", 12000);
-		itemIDs.put("Ammo Items", 12001);
-		itemIDs.put("Turret Control Unit", 12002);
-		itemIDs.put("Turret Info Book", 12003);
-		itemIDs.put("Mobile Base", 12004);
-		itemIDs.put("Icon-Cache Item", 12005);
-		itemIDs.put("HT Turret Module", 12006);
-		itemIDs.put("FLAK Rockets", 12007);
-		itemIDs.put("Artillery Shell", 12008);
-		itemIDs.put("Turret Record 1", 12009);
-		itemIDs.put("Turret Record 2", 12010);
-	}
-	
-	@PreInit
+	@EventHandler
 	public void preInit(FMLPreInitializationEvent evt) {
-	// check if Manager Pack is installed
-		manHelper.checkManPack(evt.getModMetadata().name);
-	
-	// If Manager Pack is installed, then...
-		if (manHelper.loading) {
-			
-		// init managers
-			String[] ver = evt.getModMetadata().version.split("\\.");
-			manHelper.initMan(
-					new SAP_ConfigManagerII("Turret Mod 3", "TurretMod3.txt", "/sanandreasp/"),
-					new SAP_LanguageManager("/sanandreasp/TurretMod3", "1.0", "Turret Mod 3"),
-					new SAP_UpdateManager("Turret Mod 3", Integer.parseInt(ver[0]), Integer.parseInt(ver[1]), Integer.parseInt(ver[2]), "https://dl.dropboxusercontent.com/u/56920617/TurretMod_latest.txt", "http://www.minecraftforum.net/topic/562836-")
-			);
 			
 		// init Creative Tab
 			tabTurret = new CreativeTabTurrets("turretTab");
 			
 		// create helper instance for the Config Manager (CFGMan)
-			SAP_ConfigManagerII cfgman = manHelper.getCfgMan();
-			
-		// add Config Groups to CFGMan
-			cfgman.addGroup("Other Settings (Doubles)", DataTypes.DOUBLE);
-			cfgman.addGroup("Other Settings (Booleans)", DataTypes.BOOL);
+			Configuration cfgman = new Configuration(evt.getSuggestedConfigurationFile());
 			
 		// set pre-defined config values and value names to CFGMan
-			cfgman.addStaticItemIDs(itemIDs.keySet().toArray(new String[itemIDs.size()]), itemIDs.values().toArray(new Integer[itemIDs.size()]));
-			cfgman.addStaticBlockIDs(blockIDs.keySet().toArray(new String[blockIDs.size()]), blockIDs.values().toArray(new Integer[blockIDs.size()]));
 			cfgman.addAchievementIDs(AchievementPageTM.achieveNames, AchievementPageTM.achievementIDs);
 			cfgman.addProperty("Label Render Range", "Other Settings (Doubles)", (double) labelRenderRange);
 			cfgman.addProperty("can Collector collect XP orbs", "Other Settings (Booleans)", canCollectorGetXP);
 			
 		// load Config
-			cfgman.loadConfig();
-			
-			for (String propName : itemIDs.keySet()) {
-				itemIDs.put(propName, cfgman.getItemID(propName));
-			}
-			for (String propName : blockIDs.keySet()) {
-				blockIDs.put(propName, cfgman.getBlockID(propName));
-			}
+			cfgman.load();
 			
 			AchievementPageTM.achievementIDs = cfgman.getAchievementIDs(AchievementPageTM.achieveNames);
 			
@@ -267,14 +198,8 @@ public class TM3ModRegistry {
 			canCollectorGetXP = b;
 			
 		// register Forge Events and Handlers
-			if (FMLCommonHandler.instance().getSide().isClient()) {
-				MinecraftForge.EVENT_BUS.register(new SoundRegistry());
-				TickRegistry.registerTickHandler(new TickHandlerClientRnd(), Side.CLIENT);
-				KeyBindingRegistry.registerKeyBinding(new KeyBindHandler());
-			}
-			
-			MinecraftForge.EVENT_BUS.register(new ServerEvents());
-			TickRegistry.registerScheduledTickHandler(new SchedTickHandlerWorld(), Side.SERVER);
+        proxy.registerHandlers();
+
 			
 		// add Icon to the IconCache-Item
 			ItemIconCache.iconList.put(0, "TurretMod3:ach_piercing");
@@ -300,10 +225,6 @@ public class TM3ModRegistry {
 			
 		// register optional Main Menu, if MainMenuAPI is installed
 			registerMainMenu();
-	// ... else set the Enabled-State to false
-		} else {
-			Loader.instance().getIndexedModList().get(TM3ModRegistry.modID).setEnabledState(false);
-		}
 	}
 	
 	/** registers the dungeon loot **/
@@ -336,39 +257,39 @@ public class TM3ModRegistry {
 	
 	/** initializes the items **/
 	public void initItems() {
-		laptop			= new BlockLaptop(blockIDs.get("Turret Laptop"), Material.circuits)
+		laptop			= new BlockLaptop(Material.circuits)
 							.setLightOpacity(0)
 							.setHardness(1F)
-							.setUnlocalizedName("tm3.laptop")
+							.setBlockName("tm3.laptop")
 							.setCreativeTab(tabTurret);
 		
-		turretItem		= new ItemTurret(itemIDs.get("Turret Item") - 256)
+		turretItem		= new ItemTurret()
 							.setUnlocalizedName("tm3.turretItem")
 							.setCreativeTab(tabTurret);
-		ammoItems		= (ItemAmmunitions) new ItemAmmunitions(itemIDs.get("Ammo Items") - 256)
+		ammoItems		= new ItemAmmunitions()
 							.setUnlocalizedName("tm3.arrowPack")
 							.setCreativeTab(tabTurret);
-		tcu				= new ItemGeneral(itemIDs.get("Turret Control Unit") - 256, "TurretMod3:tcu")
+		tcu				= new ItemGeneral("TurretMod3:tcu")
 							.setUnlocalizedName("tm3.turretControlU")
 							.setCreativeTab(tabTurret);
-		tInfoBook		= new ItemTurretInfo(itemIDs.get("Turret Info Book") - 256)
+		tInfoBook		= new ItemTurretInfo()
 							.setUnlocalizedName("tm3.tInfoBook")
 							.setCreativeTab(tabTurret);
-		mobileBase		= new ItemMobileBase(itemIDs.get("Mobile Base") - 256)
+		mobileBase		= new ItemMobileBase()
 							.setUnlocalizedName("tm3.mobileBase")
 							.setCreativeTab(tabTurret);
-		iconCache		= new ItemIconCache(itemIDs.get("Icon-Cache Item") - 256)
+		iconCache		= new ItemIconCache()
 							.setUnlocalizedName("tm3.achieves");
-		httm			= new ItemGeneral(itemIDs.get("HT Turret Module") - 256, "TurretMod3:httm")
+		httm			= new ItemGeneral("TurretMod3:httm")
 							.setUnlocalizedName("tm3.htTurretMod")
 							.setCreativeTab(tabTurret);
-		rocket			= new ItemFLAKRockets(itemIDs.get("FLAK Rockets") - 256)
+		rocket			= new ItemFLAKRockets()
 							.setUnlocalizedName("tm3.flakRockets")
 							.setCreativeTab(tabTurret);
-		artilleryBall	= new ItemArtilleryShells(itemIDs.get("Artillery Shell") - 256)
+		artilleryBall	= new ItemArtilleryShells()
 							.setUnlocalizedName("tm3.artilleryBalls")
 							.setCreativeTab(tabTurret);
-		turretRec1		= new ItemTMDisc(itemIDs.get("Turret Record 1") - 256, "Tidal Force", "Kubbi")
+		turretRec1		= new ItemTMDisc("Tidal Force", "Kubbi")
 							.setUnlocalizedName("tm3.turretRec1")
 							.setCreativeTab(tabTurret);
 		
@@ -379,10 +300,8 @@ public class TM3ModRegistry {
 		GameRegistry.registerTileEntity(TileEntityLaptop.class, "tm3.laptopTE");
 	}
 
-	@Init
+	@EventHandler
 	public void init(FMLInitializationEvent evt) {
-		if (!manHelper.loading) return;
-		
 	// register Turret-Informations
 		TurretInfo.addTurretInfo(EntityTurret_T1Arrow.class, new TurretInfoT1Arrow());
 		TurretInfo.addTurretInfo(EntityTurret_T1Shotgun.class, new TurretInfoT1Shotgun());
@@ -457,7 +376,7 @@ public class TM3ModRegistry {
 		EntityRegistry.registerModEntity(EntityDismantleStorage.class, "DismStorage", modEntityID++, this, 128, 5, false);
 		
 	// register Handlers
-		NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
+		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 		
 	// initialize crafting recipes
 		CraftingRegistry.initCraftings();
@@ -466,19 +385,10 @@ public class TM3ModRegistry {
 		proxy.registerRenderInformation();
 	}
 	
-	@PostInit
+	@EventHandler
 	public void postInit(FMLPostInitializationEvent evt) {
-		if (!manHelper.loading) return;
-		
-	// create helper instance for the Language Manager (LangMan)
-		SAP_LanguageManager langman = manHelper.getLangMan();
-		
-	// register Localizations to LangMan and define default Localizations
-		AchievementPageTM.initTexts(langman);
 		
 		TurretTargetRegistry.initTargetReg();
-		
-		DefLangs.setupLang(langman);
 		
 		for (int i = 0; i < TurretInfo.getTurretCount(); i++) {
 			TurretInfo tinf = TurretInfo.getTurretInfo(TurretInfo.getTurretClass(i));
@@ -532,17 +442,12 @@ public class TM3ModRegistry {
 			langman.addLangProp("turretmod3.turret.amtp"+i+"t5a", itemNames[i]);
 		}
 		
-	// load Localizations from existing language files
-		langman.loadLangs();
-		
 	// register Achievement-Icon localization
 		LanguageRegistry.addName(iconCache, "Achievement-Icons");
 	}
 	
-	@ServerStarting
+	@EventHandler
 	public void startingServer(FMLServerStartingEvent evt) {
-		if (!manHelper.loading) return;
-	
 	// register commands
 		evt.registerServerCommand(new CommandTurretMod());
 	}

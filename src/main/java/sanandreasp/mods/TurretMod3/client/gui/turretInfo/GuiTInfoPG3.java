@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import net.minecraft.util.StatCollector;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
@@ -64,22 +65,22 @@ public class GuiTInfoPG3 extends GuiTInfoBase {
 	public void drawScreen(int par1, int par2, float par3) {
         this.drawDefaultBackground();
 
-		this.mc.func_110434_K().func_110577_a(TM3ModRegistry.TEX_GUIINFO + "page_3.png");
+		this.mc.getTextureManager().bindTexture(TM3ModRegistry.TEX_GUIINFO + "page_3.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, xSize, ySize);
         
-        String str = langman.getTranslated("turretmod3.gui.tinfo.titpg3");
-        this.fontRenderer.drawString(str, this.guiLeft + (this.xSize - this.fontRenderer.getStringWidth(str))/2, this.guiTop + 6, 0x808080);
+        String str = StatCollector.translateToLocal("gui.tinfo.titpg3");
+        this.fontRendererObj.drawString(str, this.guiLeft + (this.xSize - this.fontRendererObj.getStringWidth(str))/2, this.guiTop + 6, 0x808080);
         
         str = this.turretInf.getTurretName();
-        this.fontRenderer.drawString(str, this.guiLeft + (this.xSize - this.fontRenderer.getStringWidth(str))/2, this.guiTop + 21, 0x00FF00);
+        this.fontRendererObj.drawString(str, this.guiLeft + (this.xSize - this.fontRendererObj.getStringWidth(str))/2, this.guiTop + 21, 0x00FF00);
         
-        str = langman.getTranslated("turretmod3.gui.tinfo.ammoitems");
-        this.fontRenderer.drawString(str, this.guiLeft + 8, this.guiTop + 39, 0x808080);
-        str = langman.getTranslated("turretmod3.gui.tinfo.healitems");
-        this.fontRenderer.drawString(str, this.guiLeft + 8, this.guiTop + 130, 0x808080);
+        str = StatCollector.translateToLocal("gui.tinfo.ammoitems");
+        this.fontRendererObj.drawString(str, this.guiLeft + 8, this.guiTop + 39, 0x808080);
+        str = StatCollector.translateToLocal("gui.tinfo.healitems");
+        this.fontRendererObj.drawString(str, this.guiLeft + 8, this.guiTop + 130, 0x808080);
 
-		this.mc.func_110434_K().func_110577_a(TM3ModRegistry.TEX_GUIINFO + "page_3.png");
+		this.mc.getTextureManager().bindTexture(TM3ModRegistry.TEX_GUIINFO + "page_3.png");
         int scrollX = 163;
         int scrollYA = 49 + (int)(69F * currScrollPosA);
         int scrollYH = 140 + (int)(69F * currScrollPosH);
@@ -103,7 +104,7 @@ public class GuiTInfoPG3 extends GuiTInfoBase {
 	        	this.drawItemStack(renderedItem, icnX, icnY);
 	        	RenderHelper.disableStandardItemLighting();
 	        	str = this.ammoList.get(i).getDisplayName();
-	        	this.fontRenderer.drawString(str, 26 + this.guiLeft, icnY + 4, 0xFFFFFF);
+	        	this.fontRendererObj.drawString(str, 26 + this.guiLeft, icnY + 4, 0xFFFFFF);
 	        	if (par1 >= this.guiLeft + 7 && par1 < this.guiLeft + 159 && par2 >= this.guiTop + 49 + (i-entryPosA)*19 && par2 < this.guiTop + 67 + (i-entryPosA)*19) {
 	        		hoverID = i;
 	        		hoverX = icnX;
@@ -124,7 +125,7 @@ public class GuiTInfoPG3 extends GuiTInfoBase {
 	        	this.drawItemStack(renderedItem, icnX, icnY);
 	        	RenderHelper.disableStandardItemLighting();
 	        	str = this.healList.get(i).getDisplayName();
-	        	this.fontRenderer.drawString(str, 26 + this.guiLeft, icnY + 4, 0xFFFFFF);
+	        	this.fontRendererObj.drawString(str, 26 + this.guiLeft, icnY + 4, 0xFFFFFF);
 	        	if (par1 >= this.guiLeft + 7 && par1 < this.guiLeft + 159 && par2 >= this.guiTop + 140 + (i-entryPosH)*19 && par2 < this.guiTop + 158 + (i-entryPosH)*19) {
 	        		hoverID = i;
 	        		hoverX = icnX;
@@ -132,9 +133,9 @@ public class GuiTInfoPG3 extends GuiTInfoBase {
 	        		hoverType = 1;
 	        	}
 //	        	int hp = this.turretInf.func_110143_aJFromItem(this.healList.get(i));
-//	        	str = langman.getTranslated("turretmod3.gui.tinfo.healthpts");
+//	        	str = StatCollector.translateToLocal("gui.tinfo.healthpts");
 //	        	str = hp + " " + str.substring(hp > 1 ? str.lastIndexOf('|')+1 : 0, hp > 1 ? str.length() : str.lastIndexOf('|'));
-//	        	this.fontRenderer.drawString(str, 26 + this.guiLeft, icnY + 9, 0xE0E0E0);
+//	        	this.fontRendererObj.drawString(str, 26 + this.guiLeft, icnY + 9, 0xE0E0E0);
         	}
         }
         
@@ -209,7 +210,7 @@ public class GuiTInfoPG3 extends GuiTInfoBase {
         super.handleMouseInput();
         int var1 = Mouse.getEventDWheel();
         
-        ScaledResolution var13 = new ScaledResolution(this.mc.gameSettings, this.mc.displayWidth, this.mc.displayHeight);
+        ScaledResolution var13 = new ScaledResolution(this.mc, this.mc.displayWidth, this.mc.displayHeight);
         int var14 = var13.getScaledWidth();
         int var15 = var13.getScaledHeight();
         int mX = Mouse.getX() * var14 / this.mc.displayWidth;
@@ -246,8 +247,8 @@ public class GuiTInfoPG3 extends GuiTInfoBase {
         GL11.glTranslatef(0.0F, 0.0F, 32.0F);
         this.zLevel = 200.0F;
         itemRenderer.zLevel = 200.0F;
-        itemRenderer.renderItemAndEffectIntoGUI(this.fontRenderer, this.mc.renderEngine, par1ItemStack, par2, par3);
-        itemRenderer.renderItemOverlayIntoGUI(this.fontRenderer, this.mc.renderEngine, par1ItemStack, par2, par3);
+        itemRenderer.renderItemAndEffectIntoGUI(this.fontRendererObj, this.mc.renderEngine, par1ItemStack, par2, par3);
+        itemRenderer.renderItemOverlayIntoGUI(this.fontRendererObj, this.mc.renderEngine, par1ItemStack, par2, par3);
         this.zLevel = 0.0F;
         itemRenderer.zLevel = 0.0F;
     }
@@ -268,16 +269,16 @@ public class GuiTInfoPG3 extends GuiTInfoBase {
         
         if (aType.length() > 0) {
         	count = this.turretInf.getAmmoFromItem(is);
-	    	str = langman.getTranslated("turretmod3.gui.tinfo.projectiles");
+	    	str = StatCollector.translateToLocal("gui.tinfo.projectiles");
         } else {
         	count = this.turretInf.func_110143_aJFromItem(is);
-        	str = langman.getTranslated("turretmod3.gui.tinfo.healthpts");
+        	str = StatCollector.translateToLocal("gui.tinfo.healthpts");
         }
     	str = count + " " + str.substring(count > 1 ? str.lastIndexOf('|')+1 : 0, count > 1 ? str.length() : str.lastIndexOf('|'));
     	
         var4.add("\247b"+str);
         if (aType.length() > 0) {
-        	String s = this.langman.getTranslated("turretmod3.gui.tcu.infoType");
+        	String s = StatCollector.translateToLocal("gui.tcu.infoType");
         	var4.add("\2473" + s + ": " + aType);
         }
 
@@ -289,7 +290,7 @@ public class GuiTInfoPG3 extends GuiTInfoBase {
 
             for (var6 = 0; var6 < var4.size(); ++var6)
             {
-                var7 = this.fontRenderer.getStringWidth(var4.get(var6));
+                var7 = this.fontRendererObj.getStringWidth(var4.get(var6));
 
                 if (var7 > var5)
                 {
@@ -327,10 +328,10 @@ public class GuiTInfoPG3 extends GuiTInfoBase {
             this.drawGradientRect(var6 - 3, var7 + var9 + 2, var6 + var5 + 3, var7 + var9 + 3, var12, var12);
 
             for (String s : var4) {
-            	this.fontRenderer.drawStringWithShadow(s, var6, var7, 0xFFFFFF);
+            	this.fontRendererObj.drawStringWithShadow(s, var6, var7, 0xFFFFFF);
             	var7+=10;
             }
-//            if (aType.length() > 0) this.fontRenderer.drawStringWithShadow(var4.get(1), var6, var7+=10, 0xAAAAAA);
+//            if (aType.length() > 0) this.fontRendererObj.drawStringWithShadow(var4.get(1), var6, var7+=10, 0xAAAAAA);
 
             this.zLevel = 0.0F;
             itemRenderer.zLevel = 0.0F;

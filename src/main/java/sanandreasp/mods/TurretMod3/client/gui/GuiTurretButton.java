@@ -19,10 +19,10 @@ public class GuiTurretButton extends GuiButton {
 	@Override
     public void drawButton(Minecraft par1Minecraft, int par2, int par3)
     {
-        if (this.drawButton)
+        if (this.visible)
         {
         	GL11.glPushMatrix();
-        	par1Minecraft.func_110434_K().func_110577_a(TM3ModRegistry.TEX_GUIBUTTONS);
+        	par1Minecraft.getTextureManager().bindTexture(TM3ModRegistry.TEX_GUIBUTTONS);
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             this.field_82253_i = par2 >= this.xPosition && par3 >= this.yPosition && par2 < this.xPosition + this.width && par3 < this.yPosition + this.height;
             int var5 = this.getHoverState(this.field_82253_i);

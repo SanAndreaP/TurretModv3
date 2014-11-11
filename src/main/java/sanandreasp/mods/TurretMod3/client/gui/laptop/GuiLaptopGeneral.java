@@ -10,19 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.bouncycastle.util.test.NumberParsing;
+import net.minecraft.util.StatCollector;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
 import com.google.common.collect.Maps;
 
-import cpw.mods.fml.common.network.PacketDispatcher;
-
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.entity.EntityList;
 import net.minecraft.inventory.Container;
-import net.minecraft.network.packet.Packet250CustomPayload;
 import sanandreasp.mods.TurretMod3.client.gui.GuiTurretButton;
 import sanandreasp.mods.TurretMod3.packet.PacketHandlerCommon;
 import sanandreasp.mods.TurretMod3.packet.PacketRecvLaptopTargets;
@@ -51,22 +48,22 @@ public class GuiLaptopGeneral extends GuiLaptop_Base {
 		super.initGui();
 		this.tabGeneral.enabled = false;
 		
-		this.statLabel = new GuiTurretButton(buttonList2.size(), this.guiLeft + (this.xSize - 150) / 2, this.guiTop + 35, langman.getTranslated("turretmod3.gui.laptop.enableLabel").split("\\|")[0]);
+		this.statLabel = new GuiTurretButton(buttonList2.size(), this.guiLeft + (this.xSize - 150) / 2, this.guiTop + 35, StatCollector.translateToLocal("gui.laptop.enableLabel").split("\\|")[0]);
 		this.buttonList2.add(this.statLabel);
-		this.chngTCCrosshair = new GuiTurretButton(buttonList2.size(), this.guiLeft + (this.xSize - 150) / 2, this.guiTop + 48, langman.getTranslated("turretmod3.gui.laptop.chngCrosshair"));
+		this.chngTCCrosshair = new GuiTurretButton(buttonList2.size(), this.guiLeft + (this.xSize - 150) / 2, this.guiTop + 48, StatCollector.translateToLocal("gui.laptop.chngCrosshair"));
 		this.buttonList2.add(this.chngTCCrosshair);
-		this.activateTurret = new GuiTurretButton(buttonList2.size(), this.guiLeft + (this.xSize - 150) / 2, this.guiTop + 61, langman.getTranslated("turretmod3.gui.laptop.onTurret"));
+		this.activateTurret = new GuiTurretButton(buttonList2.size(), this.guiLeft + (this.xSize - 150) / 2, this.guiTop + 61, StatCollector.translateToLocal("gui.laptop.onTurret"));
 		this.buttonList2.add(this.activateTurret);
-		this.deactivateTurret = new GuiTurretButton(buttonList2.size(), this.guiLeft + (this.xSize - 150) / 2, this.guiTop + 74, langman.getTranslated("turretmod3.gui.laptop.offTurret"));
+		this.deactivateTurret = new GuiTurretButton(buttonList2.size(), this.guiLeft + (this.xSize - 150) / 2, this.guiTop + 74, StatCollector.translateToLocal("gui.laptop.offTurret"));
 		this.buttonList2.add(this.deactivateTurret);
-		this.resetTarget = new GuiTurretButton(buttonList2.size(), this.guiLeft + (this.xSize - 150) / 2, this.guiTop + 87, langman.getTranslated("turretmod3.gui.laptop.rstTargets"));
+		this.resetTarget = new GuiTurretButton(buttonList2.size(), this.guiLeft + (this.xSize - 150) / 2, this.guiTop + 87, StatCollector.translateToLocal("gui.laptop.rstTargets"));
 		this.buttonList2.add(this.resetTarget);
-		this.uniqueTargetOn = new GuiTurretButton(buttonList2.size(), this.guiLeft + (this.xSize - 150) / 2, this.guiTop + 100, langman.getTranslated("turretmod3.gui.laptop.uniqueTgt").split("\\|")[0]);
+		this.uniqueTargetOn = new GuiTurretButton(buttonList2.size(), this.guiLeft + (this.xSize - 150) / 2, this.guiTop + 100, StatCollector.translateToLocal("gui.laptop.uniqueTgt").split("\\|")[0]);
 		this.buttonList2.add(this.uniqueTargetOn);
-		this.uniqueTargetOff = new GuiTurretButton(buttonList2.size(), this.guiLeft + (this.xSize - 150) / 2, this.guiTop + 113, langman.getTranslated("turretmod3.gui.laptop.uniqueTgt").split("\\|")[1]);
+		this.uniqueTargetOff = new GuiTurretButton(buttonList2.size(), this.guiLeft + (this.xSize - 150) / 2, this.guiTop + 113, StatCollector.translateToLocal("gui.laptop.uniqueTgt").split("\\|")[1]);
 		this.buttonList2.add(this.uniqueTargetOff);
 		
-		this.frequency = new GuiTextField(this.fontRenderer, this.guiLeft + 100, this.guiTop + 20, 40, 10);
+		this.frequency = new GuiTextField(this.fontRendererObj, this.guiLeft + 100, this.guiTop + 20, 40, 10);
 		this.frequency.setText("-1");
 	}
 	
@@ -79,10 +76,10 @@ public class GuiLaptopGeneral extends GuiLaptop_Base {
 	public void drawScreen(int par1, int par2, float par3) {
 		super.drawScreen(par1, par2, par3);
 		
-        this.fontRenderer.drawString(langman.getTranslated("turretmod3.gui.laptop.titGeneral"), this.guiLeft + 6, this.guiTop + 6, 0x808080);
+        this.fontRendererObj.drawString(StatCollector.translateToLocal("gui.laptop.titGeneral"), this.guiLeft + 6, this.guiTop + 6, 0x808080);
 		
 		boolean statEnabled = TM3ModRegistry.proxy.getPlayerTM3Data(this.mc.thePlayer).getBoolean("renderLabels");
-		String split[] = langman.getTranslated("turretmod3.gui.laptop.enableLabel").split("\\|");
+		String split[] = StatCollector.translateToLocal("gui.laptop.enableLabel").split("\\|");
 		this.statLabel.displayString = (!statEnabled ? split[1] : split[2]) + " " + split[0];
 		
     	int icon = 0;
@@ -92,11 +89,11 @@ public class GuiLaptopGeneral extends GuiLaptop_Base {
     	int chY = this.guiTop + 48;
         this.drawRect(chX, chY, chX + 11, chY + 11, 0xFF000000);
     	GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.func_110434_K().func_110577_a(TM3ModRegistry.TEX_TURRETCAM);
+        this.mc.getTextureManager().bindTexture(TM3ModRegistry.TEX_TURRETCAM);
         this.drawTexturedModalRect(chX-2, chY-2, icon * 16, 40, 16, 16);
         
-		String s = langman.getTranslated("turretmod3.gui.tcu.frequency");
-		this.fontRenderer.drawString(s, this.guiLeft + 40, this.guiTop + 22, 0x606060);
+		String s = StatCollector.translateToLocal("gui.tcu.frequency");
+		this.fontRendererObj.drawString(s, this.guiLeft + 40, this.guiTop + 22, 0x606060);
 		
 		this.frequency.drawTextBox();
 	}
@@ -123,7 +120,7 @@ public class GuiLaptopGeneral extends GuiLaptop_Base {
     	if ((par2 == 28 || par2 == 1) && this.frequency.isFocused()) {
     		this.frequency.setFocused(false);
     	}
-    	else if ((par2 == 1 || par2 == this.mc.gameSettings.keyBindInventory.keyCode) && !this.frequency.isFocused()) {
+    	else if ((par2 == 1 || par2 == this.mc.gameSettings.keyBindInventory.getKeyCode()) && !this.frequency.isFocused()) {
     		this.mc.thePlayer.closeScreen();
     	}
     }
