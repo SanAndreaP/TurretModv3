@@ -5,11 +5,13 @@ import net.minecraft.client.model.ModelChest;
 import net.minecraft.client.renderer.entity.RenderArrow;
 import net.minecraft.client.renderer.entity.RenderFireball;
 import net.minecraft.client.renderer.entity.RenderSnowball;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.util.Icon;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.MinecraftForgeClient;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.common.MinecraftForge;
 import sanandreasp.mods.TurretMod3.client.model.Model_MobileBase;
 import sanandreasp.mods.TurretMod3.client.model.turret.Model_T1Arrow;
 import sanandreasp.mods.TurretMod3.client.model.turret.Model_T1Shotgun;
@@ -67,7 +69,7 @@ import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
 import sanandreasp.mods.TurretMod3.tileentity.TileEntityLaptop;
 
 public class ClientProxy extends CommonProxy {
-
+    public final static ResourceLocation ITEM_ICONS = new ResourceLocation("/gui/items.png");
 	@Override
 	public void registerRenderInformation() {
 		RenderingRegistry.registerEntityRenderingHandler(EntityTurret_T1Arrow.class, new RenderTurret_Base(new Model_T1Arrow(), 0.3F));
@@ -94,14 +96,21 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(TurretProj_Rocket.class, new RenderBullet(TM3ModRegistry.TEX_ROCKET, 0.09625F));
 		RenderingRegistry.registerEntityRenderingHandler(TurretProj_Flame.class, new RenderFlame());
 		RenderingRegistry.registerEntityRenderingHandler(TurretProj_Shard.class, new RenderBullet(TM3ModRegistry.TEX_SHARD, 0.06625F));
-		RenderingRegistry.registerEntityRenderingHandler(TurretProj_Explosive.class, new RenderSnowball(Item.fireballCharge));
-		RenderingRegistry.registerEntityRenderingHandler(TurretProj_Snowball.class, new RenderSnowball(Item.snowball));
+		RenderingRegistry.registerEntityRenderingHandler(TurretProj_Explosive.class, new RenderSnowball(Items.fire_charge));
+		RenderingRegistry.registerEntityRenderingHandler(TurretProj_Snowball.class, new RenderSnowball(Items.snowball));
 		
 		RenderingRegistry.registerEntityRenderingHandler(EntityMobileBase.class, new RenderMobileBase(new Model_MobileBase(), 0.3F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityDismantleStorage.class, new RenderDismantleStorage(new ModelChest(), 0.3F));
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityLaptop.class, new RenderLaptop());
         
-        MinecraftForgeClient.registerItemRenderer(TM3ModRegistry.laptop.blockID, new ItemRenderLaptop());
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(TM3ModRegistry.laptop), new ItemRenderLaptop());
 	}
+
+    @Override
+    public void registerHandlers() {
+        MinecraftForge.EVENT_BUS.register(new SoundRegistry());
+        TickRegistry.registerTickHandler(new TickHandlerClientRnd());
+        KeyBindingRegistry.registerKeyBinding(new KeyBindHandler());
+    }
 }

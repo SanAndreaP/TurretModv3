@@ -27,21 +27,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
-import net.minecraftforge.common.ISidedInventory;
 import cpw.mods.fml.common.network.IGuiHandler;
-import cpw.mods.fml.common.network.IPacketHandler;
-import cpw.mods.fml.common.network.PacketDispatcher;
-import cpw.mods.fml.common.network.Player;
 
 public class GuiHandler implements IGuiHandler {
-
-	public GuiHandler() {
-	}
 
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
@@ -68,7 +59,7 @@ public class GuiHandler implements IGuiHandler {
 			case 4: // FALL-THROUGH
 			case 6:
 				{
-					TileEntity te = world.getBlockTileEntity(x, y, z);
+					TileEntity te = world.getTileEntity(x, y, z);
 					if (te != null && te instanceof TileEntityLaptop) {
 						TileEntityLaptop telap = (TileEntityLaptop) te;
 						return new ContainerLaptop(telap, player.inventory);
@@ -77,7 +68,7 @@ public class GuiHandler implements IGuiHandler {
 				break;
 			case 5:
 				{
-					TileEntity te = world.getBlockTileEntity(x, y, z);
+					TileEntity te = world.getTileEntity(x, y, z);
 					if (te != null && te instanceof TileEntityLaptop) {
 						TileEntityLaptop telap = (TileEntityLaptop) te;
 						return new ContainerLaptopUpgrades(telap, player.inventory);
@@ -102,7 +93,7 @@ public class GuiHandler implements IGuiHandler {
 			case 4: // FALL-THROUGH
 			case 5: // FALL-THROUGH
 			case 6:
-				TileEntity te = world.getBlockTileEntity(x, y, z);
+				TileEntity te = world.getTileEntity(x, y, z);
 				if (te != null && te instanceof TileEntityLaptop) {
 					if (ID == 3)
 						return new GuiLaptopGeneral((ContainerLaptop)getServerGuiElement(ID, player, world, x, y, z), (TileEntityLaptop)te);

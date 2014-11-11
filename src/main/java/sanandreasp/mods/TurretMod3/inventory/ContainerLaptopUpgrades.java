@@ -16,7 +16,7 @@ public class ContainerLaptopUpgrades extends Container {
 	public ContainerLaptopUpgrades(IInventory block, IInventory player) {
 		this.invBlock = block;
 		this.invPlayer = player;
-		this.invBlock.openChest();
+		this.invBlock.openInventory();
         int var3 = 137;
         int var4;
         int var5;
@@ -77,17 +77,17 @@ public class ContainerLaptopUpgrades extends Container {
 	}
     
     public String getInvName() {
-    	return this.invBlock.getInvName();
+    	return this.invBlock.getInventoryName();
     }
     
     public String getPInvName() {
-    	return this.invBlock.getInvName();
+    	return this.invBlock.getInventoryName();
     }
 
     @Override
-    public void onCraftGuiClosed(EntityPlayer par1EntityPlayer) {
-        super.onCraftGuiClosed(par1EntityPlayer);
-        this.invBlock.closeChest();
+    public void onContainerClosed(EntityPlayer par1EntityPlayer) {
+        super.onContainerClosed(par1EntityPlayer);
+        this.invBlock.closeInventory();
     }
     
     @Override

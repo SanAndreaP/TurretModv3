@@ -9,8 +9,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.EntityPotion;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionHelper;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 
+import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
@@ -27,14 +28,19 @@ public class RenderFlame extends Render
         GL11.glTranslatef((float)par2, (float)par4, (float)par6);
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
         GL11.glScalef(0.5F, 0.5F, 0.5F);
-        this.loadTexture("/gui/items.png");
+        this.bindEntityTexture(par1Entity);
         Tessellator var10 = Tessellator.instance;
         this.func_77026_a(var10, ((TurretProj_Flame)par1Entity).isPurified() ? TM3ModRegistry.iconCache.getIconFromDamage(2) : TM3ModRegistry.iconCache.getIconFromDamage(1));
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
         GL11.glPopMatrix();
     }
 
-    private void func_77026_a(Tessellator par1Tessellator, Icon par2Icon)
+    @Override
+    protected ResourceLocation getEntityTexture(Entity p_110775_1_) {
+        return ClientProxy.ITEM_ICONS;
+    }
+
+    private void func_77026_a(Tessellator par1Tessellator, IIcon par2Icon)
     {
         float f = par2Icon.getMinU();
         float f1 = par2Icon.getMaxU();

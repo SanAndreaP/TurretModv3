@@ -48,7 +48,7 @@ public class PacketSendUpgrades extends PacketBase {
 	        NBTBase.writeNamedTag(nbt, o);
 	        
 			Packet250CustomPayload packetTrans = new Packet250CustomPayload(PacketHandlerCommon.getChannel(), b.toByteArray());
-			PacketDispatcher.sendPacketToPlayer(packetTrans, (Player) player);
+			PacketDispatcher.sendPacketToPlayer(packetTrans, player);
 			
 		} catch (IOException e) {
 			e.printStackTrace();

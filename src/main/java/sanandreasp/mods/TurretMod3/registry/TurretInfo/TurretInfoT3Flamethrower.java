@@ -2,9 +2,9 @@ package sanandreasp.mods.TurretMod3.registry.TurretInfo;
 
 import java.util.Map;
 
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class TurretInfoT3Flamethrower extends TurretInfo {
@@ -18,25 +18,25 @@ public class TurretInfoT3Flamethrower extends TurretInfo {
 		this.lowerRangeY = 5.5F;
 		this.upperRangeY = 5.5F;
 		this.rangeX = 8.5F;
-		this.desc = "turretmod3.turret.desct3f";
-		this.name = "turretmod3.turret.namet3f";
+		this.desc = "turret.desct3f";
+		this.name = "turret.namet3f";
 		this.crafting = new Object[] {
 				"SDL", " O ", "BIB",
-				'S', new ItemStack(Item.bucketEmpty),
-				'D', new ItemStack(Block.dispenser),
-				'L', new ItemStack(Item.enderPearl),
-				'O', new ItemStack(Block.obsidian),
-				'I', new ItemStack(Block.blockIron),
-				'B', new ItemStack(Item.ingotIron)
+				'S', new ItemStack(Items.bucket),
+				'D', new ItemStack(Blocks.dispenser),
+				'L', new ItemStack(Items.ender_pearl),
+				'O', new ItemStack(Blocks.obsidian),
+				'I', new ItemStack(Blocks.iron_block),
+				'B', new ItemStack(Items.iron_ingot)
 		};
 		this.itemIcon = "TurretMod3:turret_06";
 		
-		int i = this.registerNewAmmoType("turretmod3.turret.amtp0t3f");
+		int i = this.registerNewAmmoType("turret.amtp0t3f");
 		 this.addAmmo(i, new ItemStack(TM3ModRegistry.ammoItems, 1, 5), 4);
 		 this.addAmmo(i, new ItemStack(TM3ModRegistry.ammoItems, 1, 6), 32);
 		
-		this.healItems.put(new ItemStack(Block.blockIron), 15);
-		this.healItems.put(new ItemStack(Item.ingotIron), 1);
-		this.healItems.put(new ItemStack(Block.obsidian), 30);
+		this.healItems.put(new ItemStack(Blocks.iron_block), 15);
+		this.healItems.put(new ItemStack(Items.iron_ingot), 1);
+		this.healItems.put(new ItemStack(Blocks.obsidian), 30);
 	}
 }

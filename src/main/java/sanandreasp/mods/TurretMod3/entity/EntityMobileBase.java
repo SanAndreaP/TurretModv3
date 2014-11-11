@@ -166,7 +166,7 @@ public class EntityMobileBase extends EntityLiving implements IHealable {
 	}
 	
 	@Override
-	public boolean attackEntityFrom(DamageSource par1DamageSource, int par2) {
+	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
 		if (this.riddenByEntity != null) {
 			((EntityTurret_Base)this.riddenByEntity).attackEntityFrom(par1DamageSource, par2);
 			return false;
@@ -194,8 +194,8 @@ public class EntityMobileBase extends EntityLiving implements IHealable {
 
             for (var1 = 0; var1 < 20 && this.worldObj.isRemote; ++var1)
             {
-            	this.worldObj.spawnParticle("iconcrack_"+TM3ModRegistry.mobileBase.itemID, this.posX + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, this.posY + (double)(this.rand.nextFloat() * this.height)+0.2D, this.posZ + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, this.rand.nextDouble()*0.2D-0.1D, this.rand.nextDouble()*0.2D-0.1D, this.rand.nextDouble()*0.2D-0.1D);
-            	this.worldObj.spawnParticle("iconcrack_"+TM3ModRegistry.mobileBase.itemID, this.posX + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, this.posY + (double)(this.rand.nextFloat() * this.height)+0.2D, this.posZ + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, this.rand.nextDouble()*0.2D-0.1D, this.rand.nextDouble()*0.2D-0.1D, this.rand.nextDouble()*0.2D-0.1D);
+            	this.worldObj.spawnParticle("iconcrack_"+TM3ModRegistry.mobileBase, this.posX + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, this.posY + (double)(this.rand.nextFloat() * this.height)+0.2D, this.posZ + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, this.rand.nextDouble()*0.2D-0.1D, this.rand.nextDouble()*0.2D-0.1D, this.rand.nextDouble()*0.2D-0.1D);
+            	this.worldObj.spawnParticle("iconcrack_"+TM3ModRegistry.mobileBase, this.posX + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, this.posY + (double)(this.rand.nextFloat() * this.height)+0.2D, this.posZ + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, this.rand.nextDouble()*0.2D-0.1D, this.rand.nextDouble()*0.2D-0.1D, this.rand.nextDouble()*0.2D-0.1D);
 //            	this.worldObj.spawnParticle("explode", this.posX + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, this.posY + (double)(this.rand.nextFloat() * this.height), this.posZ + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, 0D, 0D, 0D);
             }
         }

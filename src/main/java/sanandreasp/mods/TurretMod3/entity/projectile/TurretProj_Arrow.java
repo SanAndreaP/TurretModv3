@@ -2,6 +2,7 @@ package sanandreasp.mods.TurretMod3.entity.projectile;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -18,6 +19,6 @@ public class TurretProj_Arrow extends TurretProjectile {
 
 	@Override
 	public ItemStack getPickupItem() {
-		return new ItemStack(Item.arrow, 1);
+		return new ItemStack(Items.arrow, 1);
 	}
 }

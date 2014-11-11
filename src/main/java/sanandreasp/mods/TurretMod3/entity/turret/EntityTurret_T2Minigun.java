@@ -67,7 +67,7 @@ public class EntityTurret_T2Minigun extends EntityTurret_Base {
 		double partY = this.posY + this.getEyeHeight() - Math.sin(this.rotationPitch / (180F / (float)Math.PI)) * 0.5D;
 		double partZ = this.posZ + rotYawZ * (Math.cos(this.rotationPitch / (180F / (float)Math.PI))) * 0.5D;
 		
-		TM3ModRegistry.proxy.spawnParticle(0, partX - (this.isRight ? 0.5D : -0.5D)*rotYawZ, partY+0.1D, partZ - (this.isRight ? 0.5D : -0.5D)*rotYawX, 64, this.worldObj.getWorldInfo().getDimension(), this);
+		TM3ModRegistry.proxy.spawnParticle(0, partX - (this.isRight ? 0.5D : -0.5D)*rotYawZ, partY+0.1D, partZ - (this.isRight ? 0.5D : -0.5D)*rotYawX, 64, this.worldObj.provider.dimensionId, this);
 	}
 	
 	@Override

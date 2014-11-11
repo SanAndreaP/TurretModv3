@@ -9,9 +9,6 @@ import java.util.Map.Entry;
 
 import com.google.common.collect.Maps;
 
-import cpw.mods.fml.common.network.PacketDispatcher;
-import cpw.mods.fml.common.network.Player;
-
 import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_Base;
 import sanandreasp.mods.TurretMod3.item.ItemTurret;
 import sanandreasp.mods.TurretMod3.tileentity.TileEntityLaptop;
@@ -21,7 +18,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
 
 public class PacketRecvLaptopUpgrades extends PacketBase {
@@ -29,7 +25,7 @@ public class PacketRecvLaptopUpgrades extends PacketBase {
 	@Override
 	public void handle(DataInputStream iStream, EntityPlayer player) {
 		try {
-	        TileEntity te = player.worldObj.getBlockTileEntity(iStream.readInt(), iStream.readInt(), iStream.readInt());
+	        TileEntity te = player.worldObj.getTileEntity(iStream.readInt(), iStream.readInt(), iStream.readInt());
 	        if (te != null && te instanceof TileEntityLaptop) {
 	        	TileEntityLaptop lap = ((TileEntityLaptop)te);
 	        	

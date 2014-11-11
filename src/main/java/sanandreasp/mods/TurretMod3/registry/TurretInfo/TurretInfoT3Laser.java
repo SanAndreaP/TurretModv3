@@ -2,9 +2,9 @@ package sanandreasp.mods.TurretMod3.registry.TurretInfo;
 
 import java.util.Map;
 
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class TurretInfoT3Laser extends TurretInfo {
@@ -18,26 +18,26 @@ public class TurretInfoT3Laser extends TurretInfo {
 		this.lowerRangeY = 5.5F;
 		this.upperRangeY = 5.5F;
 		this.rangeX = 32.5F;
-		this.desc = "turretmod3.turret.desct3l";
-		this.name = "turretmod3.turret.namet3l";
+		this.desc = "turret.desct3l";
+		this.name = "turret.namet3l";
 		this.crafting = new Object[] {
 				"SDL", " O ", "BIB",
-				'S', new ItemStack(Item.diamond),
-				'D', new ItemStack(Block.dispenser),
-				'L', new ItemStack(Item.enderPearl),
-				'O', new ItemStack(Block.obsidian),
-				'I', new ItemStack(Block.blockIron),
-				'B', new ItemStack(Block.stone)
+				'S', new ItemStack(Items.diamond),
+				'D', new ItemStack(Blocks.dispenser),
+				'L', new ItemStack(Items.ender_pearl),
+				'O', new ItemStack(Blocks.obsidian),
+				'I', new ItemStack(Blocks.iron_block),
+				'B', new ItemStack(Blocks.stone)
 		};
 		this.itemIcon = "TurretMod3:turret_05";
 		
-		int i = this.registerNewAmmoType("turretmod3.turret.amtp0t3l");
-		 this.addAmmo(i, new ItemStack(Item.redstone), 1);
-		 this.addAmmo(i, new ItemStack(Block.blockRedstone), 9);
+		int i = this.registerNewAmmoType("turret.amtp0t3l");
+		 this.addAmmo(i, new ItemStack(Items.redstone), 1);
+		 this.addAmmo(i, new ItemStack(Blocks.redstone_block), 9);
 		
-		this.healItems.put(new ItemStack(Block.blockIron), 15);
-		this.healItems.put(new ItemStack(Item.ingotIron), 1);
-		this.healItems.put(new ItemStack(Block.obsidian), 30);
-		this.healItems.put(new ItemStack(Block.stone, 1), 1);
+		this.healItems.put(new ItemStack(Blocks.iron_block), 15);
+		this.healItems.put(new ItemStack(Items.iron_ingot), 1);
+		this.healItems.put(new ItemStack(Blocks.obsidian), 30);
+		this.healItems.put(new ItemStack(Blocks.stone, 1), 1);
 	}
 }

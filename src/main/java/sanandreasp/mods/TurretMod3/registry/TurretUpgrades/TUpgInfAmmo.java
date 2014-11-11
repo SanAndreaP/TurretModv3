@@ -1,5 +1,6 @@
 package sanandreasp.mods.TurretMod3.registry.TurretUpgrades;
 
+import net.minecraft.init.Items;
 import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_Base;
 import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_T1Arrow;
 import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_T1Shotgun;
@@ -13,17 +14,15 @@ import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_T5Artillery;
 import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_T5Railgun;
 import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_TSHealer;
 import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_TSSnowball;
-import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class TUpgInfAmmo extends TurretUpgrades {
 
 	public TUpgInfAmmo() {
-		this.upgName = "turretmod3.upgrades.nameInfbow";
-		this.upgDesc = "turretmod3.upgrades.descInfbow";
-		this.upgItem = new ItemStack(Item.bow);
+		this.upgName = "upgrades.nameInfbow";
+		this.upgDesc = "upgrades.descInfbow";
+		this.upgItem = new ItemStack(Items.bow);
 		this.upgEnchantment = Enchantment.infinity;
 		
 		this.requiredUpg = TUpgEconomy.class;

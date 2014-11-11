@@ -5,7 +5,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import sanandreasp.mods.TurretMod3.entity.EntityMobileBase;
 import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_Base;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -16,8 +16,8 @@ import net.minecraft.world.World;
 
 public class ItemMobileBase extends Item {
 
-	public ItemMobileBase(int par1) {
-		super(par1);
+	public ItemMobileBase() {
+		super();
 	}
 	
 	@Override
@@ -29,13 +29,13 @@ public class ItemMobileBase extends Item {
         }
         else
         {
-            int var11 = par3World.getBlockId(par4, par5, par6);
+            Block var11 = par3World.getBlock(par4, par5, par6);
             par4 += Facing.offsetsXForSide[par7];
             par5 += Facing.offsetsYForSide[par7];
             par6 += Facing.offsetsZForSide[par7];
             double var12 = 0.0D;
 
-            if (par7 == 1 && Block.blocksList[var11] != null && Block.blocksList[var11].getRenderType() == 11)
+            if (par7 == 1 && var11.getRenderType() == 11)
             {
                 var12 = 0.5D;
             }
@@ -68,7 +68,7 @@ public class ItemMobileBase extends Item {
     
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister) {
+    public void registerIcons(IIconRegister par1IconRegister) {
     	this.itemIcon = par1IconRegister.registerIcon("TurretMod3:mobileBase");
     }
 

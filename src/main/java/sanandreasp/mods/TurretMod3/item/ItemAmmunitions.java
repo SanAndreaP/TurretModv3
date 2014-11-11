@@ -8,27 +8,27 @@ import com.google.common.collect.Maps;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 
 public class ItemAmmunitions extends Item {
 	
 	public static Map<Integer, String> dmgLangMapping = Maps.newHashMap();
 	public static Map<Integer, String> dmgNameMapping = Maps.newHashMap();
-	private static Map<Integer, Icon> dmgIconMapping = Maps.newHashMap();
+	private static Map<Integer, IIcon> dmgIconMapping = Maps.newHashMap();
 
-	public ItemAmmunitions(int par1) {
-		super(par1);
+	public ItemAmmunitions() {
+		super();
 		this.setMaxDamage(0);
 		this.setHasSubtypes(true);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getIconFromDamage(int par1) {
+	public IIcon getIconFromDamage(int par1) {
 		return par1 < 0 || par1 >= dmgIconMapping.size() ? super.getIconFromDamage(par1) : dmgIconMapping.get(par1);
 	}
 	
@@ -43,9 +43,9 @@ public class ItemAmmunitions extends Item {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List par3List) {
+	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
 		for (int id : dmgLangMapping.keySet())
-			par3List.add(new ItemStack(this.itemID, 1, id));
+			par3List.add(new ItemStack(this, 1, id));
 	}
 	
 	public static void addAmmoItem(int dmg, String langStr, String name) {
@@ -55,7 +55,7 @@ public class ItemAmmunitions extends Item {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister par1IconRegister) {
+	public void registerIcons(IIconRegister par1IconRegister) {
 		for (int i = 0; i < dmgLangMapping.size(); i++) {
 			dmgIconMapping.put(i, par1IconRegister.registerIcon("TurretMod3:"+dmgLangMapping.get(i)));
 		}

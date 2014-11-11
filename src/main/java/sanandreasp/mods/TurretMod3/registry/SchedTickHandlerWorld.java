@@ -1,43 +1,25 @@
 package sanandreasp.mods.TurretMod3.registry;
 
-import java.util.EnumSet;
-
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-import net.minecraftforge.common.IShearable;
 
-import cpw.mods.fml.common.IScheduledTickHandler;
-import cpw.mods.fml.common.ITickHandler;
-import cpw.mods.fml.common.TickType;
+public class SchedTickHandlerWorld {
 
-public class SchedTickHandlerWorld implements IScheduledTickHandler {
-
-	
+	private int tick = 0;
 	public SchedTickHandlerWorld() { }
 
-	@Override
-	public void tickStart(EnumSet<TickType> type, Object... tickData) {
-		for (Object obj : ((World)tickData[0]).playerEntities) {
-			TM3ModRegistry.proxy.initTM3PlayerTag((EntityPlayer)obj);
-		}
+	@SubscribeEvent
+	public void tickStart(TickEvent.WorldTickEvent event) {
+        if(event.phase == TickEvent.Phase.START && event.side.isServer()) {
+            tick++;
+            if (tick > 4) {
+                for (Object obj : event.world.playerEntities) {
+                    TM3ModRegistry.proxy.initTM3PlayerTag((EntityPlayer) obj);
+                }
+                tick = 0;
+            }
+        }
 	}
-
-	@Override
-	public void tickEnd(EnumSet<TickType> type, Object... tickData) { }
-
-	@Override
-	public EnumSet<TickType> ticks() {
-		return EnumSet.of(TickType.WORLD);
-	}
-
-	@Override
-	public String getLabel() {
-		return "TurretModWldTicks";
-	}
-
-	@Override
-	public int nextTickSpacing() {
-		return 5;
-	}
-
 }

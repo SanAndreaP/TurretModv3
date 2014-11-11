@@ -69,7 +69,7 @@ public class RenderTurretForcefield extends RenderTurret_Base {
 	
 	public static void renderShield(Tessellator tess, double size, EntityTurret_TSForcefield fsTurret, double partialTicks) {
 		
-		Minecraft.getMinecraft().func_110434_K().func_110577_a(TM3ModRegistry.TEX_SHIELD);
+		Minecraft.getMinecraft().getTextureManager().bindTexture(TM3ModRegistry.TEX_SHIELD);
 		double texScaleX = 1.25D;
 		double texScaleY = 1.25D;
 		double ticks = (double)fsTurret.ticksExisted + partialTicks;

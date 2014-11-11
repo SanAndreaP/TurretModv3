@@ -1,6 +1,8 @@
 package sanandreasp.mods.TurretMod3.registry;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -19,74 +21,74 @@ public final class CraftingRegistry {
 		for (int i = 0; i < 2; i++) {
 			GameRegistry.addRecipe(new ItemStack(TM3ModRegistry.laptop, 1, i*8),
 					"  #", "QRT", "###",
-					'#', i == 0 ? new ItemStack(Block.blockNetherQuartz, 1, OreDictionary.WILDCARD_VALUE) : new ItemStack(Block.obsidian),
-					'Q', new ItemStack(Item.netherQuartz),
-					'R', new ItemStack(Item.redstone),
-					'T', new ItemStack(Block.torchRedstoneActive)
+					'#', i == 0 ? new ItemStack(Blocks.quartz_block, 1, OreDictionary.WILDCARD_VALUE) : new ItemStack(Blocks.obsidian),
+					'Q', new ItemStack(Items.quartz),
+					'R', new ItemStack(Items.redstone),
+					'T', new ItemStack(Blocks.redstone_torch)
 			);
 		}
 		
 		// Arrow Pack
 		GameRegistry.addRecipe(new ItemStack(TM3ModRegistry.ammoItems, 1, 0), 
 				"###", "#+#", "###",
-				'#', new ItemStack(Item.arrow),
-				'+', new ItemStack(Item.leather)
+				'#', new ItemStack(Items.arrow),
+				'+', new ItemStack(Items.leather)
 		);
 		
 		// Ender Pearl Bundle
 		GameRegistry.addRecipe(new ItemStack(TM3ModRegistry.ammoItems, 1, 8), 
 				"###", "#+#", "###",
-				'#', new ItemStack(Item.enderPearl),
-				'+', new ItemStack(Item.silk)
+				'#', new ItemStack(Items.ender_pearl),
+				'+', new ItemStack(Items.string)
 		);
 		
 		// Glistering Melon Bundle
 		GameRegistry.addRecipe(new ItemStack(TM3ModRegistry.ammoItems, 1, 7), 
 				"###", "###", "###",
-				'#', new ItemStack(Item.speckledMelon)
+				'#', new ItemStack(Items.speckled_melon)
 		);
 		
 		// Bullets
 		GameRegistry.addShapelessRecipe(new ItemStack(TM3ModRegistry.ammoItems, 2, 3),
-				new ItemStack(Item.ingotIron),
-				new ItemStack(Item.gunpowder)
+				new ItemStack(Items.iron_ingot),
+				new ItemStack(Items.gunpowder)
 		);
 		
 		// Bullet Pack
 		GameRegistry.addRecipe(new ItemStack(TM3ModRegistry.ammoItems, 1, 4), 
 				"###", "#+#", "###",
 				'#', new ItemStack(TM3ModRegistry.ammoItems, 1, 3),
-				'+', new ItemStack(Item.goldNugget)
+				'+', new ItemStack(Items.gold_nugget)
 		);
 		
 		// Fuel Tank
 		GameRegistry.addShapelessRecipe(new ItemStack(TM3ModRegistry.ammoItems, 1, 5),
-				new ItemStack(Block.netherBrick),
-				new ItemStack(Item.bucketLava)
+				new ItemStack(Blocks.nether_brick),
+				new ItemStack(Items.lava_bucket)
 		);
 		
 		// Fuel Tank Pack
 		GameRegistry.addRecipe(new ItemStack(TM3ModRegistry.ammoItems, 1, 6), 
 				"###", "#+#", "###",
 				'#', new ItemStack(TM3ModRegistry.ammoItems, 1, 5),
-				'+', new ItemStack(Item.silk)
+				'+', new ItemStack(Items.string)
 		);
 		
 		// Rockets
-		ItemStack[] is = new ItemStack[] {new ItemStack(Item.coal), new ItemStack(Item.ingotIron), new ItemStack(Item.ingotGold)};
+		ItemStack[] is = new ItemStack[] {new ItemStack(Items.coal), new ItemStack(Items.iron_ingot), new ItemStack(Items.gold_ingot)};
 		for (int i = 0; i < 3; i++) {
 			GameRegistry.addRecipe(new ItemStack(TM3ModRegistry.rocket, 2, i),
 				" T ", "IGI",
 				'T', is[i],
-				'I', new ItemStack(Item.ingotIron),
-				'G', new ItemStack(Item.gunpowder)
+				'I', new ItemStack(Items.iron_ingot),
+				'G', new ItemStack(Items.gunpowder)
 			);
 			GameRegistry.addRecipe(new ItemStack(TM3ModRegistry.rocket, 2, i+3),
 					" T ", "IGI", " E ",
 					'T', is[i],
-					'I', new ItemStack(Item.ingotIron),
-					'G', new ItemStack(Item.gunpowder),
-					'E', new ItemStack(Item.enderPearl)
+					'I', new ItemStack(Items.iron_ingot),
+					'G', new ItemStack(Items.gunpowder),
+					'E', new ItemStack(Items.ender_pearl)
 			);
 		}
 		
@@ -94,73 +96,73 @@ public final class CraftingRegistry {
 		  // Art. Shell
 		GameRegistry.addRecipe(new ItemStack(TM3ModRegistry.artilleryBall, 1, 0),
 				" + ", "+F+", " + ",
-				'+', new ItemStack(Item.gunpowder),
-				'F', new ItemStack(Item.fireballCharge)
+				'+', new ItemStack(Items.gunpowder),
+				'F', new ItemStack(Items.fire_charge)
 		);
 		  // Big Art. Shell
 		GameRegistry.addRecipe(new ItemStack(TM3ModRegistry.artilleryBall, 1, 1),
 				"+++", "+F+", "+++",
-				'+', new ItemStack(Item.gunpowder),
-				'F', new ItemStack(Item.fireballCharge)
+				'+', new ItemStack(Items.gunpowder),
+				'F', new ItemStack(Items.fire_charge)
 		);
 		GameRegistry.addRecipe(new ItemStack(TM3ModRegistry.artilleryBall, 1, 1),
 				" + ", "+F+", " + ",
-				'+', new ItemStack(Item.gunpowder),
+				'+', new ItemStack(Items.gunpowder),
 				'F', new ItemStack(TM3ModRegistry.artilleryBall, 1, 0)
 		);
 		  // Napalm Art. Shell
 		GameRegistry.addShapelessRecipe(new ItemStack(TM3ModRegistry.artilleryBall, 1, 2),
 				new ItemStack(TM3ModRegistry.artilleryBall, 1, 0),
-				new ItemStack(Item.blazePowder)
+				new ItemStack(Items.blaze_powder)
 		);
 		  // Big Napalm Art. Shell
 		GameRegistry.addShapelessRecipe(new ItemStack(TM3ModRegistry.artilleryBall, 1, 3),
 				new ItemStack(TM3ModRegistry.artilleryBall, 1, 1),
-				new ItemStack(Item.blazePowder)
+				new ItemStack(Items.blaze_powder)
 		);
 		  // Frag Art. Shell
 		GameRegistry.addShapelessRecipe(new ItemStack(TM3ModRegistry.artilleryBall, 1, 4),
 				new ItemStack(TM3ModRegistry.artilleryBall, 1, 0),
-				new ItemStack(Item.lightStoneDust)
+				new ItemStack(Items.glowstone_dust)
 		);
 		  // Griefing Art. Shells
 		for (int i = 0; i < 5; i++) {
 			GameRegistry.addShapelessRecipe(new ItemStack(TM3ModRegistry.artilleryBall, 1, 5+i),
 					new ItemStack(TM3ModRegistry.artilleryBall, 1, i),
-					new ItemStack(Item.magmaCream)
+					new ItemStack(Items.magma_cream)
 			);
 		}
 		
 		// Turret Info Book
 		GameRegistry.addShapelessRecipe(new ItemStack(TM3ModRegistry.tInfoBook, 1),
-				new ItemStack(Block.dispenser),
-				new ItemStack(Item.book),
-				new ItemStack(Item.dyePowder, 1, 0)
+				new ItemStack(Blocks.dispenser),
+				new ItemStack(Items.book),
+				new ItemStack(Items.dye, 1, 0)
 		);
 		
 		// TCU
 		GameRegistry.addRecipe(new ItemStack(TM3ModRegistry.tcu, 1),
 				" | ", "RBR", "III",
-				'|', new ItemStack(Item.stick),
-				'R', new ItemStack(Item.redstone),
-				'B', new ItemStack(Item.ingotGold),
-				'I', new ItemStack(Item.ingotIron)
+				'|', new ItemStack(Items.stick),
+				'R', new ItemStack(Items.redstone),
+				'B', new ItemStack(Items.gold_ingot),
+				'I', new ItemStack(Items.iron_ingot)
 		);
 		
 		// HT Turret Module
 		GameRegistry.addRecipe(new ItemStack(TM3ModRegistry.httm, 1),
 				"RDR", "GGG", "  E",
-				'R', new ItemStack(Item.redstone),
-				'D', new ItemStack(Item.diamond),
-				'G', new ItemStack(Item.ingotGold),
-				'E', new ItemStack(Item.enderPearl)
+				'R', new ItemStack(Items.redstone),
+				'D', new ItemStack(Items.diamond),
+				'G', new ItemStack(Items.gold_ingot),
+				'E', new ItemStack(Items.ender_pearl)
 		);
 		
 		// Mobile Base
 		GameRegistry.addRecipe(new ItemStack(TM3ModRegistry.mobileBase, 1),
 				"IBI", "B B", "IBI",
-				'I', new ItemStack(Item.stick),
-				'B', new ItemStack(Block.stone)
+				'I', new ItemStack(Items.stick),
+				'B', new ItemStack(Blocks.stone)
 		);
 		
 		// Pebble -> Pebbles
@@ -171,13 +173,13 @@ public final class CraftingRegistry {
 		// Pebbles -> Gravel
 		objArr = new ItemStack[8];
 		for (int i = 0; i < 8; i++) objArr[i] = new ItemStack(TM3ModRegistry.ammoItems, 1, 1);
-		GameRegistry.addShapelessRecipe(new ItemStack(Block.gravel, 1), objArr);
+		GameRegistry.addShapelessRecipe(new ItemStack(Blocks.gravel, 1), objArr);
 		
 		// Arrow Pack -> Arrows
-		GameRegistry.addShapelessRecipe(new ItemStack(Item.arrow, 8), new ItemStack(TM3ModRegistry.ammoItems, 1, 0));
+		GameRegistry.addShapelessRecipe(new ItemStack(Items.arrow, 8), new ItemStack(TM3ModRegistry.ammoItems, 1, 0));
 		
 		// Gravel -> Pebbles
-		GameRegistry.addShapelessRecipe(new ItemStack(TM3ModRegistry.ammoItems, 8, 1), new ItemStack(Block.gravel));
+		GameRegistry.addShapelessRecipe(new ItemStack(TM3ModRegistry.ammoItems, 8, 1), new ItemStack(Blocks.gravel));
 		
 		// Bullet Pack -> Bullets
 		GameRegistry.addShapelessRecipe(new ItemStack(TM3ModRegistry.ammoItems, 8, 3), new ItemStack(TM3ModRegistry.ammoItems, 1, 4));
@@ -186,9 +188,9 @@ public final class CraftingRegistry {
 		GameRegistry.addShapelessRecipe(new ItemStack(TM3ModRegistry.ammoItems, 8, 5), new ItemStack(TM3ModRegistry.ammoItems, 1, 6));
 		
 		// Glister Melon Bundle -> Glister Melon
-		GameRegistry.addShapelessRecipe(new ItemStack(Item.speckledMelon, 8), new ItemStack(TM3ModRegistry.ammoItems, 1, 7));
+		GameRegistry.addShapelessRecipe(new ItemStack(Items.speckled_melon, 8), new ItemStack(TM3ModRegistry.ammoItems, 1, 7));
 		
 		// Ender Pearl Bundle -> Ender Pearls
-		GameRegistry.addShapelessRecipe(new ItemStack(Item.enderPearl, 8), new ItemStack(TM3ModRegistry.ammoItems, 1, 8));
+		GameRegistry.addShapelessRecipe(new ItemStack(Items.ender_pearl, 8), new ItemStack(TM3ModRegistry.ammoItems, 1, 8));
 	}
 }

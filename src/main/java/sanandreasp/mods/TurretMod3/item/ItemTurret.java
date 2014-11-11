@@ -12,6 +12,7 @@ import com.google.common.collect.Maps;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.util.StatCollector;
 import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_Base;
 import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_T1Arrow;
 import sanandreasp.mods.TurretMod3.inventory.ContainerLaptop;
@@ -21,7 +22,7 @@ import sanandreasp.mods.TurretMod3.registry.TurretTargetRegistry;
 import sanandreasp.mods.TurretMod3.registry.TurretInfo.TurretInfo;
 import sanandreasp.mods.TurretMod3.registry.TurretUpgrades.TurretUpgrades;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -32,17 +33,17 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.Facing;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class ItemTurret extends Item {
 	
 	@SideOnly(Side.CLIENT)
-	private Icon[] turretIcons;
+	private IIcon[] turretIcons;
 
-	public ItemTurret(int par1) {
-		super(par1);
+	public ItemTurret() {
+		super();
 		this.setMaxDamage(0);
 		this.setHasSubtypes(true);
 	}
@@ -56,13 +57,13 @@ public class ItemTurret extends Item {
         }
         else
         {
-            int var11 = par3World.getBlockId(par4, par5, par6);
+            Block var11 = par3World.getBlock(par4, par5, par6);
             par4 += Facing.offsetsXForSide[par7];
             par5 += Facing.offsetsYForSide[par7];
             par6 += Facing.offsetsZForSide[par7];
             double var12 = 0.0D;
 
-            if (par7 == 1 && Block.blocksList[var11] != null && Block.blocksList[var11].getRenderType() == 11)
+            if (par7 == 1 && var11.getRenderType() == 11)
             {
                 var12 = 0.5D;
             }
@@ -126,7 +127,7 @@ public class ItemTurret extends Item {
     
     @Override
     @SideOnly(Side.CLIENT)
-    public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List par3List) {
+    public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
     	for (int i = 0; i < TurretInfo.getTurretCount(); i++) {
 			TurretInfo tinf = TurretInfo.getTurretInfo(TurretInfo.getTurretClass(i));
     		par3List.add(tinf.getTurretItem().copy());
@@ -134,17 +135,17 @@ public class ItemTurret extends Item {
     }
     
     @Override
-    public String getItemDisplayName(ItemStack par1ItemStack) {
+    public String getItemStackDisplayName(ItemStack par1ItemStack) {
     	if (this.hasEffect(par1ItemStack))
-    		return "\247d" + super.getItemDisplayName(par1ItemStack) + "\247r";
-    	return super.getItemDisplayName(par1ItemStack);
+    		return "\247d" + super.getItemStackDisplayName(par1ItemStack) + "\247r";
+    	return super.getItemStackDisplayName(par1ItemStack);
     }
     
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
     	super.addInformation(par1ItemStack, par2EntityPlayer, par3List, par4);
-    	String[] infos = TM3ModRegistry.manHelper.getLangMan().getTranslated("turretmod3.item.turretInfo").split("\\|");
+    	String[] infos = StatCollector.translateToLocal("item.turretInfo").split("\\|");
     	if (getProgramTag(par1ItemStack).hasKey("progName"))
     		par3List.add("\247o" + String.format(infos[0], getCustomName(par1ItemStack)) + "\247r");
     	if (getProgramTag(par1ItemStack).hasKey("progFreq"))
@@ -165,7 +166,7 @@ public class ItemTurret extends Item {
     }
     
     private static NBTTagCompound getProgramTag(ItemStack is) {
-    	NBTTagCompound isTag = is.hasTagCompound() ? is.getTagCompound() : new NBTTagCompound("tag");
+    	NBTTagCompound isTag = is.hasTagCompound() ? is.getTagCompound() : new NBTTagCompound();
     	if (isTag.hasKey("tm3_program")) {
     		return (NBTTagCompound) isTag.getTag("tm3_program");
     	} else {
@@ -326,8 +327,8 @@ public class ItemTurret extends Item {
     
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister) {
-    	this.turretIcons = new Icon[TurretInfo.getTurretCount()];
+    public void registerIcons(IIconRegister par1IconRegister) {
+    	this.turretIcons = new IIcon[TurretInfo.getTurretCount()];
     	for (int i = 0; i < TurretInfo.getTurretCount(); i++) {
     		TurretInfo tinf = TurretInfo.getTurretInfo(TurretInfo.getTurretClass(i));
     		this.turretIcons[i] = par1IconRegister.registerIcon(tinf != null ? tinf.getIconFile() : "TurretMod3:turret_01");
@@ -336,7 +337,7 @@ public class ItemTurret extends Item {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getIconFromDamage(int par1) {
+	public IIcon getIconFromDamage(int par1) {
 		return this.turretIcons != null ? this.turretIcons[par1] : null;
 	}
 	

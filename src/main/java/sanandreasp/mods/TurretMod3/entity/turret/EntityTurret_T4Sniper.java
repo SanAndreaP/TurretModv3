@@ -57,7 +57,7 @@ public class EntityTurret_T4Sniper extends EntityTurret_Base {
 		double partY = this.posY + this.getEyeHeight() - Math.sin(this.rotationPitch / (180F / (float)Math.PI)) * 1.0D;
 		double partZ = this.posZ + rotYawZ * (Math.cos(this.rotationPitch / (180F / (float)Math.PI))) * 1.0D;
 		
-		TM3ModRegistry.proxy.spawnParticle(3, partX, partY, partZ, 64, this.worldObj.getWorldInfo().getDimension(), this);
+		TM3ModRegistry.proxy.spawnParticle(3, partX, partY, partZ, 64, this.worldObj.provider.dimensionId, this);
 	}
 	
 	@Override

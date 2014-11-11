@@ -38,7 +38,7 @@ public class RenderTurretHealer extends RenderTurret_Base {
 		
 		par1Entity.faceEntity(target, 10.0F, par1Entity.getVerticalFaceSpeed());
         float var4 = (float)par1Entity.ticksExisted * 8;
-        this.loadTexture(TM3ModRegistry.TEX_HEALBEAM);
+        this.bindTexture(TM3ModRegistry.TEX_HEALBEAM);
         GL11.glPushMatrix();
         GL11.glDisable(GL11.GL_LIGHTING);
 		char var8 = 0x000F0;

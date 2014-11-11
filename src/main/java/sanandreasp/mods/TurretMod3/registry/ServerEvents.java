@@ -3,6 +3,7 @@ package sanandreasp.mods.TurretMod3.registry;
 import java.util.Iterator;
 import java.util.Random;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import sanandreasp.mods.TurretMod3.command.CommandTurretMod;
 import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_Base;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
@@ -12,7 +13,6 @@ import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.item.ItemTossEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
@@ -28,7 +28,7 @@ public class ServerEvents {
 
 	public ServerEvents() { }
 	
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void onLivingDamage(LivingAttackEvent event) {
 		if (event.entityLiving instanceof EntityTurret_Base && event.entityLiving.riddenByEntity != null && event.entityLiving.riddenByEntity instanceof EntityPlayer) {
 			if (this.rand.nextInt(100) >= 75) {
@@ -43,7 +43,7 @@ public class ServerEvents {
 		}
 	}
 
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void onLivingDrop(LivingDropsEvent event) {
 		if (!(event.entityLiving instanceof EntityPlayer)) {
 			if (event.entityLiving instanceof EntityCreeper
@@ -80,7 +80,7 @@ public class ServerEvents {
 		}
 	}
 
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void onPlayerDrops(PlayerDropsEvent event) {
 		Iterator<EntityItem> iter = event.drops.iterator();
 		while(iter.hasNext()) {
@@ -89,7 +89,7 @@ public class ServerEvents {
 		}
 	}
 
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void onPlayerToss(ItemTossEvent event) {
 		event.entityItem.getEntityData().setString("TM3_PlayerName", event.player.username);
 	}

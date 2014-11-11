@@ -100,7 +100,7 @@ public class TurretProj_Explosive extends TurretProjectile {
 		        var2.isMoving = true;
 			}
 			this.isExploding = false;
-			TM3ModRegistry.proxy.spawnParticle(9, this.posX, this.posY, this.posZ, 128, this.worldObj.getWorldInfo().getDimension(), null);
+			TM3ModRegistry.proxy.spawnParticle(9, this.posX, this.posY, this.posZ, 128, this.worldObj.provider.dimensionId, null);
 			this.setDead();
 		}
 		

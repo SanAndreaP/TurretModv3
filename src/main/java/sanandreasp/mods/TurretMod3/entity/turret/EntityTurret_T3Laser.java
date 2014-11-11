@@ -57,7 +57,7 @@ public class EntityTurret_T3Laser extends EntityTurret_Base {
 		double partY = this.posY + this.getEyeHeight() - Math.sin(this.rotationPitch / (180F / (float)Math.PI)) * 0.7D;
 		double partZ = this.posZ + rotYawZ * (Math.cos(this.rotationPitch / (180F / (float)Math.PI))) * 0.7D;
 		
-		TM3ModRegistry.proxy.spawnParticle(1, partX - (this.isRight ? 0.1D : -0.1D)*rotYawZ, partY, partZ - (this.isRight ? 0.1D : -0.1D)*rotYawX, 64, this.worldObj.getWorldInfo().getDimension(), this);
+		TM3ModRegistry.proxy.spawnParticle(1, partX - (this.isRight ? 0.1D : -0.1D)*rotYawZ, partY, partZ - (this.isRight ? 0.1D : -0.1D)*rotYawX, 64, this.worldObj.provider.dimensionId, this);
 	}
 	
 	@Override

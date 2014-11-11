@@ -2,9 +2,9 @@ package sanandreasp.mods.TurretMod3.registry.TurretInfo;
 
 import java.util.Map;
 
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -18,21 +18,21 @@ public class TurretInfoTSForcefield extends TurretInfo {
 		this.lowerRangeY = 0F;
 		this.upperRangeY = 16.5F;
 		this.rangeX = 16.5F;
-		this.desc = "turretmod3.turret.desctsf";
-		this.name = "turretmod3.turret.nametsf";
+		this.desc = "turret.desctsf";
+		this.name = "turret.nametsf";
 		this.crafting = new Object[] {
 				"P P", "OEO", "WWW",
-				'P', new ItemStack(Item.eyeOfEnder),
-				'E', new ItemStack(Block.blockRedstone),
-				'O', new ItemStack(Block.blockNetherQuartz, 1, OreDictionary.WILDCARD_VALUE),
-				'W', new ItemStack(Block.obsidian)
+				'P', new ItemStack(Items.ender_eye),
+				'E', new ItemStack(Blocks.redstone_block),
+				'O', new ItemStack(Blocks.quartz_block, 1, OreDictionary.WILDCARD_VALUE),
+				'W', new ItemStack(Blocks.obsidian)
 		};
 		this.itemIcon = "TurretMod3:turret_13";
 		
-		this.healItems.put(new ItemStack(Item.redstone), 1);
-		this.healItems.put(new ItemStack(Block.blockRedstone), 9);
-		this.healItems.put(new ItemStack(Block.obsidian), 20);
-		this.healItems.put(new ItemStack(Item.netherQuartz), 2);
-		this.healItems.put(new ItemStack(Block.blockNetherQuartz), 18);
+		this.healItems.put(new ItemStack(Items.redstone), 1);
+		this.healItems.put(new ItemStack(Blocks.redstone_block), 9);
+		this.healItems.put(new ItemStack(Blocks.obsidian), 20);
+		this.healItems.put(new ItemStack(Items.quartz), 2);
+		this.healItems.put(new ItemStack(Blocks.quartz_block), 18);
 	}
 }

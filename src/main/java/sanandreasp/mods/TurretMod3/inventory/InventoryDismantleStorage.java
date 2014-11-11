@@ -1,5 +1,6 @@
 package sanandreasp.mods.TurretMod3.inventory;
 
+import net.minecraft.item.Item;
 import sanandreasp.mods.TurretMod3.entity.EntityDismantleStorage;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
@@ -45,7 +46,7 @@ public class InventoryDismantleStorage extends InventoryBasic {
     }
 	
 	@Override
-	public String getInvName() {
+	public String getInventoryName() {
 		return "turretmod3.gui.invDismStorage";
 	}
 	
@@ -64,7 +65,7 @@ public class InventoryDismantleStorage extends InventoryBasic {
     
     private int storePartialItemStack(ItemStack par1ItemStack)
     {
-        int var2 = par1ItemStack.itemID;
+        Item var2 = par1ItemStack.getItem();
         int var3 = par1ItemStack.stackSize;
         int var4;
 
@@ -142,7 +143,7 @@ public class InventoryDismantleStorage extends InventoryBasic {
     {
         for (int var2 = 0; var2 < this.getSizeInventory(); ++var2)
         {
-            if (this.getStackInSlot(var2) != null && this.getStackInSlot(var2).itemID == par1ItemStack.itemID && this.getStackInSlot(var2).isStackable() && this.getStackInSlot(var2).stackSize < this.getStackInSlot(var2).getMaxStackSize() && this.getStackInSlot(var2).stackSize < this.getInventoryStackLimit() && (!this.getStackInSlot(var2).getHasSubtypes() || this.getStackInSlot(var2).getItemDamage() == par1ItemStack.getItemDamage()) && ItemStack.areItemStackTagsEqual(this.getStackInSlot(var2), par1ItemStack))
+            if (this.getStackInSlot(var2) != null && this.getStackInSlot(var2).getItem() == par1ItemStack.getItem() && this.getStackInSlot(var2).isStackable() && this.getStackInSlot(var2).stackSize < this.getStackInSlot(var2).getMaxStackSize() && this.getStackInSlot(var2).stackSize < this.getInventoryStackLimit() && (!this.getStackInSlot(var2).getHasSubtypes() || this.getStackInSlot(var2).getItemDamage() == par1ItemStack.getItemDamage()) && ItemStack.areItemStackTagsEqual(this.getStackInSlot(var2), par1ItemStack))
             {
                 return var2;
             }
@@ -152,15 +153,15 @@ public class InventoryDismantleStorage extends InventoryBasic {
     }
     
     @Override
-    public void openChest() {
-    	super.openChest();
+    public void openInventory() {
+    	super.openInventory();
 		if (this.dismStg.checkForDestroy)
 			this.dismStg.toggleCheckForDestroy();
     }
     
     @Override
-    public void closeChest() {
-    	super.closeChest();
+    public void closeInventory() {
+    	super.closeInventory();
 		this.dismStg.toggleCheckForDestroy();
     }
 }

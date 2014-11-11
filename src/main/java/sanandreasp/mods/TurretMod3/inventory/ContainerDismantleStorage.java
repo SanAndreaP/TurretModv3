@@ -16,7 +16,7 @@ public class ContainerDismantleStorage extends Container {
         this.dismStgInventory = par2DStgInventory;
         this.dismPlyInventory = par1PlayerInventory;
         this.numRows = par2DStgInventory.getSizeInventory() / 9;
-        par2DStgInventory.openChest();
+        par2DStgInventory.openInventory();
         int var3 = (this.numRows - 4) * 18;
         int var4;
         int var5;
@@ -49,18 +49,20 @@ public class ContainerDismantleStorage extends Container {
     }
     
     public String getInvName() {
-    	return this.dismStgInventory.getInvName();
+    	return this.dismStgInventory.getInventoryName();
     }
     
     public String getPInvName() {
-    	return this.dismPlyInventory.getInvName();
+    	return this.dismPlyInventory.getInventoryName();
     }
 
+    @Override
     public boolean canInteractWith(EntityPlayer par1EntityPlayer)
     {
         return this.dismStgInventory.isUseableByPlayer(par1EntityPlayer);
     }
 
+    @Override
     public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
     {
         ItemStack var3 = null;
@@ -85,7 +87,7 @@ public class ContainerDismantleStorage extends Container {
 
             if (var5.stackSize == 0)
             {
-                var4.putStack((ItemStack)null);
+                var4.putStack(null);
             }
             else
             {
@@ -97,9 +99,9 @@ public class ContainerDismantleStorage extends Container {
     }
 
     @Override
-    public void onCraftGuiClosed(EntityPlayer par1EntityPlayer)
+    public void onContainerClosed(EntityPlayer par1EntityPlayer)
     {
-        super.onCraftGuiClosed(par1EntityPlayer);
-        this.dismStgInventory.closeChest();
+        super.onContainerClosed(par1EntityPlayer);
+        this.dismStgInventory.closeInventory();
     }
 }

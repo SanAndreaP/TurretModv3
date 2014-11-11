@@ -2,25 +2,25 @@ package sanandreasp.mods.TurretMod3.item;
 
 import java.util.List;
 
+import net.minecraft.util.StatCollector;
 import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
-import sanandreasp.mods.managers.SAP_LanguageManager;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 
 public class ItemFLAKRockets extends Item {
 	
 	@SideOnly(Side.CLIENT)
-	private Icon[] itemIcons;
+	private IIcon[] itemIcons;
 
-	public ItemFLAKRockets(int par1) {
-		super(par1);
+	public ItemFLAKRockets() {
+		super();
 		setMaxDamage(0);
 		setHasSubtypes(true);
 	}
@@ -32,26 +32,26 @@ public class ItemFLAKRockets extends Item {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getIconFromDamage(int par1) {
+	public IIcon getIconFromDamage(int par1) {
 		return par1 < 0 || par1 >= 6 ? this.itemIcons[0] : this.itemIcons[par1];
 	}
 	
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
-		String rng = (TM3ModRegistry.manHelper.getLangMan()).getTranslated("turretmod3.item.rocketRng") + ": ";
+		String rng = StatCollector.translateToLocal("item.rocketRng") + ": ";
 		switch(par1ItemStack.getItemDamage()) {
 			case 0:
 			case 3:
-				rng += "50 " + (TM3ModRegistry.manHelper.getLangMan()).getTranslated("turretmod3.gui.tinfo.blocks");
+				rng += "50 " + StatCollector.translateToLocal("gui.tinfo.blocks");
 				break;
 			case 1:
 			case 4:
-				rng += "75 " + (TM3ModRegistry.manHelper.getLangMan()).getTranslated("turretmod3.gui.tinfo.blocks");
+				rng += "75 " + StatCollector.translateToLocal("gui.tinfo.blocks");
 				break;
 			case 2:
 			case 5:
-				rng += "100 " + (TM3ModRegistry.manHelper.getLangMan()).getTranslated("turretmod3.gui.tinfo.blocks");
+				rng += "100 " + StatCollector.translateToLocal("gui.tinfo.blocks");
 				break;
 			default:
 				rng += "N/A";
@@ -61,7 +61,7 @@ public class ItemFLAKRockets extends Item {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List par3List) {
+	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
 		for (int i = 0; i < 6; i++) {
 			par3List.add(new ItemStack(this, 1, i));
 		}
@@ -69,8 +69,8 @@ public class ItemFLAKRockets extends Item {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister par1IconRegister) {
-		this.itemIcons = new Icon[6];
+	public void registerIcons(IIconRegister par1IconRegister) {
+		this.itemIcons = new IIcon[6];
 		this.itemIcons[0] = par1IconRegister.registerIcon("TurretMod3:rktTB50");
 		this.itemIcons[1] = par1IconRegister.registerIcon("TurretMod3:rktTB100");
 		this.itemIcons[2] = par1IconRegister.registerIcon("TurretMod3:rktTB150");

@@ -3,18 +3,14 @@ package sanandreasp.mods.TurretMod3.tileentity;
 import java.util.Map;
 import java.util.Random;
 
+import net.minecraft.network.Packet;
 import sanandreasp.mods.TurretMod3.item.ItemTurret;
-
-import com.google.common.util.concurrent.SettableFuture;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.EnumSkyBlock;
 
@@ -81,7 +77,7 @@ public class TileEntityLaptop extends TileEntity implements IInventory {
             if (this.screenAngle >= 0.999F) {
             	this.worldObj.markBlockForRenderUpdate(this.xCoord, this.yCoord, this.zCoord);
             	this.worldObj.updateLightByType(EnumSkyBlock.Block, this.xCoord, this.yCoord, this.zCoord);
-            	this.worldObj.func_96440_m(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID);
+            	this.worldObj.func_96440_m(this.xCoord, this.yCoord, this.zCoord, this.getBlockType());
             	this.lightUpdated = true;
             }
 
@@ -162,7 +158,7 @@ public class TileEntityLaptop extends TileEntity implements IInventory {
 		for (ItemStack is : this.inventory) {
 			if (is != null && is.stackSize > 0) {
 				ItemTurret.setTargets(is, list);
-				this.onInventoryChanged();
+				this.markDirty();
 			}
 		}
 	}
@@ -171,7 +167,7 @@ public class TileEntityLaptop extends TileEntity implements IInventory {
 		for (ItemStack is : this.inventory) {
 			if (is != null && is.stackSize > 0) {
 				ItemTurret.addCustmNameAndFreq(is, name, freq);
-				this.onInventoryChanged();
+				this.markDirty();
 			}
 		}
 	}
@@ -201,7 +197,7 @@ public class TileEntityLaptop extends TileEntity implements IInventory {
             {
                 itemstack = this.inventory[par1];
                 this.inventory[par1] = null;
-                this.onInventoryChanged();
+                this.markDirty();
                 return itemstack;
             }
             else
@@ -213,7 +209,7 @@ public class TileEntityLaptop extends TileEntity implements IInventory {
                     this.inventory[par1] = null;
                 }
 
-                this.onInventoryChanged();
+                this.markDirty();
                 return itemstack;
             }
         }
@@ -246,16 +242,16 @@ public class TileEntityLaptop extends TileEntity implements IInventory {
             itemstack.stackSize = this.getInventoryStackLimit();
         }
 
-        this.onInventoryChanged();
+        this.markDirty();
 	}
 
 	@Override
-	public String getInvName() {
+	public String getInventoryName() {
 		return "";
 	}
 
 	@Override
-	public boolean isInvNameLocalized() {
+	public boolean hasCustomInventoryName() {
 		return false;
 	}
 
@@ -289,19 +285,19 @@ public class TileEntityLaptop extends TileEntity implements IInventory {
     }
 
 	@Override
-	public void openChest() {
+	public void openInventory() {
 		this.isUsedByPlayer = true;
-        this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 1, 1);
+        this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType(), 1, 1);
 	}
 
 	@Override
-	public void closeChest() {
+	public void closeInventory() {
 		this.isUsedByPlayer = false;
-        this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, 1, 0);
+        this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType(), 1, 0);
 	}
 
 	@Override
-	public boolean isStackValidForSlot(int i, ItemStack itemstack) {
+	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
 		return false;
 	}
 

@@ -268,7 +268,7 @@ public class EntityTurret_TSForcefield extends EntityTurret_Base {
 		int bY = MathHelper.floor_double(e.posY);
 		int bZ = MathHelper.floor_double(e.posZ);
 		int side = 0;
-		Vec3 vec = this.worldObj.getWorldVec3Pool().getVecFromPool(e.posX, e.posY, e.posZ);
+		Vec3 vec = this.worldObj.getVecFromPool(e.posX, e.posY, e.posZ);
 		
 		return new MovingObjectPosition(bX, bY, bZ, side, vec);
 	}

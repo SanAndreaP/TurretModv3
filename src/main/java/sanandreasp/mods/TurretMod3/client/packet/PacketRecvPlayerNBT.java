@@ -15,9 +15,9 @@ public class PacketRecvPlayerNBT extends PacketBase {
 	@Override
 	public void handle(DataInputStream iStream, EntityPlayer player) {
 		try {
-			TM3ModRegistry.proxy.initTM3PlayerTag((EntityPlayer) player);
+			TM3ModRegistry.proxy.initTM3PlayerTag(player);
 			NBTTagCompound nbt = ((NBTTagCompound)NBTBase.readNamedTag(iStream));
-			TM3ModRegistry.proxy.setPlayerTM3Data((EntityPlayer)player, nbt);
+			TM3ModRegistry.proxy.setPlayerTM3Data(player, nbt);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

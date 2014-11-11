@@ -62,7 +62,7 @@ public class EntityTurret_T5Artillery extends EntityTurret_Base {
 		double partY = this.posY + this.getEyeHeight() - Math.sin((this.rotationPitch - 90F) / (180F / (float)Math.PI)) * 0.7D;
 		double partZ = this.posZ + rotYawZ * (Math.cos((this.rotationPitch - 90F) / (180F / (float)Math.PI))) * 0.5D;
 		
-		TM3ModRegistry.proxy.spawnParticle(10, partX, partY, partZ, 64, this.worldObj.getWorldInfo().getDimension(), this);
+		TM3ModRegistry.proxy.spawnParticle(10, partX, partY, partZ, 64, this.worldObj.provider.dimensionId, this);
 	}
 	
 	@Override

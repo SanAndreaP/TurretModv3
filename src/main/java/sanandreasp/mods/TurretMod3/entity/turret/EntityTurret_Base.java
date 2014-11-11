@@ -116,7 +116,7 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 	}
 	
 	@Override
-	public boolean attackEntityFrom(DamageSource par1DamageSource, int par2) {
+	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
 		if (par1DamageSource.isFireDamage() && hasFireImmunity())
 			return false;
 		
@@ -257,17 +257,17 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
     	int x = MathHelper.floor_double(this.posX);
     	int y = MathHelper.floor_double(this.posY);
     	int z = MathHelper.floor_double(this.posZ);
-    	TileEntity te = this.worldObj.getBlockTileEntity(x, y, z);
+    	TileEntity te = this.worldObj.getTileEntity(x, y, z);
     	if (te != null && te instanceof IInventory) inventories.add((IInventory) te);
-    	te = this.worldObj.getBlockTileEntity(x + 1, y, z);
+    	te = this.worldObj.getTileEntity(x + 1, y, z);
     	if (te != null && te instanceof IInventory) inventories.add((IInventory) te);
-    	te = this.worldObj.getBlockTileEntity(x, y, z + 1);
+    	te = this.worldObj.getTileEntity(x, y, z + 1);
     	if (te != null && te instanceof IInventory) inventories.add((IInventory) te);
-    	te = this.worldObj.getBlockTileEntity(x - 1, y, z);
+    	te = this.worldObj.getTileEntity(x - 1, y, z);
     	if (te != null && te instanceof IInventory) inventories.add((IInventory) te);
-    	te = this.worldObj.getBlockTileEntity(x, y, z - 1);
+    	te = this.worldObj.getTileEntity(x, y, z - 1);
     	if (te != null && te instanceof IInventory) inventories.add((IInventory) te);
-    	te = this.worldObj.getBlockTileEntity(x, y - 1, z);
+    	te = this.worldObj.getTileEntity(x, y - 1, z);
     	if (te != null && te instanceof IInventory) inventories.add((IInventory) te);
     	int prevInd = inventories.size();
     	for (int i = 0; i < prevInd; i++) {
@@ -304,7 +304,7 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 	
 	@Override
     protected String getDeathSound() {
-    	return "turretmod3.hit.turretDeath";
+    	return "hit.turretDeath";
     }
 	
 	public int getExpCap() {
@@ -321,11 +321,11 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 	
 	@Override
 	protected String getHurtSound() {
-		return "turretmod3.hit.turrethit";
+		return "hit.turrethit";
 	}
 
 	protected String getLivingSound() {
-    	return this.rand.nextInt(10) == 0 && this.isActive() ? "turretmod3.idle.turretidle" : "";
+    	return this.rand.nextInt(10) == 0 && this.isActive() ? "idle.turretidle" : "";
     }
 	
 	public int getMaxAmmo() {
@@ -346,7 +346,7 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 	
 	@Override
 	public ItemStack getPickedResult(MovingObjectPosition target) {
-		return new ItemStack(this.tInfo.getTurretItem().itemID, 1, this.tInfo.getTurretItem().getItemDamage());
+		return new ItemStack(this.tInfo.getTurretItem().getItem(), 1, this.tInfo.getTurretItem().getItemDamage());
 	}
 	
 	public String getPlayerName() {
@@ -482,7 +482,7 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 					this.worldObj.playSoundAtEntity(this, "turretmod3.collect.ia_get", 1.0F, 1.0F);
 					return true;
 				}
-			} else if (held.itemID == TM3ModRegistry.tcu.itemID) {
+			} else if (held.getItem() == TM3ModRegistry.tcu) {
 				if (		(this.riddenByEntity != null
 							&& this.riddenByEntity == par1EntityPlayer
 							|| this.riddenByEntity == null && this.getPlayerName().equals(par1EntityPlayer.username)
@@ -717,7 +717,7 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 	public void onUpdate() {
 		this.motionY -= 0.05;
 		AxisAlignedBB AABBBlock[] = new AxisAlignedBB[2];
-		Block belowBlock = Block.blocksList[this.worldObj.getBlockId(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY)-1, MathHelper.floor_double(this.posZ))];
+		Block belowBlock = this.worldObj.getBlock(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY)-1, MathHelper.floor_double(this.posZ));
 		boolean intercept = false;
 		if (belowBlock != null) {
 			AxisAlignedBB aabb = belowBlock.getCollisionBoundingBoxFromPool(this.worldObj, MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY)-1, MathHelper.floor_double(this.posZ));

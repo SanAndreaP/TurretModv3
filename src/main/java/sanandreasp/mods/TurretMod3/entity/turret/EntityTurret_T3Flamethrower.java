@@ -97,7 +97,7 @@ public class EntityTurret_T3Flamethrower extends EntityTurret_Base {
 		double partY = this.posY + this.getEyeHeight() - Math.sin(this.rotationPitch / (180F / (float)Math.PI)) * 0.7D;
 		double partZ = this.posZ + rotYawZ * (Math.cos(this.rotationPitch / (180F / (float)Math.PI))) * 0.7D;
 		
-		TM3ModRegistry.proxy.spawnParticle(2, partX, partY, partZ, 64, this.worldObj.getWorldInfo().getDimension(), this);
+		TM3ModRegistry.proxy.spawnParticle(2, partX, partY, partZ, 64, this.worldObj.provider.dimensionId, this);
 		
 	    this.worldObj.playSoundAtEntity(this, this.getShootSound(), 1.5F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
 	}

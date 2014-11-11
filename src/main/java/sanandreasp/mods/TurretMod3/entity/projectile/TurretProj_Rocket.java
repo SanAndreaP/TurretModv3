@@ -86,7 +86,7 @@ public class TurretProj_Rocket extends TurretProjectile {
 		}
 		
 		if (this.worldObj.isRemote)
-			TM3ModRegistry.proxy.spawnParticle(5, this.posX, this.posY, this.posZ, 128, this.worldObj.getWorldInfo().getDimension(), this);
+			TM3ModRegistry.proxy.spawnParticle(5, this.posX, this.posY, this.posZ, 128, this.worldObj.provider.dimensionId, this);
 	}
 	
 	@Override
@@ -97,6 +97,6 @@ public class TurretProj_Rocket extends TurretProjectile {
 	@Override
 	public void setDead() {
 		super.setDead();
-		TM3ModRegistry.proxy.spawnParticle(6, this.posX, this.posY, this.posZ, 64, this.worldObj.getWorldInfo().getDimension(), this);
+		TM3ModRegistry.proxy.spawnParticle(6, this.posX, this.posY, this.posZ, 64, this.worldObj.provider.dimensionId, this);
 	}
 }

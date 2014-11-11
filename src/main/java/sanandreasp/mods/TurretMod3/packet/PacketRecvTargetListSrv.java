@@ -70,7 +70,7 @@ public class PacketRecvTargetListSrv extends PacketBase {
 	}
 	
 	public static void sendClient(EntityTurret_Base turret, EntityPlayer player) {
-    	PacketDispatcher.sendPacketToPlayer(getPacket(turret, 0x102), (Player) player);
+    	PacketDispatcher.sendPacketToPlayer(getPacket(turret, 0x102), player);
 	}
 	
 	public static void sendServer(EntityTurret_Base turret) {

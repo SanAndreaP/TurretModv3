@@ -2,6 +2,7 @@ package sanandreasp.mods.TurretMod3.entity.projectile;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.init.Blocks;
 import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
@@ -12,7 +13,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
 
 public class TurretProj_Flame extends TurretProjectile {
 	
@@ -76,15 +76,15 @@ public class TurretProj_Flame extends TurretProjectile {
 		int blockY = MathHelper.floor_double(this.posY)-2;
 		int blockZ = MathHelper.floor_double(this.posZ);
 		
-		Block baseBlock = Block.blocksList[this.worldObj.getBlockId(blockX, blockY, blockZ)];
-		Block aboveBlock = Block.blocksList[this.worldObj.getBlockId(blockX, blockY+1, blockZ)];
+		Block baseBlock = this.worldObj.getBlock(blockX, blockY, blockZ);
+		Block aboveBlock = this.worldObj.getBlock(blockX, blockY + 1, blockZ);
 		
 		if (!this.worldObj.isRemote
 				&& this.isPurified()
 				&& baseBlock != null
 				&& aboveBlock == null
 				&& this.rand.nextInt(2500) == 0) {
-			this.worldObj.setBlock(blockX, blockY+1, blockZ, Block.fire.blockID);
+			this.worldObj.setBlock(blockX, blockY+1, blockZ, Blocks.fire);
 		}
 	}
 	

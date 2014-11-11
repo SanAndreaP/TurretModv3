@@ -1,5 +1,6 @@
 package sanandreasp.mods.TurretMod3.registry.TurretUpgrades;
 
+import net.minecraft.init.Blocks;
 import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_Base;
 import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_T1Arrow;
 import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_T1Shotgun;
@@ -13,16 +14,14 @@ import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_T5Artillery;
 import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_T5Railgun;
 import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_TSHealer;
 import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_TSSnowball;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class TUpgEconomy extends TurretUpgrades {
 
 	public TUpgEconomy() {
-		this.upgName = "turretmod3.upgrades.nameEconomy";
-		this.upgDesc = "turretmod3.upgrades.descEconomy";
-		this.upgItem = new ItemStack(Block.blockGold);
+		this.upgName = "upgrades.nameEconomy";
+		this.upgDesc = "upgrades.descEconomy";
+		this.upgItem = new ItemStack(Blocks.gold_block);
 		
 		this.turrets.add(EntityTurret_T1Arrow.class);
 		this.turrets.add(EntityTurret_T1Shotgun.class);

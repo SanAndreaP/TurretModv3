@@ -2,9 +2,9 @@ package sanandreasp.mods.TurretMod3.registry.TurretInfo;
 
 import java.util.Map;
 
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -18,32 +18,32 @@ public class TurretInfoT2Minigun extends TurretInfo {
 		this.lowerRangeY = 5.5F;
 		this.upperRangeY = 5.5F;
 		this.rangeX = 24.5F;
-		this.desc = "turretmod3.turret.desct2m";
-		this.name = "turretmod3.turret.namet2m";
+		this.desc = "turret.desct2m";
+		this.name = "turret.namet2m";
 		this.crafting = new Object[] {
 				"GDL", " I ", "BBB",
-				'G', new ItemStack(Item.ingotGold),
-				'D', new ItemStack(Block.dispenser),
-				'L', new ItemStack(Item.dyePowder, 1, 4),
-				'I', new ItemStack(Block.blockIron),
-				'B', new ItemStack(Block.stoneBrick)
+				'G', new ItemStack(Items.gold_ingot),
+				'D', new ItemStack(Blocks.dispenser),
+				'L', new ItemStack(Items.dye, 1, 4),
+				'I', new ItemStack(Blocks.iron_block),
+				'B', new ItemStack(Blocks.stonebrick)
 		};
 		this.itemIcon = "TurretMod3:turret_03";
 		
-		int i = this.registerNewAmmoType("turretmod3.turret.amtp0t2m");
-		 this.addAmmo(i, new ItemStack(Item.seeds), 1);
-		i = this.registerNewAmmoType("turretmod3.turret.amtp1t2m");
-		 this.addAmmo(i, new ItemStack(Item.melonSeeds), 1);
-		 this.addAmmo(i, new ItemStack(Item.melon), 1);
-		 this.addAmmo(i, new ItemStack(Block.melon), 8);
-		i = this.registerNewAmmoType("turretmod3.turret.amtp2t2m");
-		 this.addAmmo(i, new ItemStack(Item.pumpkinSeeds), 1);
-		 this.addAmmo(i, new ItemStack(Block.pumpkin), 4);
+		int i = this.registerNewAmmoType("turret.amtp0t2m");
+		 this.addAmmo(i, new ItemStack(Items.wheat_seeds), 1);
+		i = this.registerNewAmmoType("turret.amtp1t2m");
+		 this.addAmmo(i, new ItemStack(Items.melon_seeds), 1);
+		 this.addAmmo(i, new ItemStack(Items.melon), 1);
+		 this.addAmmo(i, new ItemStack(Blocks.melon_block), 8);
+		i = this.registerNewAmmoType("turret.amtp2t2m");
+		 this.addAmmo(i, new ItemStack(Items.pumpkin_seeds), 1);
+		 this.addAmmo(i, new ItemStack(Blocks.pumpkin), 4);
 		
-		this.healItems.put(new ItemStack(Block.blockIron), 20);
-		this.healItems.put(new ItemStack(Item.ingotIron), 2);
-		this.healItems.put(new ItemStack(Item.ingotGold), 8);
-		this.healItems.put(new ItemStack(Item.dyePowder, 1, 4), 8);
-		this.healItems.put(new ItemStack(Block.stoneBrick, 1, OreDictionary.WILDCARD_VALUE), 1);
+		this.healItems.put(new ItemStack(Blocks.iron_block), 20);
+		this.healItems.put(new ItemStack(Items.iron_ingot), 2);
+		this.healItems.put(new ItemStack(Items.gold_ingot), 8);
+		this.healItems.put(new ItemStack(Items.dye, 1, 4), 8);
+		this.healItems.put(new ItemStack(Blocks.stonebrick, 1, OreDictionary.WILDCARD_VALUE), 1);
 	}
 }

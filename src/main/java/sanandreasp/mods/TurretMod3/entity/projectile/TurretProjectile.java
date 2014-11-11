@@ -2,6 +2,7 @@ package sanandreasp.mods.TurretMod3.entity.projectile;
 
 import java.util.List;
 
+import net.minecraft.init.Blocks;
 import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_Base;
 import sanandreasp.mods.TurretMod3.registry.TM3ModRegistry;
 
@@ -25,7 +26,6 @@ import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.packet.Packet70GameEvent;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.pathfinding.PathPoint;
 import net.minecraft.util.AxisAlignedBB;
@@ -214,14 +214,14 @@ public class TurretProjectile extends EntityArrow {
             this.prevRotationPitch = this.rotationPitch = (float)(Math.atan2(this.motionY, (double)var1) * 180.0D / Math.PI);
         }
 
-        int var16 = this.worldObj.getBlockId(this.xTile, this.yTile, this.zTile);
+        Block var16 = this.worldObj.getBlock(this.xTile, this.yTile, this.zTile);
 
-        if (var16 > 0)
+        if (var16 != Blocks.air)
         {
-            Block.blocksList[var16].setBlockBoundsBasedOnState(this.worldObj, this.xTile, this.yTile, this.zTile);
-            AxisAlignedBB var2 = Block.blocksList[var16].getCollisionBoundingBoxFromPool(this.worldObj, this.xTile, this.yTile, this.zTile);
+            var16.setBlockBoundsBasedOnState(this.worldObj, this.xTile, this.yTile, this.zTile);
+            AxisAlignedBB var2 = var16.getCollisionBoundingBoxFromPool(this.worldObj, this.xTile, this.yTile, this.zTile);
 
-            if (var2 != null && var2.isVecInside(this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX, this.posY, this.posZ)))
+            if (var2 != null && var2.isVecInside(this.worldObj.getVecFromPool(this.posX, this.posY, this.posZ)))
             {
                 this.inGround = true;
             }
@@ -234,7 +234,7 @@ public class TurretProjectile extends EntityArrow {
 
         if (this.inGround)
         {
-            int var18 = this.worldObj.getBlockId(this.xTile, this.yTile, this.zTile);
+            Block var18 = this.worldObj.getBlock(this.xTile, this.yTile, this.zTile);
             int var19 = this.worldObj.getBlockMetadata(this.xTile, this.yTile, this.zTile);
 
             if (var18 == this.inTile && var19 == this.inData)
@@ -266,15 +266,15 @@ public class TurretProjectile extends EntityArrow {
         else
         {
             ++this.ticksInAir;
-            Vec3 var17 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX, this.posY, this.posZ);
-            Vec3 var3 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
+            Vec3 var17 = this.worldObj.getVecFromPool(this.posX, this.posY, this.posZ);
+            Vec3 var3 = this.worldObj.getVecFromPool(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
             MovingObjectPosition var4 = this.worldObj.rayTraceBlocks_do_do(var17, var3, false, true);
-            var17 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX, this.posY, this.posZ);
-            var3 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
+            var17 = this.worldObj.getVecFromPool(this.posX, this.posY, this.posZ);
+            var3 = this.worldObj.getVecFromPool(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
 
             if (var4 != null)
             {
-                var3 = this.worldObj.getWorldVec3Pool().getVecFromPool(var4.hitVec.xCoord, var4.hitVec.yCoord, var4.hitVec.zCoord);
+                var3 = this.worldObj.getVecFromPool(var4.hitVec.xCoord, var4.hitVec.yCoord, var4.hitVec.zCoord);
             }
 
             Entity var5 = null;

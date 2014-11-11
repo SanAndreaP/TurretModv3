@@ -2,6 +2,8 @@ package sanandreasp.mods.TurretMod3.client.registry;
 
 import java.util.EnumSet;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
 import org.lwjgl.opengl.GL11;
 
 import sanandreasp.mods.TurretMod3.entity.turret.EntityTurret_Base;
@@ -24,32 +26,27 @@ import net.minecraft.util.MathHelper;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
 
-public class TickHandlerClientRnd implements ITickHandler {
-	private Minecraft mc;
+public class TickHandlerClientRnd {
 	private FontRenderer nbFont;
 
 	public TickHandlerClientRnd() {
-		this.mc = Minecraft.getMinecraft();
 		this.nbFont = new FontRenderer(mc.gameSettings, "/font/default.png", mc.renderEngine, false);
 	}
 
-	@Override
-	public void tickStart(EnumSet<TickType> type, Object... tickData) { }
-
-	@Override
-	public void tickEnd(EnumSet<TickType> type, Object... tickData) {
-		if (type.equals(EnumSet.of(TickType.RENDER))) {
-			if (this.mc.thePlayer != null 
-					&& this.mc.thePlayer.ridingEntity != null 
-					&& this.mc.thePlayer.ridingEntity instanceof EntityTurret_Base
-					&& this.mc.currentScreen == null 
-					&& !this.mc.gameSettings.showDebugInfo) {
-				ScaledResolution scaledRes = new ScaledResolution(this.mc.gameSettings, this.mc.displayWidth, this.mc.displayHeight);
+	@SubscribeEvent
+	public void tickEnd(TickEvent.RenderTickEvent event) {
+		if (event.phase == TickEvent.Phase.END) {
+            Minecraft mc = Minecraft.getMinecraft();
+			if (mc.thePlayer != null
+					&& mc.thePlayer.ridingEntity instanceof EntityTurret_Base
+					&& mc.currentScreen == null
+					&& !mc.gameSettings.showDebugInfo) {
+				ScaledResolution scaledRes = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
 				
-				EntityTurret_Base turret = (EntityTurret_Base) this.mc.thePlayer.ridingEntity;
+				EntityTurret_Base turret = (EntityTurret_Base) mc.thePlayer.ridingEntity;
 				TurretInfo tInf = TurretInfo.getTurretInfo(turret.getClass());
 				
-				this.mc.func_110434_K().func_110577_a(TM3ModRegistry.TEX_TURRETCAM);
+				this.mc.getTextureManager().bindTexture(TM3ModRegistry.TEX_TURRETCAM);
 				
 		        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 				float perc = (float)turret.getSrvHealth() / (float)turret.func_110138_aP();
@@ -88,36 +85,26 @@ public class TickHandlerClientRnd implements ITickHandler {
 				}
 				
 				s = tInf.getTurretName();
-				drawStringWithFrame(this.mc.fontRenderer, s, scaledRes.getScaledWidth() - this.mc.fontRenderer.getStringWidth(s) - 5, 5, 0xFFFFFF, 0x000000);
+				drawStringWithFrame(mc.fontRenderer, s, scaledRes.getScaledWidth() - mc.fontRenderer.getStringWidth(s) - 5, 5, 0xFFFFFF, 0x000000);
 				s = tInf.getAmmoTypeNameFromIndex(turret.getAmmoType());
-				drawStringWithFrame(this.mc.fontRenderer, s, scaledRes.getScaledWidth() - this.mc.fontRenderer.getStringWidth(s) - 5, 17, 0xFFFFFF, 0x000000);
+				drawStringWithFrame(mc.fontRenderer, s, scaledRes.getScaledWidth() - mc.fontRenderer.getStringWidth(s) - 5, 17, 0xFFFFFF, 0x000000);
 				
-		        if (!this.mc.playerController.enableEverythingIsScrewedUpMode())
+		        if (!mc.playerController.enableEverythingIsScrewedUpMode())
 		        {
 		        	int icon = 0;
-		        	if (TM3ModRegistry.proxy.getPlayerTM3Data(this.mc.thePlayer).hasKey("tcCrosshair"))
-		        		icon = TM3ModRegistry.proxy.getPlayerTM3Data(this.mc.thePlayer).getByte("tcCrosshair");
+		        	if (TM3ModRegistry.proxy.getPlayerTM3Data(mc.thePlayer).hasKey("tcCrosshair"))
+		        		icon = TM3ModRegistry.proxy.getPlayerTM3Data(mc.thePlayer).getByte("tcCrosshair");
 		        	GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		            this.mc.func_110434_K().func_110577_a("/gui/icons.png");
+		            mc.getTextureManager().bindTexture("/gui/icons.png");
 		            GL11.glEnable(GL11.GL_BLEND);
 		            GL11.glBlendFunc(GL11.GL_ONE_MINUS_DST_COLOR, GL11.GL_ONE_MINUS_SRC_COLOR);
 		            this.drawTexturedModalRect(scaledRes.getScaledWidth() / 2 - 7, scaledRes.getScaledHeight() / 2 - 7, 0, 0, 16, 16, 1);
-		            this.mc.func_110434_K().func_110577_a(TM3ModRegistry.TEX_TURRETCAM);
+		            mc.getTextureManager().bindTexture(TM3ModRegistry.TEX_TURRETCAM);
 		            this.drawTexturedModalRect(scaledRes.getScaledWidth() / 2 - 7, scaledRes.getScaledHeight() / 2 - 7, icon * 16, 40, 16, 16, 1);
 		            GL11.glDisable(GL11.GL_BLEND);
 		        }
 			}
 		}
-	}
-
-	@Override
-	public EnumSet<TickType> ticks() {
-		return EnumSet.of(TickType.RENDER);
-	}
-
-	@Override
-	public String getLabel() {
-		return "TurretModRndTicks";
 	}
 	
 	private void drawStringWithFrame(FontRenderer par0FontRenderer, String par1String, int par2X, int par3Y, int par4FgColor, int par5BgColor) {
