@@ -2,9 +2,9 @@ package sanandreasp.mods.turretmod3.entity.turret;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.logging.Level;
 import java.util.List;
 
+import net.minecraft.entity.EntityLivingBase;
 import sanandreasp.mods.turretmod3.entity.projectile.TurretProjectile;
 import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgShieldMobPush;
@@ -243,7 +243,7 @@ public class EntityTurret_TSForcefield extends EntityTurret_Base {
 		}
 	}
 	
-	private boolean isTargetValidINF(EntityLiving entity) {
+	private boolean isTargetValidINF(EntityLivingBase entity) {
 		return this.isTargetValid(entity, Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY, true);
 	}
 	

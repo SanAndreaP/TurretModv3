@@ -80,7 +80,7 @@ public class ItemTurret extends Item {
             var8.setLocationAndAngles(par2, par4, par6, MathHelper.wrapAngleTo180_float(par0World.rand.nextFloat() * 360.0F), 0.0F);
             var10.rotationYawHead = var10.rotationYaw;
             var10.renderYawOffset = var10.rotationYaw;
-            var10.setPlayerName(par7Player.username);
+            var10.setPlayerName(par7Player.getCommandSenderName());
             
             Map<String, Boolean> tgt = getTargets(par1);
             var10.targets = tgt;

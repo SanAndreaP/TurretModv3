@@ -3,6 +3,8 @@ package sanandreasp.mods.turretmod3.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.item.Item;
+import net.minecraftforge.common.util.Constants;
 import sanandreasp.mods.turretmod3.inventory.InventoryDismantleStorage;
 import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 import sanandreasp.mods.turretmod3.registry.TurretInfo.TurretInfo;
@@ -38,12 +40,6 @@ public class EntityDismantleStorage extends EntityLiving {
 	
 	public void toggleCheckForDestroy() {
 		this.checkForDestroy = !this.checkForDestroy;
-	}
-	
-	@Override
-	@SideOnly(Side.CLIENT)
-	public String getTexture() {
-		return "/item/chest.png";
 	}
 	
 	protected boolean isMovementBlocked() {
@@ -88,9 +84,9 @@ public class EntityDismantleStorage extends EntityLiving {
             			String s = "";
             			ItemStack is = ((ItemStack)obj);
             			if (is.getItem() instanceof ItemBlock) {
-            				s = "tilecrack_"+is.itemID+"_"+is.getItemDamage();
+            				s = "tilecrack_"+ Item.getIdFromItem(is.getItem())+"_"+is.getItemDamage();
             			} else {
-                			s = "iconcrack_"+is.itemID;
+                			s = "iconcrack_"+Item.getIdFromItem(is.getItem());
             			}
             			this.worldObj.spawnParticle(s, this.posX + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, this.posY + (double)(this.rand.nextFloat() * this.height), this.posZ + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, 0D, 0D, 0D);
             		}
@@ -114,7 +110,7 @@ public class EntityDismantleStorage extends EntityLiving {
 	
 	@Override
 	public boolean interact(EntityPlayer par1EntityPlayer) {
-		if (!worldObj.isRemote) par1EntityPlayer.openGui(TM3ModRegistry.instance, 2, this.worldObj, this.entityId, 0, 0);
+		if (!worldObj.isRemote) par1EntityPlayer.openGui(TM3ModRegistry.instance, 2, this.worldObj, this.getEntityId(), 0, 0);
 		return true;
 	}
 	
@@ -127,11 +123,11 @@ public class EntityDismantleStorage extends EntityLiving {
 		
 		this.dataWatcher.updateObject(20, par1.getInteger("turretCls"));
     	
-        NBTTagList var1 = par1.getTagList("Inventory");
+        NBTTagList var1 = par1.getTagList("Inventory", Constants.NBT.TAG_COMPOUND);
 
         for (int var2 = 0; var2 < var1.tagCount(); ++var2)
         {
-            NBTTagCompound var3 = (NBTTagCompound)var1.tagAt(var2);
+            NBTTagCompound var3 = var1.getCompoundTagAt(var2);
             int slot = var3.getInteger("slot");
             ItemStack is = ItemStack.loadItemStackFromNBT(var3);
             this.inventory.setInventorySlotContents(slot, is);

@@ -3,6 +3,7 @@ package sanandreasp.mods.turretmod3.client.render;
 import java.util.Iterator;
 import java.util.Map;
 
+import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import com.google.common.collect.Maps;
@@ -23,7 +24,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.world.World;
 
 public class RenderDismantleStorage extends RenderLiving {
-
+    private ResourceLocation CHEST = new ResourceLocation("/item/chest.png");
 	public RenderDismantleStorage(ModelBase par1ModelBase, float par2) {
 		super(par1ModelBase, par2);
 	}
@@ -68,5 +69,9 @@ public class RenderDismantleStorage extends RenderLiving {
 	protected float getDeathMaxRotation(EntityLiving par1EntityLiving) {
 		return 0F;
 	}
-	
+
+    @Override
+    protected ResourceLocation getEntityTexture(Entity p_110775_1_) {
+        return CHEST;
+    }
 }

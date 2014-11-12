@@ -23,12 +23,6 @@ public class EntityMobileBase extends EntityLiving implements IHealable {
 		
 		this.dataWatcher.addObject(20, (byte) 0);
 	}
-	
-	@Override
-	@SideOnly(Side.CLIENT)
-	public String getTexture() {
-		return TM3ModRegistry.TEX_MOBILEBASE;
-	}
 
 	@Override
 	public int func_110138_aP() {

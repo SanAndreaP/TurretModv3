@@ -1,5 +1,6 @@
 package sanandreasp.mods.turretmod3.entity.turret;
 
+import net.minecraft.entity.EntityLivingBase;
 import sanandreasp.mods.turretmod3.entity.IHealable;
 import sanandreasp.mods.turretmod3.entity.projectile.TurretProjectile;
 import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
@@ -55,7 +56,7 @@ public class EntityTurret_TSHealer extends EntityTurret_Base {
 		super.onUpdate();
 		
 		if (!this.worldObj.isRemote && this.currentTarget != null) {
-			this.dataWatcher.updateObject(19, this.currentTarget.entityId);
+			this.dataWatcher.updateObject(19, this.currentTarget.getEntityId());
 		}
 		
 		if (this.currentTarget == null || this.getAmmo() <= 0) {
@@ -73,7 +74,7 @@ public class EntityTurret_TSHealer extends EntityTurret_Base {
 	}
 	
 	@Override
-	public boolean isTargetValid(EntityLiving entity) {
+	public boolean isTargetValid(EntityLivingBase entity) {
 		float var1 = (float)wdtRange;
         boolean inList = !isEntityTargeted(entity) && entity instanceof IHealable;
         

@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.Random;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraft.item.ItemRecord;
 import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityCreeper;
@@ -42,16 +43,16 @@ public class ServerEvents {
 		if (!(event.entityLiving instanceof EntityPlayer)) {
 			if (event.entityLiving instanceof EntityCreeper
 					&& event.source.getEntity() instanceof EntitySkeleton
-					&& this.rand.nextInt(Item.recordWait.itemID - Item.record13.itemID + 2) == 0) {
+					&& this.rand.nextInt(14) == 0) {
 				Iterator<EntityItem> iter = event.drops.iterator();
 				while(iter.hasNext()) {
 					EntityItem e = iter.next();
-					int itmID = e.getEntityItem().itemID;
-					if (itmID >= Item.record13.itemID && itmID <= Item.recordWait.itemID) {
+					Item itmID = e.getEntityItem().getItem();
+					if (itmID instanceof ItemRecord) {
 						iter.remove();
 					}
 				}
-				event.drops.add(new EntityItem(event.entityLiving.worldObj, event.entityLiving.posX, event.entityLiving.posY, event.entityLiving.posZ, new ItemStack(TM3ModRegistry.turretRec1, 1)));
+				event.drops.add(new EntityItem(event.entityLiving.worldObj, event.entityLiving.posX, event.entityLiving.posY, event.entityLiving.posZ, new ItemStack(TM3ModRegistry.turretRec1)));
 			}
 			
 			
@@ -61,7 +62,7 @@ public class ServerEvents {
 				playerName = turret.getPlayerName();
 			} else if (event.source.getEntity() instanceof EntityPlayer) {
 				EntityPlayer player = (EntityPlayer)event.source.getEntity();
-				playerName = player.username;
+				playerName = player.getCommandSenderName();
 			}
 
 			if (playerName != null && playerName.length() > 0) {
@@ -79,12 +80,12 @@ public class ServerEvents {
 		Iterator<EntityItem> iter = event.drops.iterator();
 		while(iter.hasNext()) {
 			EntityItem eItem = iter.next();
-			eItem.getEntityData().setString("TM3_PlayerName", event.entityPlayer.username);
+			eItem.getEntityData().setString("TM3_PlayerName", event.entityPlayer.getCommandSenderName());
 		}
 	}
 
 	@SubscribeEvent
 	public void onPlayerToss(ItemTossEvent event) {
-		event.entityItem.getEntityData().setString("TM3_PlayerName", event.player.username);
+		event.entityItem.getEntityData().setString("TM3_PlayerName", event.player.getCommandSenderName());
 	}
 }
