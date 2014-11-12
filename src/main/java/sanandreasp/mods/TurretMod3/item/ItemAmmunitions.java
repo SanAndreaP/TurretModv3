@@ -44,7 +44,8 @@ public class ItemAmmunitions extends Item {
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
 		for (int id : dmgLangMapping.keySet())
-			par3List.add(new ItemStack(this, 1, id));
+            if(id!=9)
+			    par3List.add(new ItemStack(par1, 1, id));
 	}
 	
 	public static void addAmmoItem(int dmg, String langStr) {

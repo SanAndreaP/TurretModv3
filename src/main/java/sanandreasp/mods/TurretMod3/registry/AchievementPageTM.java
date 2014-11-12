@@ -14,16 +14,6 @@ public class AchievementPageTM {
 	public static Achievement camKill;
 	public static Achievement upgrade;
 	public static Achievement piercing;
-	
-	public static int[] achievementIDs = new int[] {
-		4000,
-		4001,
-		4002,
-		4003,
-		4004,
-		4005,
-		4006
-	};
 
 	public static void initAchievementPage() {
 		turretInfo = new Achievement("Turret Info", "turretmod3.tinfo", 0, 0, new ItemStack(TM3ModRegistry.tInfoBook), null).registerStat();
@@ -32,7 +22,7 @@ public class AchievementPageTM {
 		control = new Achievement("Control", "turretmod3.control", 0, 2, new ItemStack(TM3ModRegistry.tcu), turretInfo).registerStat();
 		camKill = new Achievement("Cam Kill", "turretmod3.camKill", -2, 2, new ItemStack(Items.saddle), control).registerStat();
 		upgrade = new Achievement("Upgrade", "turretmod3.upgrade", 2, 2, new ItemStack(Items.golden_sword), control).registerStat();
-		piercing = new Achievement("Piercing", "turretmod3.piercing", -4, 0, new ItemStack(TM3ModRegistry.iconCache, 1, 0), firstStrike).registerStat();
+		piercing = new Achievement("Piercing", "turretmod3.piercing", -4, 0, new ItemStack(TM3ModRegistry.ammoItems, 1, 9), firstStrike).registerStat();
 		
 		AchievementPage.registerAchievementPage(new AchievementPage("Turret Mod 3", 
 				turretInfo,
