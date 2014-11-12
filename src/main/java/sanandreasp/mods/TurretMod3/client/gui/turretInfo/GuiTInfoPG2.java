@@ -1,12 +1,13 @@
 package sanandreasp.mods.turretmod3.client.gui.turretInfo;
 
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
 
 import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 
 public class GuiTInfoPG2 extends GuiTInfoBase {
-
+    private final static ResourceLocation PAGE_2 = new ResourceLocation(TM3ModRegistry.TEX_GUIINFO + "page_2.png");
 	public GuiTInfoPG2(int pg) {
 		this.allowUserInput = true;
 		this.site = pg;
@@ -22,7 +23,7 @@ public class GuiTInfoPG2 extends GuiTInfoBase {
 	public void drawScreen(int par1, int par2, float par3) {
         this.drawDefaultBackground();
         
-		this.mc.getTextureManager().bindTexture(TM3ModRegistry.TEX_GUIINFO + "page_2.png");
+		this.mc.getTextureManager().bindTexture(PAGE_2);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, xSize, ySize);
         
@@ -80,7 +81,7 @@ public class GuiTInfoPG2 extends GuiTInfoBase {
     	this.fontRendererObj.drawString(value, this.guiLeft + 15, this.guiTop + 162, 0x000000);
     	this.customFR.drawSplitString(desc, this.guiLeft + 11, this.guiTop + 171, 157, 0x606060);
 
-		this.mc.getTextureManager().bindTexture(TM3ModRegistry.TEX_GUIINFO + "page_2.png");
+		this.mc.getTextureManager().bindTexture(PAGE_2);
         GL11.glColor4f(1.0F, 0.3F, 0.3F, 1.0F);
         drawTexturedModalRect(this.guiLeft + 136, this.guiTop + 51, 176, 32, 16, 16);
         drawTexturedModalRect(this.guiLeft + 43, this.guiTop + 131, 176, 32, 16, 16);

@@ -1,80 +1,74 @@
 package sanandreasp.mods.turretmod3.packet;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import com.google.common.collect.Maps;
 
-import cpw.mods.fml.common.network.PacketDispatcher;
-import cpw.mods.fml.common.network.Player;
+import cpw.mods.fml.common.network.ByteBufUtils;
 
+import io.netty.buffer.ByteBuf;
+import net.minecraftforge.common.util.Constants;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 import sanandreasp.mods.turretmod3.tileentity.TileEntityLaptop;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
 
 public class PacketRecvLaptopTargets extends PacketBase {
-
+    private int x, y, z;
+    private NBTTagCompound tag;
 	@Override
-	public void handle(DataInputStream iStream, EntityPlayer player) {
-		try {
-			NBTTagCompound nbt = (NBTTagCompound) NBTBase.readNamedTag(iStream);
-			Map<String, Boolean> tgt = Maps.newHashMap();
-	        NBTTagList var1 = nbt.getTagList("targetsTag");
+	public void handle(EntityPlayer player) {
+        TileEntity te = player.worldObj.getTileEntity(x, y, z);
+        if (te != null && te instanceof TileEntityLaptop) {
+            Map<String, Boolean> tgt = Maps.newHashMap();
+            NBTTagList var1 = tag.getTagList("targetsTag", Constants.NBT.TAG_COMPOUND);
 
-	        for (int var2 = 0; var2 < var1.tagCount(); ++var2)
-	        {
-	            NBTTagCompound var3 = (NBTTagCompound)var1.tagAt(var2);
-	            tgt.put(var3.getString("tgName"), var3.getBoolean("isEnabled"));
-	        }
-			
-	        TileEntity te = player.worldObj.getBlockTileEntity(iStream.readInt(), iStream.readInt(), iStream.readInt());
-	        if (te != null && te instanceof TileEntityLaptop) {
-	        	((TileEntityLaptop)te).programItemsTargets(tgt);
-	        	player.openContainer.detectAndSendChanges();
-	        }
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+            for (int var2 = 0; var2 < var1.tagCount(); ++var2)
+            {
+                NBTTagCompound var3 = var1.getCompoundTagAt(var2);
+                tgt.put(var3.getString("tgName"), var3.getBoolean("isEnabled"));
+            }
+            ((TileEntityLaptop)te).programItemsTargets(tgt);
+            player.openContainer.detectAndSendChanges();
+        }
 	}
-	
-	private static Packet250CustomPayload getPacket(Map<String, Boolean> list, TileEntity te, int id) {
-		NBTTagCompound nbt = new NBTTagCompound();				
-		NBTTagList nbtList = new NBTTagList("targetList");				
+    public PacketRecvLaptopTargets(){}
+	public PacketRecvLaptopTargets(Map<String, Boolean> list, TileEntity te) {
+        x = te.xCoord;
+        y = te.yCoord;
+        z = te.zCoord;
+		tag = new NBTTagCompound();
+		NBTTagList nbtList = new NBTTagList();
 		for (Entry<String, Boolean> target : list.entrySet()) {
 			NBTTagCompound var4 = new NBTTagCompound();
             var4.setString("tgName", target.getKey());
             var4.setBoolean("isEnabled", target.getValue());
             nbtList.appendTag(var4);
 		}
-		nbt.setTag("targetsTag", nbtList);
-		
-    	ByteArrayOutputStream b = new ByteArrayOutputStream();
-		try {
-			DataOutputStream o = new DataOutputStream(b);
-	    	o.writeInt(id);
-	    	NBTBase.writeNamedTag(nbt, o);
-	    	o.writeInt(te.xCoord);
-	    	o.writeInt(te.yCoord);
-	    	o.writeInt(te.zCoord);
-	    	
-	    	return new Packet250CustomPayload(PacketHandlerCommon.getChannel(), b.toByteArray());
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
-		return null;
+		tag.setTag("targetsTag", nbtList);
 	}
 	
 	public static void sendServer(Map<String, Boolean> list, TileEntity te) {
-    	PacketDispatcher.sendPacketToServer(getPacket(list, te, 0x004));
+    	TM3ModRegistry.networkWrapper.sendToServer(new PacketRecvLaptopTargets(list, te));
 	}
 
+    @Override
+    public void fromBytes(ByteBuf buf) {
+        x = buf.readInt();
+        y = buf.readInt();
+        z = buf.readInt();
+        tag = ByteBufUtils.readTag(buf);
+    }
+
+    @Override
+    public void toBytes(ByteBuf buf) {
+        buf.writeInt(x);
+        buf.writeInt(y);
+        buf.writeInt(z);
+        ByteBufUtils.writeTag(buf, tag);
+    }
 }

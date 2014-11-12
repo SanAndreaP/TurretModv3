@@ -13,8 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.StatCollector;
-
-import static sanandreasp.mods.managers.CommonUsedStuff.CUS;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 
 public abstract class TurretUpgrades {
 	protected int id;
@@ -93,7 +92,7 @@ public abstract class TurretUpgrades {
 		if (stack == null) return null;
 		for (int i = 0; i < upgradeListINT.size(); i++) {
 			TurretUpgrades upg = getUpgradeFromID(i);
-			if (CUS.areStacksEqualWithWCV(upg.getItem(), stack) && (turretCls == null || isUpgradeForTurret(upg, turretCls)))
+			if (TM3ModRegistry.areStacksEqualWithWildcard(upg.getItem(), stack) && (turretCls == null || isUpgradeForTurret(upg, turretCls)))
 				return getUpgradeFromID(i);
 		}
 		return null;
@@ -114,11 +113,11 @@ public abstract class TurretUpgrades {
 		
 		if (upgMap.containsKey(chkUpg.getUpgradeID()) && upgMap.get(chkUpg.getUpgradeID()) != null) {
 			ItemStack is = upgMap.get(chkUpg.getUpgradeID());
-			if (CUS.areStacksEqualWithWCV(chkUpg.getItem(), is)) {
+			if (TM3ModRegistry.areStacksEqualWithWildcard(chkUpg.getItem(), is)) {
 				if (is.isItemEnchanted() && chkUpg.getEnchantment() != null) {
 					NBTTagList ench = is.getEnchantmentTagList();
 					for (int j = 0; j < ench.tagCount(); ++j) {
-						NBTTagCompound var4 = (NBTTagCompound)ench.tagAt(j);
+						NBTTagCompound var4 = (NBTTagCompound)ench.getCompoundTagAt(j);
 						if (var4.getShort("id") == chkUpg.getEnchantment().effectId) {
 							return true;
 						}
@@ -139,11 +138,11 @@ public abstract class TurretUpgrades {
 		TurretUpgrades chkUpg = upgradeListCLT.get(tUpg);
 		
 		for (ItemStack is : upgMap) {
-			if (CUS.areStacksEqualWithWCV(chkUpg.getItem(), is)) {
+			if (TM3ModRegistry.areStacksEqualWithWildcard(chkUpg.getItem(), is)) {
 				if (is.isItemEnchanted() && chkUpg.getEnchantment() != null) {
 					NBTTagList ench = is.getEnchantmentTagList();
 					for (int j = 0; j < ench.tagCount(); ++j) {
-						NBTTagCompound var4 = (NBTTagCompound)ench.tagAt(j);
+						NBTTagCompound var4 = (NBTTagCompound)ench.getCompoundTagAt(j);
 						if (var4.getShort("id") == chkUpg.getEnchantment().effectId) {
 							return true;
 						}

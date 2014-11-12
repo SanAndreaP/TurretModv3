@@ -3,19 +3,30 @@ package sanandreasp.mods.turretmod3.packet;
 import java.io.DataInputStream;
 import java.io.IOException;
 
+import io.netty.buffer.ByteBuf;
 import sanandreasp.mods.turretmod3.entity.EntityMobileBase;
 import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
 
 import net.minecraft.entity.player.EntityPlayer;
 
 public class PacketRecvTurretSettings extends PacketBase {
+    private int eID;
+    private byte type;
+    private int freq;
+    public PacketRecvTurretSettings(){}
+    public PacketRecvTurretSettings(int entity, byte action){
+        eID = entity;
+        type = action;
+    }
+    public PacketRecvTurretSettings(int entity, byte action, int frequency){
+        this(entity, action);
+        freq = frequency;
+    }
 
 	@Override
-	public void handle(DataInputStream iStream, EntityPlayer player) {
-		try {
-			EntityTurret_Base turret = (EntityTurret_Base) player.worldObj.getEntityByID(iStream.readInt());
-			byte b = iStream.readByte();
-			switch(b) {
+	public void handle(EntityPlayer player) {
+			EntityTurret_Base turret = (EntityTurret_Base) player.worldObj.getEntityByID(eID);
+			switch(type) {
 				case 0x0:
 					turret.dismantle();
 					break;
@@ -54,7 +65,7 @@ public class PacketRecvTurretSettings extends PacketBase {
 					break;
 				case 0x5:
 					try {
-						turret.setFrequency(Integer.valueOf(iStream.readUTF()));
+						turret.setFrequency(freq);
 					} catch (NumberFormatException nfe) {
 						;
 					}
@@ -63,9 +74,19 @@ public class PacketRecvTurretSettings extends PacketBase {
 					turret.setActiveState(!turret.isActive());
 					break;
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		};
 	}
 
+    @Override
+    public void fromBytes(ByteBuf buf) {
+        eID = buf.readInt();
+        type = buf.readByte();
+        freq = buf.readInt();
+    }
+
+    @Override
+    public void toBytes(ByteBuf buf) {
+        buf.writeInt(eID);
+        buf.writeByte(type);
+        buf.writeInt(freq);
+    }
 }

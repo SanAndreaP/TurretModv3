@@ -5,67 +5,45 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import cpw.mods.fml.common.network.PacketDispatcher;
-import cpw.mods.fml.common.network.Player;
-
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.entity.player.EntityPlayerMP;
+import sanandreasp.mods.turretmod3.client.packet.PacketRecvUpgrades;
 import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.world.WorldServer;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 
 public class PacketSendUpgrades extends PacketBase {
-
+    private int eID;
+    public PacketSendUpgrades(){}
+    private PacketSendUpgrades(int entity){
+        eID = entity;
+    }
 	@Override
-	public void handle(DataInputStream iStream, EntityPlayer player) {
-		try {
-			int eID = iStream.readInt();
-			EntityTurret_Base turret = (EntityTurret_Base) ((WorldServer)player.worldObj).getEntityByID(eID);
-			if (turret == null || turret.upgrades == null) return;
-	    	ByteArrayOutputStream b = new ByteArrayOutputStream();
-	    	DataOutputStream o = new DataOutputStream(b);
-	    	o.writeInt(0x100);
-	    	
-			NBTTagCompound nbt = new NBTTagCompound("tuPkg");
-			
-			nbt.setInteger("eID", eID);
-
-	        NBTTagList var2 = new NBTTagList();
-
-	        for (int upgradeID : turret.upgrades.keySet())
-	        {
-	            NBTTagCompound var4 = new NBTTagCompound();
-	            var4.setInteger("UgID", upgradeID);
-	            turret.upgrades.get(upgradeID).writeToNBT(var4);
-	            var2.appendTag(var4);
-	        }
-
-	        nbt.setTag("TurretUpgrades", var2);
-	        
-	        NBTBase.writeNamedTag(nbt, o);
-	        
-			Packet250CustomPayload packetTrans = new Packet250CustomPayload(PacketHandlerCommon.getChannel(), b.toByteArray());
-			PacketDispatcher.sendPacketToPlayer(packetTrans, player);
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public void handle(EntityPlayer player) {
+        EntityTurret_Base turret = (EntityTurret_Base) player.worldObj.getEntityByID(eID);
+        if (turret == null || turret.upgrades == null) return;
+        if(player instanceof EntityPlayerMP) {
+            IMessage packetTrans = new PacketRecvUpgrades(turret);
+            TM3ModRegistry.networkWrapper.sendTo(packetTrans, (EntityPlayerMP)player);
+        }
 	}
 	
 	public static void send(EntityTurret_Base etb) {
-		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		DataOutputStream dos = new DataOutputStream(bos);
-		try {
-			dos.writeInt(0x000);
-			dos.writeInt(etb.entityId);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		PacketDispatcher.sendPacketToServer(new Packet250CustomPayload(PacketHandlerCommon.getChannel(), bos.toByteArray()));
+        TM3ModRegistry.networkWrapper.sendToServer(new PacketSendUpgrades(etb.getEntityId()));
 	}
+
+    @Override
+    public void fromBytes(ByteBuf buf) {
+        eID = buf.readInt();
+    }
+
+    @Override
+    public void toBytes(ByteBuf buf) {
+        buf.writeInt(eID);
+    }
 }

@@ -4,7 +4,14 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.common.MinecraftForge;
+import sanandreasp.mods.turretmod3.client.packet.PacketRecvPlayerNBT;
+import sanandreasp.mods.turretmod3.client.packet.PacketRecvSpawnParticle;
 import sanandreasp.mods.turretmod3.packet.PacketHandlerCommon;
 
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -18,7 +25,6 @@ import net.minecraft.server.MinecraftServer;
 public class CommonProxy {
 	
 	public void registerRenderInformation() {
-		;
 	}
 	
 	public void initTM3PlayerTag(EntityPlayer player) {
@@ -31,20 +37,11 @@ public class CommonProxy {
 		}
 		
 		if (!persNBT.hasKey("TurretMod3NBT")) {
-			persNBT.setTag("TurretMod3NBT", new NBTTagCompound("TM3NBT"));
+			persNBT.setTag("TurretMod3NBT", new NBTTagCompound());
 		}
-		
-		
-		if (MinecraftServer.getServer() != null) {
-		}
-		
-		if (!player.worldObj.isRemote) {
-			boolean b = MinecraftServer.getServer().getConfigurationManager().getOps().contains(player.username.trim().toLowerCase());
-			b = b || (MinecraftServer.getServer() != null 
-						&& MinecraftServer.getServer().getServerOwner() != null 
-						&& MinecraftServer.getServer().getServerOwner().equalsIgnoreCase(player.username) 
-						&& MinecraftServer.getServer().isSinglePlayer()
-					);
+
+		if (!player.worldObj.isRemote && MinecraftServer.getServer() != null) {
+			boolean b = MinecraftServer.getServer().getConfigurationManager().func_152596_g(player.getGameProfile());
 			this.getPlayerTM3Data(player).setBoolean("isOP", b);
 			sendTM3NBTToClient(player);
 		}
@@ -59,39 +56,23 @@ public class CommonProxy {
 	}
 	
 	private void sendTM3NBTToClient(EntityPlayer player) {
-		try {
-			ByteArrayOutputStream b = new ByteArrayOutputStream();
-			DataOutputStream o = new DataOutputStream(b);
-			o.writeInt(0x101);
-			NBTTagCompound nbt = getPlayerTM3Data(player);
-	        NBTBase.writeNamedTag(nbt, o);
-			Packet250CustomPayload packetTrans = new Packet250CustomPayload(PacketHandlerCommon.getChannel(), b.toByteArray());
-			PacketDispatcher.sendPacketToPlayer(packetTrans, player);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+        if(player instanceof EntityPlayerMP) {
+            IMessage packetTrans = new PacketRecvPlayerNBT(getPlayerTM3Data(player));
+            TM3ModRegistry.networkWrapper.sendTo(packetTrans, (EntityPlayerMP)player);
+        }
 	}
 	
 	public void spawnParticle(int ID, double partX, double partY, double partZ, int dist, int dimID, Entity entity) {
-		try {
-			ByteArrayOutputStream bos = new ByteArrayOutputStream();
-			DataOutputStream dos = new DataOutputStream(bos);
-			
-			dos.writeInt(0x103);
-			dos.writeShort(ID);
-			dos.writeFloat((float) partX);
-			dos.writeFloat((float) partY);
-			dos.writeFloat((float) partZ);
-			dos.writeInt(entity != null ? entity.entityId : -1);
-			
-			PacketDispatcher.sendPacketToAllAround(partX, partY, partZ, dist, dimID, new Packet250CustomPayload(PacketHandlerCommon.getChannel(), bos.toByteArray()));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+        if(entity!=null)
+            TM3ModRegistry.networkWrapper.sendToAllAround(new PacketRecvSpawnParticle((short)ID, entity.getEntityId(), partX, partY, partZ), new NetworkRegistry.TargetPoint(dimID, partX, partY, partZ, dist));
 	}
 
     public void registerHandlers() {
         MinecraftForge.EVENT_BUS.register(new ServerEvents());
         FMLCommonHandler.instance().bus().register(new SchedTickHandlerWorld());
+    }
+
+    public EntityPlayer getPlayer(MessageContext context) {
+        return context.getServerHandler().playerEntity;
     }
 }

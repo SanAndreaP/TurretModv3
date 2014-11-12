@@ -1,51 +1,50 @@
 package sanandreasp.mods.turretmod3.packet;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import com.google.common.collect.Maps;
 
-import cpw.mods.fml.common.network.PacketDispatcher;
-import cpw.mods.fml.common.network.Player;
+import cpw.mods.fml.common.network.ByteBufUtils;
 
+import io.netty.buffer.ByteBuf;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraftforge.common.util.Constants;
 import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.packet.Packet250CustomPayload;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 
 public class PacketRecvTargetListSrv extends PacketBase {
-
+    private int eID;
+    private NBTTagCompound nbt;
+    public PacketRecvTargetListSrv(){}
+    private PacketRecvTargetListSrv(int entity, NBTTagCompound tag){
+        eID = entity;
+        nbt = tag;
+    }
 	@Override
-	public void handle(DataInputStream iStream, EntityPlayer player) {
-		try {
-			int eID = iStream.readInt();
-			NBTTagCompound nbt = (NBTTagCompound) NBTBase.readNamedTag(iStream);
-			Map<String, Boolean> tgt = Maps.newHashMap();
-	        NBTTagList var1 = nbt.getTagList("targetsTag");
+	public void handle(EntityPlayer player) {
+        EntityTurret_Base turret = (EntityTurret_Base) player.worldObj.getEntityByID(eID);
+        if(turret!=null) {
+            Map<String, Boolean> tgt = Maps.newHashMap();
+            NBTTagList var1 = nbt.getTagList("targetsTag", Constants.NBT.TAG_COMPOUND);
 
-	        for (int var2 = 0; var2 < var1.tagCount(); ++var2)
-	        {
-	            NBTTagCompound var3 = (NBTTagCompound)var1.tagAt(var2);
-	            tgt.put(var3.getString("tgName"), var3.getBoolean("isEnabled"));
-	        }
-			
-			EntityTurret_Base turret = (EntityTurret_Base) player.worldObj.getEntityByID(eID);
-			turret.targets = tgt;
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+            for (int var2 = 0; var2 < var1.tagCount(); ++var2)
+            {
+                NBTTagCompound var3 = var1.getCompoundTagAt(var2);
+                tgt.put(var3.getString("tgName"), var3.getBoolean("isEnabled"));
+            }
+
+            turret.targets = tgt;
+        }
 	}
 	
-	private static Packet250CustomPayload getPacket(EntityTurret_Base turret, int id) {
+	private static PacketBase getPacket(EntityTurret_Base turret) {
 		NBTTagCompound nbt = new NBTTagCompound();				
-		NBTTagList list = new NBTTagList("targetList");				
+		NBTTagList list = new NBTTagList();
 		for (Entry<String, Boolean> target : turret.targets.entrySet()) {
 			NBTTagCompound var4 = new NBTTagCompound();
             var4.setString("tgName", target.getKey());
@@ -53,27 +52,26 @@ public class PacketRecvTargetListSrv extends PacketBase {
             list.appendTag(var4);
 		}
 		nbt.setTag("targetsTag", list);
-		
-    	ByteArrayOutputStream b = new ByteArrayOutputStream();
-		try {
-			DataOutputStream o = new DataOutputStream(b);
-	    	o.writeInt(id);
-	    	o.writeInt(turret.entityId);
-	    	NBTBase.writeNamedTag(nbt, o);
-	    	
-	    	return new Packet250CustomPayload(PacketHandlerCommon.getChannel(), b.toByteArray());
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
-		return null;
+        return new PacketRecvTargetListSrv(turret.getEntityId(), nbt);
 	}
 	
 	public static void sendClient(EntityTurret_Base turret, EntityPlayer player) {
-    	PacketDispatcher.sendPacketToPlayer(getPacket(turret, 0x102), player);
+    	TM3ModRegistry.networkWrapper.sendTo(getPacket(turret), (EntityPlayerMP)player);
 	}
 	
 	public static void sendServer(EntityTurret_Base turret) {
-    	PacketDispatcher.sendPacketToServer(getPacket(turret, 0x001));
+    	TM3ModRegistry.networkWrapper.sendToServer(getPacket(turret));
 	}
 
+    @Override
+    public void fromBytes(ByteBuf buf) {
+        eID = buf.readInt();
+        nbt = ByteBufUtils.readTag(buf);
+    }
+
+    @Override
+    public void toBytes(ByteBuf buf) {
+        buf.writeInt(eID);
+        ByteBufUtils.writeTag(buf, nbt);
+    }
 }

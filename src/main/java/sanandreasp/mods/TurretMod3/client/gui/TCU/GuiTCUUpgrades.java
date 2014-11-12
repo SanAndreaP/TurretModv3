@@ -3,6 +3,7 @@ package sanandreasp.mods.turretmod3.client.gui.TCU;
 import java.lang.ref.WeakReference;
 import java.util.Map;
 
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
@@ -18,6 +19,7 @@ import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TurretUpgrades;
 import com.google.common.collect.Maps;
 
 public class GuiTCUUpgrades extends GuiTCUBase {
+    private static final ResourceLocation PAGE_4 = new ResourceLocation(TM3ModRegistry.TEX_GUITCUDIR + "page_4.png");
     protected static RenderItem itemRenderer = new RenderItem();
 
 	private Map<Integer, TurretUpgrades> upgrades = Maps.newHashMap();
@@ -51,7 +53,7 @@ public class GuiTCUUpgrades extends GuiTCUBase {
         	this.initGui();
         }
 
-		this.mc.getTextureManager().bindTexture(TM3ModRegistry.TEX_GUITCUDIR + "page_4.png");
+		this.mc.getTextureManager().bindTexture(PAGE_4);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, xSize, ySize);
 
@@ -64,7 +66,7 @@ public class GuiTCUUpgrades extends GuiTCUBase {
         int scrollX = 163;
         int scrollY = 19 + (int)(164F * currScrollPos);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.mc.getTextureManager().bindTexture(TM3ModRegistry.TEX_GUITCUDIR + "page_4.png");
+		this.mc.getTextureManager().bindTexture(PAGE_4);
         drawTexturedModalRect(scrollX + this.guiLeft, scrollY + this.guiTop, 176,  this.upgrades.size() > 9 ? 0 : 6, 6, 6);
         
         for (int i = this.entryPos; i < 9 + entryPos && i < this.upgrades.size(); i++) {

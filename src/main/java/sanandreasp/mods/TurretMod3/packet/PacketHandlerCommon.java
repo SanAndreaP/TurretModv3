@@ -1,47 +1,39 @@
 package sanandreasp.mods.turretmod3.packet;
 
-import java.io.ByteArrayInputStream;
-import java.io.DataInputStream;
-import java.io.IOException;
-import java.util.Map;
-
-import com.google.common.collect.Maps;
-
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
+import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import cpw.mods.fml.relauncher.Side;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.packet.Packet250CustomPayload;
-import cpw.mods.fml.common.network.IPacketHandler;
-import cpw.mods.fml.common.network.PacketDispatcher;
-import cpw.mods.fml.common.network.Player;
+import sanandreasp.mods.turretmod3.client.packet.PacketRecvPlayerNBT;
+import sanandreasp.mods.turretmod3.client.packet.PacketRecvSpawnParticle;
+import sanandreasp.mods.turretmod3.client.packet.PacketRecvTargetListClt;
+import sanandreasp.mods.turretmod3.client.packet.PacketRecvUpgrades;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 
-public class PacketHandlerCommon implements IPacketHandler {
-	
-	private Map<Integer, PacketBase> packetTypes = Maps.newHashMap();
-	
-	public PacketHandlerCommon() {
-		this.packetTypes.put(0x000, new PacketSendUpgrades());
-		this.packetTypes.put(0x001, new PacketRecvTargetListSrv());
-		this.packetTypes.put(0x002, new PacketRecvTurretSettings());
-		this.packetTypes.put(0x003, new PacketRecvTurretShootKey());
-		this.packetTypes.put(0x004, new PacketRecvLaptopTargets());
-		this.packetTypes.put(0x005, new PacketRecvLaptopGUICng());
-		this.packetTypes.put(0x006, new PacketRecvLaptopGeneralStg());
-		this.packetTypes.put(0x007, new PacketRecvLaptopUpgrades());
-		this.packetTypes.put(0x008, new PacketRecvLaptopMisc());
-	}
+public class PacketHandlerCommon implements IMessageHandler<PacketBase, IMessage> {
+
+    public void registerOn(SimpleNetworkWrapper wrapper){
+        wrapper.registerMessage(this, PacketSendUpgrades.class, 0, Side.SERVER);
+        wrapper.registerMessage(this, PacketRecvTargetListSrv.class, 1, Side.SERVER);
+        wrapper.registerMessage(this, PacketRecvTurretSettings.class, 2, Side.SERVER);
+        wrapper.registerMessage(this, PacketRecvTurretShootKey.class, 3, Side.SERVER);
+        wrapper.registerMessage(this, PacketRecvLaptopTargets.class, 4, Side.SERVER);
+        wrapper.registerMessage(this, PacketRecvLaptopGUICng.class, 5, Side.SERVER);
+        wrapper.registerMessage(this, PacketRecvLaptopGeneralStg.class, 6, Side.SERVER);
+        wrapper.registerMessage(this, PacketRecvLaptopUpgrades.class, 7, Side.SERVER);
+        wrapper.registerMessage(this, PacketRecvLaptopMisc.class, 8, Side.SERVER);
+        wrapper.registerMessage(this, PacketRecvUpgrades.class, 100, Side.CLIENT);
+        wrapper.registerMessage(this, PacketRecvPlayerNBT.class, 101, Side.CLIENT);
+        wrapper.registerMessage(this, PacketRecvTargetListClt.class, 102, Side.CLIENT);
+        wrapper.registerMessage(this, PacketRecvSpawnParticle.class, 103, Side.CLIENT);
+    }
 
     @Override
-    public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player par3Player) {
-        EntityPlayer player = (EntityPlayer)par3Player;
-        try {
-        	DataInputStream iStream = new DataInputStream(new ByteArrayInputStream(packet.data));
-			this.packetTypes.get(iStream.readInt()).handle(iStream, player);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+    public IMessage onMessage(PacketBase packet, MessageContext context) {
+        EntityPlayer player = TM3ModRegistry.proxy.getPlayer(context);
+        packet.handle(player);
+        return null;
     }
-	
-	public static String getChannel() {
-		return "TurretMod3";
-	}
 }

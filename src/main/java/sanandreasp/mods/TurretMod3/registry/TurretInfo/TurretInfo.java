@@ -72,8 +72,7 @@ public abstract class TurretInfo {
 
 	public int getAmmoFromItem(ItemStack is) {
 		for (Entry<ItemStack, Integer> ent : this.ammoItems.entrySet()) {
-			if (ent.getKey().isItemEqual(is)
-					|| (ent.getKey().getItemDamage() == OreDictionary.WILDCARD_VALUE && ent.getKey().getItem() == is.getItem()))
+			if (TM3ModRegistry.areStacksEqualWithWildcard(ent.getKey(), is))
 				return ent.getValue();
 		}
 		return 0;
@@ -94,8 +93,7 @@ public abstract class TurretInfo {
 	public int getAmmoTypeFromItem(ItemStack is) {
 		for (Entry<Integer, List<ItemStack>> ent : this.ammoTypeItems.entrySet()) {
 			for (ItemStack entIS : ent.getValue()) {
-				if (entIS.isItemEqual(is)
-						|| (entIS.getItemDamage() == OreDictionary.WILDCARD_VALUE && entIS.getItem() == is.getItem()))
+				if (TM3ModRegistry.areStacksEqualWithWildcard(entIS, is))
 					return ent.getKey();
 			}
 		}
@@ -132,8 +130,7 @@ public abstract class TurretInfo {
 
 	public int func_110143_aJFromItem(ItemStack is) {
 		for (Entry<ItemStack, Integer> ent : this.healItems.entrySet()) {
-			if (ent.getKey().isItemEqual(is)
-					|| (ent.getKey().getItemDamage() == OreDictionary.WILDCARD_VALUE && ent.getKey().getItem() == is.getItem()))
+			if (TM3ModRegistry.areStacksEqualWithWildcard(ent.getKey(), is))
 				return ent.getValue();
 		}
 		return 0;

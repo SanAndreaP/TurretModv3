@@ -10,6 +10,8 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.inventory.Container;
 import sanandreasp.mods.turretmod3.packet.PacketHandlerCommon;
+import sanandreasp.mods.turretmod3.packet.PacketRecvLaptopMisc;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 import sanandreasp.mods.turretmod3.tileentity.TileEntityLaptop;
 
 public class GuiLaptopMisc extends GuiLaptop_Base {
@@ -18,7 +20,6 @@ public class GuiLaptopMisc extends GuiLaptop_Base {
 	
 	public GuiLaptopMisc(Container lapContainer, TileEntityLaptop par2TileEntityLaptop) {
 		super(lapContainer, par2TileEntityLaptop);
-		this.site = 1;
 	}
 
 	@Override
@@ -87,21 +88,10 @@ public class GuiLaptopMisc extends GuiLaptop_Base {
 	protected void actionPerformed(GuiButton par1GuiButton) {
 		super.actionPerformed(par1GuiButton);
 		if (par1GuiButton.id == this.programTurret.id) {
-			ByteArrayOutputStream b = new ByteArrayOutputStream();
-			try {
-				DataOutputStream o = new DataOutputStream(b);
-				o.writeInt(0x008);
-				o.writeInt(this.laptop.xCoord);
-				o.writeInt(this.laptop.yCoord);
-				o.writeInt(this.laptop.zCoord);
-				o.writeUTF(this.customName.getText());
-				o.writeShort(Short.valueOf(this.frequency.getText()));
-				
-				PacketDispatcher.sendPacketToServer(new Packet250CustomPayload(PacketHandlerCommon.getChannel(), b.toByteArray()));
-			} catch (IOException ex) {
-				ex.printStackTrace();
-			} catch (NumberFormatException ex) {
-				;
+            try{
+				TM3ModRegistry.networkWrapper.sendToServer(new PacketRecvLaptopMisc(this.laptop, this.customName.getText(), Short.valueOf(this.frequency.getText())));
+			} catch (NumberFormatException ignored) {
+
 			}
         	this.inventorySlots.detectAndSendChanges();
 		}

@@ -1,9 +1,12 @@
 package sanandreasp.mods.turretmod3.client.registry;
 
+import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import net.minecraft.client.model.ModelChest;
 import net.minecraft.client.renderer.entity.RenderArrow;
 import net.minecraft.client.renderer.entity.RenderSnowball;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -115,5 +118,10 @@ public class ClientProxy extends CommonProxy {
     public void registerHandlers() {
         MinecraftForge.EVENT_BUS.register(new TextureRegistry());
         FMLCommonHandler.instance().bus().register(new TickHandlerClientRnd());
+    }
+
+    @Override
+    public EntityPlayer getPlayer(MessageContext context){
+        return FMLClientHandler.instance().getClientPlayerEntity();
     }
 }

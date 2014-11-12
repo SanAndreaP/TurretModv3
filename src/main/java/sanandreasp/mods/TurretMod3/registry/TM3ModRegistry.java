@@ -3,6 +3,8 @@ package sanandreasp.mods.turretmod3.registry;
 import java.util.logging.Level;
 
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import cpw.mods.fml.relauncher.Side;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -13,6 +15,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.oredict.OreDictionary;
 import sanandreasp.mods.turretmod3.CreativeTabTurrets;
 import sanandreasp.mods.turretmod3.block.BlockLaptop;
 import sanandreasp.mods.turretmod3.command.CommandTurretMod;
@@ -50,6 +53,8 @@ import sanandreasp.mods.turretmod3.item.ItemMobileBase;
 import sanandreasp.mods.turretmod3.item.ItemTMDisc;
 import sanandreasp.mods.turretmod3.item.ItemTurret;
 import sanandreasp.mods.turretmod3.item.ItemTurretInfo;
+import sanandreasp.mods.turretmod3.packet.PacketHandlerCommon;
+import sanandreasp.mods.turretmod3.packet.PacketSendUpgrades;
 import sanandreasp.mods.turretmod3.registry.TurretInfo.TurretInfo;
 import sanandreasp.mods.turretmod3.registry.TurretInfo.TurretInfoT1Arrow;
 import sanandreasp.mods.turretmod3.registry.TurretInfo.TurretInfoT1Shotgun;
@@ -114,13 +119,15 @@ public class TM3ModRegistry {
 	/** The @Instance field for the Mod */
 	@Instance(TM3ModRegistry.modID)
 	public static TM3ModRegistry instance;
+
+    public static SimpleNetworkWrapper networkWrapper;
 	
 	// Texture fields
 	public static final String TEX_TURRETDIR	= "turretmod3:textures/entities/turrets/";
-	public static final String TEX_MOBILEBASE	= "turretmod3:textures/entities/mobileBase.png";
 	public static final String TEX_GUITCUDIR	= "turretmod3:textures/guis/tcu_gui/";
 	public static final String TEX_GUILAP		= "turretmod3:textures/guis/laptop/";
 	public static final String TEX_GUIINFO		= "turretmod3:textures/guis/turretinfo_gui/";
+    public static final ResourceLocation DEFAULT_FONT = new ResourceLocation("/font/default.png");
 	public static final ResourceLocation TEX_GUIBUTTONS	= new ResourceLocation("turretmod3:textures/guis/guis_buttons.png");
 	public static final ResourceLocation TEX_TURRETCAM	= new ResourceLocation("turretmod3:textures/guis/turretCam.png");
 	public static final ResourceLocation TEX_WHITELAP		= new ResourceLocation("turretmod3:textures/blocks/laptopWhite.png");
@@ -158,8 +165,6 @@ public class TM3ModRegistry {
         Configuration cfgman = new Configuration(evt.getSuggestedConfigurationFile());
 		// load Config
         cfgman.load();
-			
-        AchievementPageTM.achievementIDs = cfgman.getInt(AchievementPageTM.achieveNames);
 
         labelRenderRange = cfgman.getFloat("Label Render Range", "Client side", labelRenderRange, 0, 500, "The range in blocks at which label is going to render");
         canCollectorGetXP = cfgman.getBoolean("Can Collector collect XP orbs", "Server side", canCollectorGetXP, "False to disable xp collection");
@@ -177,6 +182,7 @@ public class TM3ModRegistry {
         ItemAmmunitions.addAmmoItem(6, "tankPack");
         ItemAmmunitions.addAmmoItem(7, "gMelonPack");
         ItemAmmunitions.addAmmoItem(8, "enderPearlPack");
+        ItemAmmunitions.addAmmoItem(9, "ach_piercing");
 				
 		// initialize items
         initItems();
@@ -328,9 +334,11 @@ public class TM3ModRegistry {
 		EntityRegistry.registerModEntity(EntityMobileBase.class, "MobileBase", modEntityID++, this, 128, 5, true);
 		EntityRegistry.registerModEntity(EntityDismantleStorage.class, "DismStorage", modEntityID++, this, 128, 5, false);
 		
-	// register Handlers
+	    // register Handlers
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
-		
+        networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(modID);
+		new PacketHandlerCommon().registerOn(networkWrapper);
+
 	    // initialize crafting recipes
 		CraftingRegistry.initCraftings();
 	
@@ -353,4 +361,9 @@ public class TM3ModRegistry {
 	private void registerItems(Item... items) {
 		for (int i = 0; i < items.length; i++) GameRegistry.registerItem(items[i], "tm3.item_"+i);
 	}
+
+    public static boolean areStacksEqualWithWildcard(ItemStack stack1, ItemStack stack2){
+        return (stack1.isItemEqual(stack2)
+                || (stack1.getItemDamage() == OreDictionary.WILDCARD_VALUE && stack1.getItem() == stack2.getItem()));
+    }
 }

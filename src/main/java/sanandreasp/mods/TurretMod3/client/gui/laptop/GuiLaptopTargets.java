@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
@@ -20,7 +21,7 @@ import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 import sanandreasp.mods.turretmod3.tileentity.TileEntityLaptop;
 
 public class GuiLaptopTargets extends GuiLaptop_Base {
-	
+	private static final ResourceLocation PAGE_1 = new ResourceLocation(TM3ModRegistry.TEX_GUITCUDIR + "page_1.png");
 	protected Map<Integer, String> targetList;
 	protected Map<String, Boolean> checkedTargets = Maps.newHashMap();
 	
@@ -56,7 +57,7 @@ public class GuiLaptopTargets extends GuiLaptop_Base {
 	public void drawScreen(int par1, int par2, float par3) {
 		super.drawScreen(par1, par2, par3);
 		
-		this.mc.getTextureManager().bindTexture(TM3ModRegistry.TEX_GUITCUDIR + "page_1.png");
+		this.mc.getTextureManager().bindTexture(PAGE_1);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         int scrollX = 203;
         int scrollY = 18 + (int)(91F * currScrollPos);
@@ -79,7 +80,7 @@ public class GuiLaptopTargets extends GuiLaptop_Base {
 				}
 			    if (!title) {
 			        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-					this.mc.getTextureManager().bindTexture(TM3ModRegistry.TEX_GUITCUDIR + "page_1.png");
+					this.mc.getTextureManager().bindTexture(PAGE_1);
 			    	if (!checked) {
 			    		if (hovering)
 			    			drawTexturedModalRect(x, y, 176, 14, 11, 11);
@@ -93,7 +94,7 @@ public class GuiLaptopTargets extends GuiLaptop_Base {
 			    	}
 			    } else {
 			        GL11.glColor4f(1.0F, 1.0F, 0.0F, 1.0F);
-					this.mc.getTextureManager().bindTexture(TM3ModRegistry.TEX_GUITCUDIR + "page_1.png");
+					this.mc.getTextureManager().bindTexture(PAGE_1);
 		    		if (hovering)
 		    			drawTexturedModalRect(x, y, 176, 14, 11, 11);
 		    		else
@@ -104,7 +105,7 @@ public class GuiLaptopTargets extends GuiLaptop_Base {
 				this.fontRendererObj.drawString(name.contains(".") ? name.substring(name.lastIndexOf('.')+1) : name, x + (title ? 25 : 15), y + 2, 0xFFFFFF);
 			} else {
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-				this.mc.getTextureManager().bindTexture(TM3ModRegistry.TEX_GUITCUDIR + "page_1.png");
+				this.mc.getTextureManager().bindTexture(PAGE_1);
 		        drawTexturedModalRect(x, y, 148, 192, 11, 11);
 			}
 		}

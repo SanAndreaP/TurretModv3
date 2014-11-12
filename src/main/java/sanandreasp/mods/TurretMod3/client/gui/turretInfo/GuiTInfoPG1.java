@@ -3,6 +3,7 @@ package sanandreasp.mods.turretmod3.client.gui.turretInfo;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
@@ -18,7 +19,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class GuiTInfoPG1 extends GuiTInfoBase {
-	
+	private static final ResourceLocation PAGE_1 = new ResourceLocation(TM3ModRegistry.TEX_GUIINFO + "page_1.png");
     protected static RenderItem itemRenderer = new RenderItem();
 
 	public GuiTInfoPG1(int pg) {
@@ -36,7 +37,7 @@ public class GuiTInfoPG1 extends GuiTInfoBase {
 	public void drawScreen(int par1, int par2, float par3) {
         this.drawDefaultBackground();
 
-		this.mc.getTextureManager().bindTexture(TM3ModRegistry.TEX_GUIINFO + "page_1.png");
+		this.mc.getTextureManager().bindTexture(PAGE_1);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, xSize, ySize);
         

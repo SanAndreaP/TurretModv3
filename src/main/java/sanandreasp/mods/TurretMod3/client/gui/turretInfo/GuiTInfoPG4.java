@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
@@ -22,6 +23,7 @@ import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TurretUpgrades;
 
 public class GuiTInfoPG4 extends GuiTInfoBase {
+    private static final ResourceLocation PAGE_4 = new ResourceLocation(TM3ModRegistry.TEX_GUIINFO + "page_4.png");
     protected static RenderItem itemRenderer = new RenderItem();
     protected FontRenderer customFR;
 
@@ -52,7 +54,7 @@ public class GuiTInfoPG4 extends GuiTInfoBase {
 		
         this.tabTurretUpgrades.enabled = false;
         
-        this.customFR = new FontRenderer(this.mc.gameSettings, "/font/default.png", this.mc.renderEngine, true);
+        this.customFR = new FontRenderer(this.mc.gameSettings, TM3ModRegistry.DEFAULT_FONT, this.mc.renderEngine, true);
         
         this.entryPos = 0;
         this.currScrollPos = 0;
@@ -63,7 +65,7 @@ public class GuiTInfoPG4 extends GuiTInfoBase {
 	public void drawScreen(int par1, int par2, float par3) {
         this.drawDefaultBackground();
 
-		this.mc.getTextureManager().bindTexture(TM3ModRegistry.TEX_GUIINFO + "page_4.png");
+		this.mc.getTextureManager().bindTexture(PAGE_4);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, xSize, ySize);
         
@@ -73,7 +75,7 @@ public class GuiTInfoPG4 extends GuiTInfoBase {
         str = this.turretInf.getTurretName();
         this.fontRendererObj.drawString(str, this.guiLeft + (this.xSize - this.fontRendererObj.getStringWidth(str))/2, this.guiTop + 21, 0x00FF00);
 
-		this.mc.getTextureManager().bindTexture(TM3ModRegistry.TEX_GUIINFO + "page_4.png");
+		this.mc.getTextureManager().bindTexture(PAGE_4);
         int scrollX = 163;
         int scrollY = 49 + (int)(69F * currScrollPos);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);

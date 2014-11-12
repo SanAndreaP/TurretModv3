@@ -1,49 +1,42 @@
 package sanandreasp.mods.turretmod3.packet;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-
-import cpw.mods.fml.common.network.PacketDispatcher;
-import cpw.mods.fml.common.network.Player;
-
+import io.netty.buffer.ByteBuf;
 import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
 
 public class PacketRecvLaptopGUICng extends PacketBase {
-
+    private int guiID, xCoord, yCoord, zCoord;
 	@Override
-	public void handle(DataInputStream iStream, EntityPlayer player) {
-		try {
-			player.openGui(TM3ModRegistry.instance, iStream.readInt(), player.worldObj, iStream.readInt(), iStream.readInt(), iStream.readInt());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public void handle(EntityPlayer player) {
+        player.openGui(TM3ModRegistry.instance, guiID, player.worldObj, xCoord, yCoord, zCoord);
 	}
-	
-	private static Packet250CustomPayload getPacket(int guiID, TileEntity te, int id) {
-    	ByteArrayOutputStream b = new ByteArrayOutputStream();
-		try {
-			DataOutputStream o = new DataOutputStream(b);
-	    	o.writeInt(id);
-	    	o.writeInt(guiID);
-	    	o.writeInt(te.xCoord);
-	    	o.writeInt(te.yCoord);
-	    	o.writeInt(te.zCoord);
-	    	
-	    	return new Packet250CustomPayload(PacketHandlerCommon.getChannel(), b.toByteArray());
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
-		return null;
+    public PacketRecvLaptopGUICng() {}
+	public PacketRecvLaptopGUICng(int guiID, TileEntity te) {
+        this.guiID = guiID;
+        this.xCoord = te.xCoord;
+        this.yCoord = te.yCoord;
+        this.zCoord = te.zCoord;
 	}
 	
 	public static void sendServer(int guiID, TileEntity te) {
-    	PacketDispatcher.sendPacketToServer(getPacket(guiID, te, 0x005));
+    	TM3ModRegistry.networkWrapper.sendToServer(new PacketRecvLaptopGUICng(guiID, te));
 	}
 
+    @Override
+    public void fromBytes(ByteBuf buf) {
+        this.guiID = buf.readInt();
+        this.xCoord = buf.readInt();
+        this.yCoord = buf.readInt();
+        this.zCoord = buf.readInt();
+    }
+
+    @Override
+    public void toBytes(ByteBuf buf) {
+        buf.writeInt(guiID);
+        buf.writeInt(xCoord);
+        buf.writeInt(yCoord);
+        buf.writeInt(zCoord);
+    }
 }

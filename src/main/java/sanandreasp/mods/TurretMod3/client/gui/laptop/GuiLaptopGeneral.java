@@ -12,6 +12,7 @@ import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.inventory.Container;
 import sanandreasp.mods.turretmod3.client.gui.GuiTurretButton;
 import sanandreasp.mods.turretmod3.packet.PacketHandlerCommon;
+import sanandreasp.mods.turretmod3.packet.PacketRecvLaptopGeneralStg;
 import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 import sanandreasp.mods.turretmod3.tileentity.TileEntityLaptop;
 
@@ -27,7 +28,6 @@ public class GuiLaptopGeneral extends GuiLaptop_Base {
 	
 	public GuiLaptopGeneral(Container lapContainer, TileEntityLaptop par2TileEntityLaptop) {
 		super(lapContainer, par2TileEntityLaptop);
-		this.site = 1;
 	}
 
 	@Override
@@ -115,64 +115,40 @@ public class GuiLaptopGeneral extends GuiLaptop_Base {
 	@Override
 	protected void actionPerformed(GuiButton par1GuiButton) {
 		super.actionPerformed(par1GuiButton);
-		try {
 			if (par1GuiButton.id == this.programTurret.id) {
 	        	this.inventorySlots.detectAndSendChanges();
 			} else if (par1GuiButton.id == this.statLabel.id) {
-		    	ByteArrayOutputStream b = new ByteArrayOutputStream();
-				DataOutputStream o = new DataOutputStream(b);
-		    	o.writeInt(0x006);
-		    	o.writeInt(0x00);
 		    	
-		    	PacketDispatcher.sendPacketToServer(new Packet250CustomPayload(PacketHandlerCommon.getChannel(), b.toByteArray()));
+		    	TM3ModRegistry.networkWrapper.sendToServer(new PacketRecvLaptopGeneralStg(0));
 			} else if (par1GuiButton.id == this.chngTCCrosshair.id) {
 				ByteArrayOutputStream b = new ByteArrayOutputStream();
 				DataOutputStream o = new DataOutputStream(b);
-				o.writeInt(0x006);
-				o.writeInt(0x01);
-				
-				PacketDispatcher.sendPacketToServer(new Packet250CustomPayload(PacketHandlerCommon.getChannel(), b.toByteArray()));
+
+                TM3ModRegistry.networkWrapper.sendToServer(new PacketRecvLaptopGeneralStg(1));
 			} else if (par1GuiButton.id == this.activateTurret.id || par1GuiButton.id == this.deactivateTurret.id) {
-				ByteArrayOutputStream b = new ByteArrayOutputStream();
-				DataOutputStream o = new DataOutputStream(b);
-				o.writeInt(0x006);
-				o.writeInt(0x02);
+                int i;
 				try {
-					o.writeShort(Short.parseShort(this.frequency.getText()));
+					i = Short.parseShort(this.frequency.getText());
 				} catch(NumberFormatException e) {
-					o.writeShort(-2);
+					i = -2;
 				}
-				o.writeBoolean(par1GuiButton.id == this.activateTurret.id);
-				
-				PacketDispatcher.sendPacketToServer(new Packet250CustomPayload(PacketHandlerCommon.getChannel(), b.toByteArray()));
+                TM3ModRegistry.networkWrapper.sendToServer(new PacketRecvLaptopGeneralStg(2, i, par1GuiButton.id == this.activateTurret.id));
 			} else if (par1GuiButton.id == this.resetTarget.id) {
-				ByteArrayOutputStream b = new ByteArrayOutputStream();
-				DataOutputStream o = new DataOutputStream(b);
-				o.writeInt(0x006);
-				o.writeInt(0x03);
+				int i;
 				try {
-					o.writeShort(Short.parseShort(this.frequency.getText()));
+					i = Short.parseShort(this.frequency.getText());
 				} catch(NumberFormatException e) {
-					o.writeShort(-2);
+					i = -2;
 				}
-				
-				PacketDispatcher.sendPacketToServer(new Packet250CustomPayload(PacketHandlerCommon.getChannel(), b.toByteArray()));
+                TM3ModRegistry.networkWrapper.sendToServer(new PacketRecvLaptopGeneralStg(3, i));
 			} else if (par1GuiButton.id == this.uniqueTargetOn.id || par1GuiButton.id == this.uniqueTargetOff.id) {
-				ByteArrayOutputStream b = new ByteArrayOutputStream();
-				DataOutputStream o = new DataOutputStream(b);
-				o.writeInt(0x006);
-				o.writeInt(0x04);
+				int i;
 				try {
-					o.writeShort(Short.parseShort(this.frequency.getText()));
+					i = Short.parseShort(this.frequency.getText());
 				} catch(NumberFormatException e) {
-					o.writeShort(-2);
+					i = -2;
 				}
-				o.writeBoolean(par1GuiButton.id == this.uniqueTargetOn.id);
-				
-				PacketDispatcher.sendPacketToServer(new Packet250CustomPayload(PacketHandlerCommon.getChannel(), b.toByteArray()));
+                TM3ModRegistry.networkWrapper.sendToServer(new PacketRecvLaptopGeneralStg(4, i, par1GuiButton.id == this.uniqueTargetOn.id));
 			}
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
 	}
 }

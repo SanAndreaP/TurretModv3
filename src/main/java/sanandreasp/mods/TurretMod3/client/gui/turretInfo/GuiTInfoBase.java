@@ -1,8 +1,10 @@
 package sanandreasp.mods.turretmod3.client.gui.turretInfo;
 
 import net.minecraft.init.Items;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import sanandreasp.mods.turretmod3.client.gui.GuiItemTab;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 import sanandreasp.mods.turretmod3.registry.TurretInfo.TurretInfo;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
@@ -73,7 +75,7 @@ public class GuiTInfoBase extends GuiScreen {
         	}
         }
         
-        this.customFR = new FontRenderer(this.mc.gameSettings, "/font/default.png", this.mc.renderEngine, true);
+        this.customFR = new FontRenderer(this.mc.gameSettings, TM3ModRegistry.DEFAULT_FONT, this.mc.renderEngine, true);
 	}
 	
 	@Override

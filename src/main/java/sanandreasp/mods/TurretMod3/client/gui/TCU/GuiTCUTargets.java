@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
@@ -13,6 +14,7 @@ import sanandreasp.mods.turretmod3.registry.TurretTargetRegistry;
 import net.minecraft.util.StatCollector;
 
 public class GuiTCUTargets extends GuiTCUBase {
+    private static final ResourceLocation PAGE_1 = new ResourceLocation(TM3ModRegistry.TEX_GUITCUDIR + "page_1.png");
 	protected Map<Integer, String> targetList;
 	
 	private int entryPos = 0;
@@ -31,7 +33,7 @@ public class GuiTCUTargets extends GuiTCUBase {
 	public void drawScreen(int par1, int par2, float par3) {
 		this.drawDefaultBackground();
 
-		this.mc.getTextureManager().bindTexture(TM3ModRegistry.TEX_GUITCUDIR + "page_1.png");
+		this.mc.getTextureManager().bindTexture(PAGE_1);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, xSize, ySize);
         
@@ -59,7 +61,7 @@ public class GuiTCUTargets extends GuiTCUBase {
 				}
 			    if (!title) {
 			        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-					this.mc.getTextureManager().bindTexture(TM3ModRegistry.TEX_GUITCUDIR + "page_1.png");
+					this.mc.getTextureManager().bindTexture(PAGE_1);
 			    	if (!checked) {
 			    		if (hovering)
 			    			drawTexturedModalRect(x, y, 176, 14, 11, 11);
@@ -73,7 +75,7 @@ public class GuiTCUTargets extends GuiTCUBase {
 			    	}
 			    } else {
 			        GL11.glColor4f(1.0F, 1.0F, 0.0F, 1.0F);
-					this.mc.getTextureManager().bindTexture(TM3ModRegistry.TEX_GUITCUDIR + "page_1.png");
+					this.mc.getTextureManager().bindTexture(PAGE_1);
 		    		if (hovering)
 		    			drawTexturedModalRect(x, y, 176, 14, 11, 11);
 		    		else
@@ -84,7 +86,7 @@ public class GuiTCUTargets extends GuiTCUBase {
 				this.fontRendererObj.drawString(name.contains(".") ? name.substring(name.lastIndexOf('.')+1) : name, x + (title ? 25 : 15), y + 2, 0xFFFFFF);
 			} else {
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-				this.mc.getTextureManager().bindTexture(TM3ModRegistry.TEX_GUITCUDIR + "page_1.png");
+				this.mc.getTextureManager().bindTexture(PAGE_1);
 		        drawTexturedModalRect(x, y, 148, 192, 11, 11);
 			}
 		}

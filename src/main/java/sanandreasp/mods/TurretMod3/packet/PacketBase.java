@@ -1,14 +1,13 @@
 package sanandreasp.mods.turretmod3.packet;
 
 import java.io.DataInputStream;
-import java.util.Random;
 
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 
-public abstract class PacketBase {
-	
-	public Random rand = new Random();
+public abstract class PacketBase implements IMessage{
 
-    public abstract void handle(DataInputStream iStream, EntityPlayer player);
+    public abstract void handle(EntityPlayer player);
 
 }

@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.Item;
+import net.minecraftforge.common.util.Constants;
 import sanandreasp.mods.turretmod3.client.packet.PacketRecvUpgrades;
 import sanandreasp.mods.turretmod3.entity.EntityDismantleStorage;
 import sanandreasp.mods.turretmod3.entity.EntityMobileBase;
@@ -26,7 +31,6 @@ import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TurretUpgrades;
 import com.google.common.collect.Maps;
 
 import cpw.mods.fml.common.FMLLog;
-import cpw.mods.fml.common.network.PacketDispatcher;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -39,19 +43,15 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumMovingObjectType;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
-
-import static sanandreasp.mods.managers.CommonUsedStuff.CUS;
 
 public abstract class EntityTurret_Base extends EntityLiving implements IHealable {
     protected EntityLiving currentTarget;
@@ -129,6 +129,9 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 		byte currByte = this.dataWatcher.getWatchableObjectByte(27);
 		this.dataWatcher.updateObject(27, (byte)(b ? currByte | 2 : currByte & ~2));
 	}
+
+    @SideOnly(Side.CLIENT)
+    public abstract String getTexture();
 	
 	@Override
     protected boolean canDespawn() {
@@ -194,7 +197,7 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 			ItemStack is1 = is.copy();
 			is1.stackSize = MathHelper.floor_double((double)this.getAmmo() / (double)this.tInfo.getAmmoFromItem(is1));
 			if (is1.getItemDamage() == OreDictionary.WILDCARD_VALUE) is1.setItemDamage(0);
-			ItemStack[] splitIS = CUS.getGoodItemStacks(is1);
+			ItemStack[] splitIS = this.getGoodItemStacks(is1);
 			boolean b = true;
 			for (ItemStack is2 : splitIS) {
 				stg.inventory.addItemStackToInventory(is2);
@@ -235,7 +238,7 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 		return	par1Chest.adjacentChestXNeg != null ? par1Chest.adjacentChestXNeg :
 				par1Chest.adjacentChestXPos != null ? par1Chest.adjacentChestXPos :
 				par1Chest.adjacentChestZNeg != null ? par1Chest.adjacentChestZNeg :
-				par1Chest.adjacentChestZPosition;
+				par1Chest.adjacentChestZPos;
     }
 	
 	protected IInventory[] getAdjacendContainer() {
@@ -336,17 +339,19 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 	}
 	
 	public String getPlayerName() {
-		return new String(this.dataWatcher.getWatchableObjectString(24));
+		return this.dataWatcher.getWatchableObjectString(24);
 	}
 	
 	public abstract TurretProjectile getProjectile();
 	
-	protected List<Entity> getRangedEntities() {
+	@SuppressWarnings("unchecked")
+    protected List<Entity> getRangedEntities() {
 		return this.worldObj.getEntitiesWithinAABBExcludingEntity(this, AxisAlignedBB.getBoundingBox(
 				this.posX - this.wdtRange, this.posY - this.hgtRangeD, this.posZ - this.wdtRange, this.posX + this.wdtRange, this.posY + this.hgtRangeU, this.posZ + this.wdtRange));
 	}
 	
-	protected List<Entity> getRangedTurrets() {
+	@SuppressWarnings("unchecked")
+    protected List<Entity> getRangedTurrets() {
 		return this.worldObj.getEntitiesWithinAABB(this.getClass(), AxisAlignedBB.getBoundingBox(
 				this.posX - this.wdtRange, this.posY - this.hgtRangeD, this.posZ - this.wdtRange, this.posX + this.wdtRange, this.posY + this.hgtRangeU, this.posZ + this.wdtRange));
 	}
@@ -364,7 +369,7 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 	}
 	
 	public String getTurretName() {
-		return new String(this.dataWatcher.getWatchableObjectString(25));
+		return this.dataWatcher.getWatchableObjectString(25);
 	}
 	
 	protected void grabContentFromChests() {
@@ -412,7 +417,7 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 	public boolean hasPlayerAccess(EntityPlayer player) {
 		if (player == null) return false;
 		
-		return this.getPlayerName().equals(player.username) || TM3ModRegistry.proxy.getPlayerTM3Data(player).getBoolean("isOP");
+		return this.getPlayerName().equals(player.getCommandSenderName()) || TM3ModRegistry.proxy.getPlayerTM3Data(player).getBoolean("isOP");
 	}
 	
 	public int incrAmmo(int count) {
@@ -454,7 +459,7 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 				ItemStack is = this.tInfo.getAmmoTypeItemWithLowestScore(this.getAmmoType()).copy();
 				is.stackSize = MathHelper.floor_double((double)this.getAmmo() / (double)this.tInfo.getAmmoFromItem(is));
 				if (is.getItemDamage() < 0) is.setItemDamage(0);
-				ItemStack[] splitIS = CUS.getGoodItemStacks(is);
+				ItemStack[] splitIS = this.getGoodItemStacks(is);
 				boolean b = true;
 				for (ItemStack is1 : splitIS) {
 					b = b && par1EntityPlayer.inventory.addItemStackToInventory(is1);
@@ -471,13 +476,13 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 			} else if (held.getItem() == TM3ModRegistry.tcu) {
 				if (		(this.riddenByEntity != null
 							&& this.riddenByEntity == par1EntityPlayer
-							|| this.riddenByEntity == null && this.getPlayerName().equals(par1EntityPlayer.username)
+							|| this.riddenByEntity == null && this.getPlayerName().equals(par1EntityPlayer.getCommandSenderName())
 							&& par1EntityPlayer.isSneaking())
 						&& TurretUpgrades.hasUpgrade(TUpgControl.class, this.upgrades)) {
 					if (!worldObj.isRemote)
 						par1EntityPlayer.mountEntity(this);
 				} else {
-					par1EntityPlayer.openGui(TM3ModRegistry.instance, 0, this.worldObj, this.entityId, 0, 0);
+					par1EntityPlayer.openGui(TM3ModRegistry.instance, 0, this.worldObj, this.getEntityId(), 0, 0);
 				}
 				return true;
 			} else {
@@ -495,12 +500,12 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 					if (!isTurretInList) {
 						continue;
 					} else if (!this.upgrades.containsKey(i) || this.upgrades.get(i) == null) {
-						if (CUS.areStacksEqualWithWCV(upg.getItem(), held)) {
+						if (TM3ModRegistry.areStacksEqualWithWildcard(upg.getItem(), held)) {
 							if (upg.getEnchantment() != null) {
 								NBTTagList ench = held.getEnchantmentTagList();
 						        for (int j = 0; ench != null && j < ench.tagCount(); ++j)
 						        {
-						        	NBTTagCompound var4 = (NBTTagCompound)ench.tagAt(j);
+						        	NBTTagCompound var4 = (NBTTagCompound)ench.getCompoundTagAt(j);
 						        	if (var4.getShort("id") == upg.getEnchantment().effectId) {
 						        		newUpgId = i;
 						        		break upgCounter;
@@ -513,7 +518,7 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 							}
 						}
 					} else if (this.upgrades.containsKey(i) 
-							&& CUS.areStacksEqualWithWCV(this.upgrades.get(i), held)) {
+							&& TM3ModRegistry.areStacksEqualWithWildcard(this.upgrades.get(i), held)) {
 						break;
 					}
 				}
@@ -549,11 +554,11 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
         return b;
 	}
 	
-	public boolean isTargetValid(EntityLiving entity) {
+	public boolean isTargetValid(EntityLivingBase entity) {
 		return this.isTargetValid(entity, this.wdtRange, this.hgtRangeU, this.hgtRangeD, false);
 	}
 	
-	public boolean isTargetValid(EntityLiving entity, double wdtRng, double hgtURng, double hgtDRng, boolean seeThrough) {
+	public boolean isTargetValid(EntityLivingBase entity, double wdtRng, double hgtURng, double hgtDRng, boolean seeThrough) {
         String entityStr = (String) EntityList.classToStringMapping.get(entity.getClass());
         boolean inList = this.targets.containsKey(entityStr) && this.targets.get(entityStr) && !isEntityTargeted(entity);
         
@@ -600,9 +605,9 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
             			String s = "";
             			ItemStack is = ((ItemStack)obj);
             			if (is.getItem() instanceof ItemBlock) {
-            				s = "tilecrack_"+is.itemID+"_"+is.getItemDamage();
+            				s = "tilecrack_"+Item.getIdFromItem(is.getItem())+"_"+is.getItemDamage();
             			} else {
-                			s = "iconcrack_"+is.itemID;
+                			s = "iconcrack_"+ Item.getIdFromItem(is.getItem());
             			}
             			this.worldObj.spawnParticle(s, this.posX + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, this.posY + (double)(this.rand.nextFloat() * this.height), this.posZ + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, 0D, 0D, 0D);
             		}
@@ -774,21 +779,21 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
     public void readEntityFromNBT(NBTTagCompound par1nbtTagCompound) {
     	super.readEntityFromNBT(par1nbtTagCompound);
     	
-        NBTTagList var1 = par1nbtTagCompound.getTagList("TurretTargets");
+        NBTTagList var1 = par1nbtTagCompound.getTagList("TurretTargets", Constants.NBT.TAG_COMPOUND);
 
         for (int var2 = 0; var2 < var1.tagCount(); ++var2)
         {
-            NBTTagCompound var3 = (NBTTagCompound)var1.tagAt(var2);
+            NBTTagCompound var3 = var1.getCompoundTagAt(var2);
             String var4 = var3.getString("TgName");
             boolean var5 = var3.getBoolean("TgActive");
             this.targets.put(var4, var5);
         }
         
-        NBTTagList var2 = par1nbtTagCompound.getTagList("TurretUpgrades");
+        NBTTagList var2 = par1nbtTagCompound.getTagList("TurretUpgrades", Constants.NBT.TAG_COMPOUND);
         
         for (int var3 = 0; var3 < var2.tagCount(); ++var3)
         {
-        	NBTTagCompound var4 = (NBTTagCompound)var2.tagAt(var3);
+        	NBTTagCompound var4 = var2.getCompoundTagAt(var3);
         	int var5 = var4.getInteger("UgID");
         	ItemStack var6 = ItemStack.loadItemStackFromNBT(var4);
         	this.upgrades.put(var5, var6);
@@ -822,7 +827,7 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
     public void setPlayerName(String par1Player) {
 		for (Object obj : this.worldObj.playerEntities) {
 			EntityPlayer player = (EntityPlayer)obj;
-			if (player.username.equals(par1Player)) {
+			if (player.getCommandSenderName().equals(par1Player)) {
 				this.dataWatcher.updateObject(24, par1Player);
 				return;
 			}

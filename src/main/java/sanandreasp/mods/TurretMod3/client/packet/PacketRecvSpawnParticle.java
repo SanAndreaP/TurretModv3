@@ -2,7 +2,9 @@ package sanandreasp.mods.turretmod3.client.packet;
 
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.util.Random;
 
+import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityLavaFX;
 import net.minecraft.entity.Entity;
@@ -12,16 +14,22 @@ import sanandreasp.mods.turretmod3.client.particle.EntityForcefieldFX;
 import sanandreasp.mods.turretmod3.packet.PacketBase;
 
 public class PacketRecvSpawnParticle extends PacketBase {
+    private short ID;
+    private float posX, posY, posZ;
+    private int eID;
+    private Random rand = new Random();
+    public PacketRecvSpawnParticle(){}
+    public PacketRecvSpawnParticle(short type, int entity, double... pos){
+        ID = type;
+        eID = entity;
+        posX = (float)pos[0];
+        posY = (float)pos[1];
+        posZ = (float)pos[2];
+    }
 
 	@Override
-	public void handle(DataInputStream iStream, EntityPlayer player) {
-		try {
-			short ID = iStream.readShort();
-			float posX = iStream.readFloat();
-			float posY = iStream.readFloat();
-			float posZ = iStream.readFloat();
-			int eID = iStream.readInt();
-			Entity entity = eID > -1 ? Minecraft.getMinecraft().theWorld.getEntityByID(eID) : null;
+	public void handle(EntityPlayer player) {
+			Entity entity = eID > -1 ? player.worldObj.getEntityByID(eID) : null;
 			switch(ID) {
 				case 0:
 					for (int i = 0; i < 5; i++) {
@@ -60,7 +68,7 @@ public class PacketRecvSpawnParticle extends PacketBase {
 							double d1 = this.rand.nextGaussian() * 0.02D;
 							double d2 = this.rand.nextGaussian() * 0.02D;
 							double d3 = 10D;
-							Minecraft.getMinecraft().theWorld.spawnParticle(
+							player.worldObj.spawnParticle(
 											"explode",
 											(entity.posX + (this.rand.nextFloat()
 													* entity.width * 2.0F))
@@ -89,7 +97,7 @@ public class PacketRecvSpawnParticle extends PacketBase {
 						double d1 = this.rand.nextGaussian() * 0.02D;
 						double d2 = this.rand.nextGaussian() * 0.02D;
 						double d3 = 10D;
-						Minecraft.getMinecraft().theWorld.spawnParticle(
+						player.worldObj.spawnParticle(
 										"largeexplode",
 										(posX + (this.rand.nextFloat())) - d4 * d3,
 										(posY + (this.rand.nextFloat())) - d1 * d3,
@@ -130,9 +138,23 @@ public class PacketRecvSpawnParticle extends PacketBase {
 					}
 					break;
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 
+    @Override
+    public void fromBytes(ByteBuf buf) {
+        ID = buf.readShort();
+        posX = buf.readFloat();
+        posY = buf.readFloat();
+        posZ = buf.readFloat();
+        eID = buf.readInt();
+    }
+
+    @Override
+    public void toBytes(ByteBuf buf) {
+        buf.writeShort(ID);
+        buf.writeFloat(posX);
+        buf.writeFloat(posY);
+        buf.writeFloat(posZ);
+        buf.writeInt(eID);
+    }
 }

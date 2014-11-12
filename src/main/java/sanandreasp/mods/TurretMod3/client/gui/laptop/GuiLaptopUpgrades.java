@@ -1,19 +1,13 @@
 package sanandreasp.mods.turretmod3.client.gui.laptop;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-
-import cpw.mods.fml.common.network.PacketDispatcher;
-
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.util.StatCollector;
 import sanandreasp.mods.turretmod3.item.ItemTurret;
-import sanandreasp.mods.turretmod3.packet.PacketHandlerCommon;
+import sanandreasp.mods.turretmod3.packet.PacketRecvLaptopUpgrades;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 import sanandreasp.mods.turretmod3.tileentity.TileEntityLaptop;
 
 public class GuiLaptopUpgrades extends GuiLaptop_Base {
@@ -92,20 +86,7 @@ public class GuiLaptopUpgrades extends GuiLaptop_Base {
 			ItemStack upgSlot = this.laptop.getStackInSlot(k+8);
 			
 			if (turretSlot != null && upgSlot != null && ItemTurret.isUpgradeValid(turretSlot, upgSlot, ItemTurret.getUpgItems(turretSlot))) {
-				ByteArrayOutputStream b = new ByteArrayOutputStream();
-				try {
-					DataOutputStream o = new DataOutputStream(b);
-					o.writeInt(0x007);
-					o.writeInt(this.laptop.xCoord);
-					o.writeInt(this.laptop.yCoord);
-					o.writeInt(this.laptop.zCoord);
-					o.writeInt(tsID);
-					o.writeInt(k+8);
-					
-					PacketDispatcher.sendPacketToServer(new Packet250CustomPayload(PacketHandlerCommon.getChannel(), b.toByteArray()));
-				} catch (IOException ex) {
-					ex.printStackTrace();
-				}
+				TM3ModRegistry.networkWrapper.sendToServer(new PacketRecvLaptopUpgrades(this.laptop, tsID, k+8));
 			}
 		}
 	}

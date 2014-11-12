@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
@@ -20,6 +21,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class GuiTInfoPG3 extends GuiTInfoBase {
+    private static final ResourceLocation PAGE_3 = new ResourceLocation(TM3ModRegistry.TEX_GUIINFO + "page_3.png");
     protected static RenderItem itemRenderer = new RenderItem();
     
 	protected Map<Integer, ItemStack> ammoList = Maps.newHashMap();
@@ -60,7 +62,7 @@ public class GuiTInfoPG3 extends GuiTInfoBase {
 	public void drawScreen(int par1, int par2, float par3) {
         this.drawDefaultBackground();
 
-		this.mc.getTextureManager().bindTexture(TM3ModRegistry.TEX_GUIINFO + "page_3.png");
+		this.mc.getTextureManager().bindTexture(PAGE_3);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, xSize, ySize);
         
@@ -75,7 +77,7 @@ public class GuiTInfoPG3 extends GuiTInfoBase {
         str = StatCollector.translateToLocal("gui.tinfo.healitems");
         this.fontRendererObj.drawString(str, this.guiLeft + 8, this.guiTop + 130, 0x808080);
 
-		this.mc.getTextureManager().bindTexture(TM3ModRegistry.TEX_GUIINFO + "page_3.png");
+		this.mc.getTextureManager().bindTexture(PAGE_3);
         int scrollX = 163;
         int scrollYA = 49 + (int)(69F * currScrollPosA);
         int scrollYH = 140 + (int)(69F * currScrollPosH);

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.init.Items;
+import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import sanandreasp.mods.turretmod3.client.gui.GuiItemTab;
@@ -19,6 +20,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 
 public class GuiLaptop_Base extends GuiContainer {
+    private static final ResourceLocation[] PAGES = {new ResourceLocation(TM3ModRegistry.TEX_GUILAP + "page_1.png"), new ResourceLocation(TM3ModRegistry.TEX_GUILAP + "page_2.png"), new ResourceLocation(TM3ModRegistry.TEX_GUILAP + "page_3.png")};
 	protected TileEntityLaptop laptop;
 	protected int site = 1;
     protected GuiButton programTurret;
@@ -66,7 +68,7 @@ public class GuiLaptop_Base extends GuiContainer {
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.getTextureManager().bindTexture(TM3ModRegistry.TEX_GUILAP + "page_" + Integer.toString(site) + ".png");
+        this.mc.getTextureManager().bindTexture(PAGES[site-1]);
         int k = (this.width - this.xSize) / 2;
         int l = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);

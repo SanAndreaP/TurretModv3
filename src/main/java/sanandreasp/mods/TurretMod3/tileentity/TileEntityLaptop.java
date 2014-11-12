@@ -3,7 +3,10 @@ package sanandreasp.mods.turretmod3.tileentity;
 import java.util.Map;
 import java.util.Random;
 
+import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraftforge.common.util.Constants;
 import sanandreasp.mods.turretmod3.item.ItemTurret;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -90,15 +93,14 @@ public class TileEntityLaptop extends TileEntity implements IInventory {
 	
 	@Override
 	public Packet getDescriptionPacket() {
-		NBTTagCompound nbt = new NBTTagCompound("TELaptopData");
+		NBTTagCompound nbt = new NBTTagCompound();
 		this.writeData(nbt);
-		Packet132TileEntityData packet = new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 3, nbt);
-		return packet;
+		return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 3, nbt);
 	}
 	
 	@Override
-	public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt) {
-		this.readData(pkt.customParam1);
+	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
+		this.readData(pkt.func_148857_g());
 	}
 	
 	@Override
@@ -130,12 +132,12 @@ public class TileEntityLaptop extends TileEntity implements IInventory {
 	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
 		super.readFromNBT(par1nbtTagCompound);
 		
-        NBTTagList var2 = par1nbtTagCompound.getTagList("Items");
+        NBTTagList var2 = par1nbtTagCompound.getTagList("Items", Constants.NBT.TAG_COMPOUND);
         this.inventory = new ItemStack[this.getSizeInventory()];
 
         for (int var3 = 0; var3 < var2.tagCount(); ++var3)
         {
-            NBTTagCompound var4 = (NBTTagCompound)var2.tagAt(var3);
+            NBTTagCompound var4 = var2.getCompoundTagAt(var3);
             
             byte var5 = var4.getByte("Slot");
 
