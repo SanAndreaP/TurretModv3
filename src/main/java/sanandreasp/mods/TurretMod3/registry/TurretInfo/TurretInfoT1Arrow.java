@@ -33,7 +33,7 @@ public class TurretInfoT1Arrow extends TurretInfo {
 		
 		this.healItems.put(new ItemStack(Blocks.mossy_cobblestone), 10);
 		this.healItems.put(new ItemStack(Blocks.cobblestone), 5);
-		this.healItems.put(new ItemStack(Blocks.wood, 1, OreDictionary.WILDCARD_VALUE), 2);
+		this.healItems.put(new ItemStack(Blocks.log, 1, OreDictionary.WILDCARD_VALUE), 2);
 		this.healItems.put(new ItemStack(Blocks.planks, 1, OreDictionary.WILDCARD_VALUE), 1);
 	}
 }

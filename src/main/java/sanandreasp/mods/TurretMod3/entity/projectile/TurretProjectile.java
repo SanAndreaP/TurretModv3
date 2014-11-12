@@ -33,7 +33,7 @@ public class TurretProjectile extends EntityArrow {
     protected int xTile = -1;
     protected int yTile = -1;
     protected int zTile = -1;
-    protected int inTile = 0;
+    protected Block inTile = Blocks.air;
     protected int inData = 0;
     protected boolean inGround = false;
     protected int ticksInGround;
@@ -154,7 +154,7 @@ public class TurretProjectile extends EntityArrow {
 
         if (this.shootingEntity != null && moving.entityHit != this.shootingEntity && moving.entityHit instanceof EntityPlayer && this.shootingEntity instanceof EntityPlayerMP)
         {
-            ((EntityPlayerMP)this.shootingEntity).playerNetServerHandler.sendPacketToPlayer(new Packet70GameEvent(6, 0));
+            ((EntityPlayerMP)this.shootingEntity).playerNetServerHandler.sendPacket(new Packet70GameEvent(6, 0));
         }
     }
     
@@ -301,8 +301,8 @@ public class TurretProjectile extends EntityArrow {
                 		|| (this.shouldTargetOneType()
                 				? this.targetedEntity != null && var10 != null && this.targetedEntity.getClass().isAssignableFrom(var10.getClass())
                 				: this.shootingEntity instanceof EntityTurret_Base && var10 instanceof EntityLiving
-                						? ((EntityTurret_Base)this.shootingEntity).isTargetValid((EntityLiving) var10)
-                						: false);
+                						&& ((EntityTurret_Base)this.shootingEntity).isTargetValid((EntityLiving) var10)
+                						);
                 boolean cannotBeHit = (var10 instanceof EntityLiving) && (float)((EntityLiving)var10).hurtResistantTime > (float)((EntityLiving)var10).maxHurtResistantTime / 2.0F || var10.isDead;
 
                 
@@ -412,7 +412,7 @@ public class TurretProjectile extends EntityArrow {
                     this.xTile = var4.blockX;
                     this.yTile = var4.blockY;
                     this.zTile = var4.blockZ;
-                    this.inTile = this.worldObj.getBlockId(this.xTile, this.yTile, this.zTile);
+                    this.inTile = this.worldObj.getBlock(this.xTile, this.yTile, this.zTile);
                     this.inData = this.worldObj.getBlockMetadata(this.xTile, this.yTile, this.zTile);
                     this.motionX = (double)((float)(var4.hitVec.xCoord - this.posX));
                     this.motionY = (double)((float)(var4.hitVec.yCoord - this.posY));
@@ -427,9 +427,9 @@ public class TurretProjectile extends EntityArrow {
                     	this.arrowShake = 7;
                     this.setIsCritical(false);
 
-                    if (this.inTile != 0)
+                    if (this.inTile != Blocks.air)
                     {
-                        Block.blocksList[this.inTile].onEntityCollidedWithBlock(this.worldObj, this.xTile, this.yTile, this.zTile, this);
+                        this.inTile.onEntityCollidedWithBlock(this.worldObj, this.xTile, this.yTile, this.zTile, this);
                     }
                 }
             }
@@ -511,7 +511,7 @@ public class TurretProjectile extends EntityArrow {
         par1NBTTagCompound.setShort("xTile", (short)this.xTile);
         par1NBTTagCompound.setShort("yTile", (short)this.yTile);
         par1NBTTagCompound.setShort("zTile", (short)this.zTile);
-        par1NBTTagCompound.setByte("inTile", (byte)this.inTile);
+        par1NBTTagCompound.setByte("inTile", (byte)Block.getIdFromBlock(this.inTile));
         par1NBTTagCompound.setByte("inData", (byte)this.inData);
         par1NBTTagCompound.setByte("shake", (byte)this.arrowShake);
         par1NBTTagCompound.setByte("inGround", (byte)(this.inGround ? 1 : 0));
@@ -528,7 +528,7 @@ public class TurretProjectile extends EntityArrow {
         this.xTile = par1NBTTagCompound.getShort("xTile");
         this.yTile = par1NBTTagCompound.getShort("yTile");
         this.zTile = par1NBTTagCompound.getShort("zTile");
-        this.inTile = par1NBTTagCompound.getByte("inTile") & 255;
+        this.inTile = Block.getBlockById(par1NBTTagCompound.getByte("inTile") & 255);
         this.inData = par1NBTTagCompound.getByte("inData") & 255;
         this.arrowShake = par1NBTTagCompound.getByte("shake") & 255;
         this.inGround = par1NBTTagCompound.getByte("inGround") == 1;
