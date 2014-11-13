@@ -224,7 +224,7 @@
  turret.amtp4t5a=Frag Artillery Shell
  item.tm3.turretRec1=Turret Music Disc
 
-itemGroup.turretTab=Turret Mod
+ itemGroup.turretTab=Turret Mod
  mainMenu.name=Turret Mod Menu
  
  achievement.turretmod3.tinfo=Get the Infos!
@@ -241,3 +241,6 @@ itemGroup.turretTab=Turret Mod
  achievement.turretmod3.upgrade.desc=Upgrade one of your turrets for the first time
  achievement.turretmod3.piercing=Piercing Blast!
  achievement.turretmod3.piercing.desc=Cause 10 Kills in 10 seconds with your T2 Minigun Turret
+
+ turret.renderLabel.true=Turrent labels will be rendered
+ turret.renderLabel.false=Turrent labels won't be rendered

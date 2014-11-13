@@ -24,10 +24,10 @@ public class CommandTurretMod extends CommandBase {
 				if (var2.length > 1) {
                     if (var2[1].equals("true")) {
                         TM3ModRegistry.proxy.getPlayerTM3Data(player).setBoolean("renderLabels", true);
-                        var1.sendChatToPlayer("turret labels will be rendered");
+                        func_152373_a(var1, this, "turret.renderLabel.true");
                     } else {
                         TM3ModRegistry.proxy.getPlayerTM3Data(player).setBoolean("renderLabels", false);
-                        var1.sendChatToPlayer("turret labels won't be rendered");
+                        func_152373_a(var1, this, "turret.renderLabel.false");
                     }
                 }
 			}
