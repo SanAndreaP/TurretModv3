@@ -304,7 +304,7 @@ public class ItemTurret extends Item {
     }
     
     @Override
-    public int getItemStackLimit() {
+    public int getItemStackLimit(ItemStack itemStack) {
     	return 4;
     }
     
@@ -315,7 +315,7 @@ public class ItemTurret extends Item {
     
     @Override
     @SideOnly(Side.CLIENT)
-    public boolean hasEffect(ItemStack par1ItemStack) {
+    public boolean hasEffect(ItemStack par1ItemStack, int renderPass) {
     	return par1ItemStack.getTagCompound() != null && par1ItemStack.getTagCompound().hasKey("tm3_program");
     }
     

@@ -50,18 +50,12 @@ public class ItemMobileBase extends Item {
     
     public static Entity spawnBase(World par0World, double par2, double par4, double par6)
     {
-        Entity var8 = new EntityMobileBase(par0World);
-
-        if (var8 != null && var8 instanceof EntityMobileBase)
-        {
-        	EntityMobileBase var10 = (EntityMobileBase)var8;
-            var8.setLocationAndAngles(par2, par4, par6, MathHelper.wrapAngleTo180_float(par0World.rand.nextFloat() * 360.0F), 0.0F);
-            var10.rotationYawHead = var10.rotationYaw;
-            var10.renderYawOffset = var10.rotationYaw;
-            var10.initCreature();
-            par0World.spawnEntityInWorld(var8);
-            var10.playLivingSound();
-        }
+        EntityMobileBase var8 = new EntityMobileBase(par0World);
+        var8.setLocationAndAngles(par2, par4, par6, MathHelper.wrapAngleTo180_float(par0World.rand.nextFloat() * 360.0F), 0.0F);
+        var8.rotationYawHead = var8.rotationYaw;
+        var8.renderYawOffset = var8.rotationYaw;
+        par0World.spawnEntityInWorld(var8);
+        var8.playLivingSound();
         return var8;
     }
 }
