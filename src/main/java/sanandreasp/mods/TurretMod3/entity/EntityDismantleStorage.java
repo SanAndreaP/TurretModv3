@@ -3,6 +3,8 @@ package sanandreasp.mods.turretmod3.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.util.Constants;
 import sanandreasp.mods.turretmod3.inventory.InventoryDismantleStorage;
@@ -19,7 +21,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
-public class EntityDismantleStorage extends EntityLiving {
+public class EntityDismantleStorage extends EntityLivingBase {
 	
 	public InventoryDismantleStorage inventory;
 	public Class tbClass = null;
@@ -29,8 +31,8 @@ public class EntityDismantleStorage extends EntityLiving {
 	public EntityDismantleStorage(World par1World) {
 		super(par1World);
 		this.setSize(0.65F, 0.8F);
-		this.dataWatcher.addObject(20, (int)0);
-		this.inventory = new InventoryDismantleStorage("turretmod3.gui.dismtStorage", 27, this);
+		this.dataWatcher.addObject(20, 0);
+		this.inventory = new InventoryDismantleStorage("gui.invDismStorage", 27, this);
 	}
 
 	public EntityDismantleStorage(World par1World, int i) {
@@ -60,7 +62,7 @@ public class EntityDismantleStorage extends EntityLiving {
 				b.add(is != null && is.stackSize > 0);
 			}
 			if (!b.contains(true)) {
-				this.attackEntityFrom(DamageSource.magic, Math.max(this.health, this.func_110138_aP()));
+				this.attackEntityFrom(DamageSource.magic, Math.max(this.getHealth(), this.getMaxHealth()));
 			}
 		}
 	}
@@ -109,8 +111,9 @@ public class EntityDismantleStorage extends EntityLiving {
 	}
 	
 	@Override
-	public boolean interact(EntityPlayer par1EntityPlayer) {
-		if (!worldObj.isRemote) par1EntityPlayer.openGui(TM3ModRegistry.instance, 2, this.worldObj, this.getEntityId(), 0, 0);
+	public boolean interactFirst(EntityPlayer par1EntityPlayer) {
+		if (!worldObj.isRemote)
+            par1EntityPlayer.openGui(TM3ModRegistry.instance, 2, this.worldObj, this.getEntityId(), 0, 0);
 		return true;
 	}
 	
@@ -155,8 +158,31 @@ public class EntityDismantleStorage extends EntityLiving {
 	}
 
 	@Override
-	public int func_110138_aP() {
-		return 1;
-	}
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(1.0D);
+    }
 
+    @Override
+    public ItemStack getHeldItem()
+    {
+        return this.inventory.getStackInSlot(0);
+    }
+
+    @Override
+    public void setCurrentItemOrArmor(int slot, ItemStack itemStack) {
+        this.inventory.setInventorySlotContents(slot, itemStack);
+    }
+
+    @Override
+    public ItemStack getEquipmentInSlot(int slot)
+    {
+        return this.inventory.getStackInSlot(slot);
+    }
+
+    @Override
+    public ItemStack[] getLastActiveItems()
+    {
+        return this.inventory.getContent();
+    }
 }

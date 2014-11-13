@@ -78,7 +78,7 @@ public class EntityTurret_TSHealer extends EntityTurret_Base {
 		float var1 = (float)wdtRange;
         boolean inList = !isEntityTargeted(entity) && entity instanceof IHealable;
         
-        return !(entity.isDead || entity.func_110143_aJ() <= 0 || entity.func_110143_aJ() >= entity.func_110138_aP()
+        return !(entity.isDead || entity.getHealth() <= 0 || entity.getHealth() >= entity.getMaxHealth()
         		|| entity.getDistanceSqToEntity(this) > (double)(var1 * var1) 
         		|| !this.canEntityBeSeen(entity)
         		|| this.posY - entity.posY > this.hgtRangeD

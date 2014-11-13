@@ -1,6 +1,7 @@
 package sanandreasp.mods.turretmod3.entity.projectile;
 
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -35,7 +36,7 @@ public class TurretProj_Snowball extends TurretProjectile {
 	}
 	
 	@Override
-	public void onEntityHit(EntityLiving living) {
+	public void onEntityHit(EntityLivingBase living) {
 		super.onEntityHit(living);
 		living.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 100, this.amplifier));
 	}

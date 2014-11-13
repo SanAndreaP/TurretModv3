@@ -2,6 +2,7 @@ package sanandreasp.mods.turretmod3.entity.projectile;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.entity.EntityLivingBase;
 import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.world.World;
@@ -67,7 +68,7 @@ public class TurretProj_Shard extends TurretProjectile {
 	}
 	
 	@Override
-	public void onEntityHit(EntityLiving living) {
+	public void onEntityHit(EntityLivingBase living) {
 		super.onEntityHit(living);
 		this.setHitEntities(this.getHitEntities()+1);
 	}

@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import cpw.mods.fml.common.ObfuscationReflectionHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.*;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.util.Constants;
 import sanandreasp.mods.turretmod3.client.packet.PacketRecvUpgrades;
@@ -33,9 +34,6 @@ import com.google.common.collect.Maps;
 import cpw.mods.fml.common.FMLLog;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityList;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -70,25 +68,29 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 
 	public EntityTurret_Base(World par1World) {
 		super(par1World);
-		this.dataWatcher.addObject(20, (short) 0); // Ammo
-		this.dataWatcher.addObject(21, (int) 0); // Health
-		this.dataWatcher.addObject(22, (short) 0); // Ammo type
-		this.dataWatcher.addObject(23, (short) 0); // Experience
-		this.dataWatcher.addObject(24, ""); // Player name
-		this.dataWatcher.addObject(25, "Turret"); // Turret name
-		this.dataWatcher.addObject(26, ""); // Target name
-		
-		/** 
-		 * &1 == uniqueTargets
-		 * &2 == isActive
-		**/
-		this.dataWatcher.addObject(27, (byte) (0 | 1 | 2));   // boolean stuff
-		
-		this.dataWatcher.addObject(28, (int)0); // shootTicks
-		this.dataWatcher.addObject(29, (byte)0); // frequency
 		this.setSize(0.3F, 1.8F);
-		initCreature();
 	}
+
+    @Override
+    protected void entityInit()
+    {
+        super.entityInit();
+        this.dataWatcher.addObject(20, (short) 0); // Ammo
+        this.dataWatcher.addObject(21,  0); // Health
+        this.dataWatcher.addObject(22, (short) 0); // Ammo type
+        this.dataWatcher.addObject(23, (short) 0); // Experience
+        this.dataWatcher.addObject(24, ""); // Player name
+        this.dataWatcher.addObject(25, "Turret"); // Turret name
+        this.dataWatcher.addObject(26, ""); // Target name
+        /**
+         * &1 == uniqueTargets
+         * &2 == isActive
+         **/
+        this.dataWatcher.addObject(27, (byte) (0 | 1 | 2));   // boolean stuff
+
+        this.dataWatcher.addObject(28, 0); // shootTicks
+        this.dataWatcher.addObject(29, (byte)0); // frequency
+    }
 	
 	public void addExperience(int par1Xp) {
 		if (par1Xp < 0) {
@@ -204,12 +206,16 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 			}
 		}
 		
-		attackEntityFrom(DamageSource.magic, Math.max(this.func_110143_aJ(), this.func_110138_aP()));
+		attackEntityFrom(DamageSource.magic, Math.max(this.getHealth(), this.getMaxHealth()));
 		
 		this.worldObj.spawnEntityInWorld(stg);
 	}
-	
-	public void faceEntity(Entity par1Entity, float par2, float par3)
+
+    private ItemStack[] getGoodItemStacks(ItemStack is1) {
+        return new ItemStack[0];
+    }
+
+    public void faceEntity(Entity par1Entity, float par2, float par3)
     {
 		if (par1Entity == null) return;
         double var4 = par1Entity.posX - this.posX;
@@ -320,11 +326,12 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 	public int getMaxAmmo() {
 		return 256;
 	}
-	
-	@Override
-	public int func_110138_aP() {
-		return 20;
-	}
+
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20.0D);
+    }
 	
 	public abstract int getMaxShootTicks();
 	
@@ -380,11 +387,11 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
     	lblChest:
     	for (IInventory chest : containers) {
     		if (chest != null) {
-    			for (int i = 0; i < chest.getSizeInventory() && (this.getAmmo() < this.getMaxAmmo() || this.getSrvHealth() < this.func_110138_aP()); i++) {
+    			for (int i = 0; i < chest.getSizeInventory() && (this.getAmmo() < this.getMaxAmmo() || this.getSrvHealth() < this.getMaxHealth()); i++) {
     				ItemStack cstSlot = chest.getStackInSlot(i);
     				if (cstSlot != null) {
-    					if (tInfo.func_110143_aJFromItem(cstSlot) > 0 && this.func_110143_aJ()+tInfo.func_110143_aJFromItem(cstSlot) <= this.func_110138_aP()) {
-    						this.heal(tInfo.func_110143_aJFromItem(cstSlot));
+    					if (tInfo.getHealthFromItem(cstSlot) > 0 && this.getHealth()+tInfo.getHealthFromItem(cstSlot) <= this.getMaxHealth()) {
+    						this.heal(tInfo.getHealthFromItem(cstSlot));
     						chest.decrStackSize(i, 1);
     						playSound = true;
     						break lblChest;
@@ -427,15 +434,11 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 	}
 	
 	@Override
-	public void initCreature() {
-	}
-	
-	@Override
 	public boolean interact(EntityPlayer par1EntityPlayer) {
 		ItemStack held = par1EntityPlayer.getHeldItem();
 		if (held != null) {
-			if (tInfo.func_110143_aJFromItem(held) > 0 && this.func_110143_aJ()+tInfo.func_110143_aJFromItem(held) <= this.func_110138_aP()) {
-				this.heal(tInfo.func_110143_aJFromItem(held));
+			if (tInfo.getHealthFromItem(held) > 0 && this.getHealth()+tInfo.getHealthFromItem(held) <= this.getMaxHealth()) {
+				this.heal(tInfo.getHealthFromItem(held));
 				par1EntityPlayer.inventory.decrStackSize(par1EntityPlayer.inventory.currentItem, 1);
 				this.worldObj.playSoundAtEntity(this, "turretmod3.collect.ia_get", 1.0F, 1.0F);
 				return true;
@@ -455,7 +458,7 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 						return true;
 					}
 				}
-			} else if (tInfo.getAmmoFromItem(held) > 0 && tInfo.getAmmoTypeFromItem(held) != this.getAmmoType() && this.getPlayerName().equals(par1EntityPlayer.username)) {
+			} else if (tInfo.getAmmoFromItem(held) > 0 && tInfo.getAmmoTypeFromItem(held) != this.getAmmoType() && this.getPlayerName().equals(par1EntityPlayer.getCommandSenderName())) {
 				ItemStack is = this.tInfo.getAmmoTypeItemWithLowestScore(this.getAmmoType()).copy();
 				is.stackSize = MathHelper.floor_double((double)this.getAmmo() / (double)this.tInfo.getAmmoFromItem(is));
 				if (is.getItemDamage() < 0) is.setItemDamage(0);
@@ -505,7 +508,7 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 								NBTTagList ench = held.getEnchantmentTagList();
 						        for (int j = 0; ench != null && j < ench.tagCount(); ++j)
 						        {
-						        	NBTTagCompound var4 = (NBTTagCompound)ench.getCompoundTagAt(j);
+						        	NBTTagCompound var4 = ench.getCompoundTagAt(j);
 						        	if (var4.getShort("id") == upg.getEnchantment().effectId) {
 						        		newUpgId = i;
 						        		break upgCounter;
@@ -562,15 +565,15 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
         String entityStr = (String) EntityList.classToStringMapping.get(entity.getClass());
         boolean inList = this.targets.containsKey(entityStr) && this.targets.get(entityStr) && !isEntityTargeted(entity);
         
-        return !(entity.isDead || entity.func_110143_aJ() <= 0
-        		|| (!Double.isInfinite(wdtRng) && entity.getDistanceSqToEntity(this) > (double)(wdtRng * wdtRng))
+        return !(entity.isDead || entity.getHealth() <= 0
+        		|| (!Double.isInfinite(wdtRng) && entity.getDistanceSqToEntity(this) > (wdtRng * wdtRng))
         		|| !(this.canEntityBeSeen(entity) || seeThrough)
         		|| (!Double.isInfinite(hgtDRng) && this.posY - entity.posY > hgtDRng)
         		|| (!Double.isInfinite(hgtURng) && entity.posY - this.posY > hgtURng)) && inList;
 	}
 	
 	@Override
-	public void knockBack(Entity par1Entity, int par2, double par3, double par5) { }
+	public void knockBack(Entity par1Entity, float par2, double par3, double par5) { }
 	
 	@Override
     protected void onDeathUpdate()
@@ -622,10 +625,10 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 	}
 	
 	@Override
-    public void onKillEntity(EntityLiving par1EntityLiving) {
+    public void onKillEntity(EntityLivingBase par1EntityLiving) {
     	super.onKillEntity(par1EntityLiving);
-    	if (this.canCollectXP()) {
-    		this.addExperience(par1EntityLiving.experienceValue);
+    	if (this.canCollectXP() && par1EntityLiving instanceof EntityLiving) {
+    		this.addExperience((Integer)ObfuscationReflectionHelper.getPrivateValue(EntityLiving.class, (EntityLiving) par1EntityLiving, "experienceValue", "field_70728_aV"));
     	}
     	EntityPlayer player = this.worldObj.getPlayerEntityByName(this.getPlayerName());
     	if (player != null) {
@@ -633,7 +636,6 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
     			player.triggerAchievement(AchievementPageTM.firstStrike);
     		else if (this.riddenByEntity == player)
     			player.triggerAchievement(AchievementPageTM.camKill);
-//    		System.out.println("TRIGGER");
     	}
     }
 	
@@ -760,7 +762,7 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 		if (!this.worldObj.isRemote) {
 			if (this.ticksExisted % 5 == 0 && TurretUpgrades.hasUpgrade(TUpgChestGrabbing.class, this.upgrades))
 				this.grabContentFromChests();
-			this.dataWatcher.updateObject(21, this.health);
+			this.dataWatcher.updateObject(21, this.getHealth());
 		}
 		
 		if (this.ridingEntity == null) {
@@ -887,7 +889,7 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
     }
     
     public void tryToShoot(boolean isRidden) {
-		if ((this.currentTarget != null || isRidden) && !this.worldObj.isRemote && this.health > 0) {
+		if ((this.currentTarget != null || isRidden) && !this.worldObj.isRemote && this.getHealth() > 0) {
 			if (this.getShootTicks() <= 0) {
 				if (this.getAmmo() > 0) {
 					this.shootProjectile(isRidden);
@@ -940,8 +942,8 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
             }
         }
 
-        this.field_70768_au = this.field_70766_av;
-        this.field_70766_av = 0.0F;
+        this.field_70768_au = this.field_110154_aX;
+        this.field_110154_aX = 0.0F;
         this.fallDistance = 0.0F;
     };
     

@@ -2,16 +2,16 @@ package sanandreasp.mods.turretmod3.entity.projectile;
 
 import java.util.List;
 
+import net.minecraft.block.material.Material;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.entity.*;
 import net.minecraft.init.Blocks;
+import net.minecraft.network.play.server.S2BPacketChangeGameState;
 import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
 
 import cpw.mods.fml.common.ObfuscationReflectionHelper;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.EnchantmentThorns;
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.IEntityMultiPart;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.boss.EntityDragonPart;
 import net.minecraft.entity.monster.EntityEnderman;
@@ -103,7 +103,7 @@ public class TurretProjectile extends EntityArrow {
             this.setHeading(var6, var8 + (double)var20, var10, par4, par5);
         }
     }
-    
+
     public void setHeading(double d1, double d2, double d3, float f1, float f2) {
         this.setThrowableHeading(d1, d2, d3, f1, f2);
         this.motionX *= this.getSpeedVal();
@@ -122,10 +122,10 @@ public class TurretProjectile extends EntityArrow {
     public boolean dieOnImpact() {
     	return true;
     }
-    
+
     public void processHit(MovingObjectPosition moving) {
 
-        EntityLiving entity = (EntityLiving)moving.entityHit;
+        EntityLivingBase entity = (EntityLivingBase)moving.entityHit;
         
     	if (!this.worldObj.isRemote)
         {
@@ -133,7 +133,7 @@ public class TurretProjectile extends EntityArrow {
     			entity.setArrowCountInEntity(entity.getArrowCountInEntity() + 1);
         }
     	
-    	ObfuscationReflectionHelper.setPrivateValue(EntityLiving.class, entity, 0, "recentlyHit", "field_70718_bc");
+    	ObfuscationReflectionHelper.setPrivateValue(EntityLivingBase.class, entity, 0, "recentlyHit", "field_70718_bc");
     	
     	float var26 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
     	moving.entityHit.motionX *= (double)this.knockbackStrength * 0.6000000238418579D / (double)var26;
@@ -149,16 +149,16 @@ public class TurretProjectile extends EntityArrow {
     	}
 //            }
 //        }
+        if(this.shootingEntity instanceof EntityLivingBase) {
+            Enchantment.thorns.func_151367_b((EntityLivingBase)this.shootingEntity, entity, 1);
 
-        EnchantmentThorns.func_92096_a(this.shootingEntity, entity, this.rand);
-
-        if (this.shootingEntity != null && moving.entityHit != this.shootingEntity && moving.entityHit instanceof EntityPlayer && this.shootingEntity instanceof EntityPlayerMP)
-        {
-            ((EntityPlayerMP)this.shootingEntity).playerNetServerHandler.sendPacket(new Packet70GameEvent(6, 0));
+            if (moving.entityHit != this.shootingEntity && moving.entityHit instanceof EntityPlayer && this.shootingEntity instanceof EntityPlayerMP) {
+                ((EntityPlayerMP) this.shootingEntity).playerNetServerHandler.sendPacket(new S2BPacketChangeGameState(6, 0.0F));
+            }
         }
     }
     
-    public void onEntityHit(EntityLiving living) {
+    public void onEntityHit(EntityLivingBase living) {
     	;
     }
     
@@ -210,12 +210,12 @@ public class TurretProjectile extends EntityArrow {
 
         Block var16 = this.worldObj.getBlock(this.xTile, this.yTile, this.zTile);
 
-        if (var16 != Blocks.air)
+        if (var16.getMaterial() != Material.air)
         {
             var16.setBlockBoundsBasedOnState(this.worldObj, this.xTile, this.yTile, this.zTile);
             AxisAlignedBB var2 = var16.getCollisionBoundingBoxFromPool(this.worldObj, this.xTile, this.yTile, this.zTile);
 
-            if (var2 != null && var2.isVecInside(this.worldObj.getVecFromPool(this.posX, this.posY, this.posZ)))
+            if (var2 != null && var2.isVecInside(Vec3.createVectorHelper(this.posX, this.posY, this.posZ)))
             {
                 this.inGround = true;
             }
@@ -260,15 +260,15 @@ public class TurretProjectile extends EntityArrow {
         else
         {
             ++this.ticksInAir;
-            Vec3 var17 = this.worldObj.getVecFromPool(this.posX, this.posY, this.posZ);
-            Vec3 var3 = this.worldObj.getVecFromPool(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
-            MovingObjectPosition var4 = this.worldObj.rayTraceBlocks_do_do(var17, var3, false, true);
-            var17 = this.worldObj.getVecFromPool(this.posX, this.posY, this.posZ);
-            var3 = this.worldObj.getVecFromPool(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
+            Vec3 var17 = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
+            Vec3 var3 = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
+            MovingObjectPosition var4 = this.worldObj.func_147447_a(var17, var3, false, true, false);//raytrace
+            var17 = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
+            var3 = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
 
             if (var4 != null)
             {
-                var3 = this.worldObj.getVecFromPool(var4.hitVec.xCoord, var4.hitVec.yCoord, var4.hitVec.zCoord);
+                var3 = Vec3.createVectorHelper(var4.hitVec.xCoord, var4.hitVec.yCoord, var4.hitVec.zCoord);
             }
 
             Entity var5 = null;
@@ -377,11 +377,11 @@ public class TurretProjectile extends EntityArrow {
                         		if (turret.getDistanceToEntity(living) <= 16.0F) {
 	                        		living.setRevengeTarget(turret);
 	                        		living.setAttackTarget(turret);
-	                        		living.setLastAttackingEntity(turret);
+	                        		living.setLastAttacker(turret);
 	                        		ObfuscationReflectionHelper.setPrivateValue(EntityLiving.class, living, turret, "currentTarget", "field_70776_bF");
                         		} else if (living instanceof EntityCreature && living instanceof IMob) {
                         			PathEntity path = this.worldObj.getEntityPathToXYZ(living, (int)turret.posX, (int)turret.posY, (int)turret.posZ, (float) turret.wdtRange*2F, true, false, false, true);
-                        			((EntityCreature)living).getNavigator().setPath(path, 0.35F);
+                        			living.getNavigator().setPath(path, 0.35F);
                         			((EntityCreature)living).setPathToEntity(path);
                         		}
                         	}
@@ -486,7 +486,7 @@ public class TurretProjectile extends EntityArrow {
             this.motionZ *= (double)var22;
             this.motionY -= (double)var11;
             this.setPosition(this.posX, this.posY, this.posZ);
-            this.doBlockCollisions();
+            this.func_145775_I();//collide with block
         }
     }
     

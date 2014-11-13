@@ -1,5 +1,6 @@
 package sanandreasp.mods.turretmod3.entity.turret;
 
+import net.minecraft.entity.EntityLivingBase;
 import sanandreasp.mods.turretmod3.entity.projectile.TurretProj_Pebble;
 import sanandreasp.mods.turretmod3.entity.projectile.TurretProjectile;
 import sanandreasp.mods.turretmod3.registry.AchievementPageTM;
@@ -92,7 +93,7 @@ public class EntityTurret_T1Shotgun extends EntityTurret_Base {
 	}
 	
 	@Override
-	public void onKillEntity(EntityLiving par1EntityLiving) {
+	public void onKillEntity(EntityLivingBase par1EntityLiving) {
 		super.onKillEntity(par1EntityLiving);
 		if (this.firstStrike && this.riddenByEntity == null) {
 			EntityPlayer player = this.worldObj.getPlayerEntityByName(this.getPlayerName());

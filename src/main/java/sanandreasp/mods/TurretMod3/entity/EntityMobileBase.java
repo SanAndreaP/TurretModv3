@@ -1,5 +1,6 @@
 package sanandreasp.mods.turretmod3.entity;
 
+import net.minecraft.entity.SharedMonsterAttributes;
 import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
 import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -20,14 +21,19 @@ public class EntityMobileBase extends EntityLiving implements IHealable {
 	public EntityMobileBase(World par1World) {
 		super(par1World);
 		this.setSize(0.99F, stdHeight);
-		
-		this.dataWatcher.addObject(20, (byte) 0);
 	}
 
-	@Override
-	public int func_110138_aP() {
-		return 20;
-	}
+    @Override
+    protected void entityInit() {
+        super.entityInit();
+        this.dataWatcher.addObject(20, (byte) 0);
+    }
+
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20.0D);
+    }
 	
 	@Override
 	public void onLivingUpdate() {
@@ -75,16 +81,13 @@ public class EntityMobileBase extends EntityLiving implements IHealable {
         this.worldObj.theProfiler.startSection("travel");
         this.moveStrafing *= 0.98F;
         this.moveForward *= 0.98F;
-        float var11 = this.landMovementFactor;
-        this.landMovementFactor *= this.getSpeedModifier();
         this.moveEntityWithHeading(this.moveStrafing, this.moveForward);
-        this.landMovementFactor = var11;
         this.worldObj.theProfiler.endSection();
         this.worldObj.theProfiler.startSection("push");
 
         if (!this.worldObj.isRemote)
         {
-            this.func_85033_bc();
+            this.collideWithNearbyEntities();
         }
 
         this.worldObj.theProfiler.endSection();

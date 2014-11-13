@@ -1,5 +1,7 @@
 package sanandreasp.mods.turretmod3.entity.turret;
 
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import sanandreasp.mods.turretmod3.entity.projectile.TurretProj_Rocket;
 import sanandreasp.mods.turretmod3.entity.projectile.TurretProjectile;
 import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
@@ -32,7 +34,7 @@ public class EntityTurret_T4FLAK extends EntityTurret_Base {
 	}
 	
 	@Override
-	public boolean isTargetValid(EntityLiving entity, double wdtRng, double hgtURng, double hgtDRng, boolean seeThrough) {
+	public boolean isTargetValid(EntityLivingBase entity, double wdtRng, double hgtURng, double hgtDRng, boolean seeThrough) {
 		return super.isTargetValid(entity, wdtRng, hgtURng, hgtDRng, seeThrough) && !entity.onGround;
 	}
 	
@@ -43,10 +45,11 @@ public class EntityTurret_T4FLAK extends EntityTurret_Base {
 		return proj;
 	}
 
-	@Override
-	public int func_110138_aP() {
-		return 80;
-	}
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(80.0D);
+    }
 	
 	@Override
 	public int getMaxAmmo() {
@@ -90,7 +93,7 @@ public class EntityTurret_T4FLAK extends EntityTurret_Base {
 	}
 	
 	@Override
-	public void onKillEntity(EntityLiving par1EntityLiving) {
+	public void onKillEntity(EntityLivingBase par1EntityLiving) {
 		super.onKillEntity(par1EntityLiving);
 	}
 	

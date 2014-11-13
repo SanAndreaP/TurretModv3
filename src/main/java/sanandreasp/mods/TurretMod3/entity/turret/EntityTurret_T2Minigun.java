@@ -1,5 +1,7 @@
 package sanandreasp.mods.turretmod3.entity.turret;
 
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import sanandreasp.mods.turretmod3.entity.projectile.TurretProj_Seed;
 import sanandreasp.mods.turretmod3.entity.projectile.TurretProjectile;
 import sanandreasp.mods.turretmod3.registry.AchievementPageTM;
@@ -38,10 +40,11 @@ public class EntityTurret_T2Minigun extends EntityTurret_Base {
 		return proj;
 	}
 
-	@Override
-	public int func_110138_aP() {
-		return 40;
-	}
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(40.0D);
+    }
 	
 	@Override
 	public int getMaxAmmo() {
@@ -99,7 +102,7 @@ public class EntityTurret_T2Minigun extends EntityTurret_Base {
 	}
 	
 	@Override
-	public void onKillEntity(EntityLiving par1EntityLiving) {
+	public void onKillEntity(EntityLivingBase par1EntityLiving) {
 		super.onKillEntity(par1EntityLiving);
 		this.killsWithin10sec++;
 	}

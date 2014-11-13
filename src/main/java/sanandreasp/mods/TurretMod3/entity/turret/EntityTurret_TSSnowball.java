@@ -1,5 +1,6 @@
 package sanandreasp.mods.turretmod3.entity.turret;
 
+import net.minecraft.entity.EntityLivingBase;
 import sanandreasp.mods.turretmod3.entity.projectile.TurretProj_Snowball;
 import sanandreasp.mods.turretmod3.entity.projectile.TurretProjectile;
 import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
@@ -53,7 +54,7 @@ public class EntityTurret_TSSnowball extends EntityTurret_Base {
 	}
 	
 	@Override
-	public boolean isTargetValid(EntityLiving entity) {
+	public boolean isTargetValid(EntityLivingBase entity) {
 		PotionEffect effect = entity.getActivePotionEffect(Potion.moveSlowdown);
 		return super.isTargetValid(entity) && !(effect != null && effect.getDuration() > 20 && effect.getAmplifier() >= this.getSlowdownAmplifier());
 	}

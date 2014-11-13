@@ -3,6 +3,7 @@ package sanandreasp.mods.turretmod3.entity.projectile;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.world.World;
 
 public class TurretProj_Laser extends TurretProjectile {
@@ -32,7 +33,7 @@ public class TurretProj_Laser extends TurretProjectile {
 	}
 	
 	@Override
-	public void onEntityHit(EntityLiving living) {
+	public void onEntityHit(EntityLivingBase living) {
 		super.onEntityHit(living);
 		living.setFire(5);
 	}

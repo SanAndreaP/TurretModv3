@@ -1,5 +1,6 @@
 package sanandreasp.mods.turretmod3.inventory;
 
+import cpw.mods.fml.common.ObfuscationReflectionHelper;
 import net.minecraft.item.Item;
 import sanandreasp.mods.turretmod3.entity.EntityDismantleStorage;
 import net.minecraft.inventory.InventoryBasic;
@@ -14,6 +15,10 @@ public class InventoryDismantleStorage extends InventoryBasic {
 		super(par1Str, false, par2);
 		this.dismStg = eds;
 	}
+
+    public ItemStack[] getContent(){
+        return ObfuscationReflectionHelper.getPrivateValue(InventoryBasic.class, this, "inventoryContents", "field_70482_c");
+    }
 	
 	public boolean addItemStackToInventory(ItemStack par1ItemStack)
     {

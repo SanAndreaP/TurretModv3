@@ -1,5 +1,6 @@
 package sanandreasp.mods.turretmod3.entity.turret;
 
+import net.minecraft.entity.SharedMonsterAttributes;
 import sanandreasp.mods.turretmod3.entity.projectile.TurretProj_Shard;
 import sanandreasp.mods.turretmod3.entity.projectile.TurretProjectile;
 import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
@@ -20,11 +21,12 @@ public class EntityTurret_T5Railgun extends EntityTurret_Base {
 	public String getTexture() {
 		return TM3ModRegistry.TEX_TURRETDIR + "t5Railgun.png";
 	}
-	
-	@Override
-	public int func_110138_aP() {
-		return 100;
-	}
+
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(100.0D);
+    }
 
 	@Override
 	public TurretProjectile getProjectile() {

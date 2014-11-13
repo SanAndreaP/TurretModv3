@@ -1,5 +1,6 @@
 package sanandreasp.mods.turretmod3.entity.turret;
 
+import net.minecraft.entity.SharedMonsterAttributes;
 import sanandreasp.mods.turretmod3.entity.projectile.TurretProj_Plasma;
 import sanandreasp.mods.turretmod3.entity.projectile.TurretProjectile;
 import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
@@ -20,11 +21,12 @@ public class EntityTurret_T4Sniper extends EntityTurret_Base {
 	public String getTexture() {
 		return TM3ModRegistry.TEX_TURRETDIR + "t4Sniper.png";
 	}
-	
-	@Override
-	public int func_110138_aP() {
-		return 40;
-	}
+
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(40.0D);
+    }
 
 	@Override
 	public TurretProjectile getProjectile() {

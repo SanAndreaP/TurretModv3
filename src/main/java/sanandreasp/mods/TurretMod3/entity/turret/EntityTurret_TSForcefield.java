@@ -4,7 +4,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
 
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.*;
+import org.apache.logging.log4j.Level;
 import sanandreasp.mods.turretmod3.entity.projectile.TurretProjectile;
 import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgShieldMobPush;
@@ -18,9 +19,6 @@ import cpw.mods.fml.relauncher.ReflectionHelper;
 import cpw.mods.fml.relauncher.ReflectionHelper.UnableToFindMethodException;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityFireball;
 import net.minecraft.entity.projectile.EntityThrowable;
@@ -59,11 +57,12 @@ public class EntityTurret_TSForcefield extends EntityTurret_Base {
 	public void addExperience(int par1Xp) {
 		;
 	}
-	
-	@Override
-	public int func_110138_aP() {
-		return 40;
-	}
+
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(40.0D);
+    }
 	
 	@Override
 	public int getMaxAmmo() {
@@ -252,7 +251,7 @@ public class EntityTurret_TSForcefield extends EntityTurret_Base {
 		int bY = MathHelper.floor_double(e.posY);
 		int bZ = MathHelper.floor_double(e.posZ);
 		int side = 0;
-		Vec3 vec = this.worldObj.getVecFromPool(e.posX, e.posY, e.posZ);
+		Vec3 vec = Vec3.createVectorHelper(e.posX, e.posY, e.posZ);
 		
 		return new MovingObjectPosition(bX, bY, bZ, side, vec);
 	}

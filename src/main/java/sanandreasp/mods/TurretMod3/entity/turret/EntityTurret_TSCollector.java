@@ -2,6 +2,8 @@ package sanandreasp.mods.turretmod3.entity.turret;
 
 import java.util.List;
 
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import sanandreasp.mods.turretmod3.entity.projectile.TurretProjectile;
 import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgExpStorageC;
@@ -46,11 +48,12 @@ public class EntityTurret_TSCollector extends EntityTurret_Base {
 	public void addExperience(int par1Xp) {
 		if (this.xpCooldown == 0) super.addExperience(par1Xp);
 	}
-	
-	@Override
-	public int func_110138_aP() {
-		return 60;
-	}
+
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(60.0D);
+    }
 	
 	@Override
 	public int getMaxAmmo() {
@@ -83,7 +86,7 @@ public class EntityTurret_TSCollector extends EntityTurret_Base {
 	}
 	
 	@Override
-	public boolean isTargetValid(EntityLiving entity) {
+	public boolean isTargetValid(EntityLivingBase entity) {
 		return false;
 	}
 	

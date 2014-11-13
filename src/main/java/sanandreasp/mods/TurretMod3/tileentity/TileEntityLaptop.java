@@ -78,9 +78,9 @@ public class TileEntityLaptop extends TileEntity implements IInventory {
             }
             
             if (this.screenAngle >= 0.999F) {
-            	this.worldObj.markBlockForRenderUpdate(this.xCoord, this.yCoord, this.zCoord);
+            	this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
             	this.worldObj.updateLightByType(EnumSkyBlock.Block, this.xCoord, this.yCoord, this.zCoord);
-            	this.worldObj.func_96440_m(this.xCoord, this.yCoord, this.zCoord, this.getBlockType());
+            	this.worldObj.notifyBlockChange(this.xCoord, this.yCoord, this.zCoord, this.getBlockType());
             	this.lightUpdated = true;
             }
 

@@ -1,5 +1,6 @@
 package sanandreasp.mods.turretmod3.entity.turret;
 
+import net.minecraft.entity.SharedMonsterAttributes;
 import sanandreasp.mods.turretmod3.entity.projectile.TurretProj_Flame;
 import sanandreasp.mods.turretmod3.entity.projectile.TurretProjectile;
 import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
@@ -27,11 +28,12 @@ public class EntityTurret_T3Flamethrower extends EntityTurret_Base {
 	public String getTexture() {
 		return TM3ModRegistry.TEX_TURRETDIR + "t3Flamethrower.png";
 	}
-	
-	@Override
-	public int func_110138_aP() {
-		return 60;
-	}
+
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(60.0D);
+    }
 	
 	@Override
 	protected void decrAmmo() {
