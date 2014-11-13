@@ -1,20 +1,11 @@
 package sanandreasp.mods.turretmod3.packet;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import sanandreasp.mods.turretmod3.client.packet.PacketRecvUpgrades;
 import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.world.WorldServer;
 import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 
 public class PacketSendUpgrades extends PacketBase {

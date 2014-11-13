@@ -1,16 +1,8 @@
 package sanandreasp.mods.turretmod3.registry.TurretUpgrades;
 
 import net.minecraft.init.Blocks;
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_T1Arrow;
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_T1Shotgun;
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_T2Minigun;
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_T2Revolver;
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_T3Laser;
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_TSCollector;
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_TSForcefield;
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_TSHealer;
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_TSSnowball;
 import net.minecraft.item.ItemStack;
+import sanandreasp.mods.turretmod3.entity.turret.*;
 
 public class TUpgFireImmunity extends TurretUpgrades {
 

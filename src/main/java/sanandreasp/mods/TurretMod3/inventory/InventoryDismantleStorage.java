@@ -1,11 +1,11 @@
 package sanandreasp.mods.turretmod3.inventory;
 
 import cpw.mods.fml.common.ObfuscationReflectionHelper;
-import net.minecraft.item.Item;
-import sanandreasp.mods.turretmod3.entity.EntityDismantleStorage;
 import net.minecraft.inventory.InventoryBasic;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import sanandreasp.mods.turretmod3.entity.EntityDismantleStorage;
 
 public class InventoryDismantleStorage extends InventoryBasic {
 	

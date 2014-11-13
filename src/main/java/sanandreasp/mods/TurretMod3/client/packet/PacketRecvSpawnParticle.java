@@ -1,9 +1,5 @@
 package sanandreasp.mods.turretmod3.client.packet;
 
-import java.io.DataInputStream;
-import java.io.IOException;
-import java.util.Random;
-
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityLavaFX;
@@ -12,6 +8,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import sanandreasp.mods.turretmod3.client.particle.EntityBulletShotFX;
 import sanandreasp.mods.turretmod3.client.particle.EntityForcefieldFX;
 import sanandreasp.mods.turretmod3.packet.PacketBase;
+
+import java.util.Random;
 
 public class PacketRecvSpawnParticle extends PacketBase {
     private short ID;

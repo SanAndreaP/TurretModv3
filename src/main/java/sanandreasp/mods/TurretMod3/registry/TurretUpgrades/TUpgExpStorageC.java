@@ -1,8 +1,8 @@
 package sanandreasp.mods.turretmod3.registry.TurretUpgrades;
 
 import net.minecraft.init.Items;
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_TSCollector;
 import net.minecraft.item.ItemStack;
+import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_TSCollector;
 
 public class TUpgExpStorageC extends TurretUpgrades {
 

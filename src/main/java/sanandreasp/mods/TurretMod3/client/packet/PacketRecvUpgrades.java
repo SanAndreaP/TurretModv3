@@ -1,11 +1,7 @@
 package sanandreasp.mods.turretmod3.client.packet;
 
-import java.util.Map;
-
 import com.google.common.collect.Maps;
-
 import cpw.mods.fml.common.network.ByteBufUtils;
-
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -15,6 +11,8 @@ import net.minecraftforge.common.util.Constants;
 import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
 import sanandreasp.mods.turretmod3.packet.PacketBase;
 import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
+
+import java.util.Map;
 
 public class PacketRecvUpgrades extends PacketBase {
     private int eID;

@@ -1,20 +1,17 @@
 package sanandreasp.mods.turretmod3.client.gui.laptop;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-
-import net.minecraft.util.StatCollector;
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.inventory.Container;
+import net.minecraft.util.StatCollector;
+import org.lwjgl.opengl.GL11;
 import sanandreasp.mods.turretmod3.client.gui.GuiTurretButton;
-import sanandreasp.mods.turretmod3.packet.PacketHandlerCommon;
 import sanandreasp.mods.turretmod3.packet.PacketRecvLaptopGeneralStg;
 import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 import sanandreasp.mods.turretmod3.tileentity.TileEntityLaptop;
+
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
 
 public class GuiLaptopGeneral extends GuiLaptop_Base {
 	private GuiButton statLabel;

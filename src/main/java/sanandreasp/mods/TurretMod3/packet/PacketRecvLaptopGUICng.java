@@ -1,10 +1,9 @@
 package sanandreasp.mods.turretmod3.packet;
 
 import io.netty.buffer.ByteBuf;
-import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 
 public class PacketRecvLaptopGUICng extends PacketBase {
     private int guiID, xCoord, yCoord, zCoord;

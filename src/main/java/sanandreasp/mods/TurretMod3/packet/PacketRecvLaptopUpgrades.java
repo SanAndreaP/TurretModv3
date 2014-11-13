@@ -1,12 +1,11 @@
 package sanandreasp.mods.turretmod3.packet;
 
 import io.netty.buffer.ByteBuf;
-import sanandreasp.mods.turretmod3.item.ItemTurret;
-import sanandreasp.mods.turretmod3.tileentity.TileEntityLaptop;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import sanandreasp.mods.turretmod3.item.ItemTurret;
+import sanandreasp.mods.turretmod3.tileentity.TileEntityLaptop;
 
 public class PacketRecvLaptopUpgrades extends PacketBase {
     private int x, y, z;

@@ -1,21 +1,18 @@
 package sanandreasp.mods.turretmod3.packet;
 
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.google.common.collect.Maps;
-
 import cpw.mods.fml.common.network.ByteBufUtils;
-
 import io.netty.buffer.ByteBuf;
-import net.minecraftforge.common.util.Constants;
-import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
-import sanandreasp.mods.turretmod3.tileentity.TileEntityLaptop;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.Constants;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
+import sanandreasp.mods.turretmod3.tileentity.TileEntityLaptop;
+
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class PacketRecvLaptopTargets extends PacketBase {
     private int x, y, z;

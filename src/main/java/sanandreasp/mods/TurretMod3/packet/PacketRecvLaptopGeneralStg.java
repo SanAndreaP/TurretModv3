@@ -1,14 +1,13 @@
 package sanandreasp.mods.turretmod3.packet;
 
-import java.util.List;
-
 import io.netty.buffer.ByteBuf;
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
-import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
+
+import java.util.List;
 
 public class PacketRecvLaptopGeneralStg extends PacketBase {
     private int id, freq;

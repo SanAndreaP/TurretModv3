@@ -2,9 +2,7 @@ package sanandreasp.mods.turretmod3.client.gui.TCU;
 
 import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
-
 import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_TSForcefield;
-import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 import sanandreasp.mods.turretmod3.registry.TurretInfo.TurretInfo;
 
 public class GuiTCUInfo extends GuiTCUBase {

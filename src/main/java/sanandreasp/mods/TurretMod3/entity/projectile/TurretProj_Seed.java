@@ -1,9 +1,9 @@
 package sanandreasp.mods.turretmod3.entity.projectile;
 
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_T2Minigun;
-import sanandreasp.mods.turretmod3.registry.TurretInfo.TurretInfo;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_T2Minigun;
+import sanandreasp.mods.turretmod3.registry.TurretInfo.TurretInfo;
 
 public class TurretProj_Seed extends TurretProjectile {
 	

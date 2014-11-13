@@ -1,12 +1,11 @@
 package sanandreasp.mods.turretmod3.client.model.turret;
 
+import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.entity.Entity;
 import org.lwjgl.opengl.GL11;
-
 import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
 import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgInfAmmo;
 import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TurretUpgrades;
-import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 
 public class Model_TSHealer extends ModelTurret_Base {
 	public ModelRenderer TurretFeetI;

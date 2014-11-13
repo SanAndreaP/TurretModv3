@@ -1,7 +1,7 @@
 package sanandreasp.mods.turretmod3.entity.projectile;
 
-import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 import net.minecraft.world.World;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 
 public class TurretProj_Explosive extends TurretProjectile {
 	

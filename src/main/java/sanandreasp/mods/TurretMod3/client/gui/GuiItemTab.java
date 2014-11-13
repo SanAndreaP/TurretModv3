@@ -1,16 +1,14 @@
 package sanandreasp.mods.turretmod3.client.gui;
 
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-
-import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.item.ItemStack;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 
 public class GuiItemTab extends GuiButton {
 	

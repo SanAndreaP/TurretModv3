@@ -1,9 +1,8 @@
 package sanandreasp.mods.turretmod3.packet;
 
 import io.netty.buffer.ByteBuf;
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
-
 import net.minecraft.entity.player.EntityPlayer;
+import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
 
 public class PacketRecvTurretShootKey extends PacketBase {
 

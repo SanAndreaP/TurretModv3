@@ -1,11 +1,11 @@
 package sanandreasp.mods.turretmod3.inventory;
 
-import sanandreasp.mods.turretmod3.item.ItemTurret;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import sanandreasp.mods.turretmod3.item.ItemTurret;
 
 public class ContainerLaptop extends Container {
 	private IInventory invBlock;

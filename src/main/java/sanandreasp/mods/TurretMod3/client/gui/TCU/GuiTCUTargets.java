@@ -1,17 +1,14 @@
 package sanandreasp.mods.turretmod3.client.gui.TCU;
 
+import net.minecraft.util.StatCollector;
+import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.GL11;
+import sanandreasp.mods.turretmod3.packet.PacketRecvTargetListSrv;
+import sanandreasp.mods.turretmod3.registry.TurretTargetRegistry;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import net.minecraft.util.ResourceLocation;
-import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.GL11;
-
-import sanandreasp.mods.turretmod3.packet.PacketRecvTargetListSrv;
-import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
-import sanandreasp.mods.turretmod3.registry.TurretTargetRegistry;
-import net.minecraft.util.StatCollector;
 
 public class GuiTCUTargets extends GuiTCUBase {
 	protected Map<Integer, String> targetList;

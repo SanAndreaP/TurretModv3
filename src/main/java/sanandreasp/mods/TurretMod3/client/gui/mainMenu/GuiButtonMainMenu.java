@@ -1,10 +1,9 @@
 package sanandreasp.mods.turretmod3.client.gui.mainMenu;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
+import org.lwjgl.opengl.GL11;
 
 public class GuiButtonMainMenu extends GuiButton {
 	private int color = 0xFFFFFF;

@@ -1,22 +1,21 @@
 package sanandreasp.mods.turretmod3.client.gui.turretInfo;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
-import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
+import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GuiTInfoPG1 extends GuiTInfoBase {
 	private static final ResourceLocation PAGE_1 = new ResourceLocation(TM3ModRegistry.TEX_GUIINFO + "page_1.png");

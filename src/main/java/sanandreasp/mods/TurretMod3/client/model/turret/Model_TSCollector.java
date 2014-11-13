@@ -1,10 +1,9 @@
 package sanandreasp.mods.turretmod3.client.model.turret;
 
-import org.lwjgl.opengl.GL11;
-
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import org.lwjgl.opengl.GL11;
+import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
 
 public class Model_TSCollector extends ModelTurret_Base {
 	public ModelRenderer TurretFeetI;

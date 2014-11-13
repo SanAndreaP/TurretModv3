@@ -3,7 +3,6 @@ package sanandreasp.mods.turretmod3.client.gui.turretInfo;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
-
 import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 
 public class GuiTInfoPG2 extends GuiTInfoBase {

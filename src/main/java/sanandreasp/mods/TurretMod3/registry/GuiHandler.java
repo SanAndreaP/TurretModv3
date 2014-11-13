@@ -1,6 +1,11 @@
 package sanandreasp.mods.turretmod3.registry;
 
+import cpw.mods.fml.common.network.IGuiHandler;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 import sanandreasp.mods.turretmod3.client.gui.GuiDismantledStorage;
 import sanandreasp.mods.turretmod3.client.gui.TCU.GuiTCUInfo;
 import sanandreasp.mods.turretmod3.client.gui.laptop.GuiLaptopGeneral;
@@ -15,11 +20,6 @@ import sanandreasp.mods.turretmod3.inventory.ContainerLaptop;
 import sanandreasp.mods.turretmod3.inventory.ContainerLaptopUpgrades;
 import sanandreasp.mods.turretmod3.packet.PacketRecvTargetListSrv;
 import sanandreasp.mods.turretmod3.tileentity.TileEntityLaptop;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
-import cpw.mods.fml.common.network.IGuiHandler;
 
 public class GuiHandler implements IGuiHandler {
 

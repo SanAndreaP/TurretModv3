@@ -1,21 +1,20 @@
 package sanandreasp.mods.turretmod3.tileentity;
 
-import java.util.Map;
-import java.util.Random;
-
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraftforge.common.util.Constants;
-import sanandreasp.mods.turretmod3.item.ItemTurret;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.EnumSkyBlock;
+import net.minecraftforge.common.util.Constants;
+import sanandreasp.mods.turretmod3.item.ItemTurret;
+
+import java.util.Map;
+import java.util.Random;
 
 public class TileEntityLaptop extends TileEntity implements IInventory {
 	

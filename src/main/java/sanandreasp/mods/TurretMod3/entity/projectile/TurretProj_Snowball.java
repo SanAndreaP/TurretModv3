@@ -1,6 +1,5 @@
 package sanandreasp.mods.turretmod3.entity.projectile;
 
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;

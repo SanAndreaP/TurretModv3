@@ -1,22 +1,20 @@
 package sanandreasp.mods.turretmod3.client.gui.TCU;
 
-import java.lang.ref.WeakReference;
-import java.util.Map;
-
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
-import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-
+import com.google.common.collect.Maps;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.oredict.OreDictionary;
+import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
 import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TurretUpgrades;
 
-import com.google.common.collect.Maps;
+import java.lang.ref.WeakReference;
+import java.util.Map;
 
 public class GuiTCUUpgrades extends GuiTCUBase {
     private static final ResourceLocation PAGE_4 = new ResourceLocation(TM3ModRegistry.TEX_GUITCUDIR + "page_4.png");

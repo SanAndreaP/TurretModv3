@@ -1,21 +1,15 @@
 package sanandreasp.mods.turretmod3.registry;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import sanandreasp.mods.turretmod3.entity.EntityDismantleStorage;
-import sanandreasp.mods.turretmod3.entity.EntityMobileBase;
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
-
 import com.google.common.collect.Maps;
-
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.IAnimals;
+import sanandreasp.mods.turretmod3.entity.EntityDismantleStorage;
+import sanandreasp.mods.turretmod3.entity.EntityMobileBase;
+import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
+
+import java.util.*;
 
 public class TurretTargetRegistry {
 	public static TurretTargetRegistry trTargets;

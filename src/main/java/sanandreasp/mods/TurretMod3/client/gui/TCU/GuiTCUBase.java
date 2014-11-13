@@ -1,13 +1,13 @@
 package sanandreasp.mods.turretmod3.client.gui.TCU;
 
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import sanandreasp.mods.turretmod3.client.gui.GuiItemTab;
 import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.item.ItemStack;
 import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 
 public class GuiTCUBase extends GuiScreen {

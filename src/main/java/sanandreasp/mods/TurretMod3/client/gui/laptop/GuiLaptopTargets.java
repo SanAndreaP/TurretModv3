@@ -1,24 +1,22 @@
 package sanandreasp.mods.turretmod3.client.gui.laptop;
 
-import static sanandreasp.mods.turretmod3.registry.TurretTargetRegistry.trTargets;
+import com.google.common.collect.Maps;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.entity.EntityList;
+import net.minecraft.inventory.Container;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
+import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.GL11;
+import sanandreasp.mods.turretmod3.packet.PacketRecvLaptopTargets;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
+import sanandreasp.mods.turretmod3.tileentity.TileEntityLaptop;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
-import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.GL11;
-
-import com.google.common.collect.Maps;
-
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.entity.EntityList;
-import net.minecraft.inventory.Container;
-import sanandreasp.mods.turretmod3.packet.PacketRecvLaptopTargets;
-import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
-import sanandreasp.mods.turretmod3.tileentity.TileEntityLaptop;
+import static sanandreasp.mods.turretmod3.registry.TurretTargetRegistry.trTargets;
 
 public class GuiLaptopTargets extends GuiLaptop_Base {
 	private static final ResourceLocation PAGE_1 = new ResourceLocation(TM3ModRegistry.TEX_GUITCUDIR + "page_1.png");

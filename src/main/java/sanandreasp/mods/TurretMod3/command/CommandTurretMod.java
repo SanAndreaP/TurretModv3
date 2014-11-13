@@ -1,9 +1,9 @@
 package sanandreasp.mods.turretmod3.command;
 
-import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 
 public class CommandTurretMod extends CommandBase {
 	@Override

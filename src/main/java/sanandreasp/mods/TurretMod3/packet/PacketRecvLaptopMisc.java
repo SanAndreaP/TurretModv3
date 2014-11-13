@@ -2,10 +2,9 @@ package sanandreasp.mods.turretmod3.packet;
 
 import cpw.mods.fml.common.network.ByteBufUtils;
 import io.netty.buffer.ByteBuf;
-import sanandreasp.mods.turretmod3.tileentity.TileEntityLaptop;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import sanandreasp.mods.turretmod3.tileentity.TileEntityLaptop;
 
 public class PacketRecvLaptopMisc extends PacketBase {
     private int x,y,z;

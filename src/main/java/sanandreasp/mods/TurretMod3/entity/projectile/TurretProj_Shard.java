@@ -3,9 +3,8 @@ package sanandreasp.mods.turretmod3.entity.projectile;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.EntityLivingBase;
-import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.world.World;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 
 public class TurretProj_Shard extends TurretProjectile {
 

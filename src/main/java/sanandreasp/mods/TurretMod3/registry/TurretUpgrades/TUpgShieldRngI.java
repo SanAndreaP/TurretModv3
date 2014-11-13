@@ -1,9 +1,9 @@
 package sanandreasp.mods.turretmod3.registry.TurretUpgrades;
 
 import net.minecraft.init.Blocks;
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_TSForcefield;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
+import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_TSForcefield;
 
 public class TUpgShieldRngI extends TurretUpgrades {
 

@@ -2,9 +2,9 @@ package sanandreasp.mods.turretmod3.registry.TurretInfo;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 
 public class TurretInfoT1Arrow extends TurretInfo {
 

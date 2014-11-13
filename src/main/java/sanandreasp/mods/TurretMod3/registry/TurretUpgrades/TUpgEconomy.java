@@ -1,19 +1,8 @@
 package sanandreasp.mods.turretmod3.registry.TurretUpgrades;
 
 import net.minecraft.init.Blocks;
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_T1Arrow;
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_T1Shotgun;
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_T2Minigun;
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_T2Revolver;
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_T3Flamethrower;
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_T3Laser;
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_T4FLAK;
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_T4Sniper;
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_T5Artillery;
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_T5Railgun;
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_TSHealer;
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_TSSnowball;
 import net.minecraft.item.ItemStack;
+import sanandreasp.mods.turretmod3.entity.turret.*;
 
 public class TUpgEconomy extends TurretUpgrades {
 

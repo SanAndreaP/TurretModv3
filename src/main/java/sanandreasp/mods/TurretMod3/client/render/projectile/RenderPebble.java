@@ -6,11 +6,9 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.IIcon;
-
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
-
 import sanandreasp.mods.turretmod3.client.registry.ClientProxy;
 import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 

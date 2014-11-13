@@ -1,20 +1,14 @@
 package sanandreasp.mods.turretmod3.client.gui.TCU;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
-
 import sanandreasp.mods.turretmod3.client.gui.GuiTurretButton;
-import sanandreasp.mods.turretmod3.packet.PacketHandlerCommon;
 import sanandreasp.mods.turretmod3.packet.PacketRecvTurretSettings;
 import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgControl;
 import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TurretUpgrades;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiTextField;
 
 public class GuiTCUSettings extends GuiTCUBase {
 	private GuiButton dismantleTurret;

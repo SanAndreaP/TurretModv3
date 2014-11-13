@@ -1,8 +1,8 @@
 package sanandreasp.mods.turretmod3.registry.TurretUpgrades;
 
+import net.minecraft.item.ItemStack;
 import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_TSCollector;
 import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
-import net.minecraft.item.ItemStack;
 
 public class TUpgTurretCollect extends TurretUpgrades {
 

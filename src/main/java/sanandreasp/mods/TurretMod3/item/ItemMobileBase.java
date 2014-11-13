@@ -1,10 +1,6 @@
 package sanandreasp.mods.turretmod3.item;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import sanandreasp.mods.turretmod3.entity.EntityMobileBase;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -12,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Facing;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import sanandreasp.mods.turretmod3.entity.EntityMobileBase;
 
 public class ItemMobileBase extends Item {
 

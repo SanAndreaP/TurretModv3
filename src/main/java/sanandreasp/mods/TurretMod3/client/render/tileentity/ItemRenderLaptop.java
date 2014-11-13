@@ -1,14 +1,13 @@
 package sanandreasp.mods.turretmod3.client.render.tileentity;
 
-import org.lwjgl.opengl.GL11;
-
-import sanandreasp.mods.turretmod3.block.BlockLaptop;
-import sanandreasp.mods.turretmod3.client.model.ModelLaptop;
-import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
+import org.lwjgl.opengl.GL11;
+import sanandreasp.mods.turretmod3.block.BlockLaptop;
+import sanandreasp.mods.turretmod3.client.model.ModelLaptop;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 
 public class ItemRenderLaptop implements IItemRenderer {
 	private ModelLaptop model = new ModelLaptop();

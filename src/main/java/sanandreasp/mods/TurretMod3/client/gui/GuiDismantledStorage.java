@@ -1,12 +1,10 @@
 package sanandreasp.mods.turretmod3.client.gui;
 
-import org.lwjgl.opengl.GL11;
-
-import sanandreasp.mods.turretmod3.inventory.ContainerDismantleStorage;
-
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.StatCollector;
+import org.lwjgl.opengl.GL11;
+import sanandreasp.mods.turretmod3.inventory.ContainerDismantleStorage;
 
 public class GuiDismantledStorage extends GuiContainer {
     private String invName;

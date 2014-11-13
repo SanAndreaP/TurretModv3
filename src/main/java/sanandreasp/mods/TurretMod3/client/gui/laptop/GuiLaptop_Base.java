@@ -1,23 +1,22 @@
 package sanandreasp.mods.turretmod3.client.gui.laptop;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import net.minecraft.init.Items;
-import net.minecraft.util.ResourceLocation;
-import org.lwjgl.opengl.GL11;
-
-import sanandreasp.mods.turretmod3.client.gui.GuiItemTab;
-import sanandreasp.mods.turretmod3.packet.PacketRecvLaptopGUICng;
-import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
-import sanandreasp.mods.turretmod3.tileentity.TileEntityLaptop;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
+import org.lwjgl.opengl.GL11;
+import sanandreasp.mods.turretmod3.client.gui.GuiItemTab;
+import sanandreasp.mods.turretmod3.packet.PacketRecvLaptopGUICng;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
+import sanandreasp.mods.turretmod3.tileentity.TileEntityLaptop;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GuiLaptop_Base extends GuiContainer {
     private static final ResourceLocation[] PAGES = {new ResourceLocation(TM3ModRegistry.TEX_GUILAP + "page_1.png"), new ResourceLocation(TM3ModRegistry.TEX_GUILAP + "page_2.png"), new ResourceLocation(TM3ModRegistry.TEX_GUILAP + "page_3.png")};
