@@ -1,6 +1,7 @@
 package sanandreasp.mods.turretmod3.client.model.turret;
 
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelRenderer;
 
 public class ModelTurret_Base extends ModelBase {
 	
@@ -15,4 +16,9 @@ public class ModelTurret_Base extends ModelBase {
 		
 	}
 
+    protected void setRotation(ModelRenderer model, float x, float y, float z) {
+        model.rotateAngleX = x;
+        model.rotateAngleY = y;
+        model.rotateAngleZ = z;
+    }
 }

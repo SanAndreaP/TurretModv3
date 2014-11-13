@@ -21,7 +21,7 @@ public class RenderLaptop extends TileEntitySpecialRenderer {
     {
         int i;
 
-        if (!par1TileEntityLaptop.func_70309_m()) {
+        if (!par1TileEntityLaptop.hasWorldObj()) {
             i = 0;
         } else {
             i = BlockLaptop.getRotation(par1TileEntityLaptop.getBlockMetadata());

@@ -148,13 +148,8 @@ public class Model_T1Arrow extends ModelTurret_Base {
 		AmmoBar.render(f5);
 		GL11.glPopMatrix();
 	}
-	
-	private void setRotation(ModelRenderer model, float x, float y, float z) {
-		model.rotateAngleX = x;
-		model.rotateAngleY = y;
-		model.rotateAngleZ = z;
-	}
-	
+
+	@Override
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
 		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 
@@ -171,7 +166,7 @@ public class Model_T1Arrow extends ModelTurret_Base {
         
         EntityTurret_Base turret = (EntityTurret_Base)entity;
         
-        float healthRot = -((float)Math.PI / 2F) * ((float)(turret.func_110138_aP() - turret.getSrvHealth()) / (float)turret.func_110138_aP());
+        float healthRot = -((float)Math.PI / 2F) * ((float)(turret.getMaxHealth() - turret.getSrvHealth()) / (float)turret.getMaxHealth());
         this.HealthBar.rotateAngleZ = healthRot;
         float ammoRot = ((float)Math.PI / 2F) * ((float)(turret.getMaxAmmo() - turret.getAmmo()) / (float)turret.getMaxAmmo());
 

@@ -3,6 +3,8 @@ package sanandreasp.mods.turretmod3.client.render;
 import java.util.Iterator;
 import java.util.Map;
 
+import net.minecraft.client.renderer.entity.RendererLivingEntity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
@@ -18,19 +20,18 @@ import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelChest;
 import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.world.World;
 
-public class RenderDismantleStorage extends RenderLiving {
+public class RenderDismantleStorage extends RendererLivingEntity {
     private ResourceLocation CHEST = new ResourceLocation("/item/chest.png");
 	public RenderDismantleStorage(ModelBase par1ModelBase, float par2) {
 		super(par1ModelBase, par2);
 	}
 
 	@Override
-	protected void renderModel(EntityLiving par1EntityLiving, float par2, float par3, float par4, float par5, float par6, float par7) {
+	protected void renderModel(EntityLivingBase par1EntityLiving, float par2, float par3, float par4, float par5, float par6, float par7) {
 		EntityDismantleStorage stg = (EntityDismantleStorage)par1EntityLiving;
         if (!par1EntityLiving.isInvisible())
         {
@@ -66,7 +67,7 @@ public class RenderDismantleStorage extends RenderLiving {
 	}
 	
 	@Override
-	protected float getDeathMaxRotation(EntityLiving par1EntityLiving) {
+	protected float getDeathMaxRotation(EntityLivingBase par1EntityLiving) {
 		return 0F;
 	}
 

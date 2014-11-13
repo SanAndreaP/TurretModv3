@@ -19,7 +19,6 @@ import net.minecraft.entity.EntityLiving;
 public class RenderTurret_Base extends RenderLiving {
 	public RenderTurret_Base(ModelBase par1ModelBase) {
 		super(par1ModelBase, 0.3F);
-		
 		try {
 			Class baseModelC = par1ModelBase.getClass();
 			ModelTurret_Base baseModelI = (ModelTurret_Base) baseModelC.newInstance();
@@ -65,6 +64,7 @@ public class RenderTurret_Base extends RenderLiving {
 		}
 	}
 
+    @Override
     protected void passSpecialRender(EntityLiving par1EntityLiving, double par2, double par4, double par6)
     {
         this.renderStats((EntityTurret_Base)par1EntityLiving, par2, par4, par6);
@@ -127,7 +127,7 @@ public class RenderTurret_Base extends RenderLiving {
                 var14.drawString(playerName, -var14.getStringWidth(playerName) / 2, 18, 0xBBBBBB);
                 GL11.glDisable(GL11.GL_TEXTURE_2D);
                 
-                double health = ((double)par1Turret.getSrvHealth() / (double)par1Turret.func_110138_aP()) * 50D - 25D;
+                double health = ((double)par1Turret.getSrvHealth() / (double)par1Turret.getMaxHealth()) * 50D - 25D;
                 double ammo = ((double)par1Turret.getAmmo() / (double)par1Turret.getMaxAmmo()) * 50D - 25D;
                 double exp = ((double)par1Turret.getExperience() / (double)par1Turret.getExpCap()) * 50D - 25D;
                 boolean hasXP = TurretUpgrades.hasUpgrade(TUpgExperience.class, par1Turret.upgrades) && par1Turret.hasPlayerAccess(Minecraft.getMinecraft().thePlayer);

@@ -307,7 +307,7 @@ public class RenderTurretForcefield extends RenderTurret_Base {
                 var14.drawString(var131, -var14.getStringWidth(var131) / 2, 18, 0xBBBBBB);
                 GL11.glDisable(GL11.GL_TEXTURE_2D);
                 
-                double health = ((double)par1Turret.getSrvHealth() / (double)par1Turret.func_110138_aP()) * 50D - 25D;
+                double health = ((double)par1Turret.getSrvHealth() / (double)par1Turret.getMaxHealth()) * 50D - 25D;
                 double shield = ((double)par1Turret.getShieldPts() / (double)par1Turret.getMaxShieldPts()) * 50D - 25D;
                 
                 //bars bkg
