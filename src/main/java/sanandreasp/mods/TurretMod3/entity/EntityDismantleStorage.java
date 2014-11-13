@@ -1,30 +1,28 @@
 package sanandreasp.mods.turretmod3.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.item.Item;
-import net.minecraftforge.common.util.Constants;
-import sanandreasp.mods.turretmod3.inventory.InventoryDismantleStorage;
-import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
-import sanandreasp.mods.turretmod3.registry.TurretInfo.TurretInfo;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.Constants;
+import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
+import sanandreasp.mods.turretmod3.inventory.InventoryDismantleStorage;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
+import sanandreasp.mods.turretmod3.registry.TurretInfo.TurretInfo;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class EntityDismantleStorage extends EntityLivingBase {
 	
 	public InventoryDismantleStorage inventory;
-	public Class tbClass = null;
+	public Class<? extends EntityTurret_Base> tbClass = null;
 	public Object tbRender = null;
 	public boolean checkForDestroy = false;
 

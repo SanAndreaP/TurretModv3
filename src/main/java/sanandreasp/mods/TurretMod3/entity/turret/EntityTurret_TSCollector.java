@@ -1,25 +1,18 @@
 package sanandreasp.mods.turretmod3.entity.turret;
 
-import java.util.List;
-
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import sanandreasp.mods.turretmod3.entity.projectile.TurretProjectile;
-import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgExpStorageC;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgItemCollect;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgRangeIncr;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgTurretCollect;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TurretUpgrades;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
+import sanandreasp.mods.turretmod3.entity.projectile.TurretProjectile;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
+import sanandreasp.mods.turretmod3.registry.TurretUpgrades.*;
+
+import java.util.List;
 
 public class EntityTurret_TSCollector extends EntityTurret_Base {
 	
@@ -31,12 +24,7 @@ public class EntityTurret_TSCollector extends EntityTurret_Base {
 	    wdtRange = 	16.5F;
 	    hgtRangeU = 16.5F;
 	    hgtRangeD = 16.5F;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public String getTexture() {
-		return TM3ModRegistry.TEX_TURRETDIR + "tsCollector.png";
+        setTextures("tsCollector");
 	}
 	
 	@Override
@@ -98,11 +86,6 @@ public class EntityTurret_TSCollector extends EntityTurret_Base {
 	@Override
 	public int getMaxShootTicks() {
 		return 0;
-	}
-
-	@Override
-	public String getGlowTexture() {
-		return TM3ModRegistry.TEX_TURRETDIR + "tsCollectorG.png";
 	}
 	
 	@Override

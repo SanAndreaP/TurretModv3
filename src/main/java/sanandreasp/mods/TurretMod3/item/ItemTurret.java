@@ -1,21 +1,8 @@
 package sanandreasp.mods.turretmod3.item;
 
-import static sanandreasp.mods.turretmod3.registry.TurretTargetRegistry.trTargets;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.collect.Maps;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.util.StatCollector;
-import net.minecraftforge.common.util.Constants;
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
-import sanandreasp.mods.turretmod3.inventory.ContainerLaptopUpgrades;
-import sanandreasp.mods.turretmod3.registry.TurretInfo.TurretInfo;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TurretUpgrades;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -29,7 +16,19 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.Facing;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.Constants;
+import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
+import sanandreasp.mods.turretmod3.inventory.ContainerLaptopUpgrades;
+import sanandreasp.mods.turretmod3.registry.TurretInfo.TurretInfo;
+import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TurretUpgrades;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import static sanandreasp.mods.turretmod3.registry.TurretTargetRegistry.trTargets;
 
 public class ItemTurret extends Item {
 	
@@ -81,9 +80,7 @@ public class ItemTurret extends Item {
             var10.rotationYawHead = var10.rotationYaw;
             var10.renderYawOffset = var10.rotationYaw;
             var10.setPlayerName(par7Player.getCommandSenderName());
-            
-            Map<String, Boolean> tgt = getTargets(par1);
-            var10.targets = tgt;
+            var10.targets = getTargets(par1);
             	
             Map<Integer, ItemStack> upgMap = Maps.newHashMap();
             List<ItemStack> upgList = getUpgItems(par1);
@@ -110,15 +107,16 @@ public class ItemTurret extends Item {
     }
     
     public static Entity getTurretByDamage(World world, int dmg) {
-    	Class cls = TurretInfo.getTurretClass(dmg);
+    	Class<? extends EntityTurret_Base> cls = TurretInfo.getTurretClass(dmg);
     	try {
-			return (Entity) cls.getConstructor(World.class).newInstance(world);
+			return cls.getConstructor(World.class).newInstance(world);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
     	return null;
     }
     
+    @SuppressWarnings("unchecked")
     @Override
     @SideOnly(Side.CLIENT)
     public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
@@ -135,6 +133,7 @@ public class ItemTurret extends Item {
     	return super.getItemStackDisplayName(par1ItemStack);
     }
     
+    @SuppressWarnings("unchecked")
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
@@ -226,14 +225,8 @@ public class ItemTurret extends Item {
     	Class<? extends EntityTurret_Base> turretCls = TurretInfo.getTurretClass(turretItm.getItemDamage());
     	
 		TurretUpgrades upg = TurretUpgrades.getUpgradeFromItem(upgItm, turretCls);
-		if (upg == null) {
-    		return false;
-		}
-		if (!upg.hasRequiredUpgrade(upgList)) {
-			return false;
-		}
-		
-    	return !TurretUpgrades.hasUpgrade(upg.getClass(), upgList);
+        return upg != null && upg.hasRequiredUpgrade(upgList) && !TurretUpgrades.hasUpgrade(upg.getClass(), upgList);
+
     }
     
     public static void addUpgItem(ItemStack turretItm, ItemStack upgItm) {
@@ -315,7 +308,7 @@ public class ItemTurret extends Item {
     
     @Override
     @SideOnly(Side.CLIENT)
-    public boolean hasEffect(ItemStack par1ItemStack, int renderPass) {
+    public boolean hasEffect(ItemStack par1ItemStack) {
     	return par1ItemStack.getTagCompound() != null && par1ItemStack.getTagCompound().hasKey("tm3_program");
     }
     

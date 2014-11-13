@@ -1,13 +1,9 @@
 package sanandreasp.mods.turretmod3.packet;
 
-import java.io.DataInputStream;
-import java.io.IOException;
-
 import io.netty.buffer.ByteBuf;
+import net.minecraft.entity.player.EntityPlayer;
 import sanandreasp.mods.turretmod3.entity.EntityMobileBase;
 import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
-
-import net.minecraft.entity.player.EntityPlayer;
 
 public class PacketRecvTurretSettings extends PacketBase {
     private int eID;
@@ -25,7 +21,9 @@ public class PacketRecvTurretSettings extends PacketBase {
 
 	@Override
 	public void handle(EntityPlayer player) {
-			EntityTurret_Base turret = (EntityTurret_Base) player.worldObj.getEntityByID(eID);
+        EntityTurret_Base turret = (EntityTurret_Base) player.worldObj.getEntityByID(eID);
+        if(turret==null)
+            return;
 			switch(type) {
 				case 0x0:
 					turret.dismantle();

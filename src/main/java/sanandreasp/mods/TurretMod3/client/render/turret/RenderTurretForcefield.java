@@ -1,20 +1,18 @@
 package sanandreasp.mods.turretmod3.client.render.turret;
 
-import java.util.Random;
-
-import net.minecraft.util.ResourceLocation;
-import org.lwjgl.opengl.GL11;
-
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_TSForcefield;
-import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
+import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
+import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_TSForcefield;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
+
+import java.util.Random;
 
 public class RenderTurretForcefield extends RenderTurret_Base {
 	private static long rndSeed = 0L;
@@ -25,8 +23,8 @@ public class RenderTurretForcefield extends RenderTurret_Base {
 	}
 	
 	@Override
-	public void doRenderLiving(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9) {
-		super.doRenderLiving(par1EntityLiving, par2, par4, par6, par8, par9);
+	public void doRender(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9) {
+		super.doRender(par1EntityLiving, par2, par4, par6, par8, par9);
 		EntityTurret_TSForcefield fsTurret = ((EntityTurret_TSForcefield)par1EntityLiving);
 		if (!fsTurret.isActive() || fsTurret.isInGui())
 			return;
@@ -127,8 +125,6 @@ public class RenderTurretForcefield extends RenderTurret_Base {
               
 			GL11.glPopMatrix();
 		}
-
-		Minecraft.getMinecraft().renderEngine.resetBoundTexture();
 	}
 	
 	public static void renderLightning(Tessellator tessellator)

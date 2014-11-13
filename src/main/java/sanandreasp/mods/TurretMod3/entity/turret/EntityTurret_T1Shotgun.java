@@ -1,6 +1,9 @@
 package sanandreasp.mods.turretmod3.entity.turret;
 
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.World;
 import sanandreasp.mods.turretmod3.entity.projectile.TurretProj_Pebble;
 import sanandreasp.mods.turretmod3.entity.projectile.TurretProjectile;
 import sanandreasp.mods.turretmod3.registry.AchievementPageTM;
@@ -8,12 +11,6 @@ import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgEnderHitting;
 import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgInfAmmo;
 import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TurretUpgrades;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.MathHelper;
-import net.minecraft.world.World;
 
 public class EntityTurret_T1Shotgun extends EntityTurret_Base {
 	
@@ -21,12 +18,7 @@ public class EntityTurret_T1Shotgun extends EntityTurret_Base {
 
 	public EntityTurret_T1Shotgun(World par1World) {
 		super(par1World);
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public String getTexture() {
-		return TM3ModRegistry.TEX_TURRETDIR + "t1Shotgun.png";
+        setTextures("t1Shotgun");
 	}
 
 	@Override
@@ -80,11 +72,6 @@ public class EntityTurret_T1Shotgun extends EntityTurret_Base {
 	public int getMaxShootTicks() {
 		this.firstStrike = false;
 		return 20;
-	}
-
-	@Override
-	public String getGlowTexture() {
-		return TM3ModRegistry.TEX_TURRETDIR + "t1ShotgunG.png";
 	}
 	
 	@Override

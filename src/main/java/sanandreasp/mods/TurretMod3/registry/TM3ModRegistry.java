@@ -1,10 +1,17 @@
 package sanandreasp.mods.turretmod3.registry;
 
-import java.util.logging.Level;
-
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
-import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.common.registry.EntityRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -21,90 +28,13 @@ import sanandreasp.mods.turretmod3.block.BlockLaptop;
 import sanandreasp.mods.turretmod3.command.CommandTurretMod;
 import sanandreasp.mods.turretmod3.entity.EntityDismantleStorage;
 import sanandreasp.mods.turretmod3.entity.EntityMobileBase;
-import sanandreasp.mods.turretmod3.entity.projectile.TurretProj_Arrow;
-import sanandreasp.mods.turretmod3.entity.projectile.TurretProj_Bullet;
-import sanandreasp.mods.turretmod3.entity.projectile.TurretProj_Explosive;
-import sanandreasp.mods.turretmod3.entity.projectile.TurretProj_Flame;
-import sanandreasp.mods.turretmod3.entity.projectile.TurretProj_Laser;
-import sanandreasp.mods.turretmod3.entity.projectile.TurretProj_Pebble;
-import sanandreasp.mods.turretmod3.entity.projectile.TurretProj_Plasma;
-import sanandreasp.mods.turretmod3.entity.projectile.TurretProj_Rocket;
-import sanandreasp.mods.turretmod3.entity.projectile.TurretProj_Seed;
-import sanandreasp.mods.turretmod3.entity.projectile.TurretProj_Shard;
-import sanandreasp.mods.turretmod3.entity.projectile.TurretProj_Snowball;
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_T1Arrow;
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_T1Shotgun;
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_T2Minigun;
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_T2Revolver;
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_T3Flamethrower;
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_T3Laser;
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_T4FLAK;
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_T4Sniper;
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_T5Artillery;
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_T5Railgun;
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_TSCollector;
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_TSForcefield;
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_TSHealer;
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_TSSnowball;
-import sanandreasp.mods.turretmod3.item.ItemAmmunitions;
-import sanandreasp.mods.turretmod3.item.ItemArtilleryShells;
-import sanandreasp.mods.turretmod3.item.ItemFLAKRockets;
-import sanandreasp.mods.turretmod3.item.ItemMobileBase;
-import sanandreasp.mods.turretmod3.item.ItemTMDisc;
-import sanandreasp.mods.turretmod3.item.ItemTurret;
-import sanandreasp.mods.turretmod3.item.ItemTurretInfo;
+import sanandreasp.mods.turretmod3.entity.projectile.*;
+import sanandreasp.mods.turretmod3.entity.turret.*;
+import sanandreasp.mods.turretmod3.item.*;
 import sanandreasp.mods.turretmod3.packet.PacketHandlerCommon;
-import sanandreasp.mods.turretmod3.packet.PacketSendUpgrades;
-import sanandreasp.mods.turretmod3.registry.TurretInfo.TurretInfo;
-import sanandreasp.mods.turretmod3.registry.TurretInfo.TurretInfoT1Arrow;
-import sanandreasp.mods.turretmod3.registry.TurretInfo.TurretInfoT1Shotgun;
-import sanandreasp.mods.turretmod3.registry.TurretInfo.TurretInfoT2Minigun;
-import sanandreasp.mods.turretmod3.registry.TurretInfo.TurretInfoT2Revolver;
-import sanandreasp.mods.turretmod3.registry.TurretInfo.TurretInfoT3Flamethrower;
-import sanandreasp.mods.turretmod3.registry.TurretInfo.TurretInfoT3Laser;
-import sanandreasp.mods.turretmod3.registry.TurretInfo.TurretInfoT4FLAK;
-import sanandreasp.mods.turretmod3.registry.TurretInfo.TurretInfoT4Sniper;
-import sanandreasp.mods.turretmod3.registry.TurretInfo.TurretInfoT5Artillery;
-import sanandreasp.mods.turretmod3.registry.TurretInfo.TurretInfoT5Railgun;
-import sanandreasp.mods.turretmod3.registry.TurretInfo.TurretInfoTSCollector;
-import sanandreasp.mods.turretmod3.registry.TurretInfo.TurretInfoTSForcefield;
-import sanandreasp.mods.turretmod3.registry.TurretInfo.TurretInfoTSHealer;
-import sanandreasp.mods.turretmod3.registry.TurretInfo.TurretInfoTSSnowball;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgChestGrabbing;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgControl;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgEconomy;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgEnderHitting;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgExpStorage;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgExpStorageC;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgExperience;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgFireImmunity;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgInfAmmo;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgItemCollect;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgPiercing;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgPrecision;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgPurify;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgRangeIncr;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgShieldMobPush;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgShieldPointsIncr;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgShieldRepairIncr;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgShieldRngI;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgShieldRngII;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgSlowdownII;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgStopMove;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgTurretCollect;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TurretUpgrades;
+import sanandreasp.mods.turretmod3.registry.TurretInfo.*;
+import sanandreasp.mods.turretmod3.registry.TurretUpgrades.*;
 import sanandreasp.mods.turretmod3.tileentity.TileEntityLaptop;
-import cpw.mods.fml.common.FMLLog;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.registry.EntityRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
 
 @Mod(modid=TM3ModRegistry.modID, name="Turret Mod 3", version="3.0.1")
 public class TM3ModRegistry {
@@ -157,7 +87,6 @@ public class TM3ModRegistry {
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent evt) {
-			
 		// init Creative Tab
         tabTurret = new CreativeTabTurrets("turretTab");
 			
@@ -165,10 +94,10 @@ public class TM3ModRegistry {
         Configuration cfgman = new Configuration(evt.getSuggestedConfigurationFile());
 		// load Config
         cfgman.load();
-
         labelRenderRange = cfgman.getFloat("Label Render Range", "Client side", labelRenderRange, 0, 500, "The range in blocks at which label is going to render");
         canCollectorGetXP = cfgman.getBoolean("Can Collector collect XP orbs", "Server side", canCollectorGetXP, "False to disable xp collection");
-			
+        cfgman.save();
+
 		// register Forge Events and Handlers
         proxy.registerHandlers();
 
@@ -363,7 +292,9 @@ public class TM3ModRegistry {
 	}
 
     public static boolean areStacksEqualWithWildcard(ItemStack stack1, ItemStack stack2){
-        return (stack1.isItemEqual(stack2)
+        if(stack1==stack2)
+            return true;
+        return stack1!=null && stack2!=null && (stack1.isItemEqual(stack2)
                 || (stack1.getItemDamage() == OreDictionary.WILDCARD_VALUE && stack1.getItem() == stack2.getItem()));
     }
 }

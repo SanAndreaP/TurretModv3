@@ -2,18 +2,15 @@ package sanandreasp.mods.turretmod3.entity.turret;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.World;
 import sanandreasp.mods.turretmod3.entity.projectile.TurretProj_Seed;
 import sanandreasp.mods.turretmod3.entity.projectile.TurretProjectile;
 import sanandreasp.mods.turretmod3.registry.AchievementPageTM;
 import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgPiercing;
 import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TurretUpgrades;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.MathHelper;
-import net.minecraft.world.World;
 
 public class EntityTurret_T2Minigun extends EntityTurret_Base {
 	
@@ -25,12 +22,7 @@ public class EntityTurret_T2Minigun extends EntityTurret_Base {
 	public EntityTurret_T2Minigun(World par1World) {
 		super(par1World);
 		this.wdtRange = 24.5F;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public String getTexture() {
-		return TM3ModRegistry.TEX_TURRETDIR + "t2Minigun.png";
+        setTextures("t2Minigun");
 	}
 	
 	@Override
@@ -88,12 +80,6 @@ public class EntityTurret_T2Minigun extends EntityTurret_Base {
 			}
 			this.killsWithin10sec = 0;
 		}
-		
-	}
-
-	@Override
-	public String getGlowTexture() {
-		return TM3ModRegistry.TEX_TURRETDIR + "t2MinigunG.png";
 	}
 	
 	@Override

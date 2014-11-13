@@ -1,20 +1,22 @@
 package sanandreasp.mods.turretmod3.client.render.turret;
 
-import org.lwjgl.opengl.GL11;
-
-import sanandreasp.mods.turretmod3.client.model.turret.ModelTurret_Base;
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
-import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgExperience;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgInfAmmo;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TurretUpgrades;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
+import sanandreasp.mods.turretmod3.client.model.turret.ModelTurret_Base;
+import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
+import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgExperience;
+import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgInfAmmo;
+import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TurretUpgrades;
 
 public class RenderTurret_Base extends RenderLiving {
 	public RenderTurret_Base(ModelBase par1ModelBase) {
@@ -23,11 +25,9 @@ public class RenderTurret_Base extends RenderLiving {
 			Class baseModelC = par1ModelBase.getClass();
 			ModelTurret_Base baseModelI = (ModelTurret_Base) baseModelC.newInstance();
 			setRenderPassModel(baseModelI.setGlowModel());
-		} catch (InstantiationException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} 
+		}
 	}
 	
 	public ModelBase getMainModel() {
@@ -35,7 +35,7 @@ public class RenderTurret_Base extends RenderLiving {
 	}
 	
 	@Override
-	protected int shouldRenderPass(EntityLiving par1EntityLiving, int par2, float par3) {
+	protected int shouldRenderPass(EntityLivingBase par1EntityLiving, int par2, float par3) {
 		if (par1EntityLiving.hurtTime <= 0) {
 			GL11.glScalef(1.001F, 1.001F, 1.001F);
 			GL11.glTranslatef(0F, -0.001F, 0F);
@@ -44,11 +44,11 @@ public class RenderTurret_Base extends RenderLiving {
 			return -1;
 		}
 		EntityTurret_Base turret = (EntityTurret_Base)par1EntityLiving;
-		if (par2 != 0 || turret.getGlowTexture().length() <= 0 || turret.hurtTime > 0 || !turret.isActive()) {
+		if (par2 != 0 || turret.getGlowTexture() == null || turret.hurtTime > 0 || !turret.isActive()) {
 			GL11.glDepthMask(true);
 			return -1;
 		} else {
-			this.loadTexture(turret.getGlowTexture());
+			this.bindTexture(turret.getGlowTexture());
 			float var4 = 1.0F;
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glDisable(GL11.GL_ALPHA_TEST);
@@ -65,15 +65,15 @@ public class RenderTurret_Base extends RenderLiving {
 	}
 
     @Override
-    protected void passSpecialRender(EntityLiving par1EntityLiving, double par2, double par4, double par6)
+    protected void passSpecialRender(EntityLivingBase par1EntityLiving, double par2, double par4, double par6)
     {
         this.renderStats((EntityTurret_Base)par1EntityLiving, par2, par4, par6);
     }
     
     @Override
-    public void doRenderLiving(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9) {
+    public void doRender(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9) {
     	if (!(par1EntityLiving.riddenByEntity != null && par1EntityLiving.riddenByEntity == Minecraft.getMinecraft().thePlayer && Minecraft.getMinecraft().gameSettings.thirdPersonView == 0))
-    		super.doRenderLiving(par1EntityLiving, par2, par4, par6, par8, par9);
+    		super.doRender(par1EntityLiving, par2, par4, par6, par8, par9);
     }
     
     protected void renderStats(EntityTurret_Base par1Turret, double par2, double par4, double par6)
@@ -231,5 +231,10 @@ public class RenderTurret_Base extends RenderLiving {
                 GL11.glPopMatrix();
             }
         }
+    }
+
+    @Override
+    protected ResourceLocation getEntityTexture(Entity entity) {
+        return ((EntityTurret_Base)entity).getTexture();
     }
 }

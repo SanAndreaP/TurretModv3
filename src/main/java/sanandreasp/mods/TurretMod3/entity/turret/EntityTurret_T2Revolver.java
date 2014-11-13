@@ -1,12 +1,10 @@
 package sanandreasp.mods.turretmod3.entity.turret;
 
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.world.World;
 import sanandreasp.mods.turretmod3.entity.projectile.TurretProj_Bullet;
 import sanandreasp.mods.turretmod3.entity.projectile.TurretProjectile;
 import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.world.World;
 
 public class EntityTurret_T2Revolver extends EntityTurret_Base {
 	
@@ -14,17 +12,17 @@ public class EntityTurret_T2Revolver extends EntityTurret_Base {
 
 	public EntityTurret_T2Revolver(World par1World) {
 		super(par1World);
-		this.dataWatcher.addObject(18, (int) 0); // right Offset
-		this.dataWatcher.addObject(19, (int) 0); // left Offset
 		this.wdtRange = 24.5F;
+        setTextures("t2Revolver");
 	}
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public String getTexture() {
-		return TM3ModRegistry.TEX_TURRETDIR + "t2Revolver.png";
-	}
-	
+    @Override
+    protected void entityInit() {
+        super.entityInit();
+        this.dataWatcher.addObject(18, 0); // right Offset
+        this.dataWatcher.addObject(19, 0); // left Offset
+    }
+
 	public int getRightBarrelOffset() {
 		return this.dataWatcher.getWatchableObjectInt(18);
 	}
@@ -74,11 +72,6 @@ public class EntityTurret_T2Revolver extends EntityTurret_Base {
 			this.isRight = !this.isRight;
 		}
 		return maxShootTicks;
-	}
-
-	@Override
-	public String getGlowTexture() {
-		return TM3ModRegistry.TEX_TURRETDIR + "t2RevolverG.png";
 	}
 	
 	@Override

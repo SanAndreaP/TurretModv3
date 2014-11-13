@@ -1,22 +1,20 @@
 package sanandreasp.mods.turretmod3.registry.TurretInfo;
 
+import com.google.common.collect.Maps;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
+import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import net.minecraftforge.oredict.OreDictionary;
-import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
-
-import com.google.common.collect.Maps;
-
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
-
 public abstract class TurretInfo {
 
-	protected static Map<Class, TurretInfo> turrets = Maps.newHashMap();
-	protected static Map<Integer, Class> turretList = Maps.newHashMap();
+	protected static Map<Class<? extends EntityTurret_Base>, TurretInfo> turrets = Maps.newHashMap();
+	protected static Map<Integer, Class<? extends EntityTurret_Base>> turretList = Maps.newHashMap();
 
 	protected String name;
 	protected String desc;
@@ -54,7 +52,7 @@ public abstract class TurretInfo {
 		return this.maxEXP;
 	}
 
-	public static Class getTurretClass(int id) {
+	public static Class<? extends EntityTurret_Base> getTurretClass(int id) {
 		return turretList.get(id);
 	}
 
@@ -176,7 +174,7 @@ public abstract class TurretInfo {
 		return this.rangeX;
 	}
 
-	public static void addTurretInfo(Class tClass, TurretInfo tInf) {
+	public static void addTurretInfo(Class<? extends EntityTurret_Base> tClass, TurretInfo tInf) {
 		turretList.put(tInf.infoID = turretList.size(), tClass);
 		turrets.put(tClass, tInf);
 	}

@@ -1,15 +1,25 @@
 package sanandreasp.mods.turretmod3.entity.turret;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
+import com.google.common.collect.Maps;
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.ObfuscationReflectionHelper;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.entity.*;
+import net.minecraft.entity.item.EntityXPOrb;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.util.*;
+import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
+import net.minecraftforge.oredict.OreDictionary;
 import sanandreasp.mods.turretmod3.client.packet.PacketRecvUpgrades;
 import sanandreasp.mods.turretmod3.entity.EntityDismantleStorage;
 import sanandreasp.mods.turretmod3.entity.EntityMobileBase;
@@ -19,41 +29,15 @@ import sanandreasp.mods.turretmod3.packet.PacketSendUpgrades;
 import sanandreasp.mods.turretmod3.registry.AchievementPageTM;
 import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 import sanandreasp.mods.turretmod3.registry.TurretInfo.TurretInfo;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgChestGrabbing;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgControl;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgEconomy;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgEnderHitting;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgExpStorage;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgExperience;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgFireImmunity;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgInfAmmo;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TurretUpgrades;
+import sanandreasp.mods.turretmod3.registry.TurretUpgrades.*;
 
-import com.google.common.collect.Maps;
-
-import cpw.mods.fml.common.FMLLog;
-
-import net.minecraft.block.Block;
-import net.minecraft.entity.item.EntityXPOrb;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityChest;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.world.World;
-import net.minecraftforge.oredict.OreDictionary;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public abstract class EntityTurret_Base extends EntityLiving implements IHealable {
-    protected EntityLiving currentTarget;
-    
+    protected EntityLivingBase currentTarget;
+    private ResourceLocation texture, glowTexture;
     public double wdtRange = 16.5F;
     public double hgtRangeU = 5.5F;
     public double hgtRangeD = 5.5F;
@@ -105,11 +89,9 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 	
 	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
-		if (par1DamageSource.isFireDamage() && hasFireImmunity())
-			return false;
-		
-		return super.attackEntityFrom(par1DamageSource, par2);
-	}
+        return !(par1DamageSource.isFireDamage() && hasFireImmunity()) && super.attackEntityFrom(par1DamageSource, par2);
+
+    }
 	
 	public boolean hasFireImmunity() {
 		return TurretUpgrades.hasUpgrade(TUpgFireImmunity.class, this.upgrades);
@@ -132,8 +114,18 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 		this.dataWatcher.updateObject(27, (byte)(b ? currByte | 2 : currByte & ~2));
 	}
 
-    @SideOnly(Side.CLIENT)
-    public abstract String getTexture();
+    public void setTextures(String name){
+        texture = new ResourceLocation(TM3ModRegistry.TEX_TURRETDIR + name +".png");
+        glowTexture = new ResourceLocation(TM3ModRegistry.TEX_TURRETDIR + name +"G.png");
+    }
+
+    public ResourceLocation getTexture(){
+        return texture;
+    }
+
+    public ResourceLocation getGlowTexture() {
+        return glowTexture;
+    }
 	
 	@Override
     protected boolean canDespawn() {
@@ -144,8 +136,8 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 		if (this.currentTarget == null && !this.worldObj.isRemote) {
 			List<Entity> rangedEntities = getRangedEntities();
 			for (Entity entity : rangedEntities) {
-				if (entity != null && entity instanceof EntityLiving && isTargetValid((EntityLiving)entity)) {
-					this.currentTarget = (EntityLiving) entity;
+				if (entity != null && entity instanceof EntityLivingBase && isTargetValid((EntityLiving)entity)) {
+					this.currentTarget = (EntityLivingBase) entity;
 					break;
 				}
 			}
@@ -200,7 +192,6 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 			is1.stackSize = MathHelper.floor_double((double)this.getAmmo() / (double)this.tInfo.getAmmoFromItem(is1));
 			if (is1.getItemDamage() == OreDictionary.WILDCARD_VALUE) is1.setItemDamage(0);
 			ItemStack[] splitIS = this.getGoodItemStacks(is1);
-			boolean b = true;
 			for (ItemStack is2 : splitIS) {
 				stg.inventory.addItemStackToInventory(is2);
 			}
@@ -211,8 +202,9 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 		this.worldObj.spawnEntityInWorld(stg);
 	}
 
+    //TODO: find what this is supposed to do
     private ItemStack[] getGoodItemStacks(ItemStack is1) {
-        return new ItemStack[0];
+        return is1.stackSize>0 ? new ItemStack[]{is1} : new ItemStack[0];
     }
 
     public void faceEntity(Entity par1Entity, float par2, float par3)
@@ -285,7 +277,7 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 		return this.dataWatcher.getWatchableObjectShort(22);
 	}
 	
-	public EntityLiving getCurrentTarget() {
+	public EntityLivingBase getCurrentTarget() {
 		return this.currentTarget;
 	}
 	
@@ -309,16 +301,13 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 	public int getExperience() {
 		return this.dataWatcher.getWatchableObjectShort(23);
 	}
-	
-	public String getGlowTexture() {
-		return "";
-	}
-	
+
 	@Override
 	protected String getHurtSound() {
 		return "hit.turrethit";
 	}
 
+    @Override
 	protected String getLivingSound() {
     	return this.rand.nextInt(10) == 0 && this.isActive() ? "idle.turretidle" : "";
     }
@@ -422,10 +411,9 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
     }
 	
 	public boolean hasPlayerAccess(EntityPlayer player) {
-		if (player == null) return false;
-		
-		return this.getPlayerName().equals(player.getCommandSenderName()) || TM3ModRegistry.proxy.getPlayerTM3Data(player).getBoolean("isOP");
-	}
+        return player != null && (this.getPlayerName().equals(player.getCommandSenderName()) || TM3ModRegistry.proxy.getPlayerTM3Data(player).getBoolean("isOP"));
+
+    }
 	
 	public int incrAmmo(int count) {
 		int remain = (this.getAmmo() + count) - this.getMaxAmmo();
@@ -605,7 +593,7 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
             {
             	for (Object obj : this.tInfo.getCrafting()) {
             		if (obj != null && obj instanceof ItemStack) {
-            			String s = "";
+            			String s;
             			ItemStack is = ((ItemStack)obj);
             			if (is.getItem() instanceof ItemBlock) {
             				s = "tilecrack_"+Item.getIdFromItem(is.getItem())+"_"+is.getItemDamage();
@@ -645,7 +633,6 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
             double var1 = this.posX + (this.newPosX - this.posX) / (double)this.newPosRotationIncrements;
             double var3 = this.posY + (this.newPosY - this.posY) / (double)this.newPosRotationIncrements;
             double var5 = this.posZ + (this.newPosZ - this.posZ) / (double)this.newPosRotationIncrements;
-            double var7 = MathHelper.wrapAngleTo180_double(this.newRotationYaw - (double)this.rotationYaw);
             this.rotationPitch = (float)((double)this.rotationPitch + (this.newRotationPitch - (double)this.rotationPitch) / (double)this.newPosRotationIncrements);
             --this.newPosRotationIncrements;
             this.setPosition(var1, var3, var5);
@@ -672,10 +659,7 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
         {
             this.motionZ = 0.0D;
         }
-        
-//        if (!this.onGround && this.ridingEntity == null) {
-//        	this.motionY -= 0.05D;
-//        }
+
 
         this.worldObj.theProfiler.startSection("ai");
 
@@ -709,7 +693,6 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 	@Override
 	public void onUpdate() {
 		this.motionY -= 0.05;
-		AxisAlignedBB AABBBlock[] = new AxisAlignedBB[2];
 		Block belowBlock = this.worldObj.getBlock(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY)-1, MathHelper.floor_double(this.posZ));
 		boolean intercept = false;
 		if (belowBlock != null) {
@@ -901,14 +884,14 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 			}
 		}
 	}
-    
+
+    @Override
     protected void updateEntityActionState()
     {
         ++this.entityAge;
         this.despawnEntity();
         this.moveStrafing = 0.0F;
         this.moveForward = 0.0F;
-        float var1 = (float)wdtRange;
 
         if (!this.isActive())
         	return;
@@ -945,7 +928,7 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
         this.field_70768_au = this.field_110154_aX;
         this.field_110154_aX = 0.0F;
         this.fallDistance = 0.0F;
-    };
+    }
     
     @Override
 	public void updateRiderPosition() {
@@ -956,7 +939,7 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
         if (this.riddenByEntity.isEntityInsideOpaqueBlock())
             this.riddenByEntity.setPosition(this.posX, this.posY + this.getMountedYOffset() + this.riddenByEntity.getYOffset(), this.posZ);
 	}
-    
+
     protected float updateRotation(float par1, float par2, float par3, boolean par4)
     {
         float var4 = MathHelper.wrapAngleTo180_float(par2 - par1);

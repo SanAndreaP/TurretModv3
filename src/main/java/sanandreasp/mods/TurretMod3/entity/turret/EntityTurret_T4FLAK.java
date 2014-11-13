@@ -2,14 +2,10 @@ package sanandreasp.mods.turretmod3.entity.turret;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import sanandreasp.mods.turretmod3.entity.projectile.TurretProj_Rocket;
-import sanandreasp.mods.turretmod3.entity.projectile.TurretProjectile;
-import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import sanandreasp.mods.turretmod3.entity.projectile.TurretProj_Rocket;
+import sanandreasp.mods.turretmod3.entity.projectile.TurretProjectile;
 
 public class EntityTurret_T4FLAK extends EntityTurret_Base {
 	
@@ -20,17 +16,17 @@ public class EntityTurret_T4FLAK extends EntityTurret_Base {
 		this.wdtRange = 50.5D;
 		this.hgtRangeD = 0.0D;
 		this.hgtRangeU = 50.5D;
-		this.dataWatcher.addObject(19, this.shoots);
+        setTextures("t4FLAK");
 	}
+
+    @Override
+    protected void entityInit() {
+        super.entityInit();
+        this.dataWatcher.addObject(19, this.shoots);
+    }
 	
 	private int getShoots() {
 		return this.dataWatcher.getWatchableObjectInt(19);
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public String getTexture() {
-		return TM3ModRegistry.TEX_TURRETDIR + "t4FLAK.png";
 	}
 	
 	@Override
@@ -80,11 +76,6 @@ public class EntityTurret_T4FLAK extends EntityTurret_Base {
 	public void onUpdate() {
 		super.onUpdate();
 		this.wdtRange = this.hgtRangeU = 50.5D + (double)(this.getAmmoType() % 3) * 25.0D;
-	}
-
-	@Override
-	public String getGlowTexture() {
-		return TM3ModRegistry.TEX_TURRETDIR + "t4FLAKG.png";
 	}
 	
 	@Override

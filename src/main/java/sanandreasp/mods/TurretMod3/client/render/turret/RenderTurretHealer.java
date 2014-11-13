@@ -1,16 +1,14 @@
 package sanandreasp.mods.turretmod3.client.render.turret;
 
-import net.minecraft.util.ResourceLocation;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_TSHealer;
-import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
+import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_TSHealer;
 
 public class RenderTurretHealer extends RenderTurret_Base {
     public static final ResourceLocation TEX_HEALBEAM = new ResourceLocation("turretmod3:textures/entities/healBeam.png");
@@ -20,8 +18,8 @@ public class RenderTurretHealer extends RenderTurret_Base {
 	}
 	
 	@Override
-	public void doRenderLiving(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9) {
-		super.doRenderLiving(par1EntityLiving, par2, par4, par6, par8, par9);
+	public void doRender(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9) {
+		super.doRender(par1EntityLiving, par2, par4, par6, par8, par9);
 		EntityTurret_TSHealer healer = (EntityTurret_TSHealer)par1EntityLiving;
 		if (healer.getCurrentTargetStr() != null && healer.getCurrentTargetStr().length() > 0 && healer.getAmmo() > 0) {
 			renderHealBeam(healer, par2, par4, par6, par8, par9);

@@ -1,17 +1,10 @@
 package sanandreasp.mods.turretmod3.entity.projectile;
 
-import java.util.List;
-
+import cpw.mods.fml.common.ObfuscationReflectionHelper;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.*;
-import net.minecraft.init.Blocks;
-import net.minecraft.network.play.server.S2BPacketChangeGameState;
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
-
-import cpw.mods.fml.common.ObfuscationReflectionHelper;
-import net.minecraft.block.Block;
-import net.minecraft.enchantment.EnchantmentThorns;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.boss.EntityDragonPart;
 import net.minecraft.entity.monster.EntityEnderman;
@@ -19,15 +12,16 @@ import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.play.server.S2BPacketChangeGameState;
 import net.minecraft.pathfinding.PathEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
+import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
+
+import java.util.List;
 
 public class TurretProjectile extends EntityArrow {
     protected int xTile = -1;
@@ -62,7 +56,7 @@ public class TurretProjectile extends EntityArrow {
         this.renderDistanceWeight = 10.0D;
     }
 
-    public void setTarget(EntityLiving par2EntityLiving, EntityLiving par3EntityLiving, float par4, float par5)
+    public void setTarget(EntityLivingBase par2EntityLiving, EntityLivingBase par3EntityLiving, float par4, float par5)
     {
         this.hasNoTarget = isEndermanDamageable = false;
         this.shootingEntity = par2EntityLiving;

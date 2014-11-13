@@ -1,24 +1,9 @@
 package sanandreasp.mods.turretmod3.entity.turret;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.List;
-
-import net.minecraft.entity.*;
-import org.apache.logging.log4j.Level;
-import sanandreasp.mods.turretmod3.entity.projectile.TurretProjectile;
-import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgShieldMobPush;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgShieldPointsIncr;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgShieldRepairIncr;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgShieldRngI;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgShieldRngII;
-import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TurretUpgrades;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.relauncher.ReflectionHelper;
 import cpw.mods.fml.relauncher.ReflectionHelper.UnableToFindMethodException;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.entity.*;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityFireball;
 import net.minecraft.entity.projectile.EntityThrowable;
@@ -28,6 +13,13 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import sanandreasp.mods.turretmod3.entity.projectile.TurretProjectile;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
+import sanandreasp.mods.turretmod3.registry.TurretUpgrades.*;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.List;
 
 public class EntityTurret_TSForcefield extends EntityTurret_Base {
 
@@ -37,16 +29,16 @@ public class EntityTurret_TSForcefield extends EntityTurret_Base {
 	    this.hgtRangeU = 8.5F;
 	    this.hgtRangeD = 1.5F;
 		this.ignoreFrustumCheck = true;
-		this.dataWatcher.addObject(30, (short) 0); // Shield Points
-		this.dataWatcher.updateObject(27, (byte)(this.dataWatcher.getWatchableObjectByte(27) | 4));
 		this.renderDistanceWeight = 128D;
+        setTextures("tsForcefield");
 	}
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public String getTexture() {
-		return TM3ModRegistry.TEX_TURRETDIR + "tsForcefield.png";
-	}
+    @Override
+    protected void entityInit() {
+        super.entityInit();
+        this.dataWatcher.addObject(30, (short) 0); // Shield Points
+        this.dataWatcher.updateObject(27, (byte)(this.dataWatcher.getWatchableObjectByte(27) | 4));
+    }
 	
 	@Override
 	protected String getLivingSound() {
@@ -55,7 +47,6 @@ public class EntityTurret_TSForcefield extends EntityTurret_Base {
 	
 	@Override
 	public void addExperience(int par1Xp) {
-		;
 	}
 
     @Override
@@ -76,7 +67,6 @@ public class EntityTurret_TSForcefield extends EntityTurret_Base {
 	
 	@Override
 	protected void checkForEnemies() {
-		;
 	}
 
 	@Override
@@ -86,12 +76,10 @@ public class EntityTurret_TSForcefield extends EntityTurret_Base {
 	
 	@Override
 	public void shootProjectile(boolean isRidden) {
-		;
 	}
 	
 	@Override
 	public void tryToShoot(boolean isRidden) {
-		;
 	}
 	
 	@Override
@@ -111,11 +99,6 @@ public class EntityTurret_TSForcefield extends EntityTurret_Base {
 	public void toggleShield(boolean flag) {
 		byte currStates = this.dataWatcher.getWatchableObjectByte(27);
 		this.dataWatcher.updateObject(27, (byte)(flag ? currStates | 4 : currStates & ~4));
-	}
-
-	@Override
-	public String getGlowTexture() {
-		return TM3ModRegistry.TEX_TURRETDIR + "tsForcefieldG.png";
 	}
 	
 	public boolean hasHighRngI() {
@@ -262,16 +245,16 @@ public class EntityTurret_TSForcefield extends EntityTurret_Base {
 			mtd.invoke(throwable, getMOPTileFromEntity(throwable));
 			return true;
 		} catch(UnableToFindMethodException e) {
-			FMLLog.log(TM3ModRegistry.modID, Level.WARNING, e, "Method %s in Class %s not found! Most likely a naming error or wrong class!", "onImpact", throwable.getClass());
+			FMLLog.warning("Method %s in Class %s not found! Most likely a naming error or wrong class!", "onImpact", throwable.getClass());
 			return false;
 		} catch (IllegalAccessException e) {
-			FMLLog.log(TM3ModRegistry.modID, Level.WARNING, e, "Access denied on Method %s in Class %s!", "onImpact", "EntityThrowable");
+			FMLLog.warning("Access denied on Method %s in Class %s!", "onImpact", "EntityThrowable");
 			return false;
 		} catch (IllegalArgumentException e) {
-			FMLLog.log(TM3ModRegistry.modID, Level.WARNING, e, "Insufficient Arguments for Method %s in Class %s!", "onImpact", "EntityThrowable");
+			FMLLog.warning("Insufficient Arguments for Method %s in Class %s!", "onImpact", "EntityThrowable");
 			return false;
 		} catch (InvocationTargetException e) {
-			FMLLog.log(TM3ModRegistry.modID, Level.WARNING, e, "Invocation of Method %s in Class %s failed!", "onImpact", "EntityThrowable");
+			FMLLog.warning("Invocation of Method %s in Class %s failed!", "onImpact", "EntityThrowable");
 			return false;
 		}
 	}
@@ -282,16 +265,16 @@ public class EntityTurret_TSForcefield extends EntityTurret_Base {
 			mtd.invoke(throwable, getMOPTileFromEntity(throwable));
 			return true;
 		} catch(UnableToFindMethodException e) {
-			FMLLog.log(TM3ModRegistry.modID, Level.WARNING, e, "Method %s in Class %s not found! Most likely a naming error or wrong class!", "onImpact", throwable.getClass());
+			FMLLog.warning("Method %s in Class %s not found! Most likely a naming error or wrong class!", "onImpact", throwable.getClass());
 			return false;
 		} catch (IllegalAccessException e) {
-			FMLLog.log(TM3ModRegistry.modID, Level.WARNING, e, "Access denied on Method %s in Class %s!", "onImpact", "EntityThrowable");
+			FMLLog.warning("Access denied on Method %s in Class %s!", "onImpact", "EntityThrowable");
 			return false;
 		} catch (IllegalArgumentException e) {
-			FMLLog.log(TM3ModRegistry.modID, Level.WARNING, e, "Insufficient Arguments for Method %s in Class %s!", "onImpact", "EntityThrowable");
+			FMLLog.warning("Insufficient Arguments for Method %s in Class %s!", "onImpact", "EntityThrowable");
 			return false;
 		} catch (InvocationTargetException e) {
-			FMLLog.log(TM3ModRegistry.modID, Level.WARNING, e, "Invocation of Method %s in Class %s failed!", "onImpact", "EntityThrowable");
+			FMLLog.warning("Invocation of Method %s in Class %s failed!", "onImpact", "EntityThrowable");
 			return false;
 		}
 	}

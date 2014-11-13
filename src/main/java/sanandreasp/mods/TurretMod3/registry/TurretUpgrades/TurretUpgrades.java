@@ -1,19 +1,17 @@
 package sanandreasp.mods.turretmod3.registry.TurretUpgrades;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
-
 import com.google.common.collect.Maps;
-
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.StatCollector;
+import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
 import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public abstract class TurretUpgrades {
 	protected int id;
@@ -21,7 +19,7 @@ public abstract class TurretUpgrades {
 	protected Enchantment upgEnchantment = null;
 	protected String upgName;
 	protected String upgDesc;
-	protected List<Class> turrets = new ArrayList();
+	protected List<Class<? extends EntityTurret_Base>> turrets = new ArrayList<Class<? extends EntityTurret_Base>>();
 	protected static Map<Integer, TurretUpgrades> upgradeListINT = Maps.newHashMap();
 	protected static Map<Class, TurretUpgrades> upgradeListCLT = Maps.newHashMap();
 	protected Class<? extends TurretUpgrades> requiredUpg = null;
@@ -37,16 +35,12 @@ public abstract class TurretUpgrades {
 	}
 	
 	public boolean hasRequiredUpgrade(Map<Integer, ItemStack> upgMap) {
-		if (this.requiredUpg == null)
-			return true;
-		return hasUpgrade(this.requiredUpg, upgMap);
-	}
+        return this.requiredUpg == null || hasUpgrade(this.requiredUpg, upgMap);
+    }
 	
 	public boolean hasRequiredUpgrade(List<ItemStack> upgMap) {
-		if (this.requiredUpg == null)
-			return true;
-		return hasUpgrade(this.requiredUpg, upgMap);
-	}
+        return this.requiredUpg == null || hasUpgrade(this.requiredUpg, upgMap);
+    }
 	
 	public String getReqUpgradeName() {
 		return this.requiredUpg != null ? TurretUpgrades.upgradeListCLT.get(this.requiredUpg).getName() : "";
@@ -60,8 +54,8 @@ public abstract class TurretUpgrades {
 		return StatCollector.translateToLocal(this.upgDesc);
 	}
 	
-	public List<Class> getTurrets() {
-		return new ArrayList(this.turrets);
+	public List<Class<? extends EntityTurret_Base>> getTurrets() {
+		return new ArrayList<Class<? extends EntityTurret_Base>>(this.turrets);
 	}
 	
 	public static boolean isUpgradeForTurret(TurretUpgrades upg, Class<? extends EntityTurret_Base> turretCls) {
@@ -117,7 +111,7 @@ public abstract class TurretUpgrades {
 				if (is.isItemEnchanted() && chkUpg.getEnchantment() != null) {
 					NBTTagList ench = is.getEnchantmentTagList();
 					for (int j = 0; j < ench.tagCount(); ++j) {
-						NBTTagCompound var4 = (NBTTagCompound)ench.getCompoundTagAt(j);
+						NBTTagCompound var4 = ench.getCompoundTagAt(j);
 						if (var4.getShort("id") == chkUpg.getEnchantment().effectId) {
 							return true;
 						}
@@ -142,7 +136,7 @@ public abstract class TurretUpgrades {
 				if (is.isItemEnchanted() && chkUpg.getEnchantment() != null) {
 					NBTTagList ench = is.getEnchantmentTagList();
 					for (int j = 0; j < ench.tagCount(); ++j) {
-						NBTTagCompound var4 = (NBTTagCompound)ench.getCompoundTagAt(j);
+						NBTTagCompound var4 = ench.getCompoundTagAt(j);
 						if (var4.getShort("id") == chkUpg.getEnchantment().effectId) {
 							return true;
 						}

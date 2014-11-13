@@ -1,12 +1,10 @@
 package sanandreasp.mods.turretmod3.entity.turret;
 
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.world.World;
 import sanandreasp.mods.turretmod3.entity.projectile.TurretProj_Laser;
 import sanandreasp.mods.turretmod3.entity.projectile.TurretProjectile;
 import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.world.World;
 
 public class EntityTurret_T3Laser extends EntityTurret_Base {
 	
@@ -15,12 +13,7 @@ public class EntityTurret_T3Laser extends EntityTurret_Base {
 	public EntityTurret_T3Laser(World par1World) {
 		super(par1World);
 		this.wdtRange = 32.5F;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public String getTexture() {
-		return TM3ModRegistry.TEX_TURRETDIR + "t3Laser.png";
+        setTextures("t3Laser");
 	}
 
     @Override
@@ -53,11 +46,6 @@ public class EntityTurret_T3Laser extends EntityTurret_Base {
 			this.isRight = !this.isRight;
 		}
 		return maxShootTicks;
-	}
-
-	@Override
-	public String getGlowTexture() {
-		return TM3ModRegistry.TEX_TURRETDIR + "t3LaserG.png";
 	}
 	
 	@Override

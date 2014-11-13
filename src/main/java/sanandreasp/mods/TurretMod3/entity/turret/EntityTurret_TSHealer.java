@@ -1,13 +1,9 @@
 package sanandreasp.mods.turretmod3.entity.turret;
 
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.world.World;
 import sanandreasp.mods.turretmod3.entity.IHealable;
 import sanandreasp.mods.turretmod3.entity.projectile.TurretProjectile;
-import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.world.World;
 
 public class EntityTurret_TSHealer extends EntityTurret_Base {
 	
@@ -15,15 +11,15 @@ public class EntityTurret_TSHealer extends EntityTurret_Base {
 
 	public EntityTurret_TSHealer(World par1World) {
 		super(par1World);
-		this.dataWatcher.addObject(19, (int)0);
 		this.ignoreFrustumCheck = true;
+        setTextures("tsHealer");
 	}
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public String getTexture() {
-		return TM3ModRegistry.TEX_TURRETDIR + "tsHealer.png";
-	}
+    @Override
+    protected void entityInit() {
+        super.entityInit();
+        this.dataWatcher.addObject(19, 0);
+    }
 
 	@Override
 	public TurretProjectile getProjectile() {
@@ -34,7 +30,7 @@ public class EntityTurret_TSHealer extends EntityTurret_Base {
 	public void shootProjectile(boolean isRidden) {
 		this.currentTarget.heal(1);
 		if (this.soundTicks == 0) {
-	        this.worldObj.playSoundAtEntity(this, this.getShootSound(), 1.5F, 1.0F / (float)(this.getRNG().nextFloat() * 0.2F + 0.8F));
+	        this.worldObj.playSoundAtEntity(this, this.getShootSound(), 1.5F, 1.0F / (this.getRNG().nextFloat() * 0.2F + 0.8F));
 		}
 		this.soundTicks++;
 		if (this.soundTicks > 3)
@@ -66,11 +62,6 @@ public class EntityTurret_TSHealer extends EntityTurret_Base {
 	
 	public int getTargetEID() {
 		return this.dataWatcher.getWatchableObjectInt(19);
-	}
-	
-	@Override
-	public String getGlowTexture() {
-		return TM3ModRegistry.TEX_TURRETDIR + "tsHealerG.png";
 	}
 	
 	@Override

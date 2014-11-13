@@ -1,17 +1,15 @@
 package sanandreasp.mods.turretmod3.entity.turret;
 
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.World;
 import sanandreasp.mods.turretmod3.entity.projectile.TurretProj_Flame;
 import sanandreasp.mods.turretmod3.entity.projectile.TurretProjectile;
 import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgPurify;
 import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TurretUpgrades;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.MathHelper;
-import net.minecraft.world.World;
 
 public class EntityTurret_T3Flamethrower extends EntityTurret_Base {
 	
@@ -21,12 +19,7 @@ public class EntityTurret_T3Flamethrower extends EntityTurret_Base {
 	public EntityTurret_T3Flamethrower(World par1World) {
 		super(par1World);
 		this.wdtRange = 8.5D;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public String getTexture() {
-		return TM3ModRegistry.TEX_TURRETDIR + "t3Flamethrower.png";
+        setTextures("t3Flamethrower");
 	}
 
     @Override
@@ -111,11 +104,6 @@ public class EntityTurret_T3Flamethrower extends EntityTurret_Base {
 	@Override
 	public boolean hasFireImmunity() {
 		return true;
-	}
-
-	@Override
-	public String getGlowTexture() {
-		return TM3ModRegistry.TEX_TURRETDIR + "t3FlamethrowerG.png";
 	}
 	
 	@Override
