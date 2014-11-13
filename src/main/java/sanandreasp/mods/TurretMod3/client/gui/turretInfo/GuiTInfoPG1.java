@@ -91,7 +91,7 @@ public class GuiTInfoPG1 extends GuiTInfoBase {
         turret.renderYawOffset = renderYaw;
         turret.rotationYaw = renderYaw;
         turret.rotationYawHead = renderYaw;
-        turret.getDataWatcher().updateObject(21, turret.func_110138_aP() / 2);
+        turret.getDataWatcher().updateObject(21, turret.getMaxHealth() / 2);
         turret.getDataWatcher().updateObject(20, (short) (turret.getMaxAmmo() / 2));
         GL11.glTranslatef(0.0F, turret.yOffset, 0.0F);
         RenderManager.instance.playerViewY = 180.0F;

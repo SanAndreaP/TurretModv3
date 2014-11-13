@@ -14,7 +14,6 @@ import sanandreasp.mods.turretmod3.registry.TurretTargetRegistry;
 import net.minecraft.util.StatCollector;
 
 public class GuiTCUTargets extends GuiTCUBase {
-    private static final ResourceLocation PAGE_1 = new ResourceLocation(TM3ModRegistry.TEX_GUITCUDIR + "page_1.png");
 	protected Map<Integer, String> targetList;
 	
 	private int entryPos = 0;

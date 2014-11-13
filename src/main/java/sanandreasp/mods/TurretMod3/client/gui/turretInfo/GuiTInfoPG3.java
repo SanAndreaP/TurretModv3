@@ -268,7 +268,7 @@ public class GuiTInfoPG3 extends GuiTInfoBase {
         	count = this.turretInf.getAmmoFromItem(is);
 	    	str = StatCollector.translateToLocal("gui.tinfo.projectiles");
         } else {
-        	count = this.turretInf.func_110143_aJFromItem(is);
+        	count = this.turretInf.getHealthFromItem(is);
         	str = StatCollector.translateToLocal("gui.tinfo.healthpts");
         }
     	str = count + " " + str.substring(count > 1 ? str.lastIndexOf('|')+1 : 0, count > 1 ? str.length() : str.lastIndexOf('|'));

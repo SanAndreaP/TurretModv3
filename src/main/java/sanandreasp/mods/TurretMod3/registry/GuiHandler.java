@@ -1,5 +1,6 @@
 package sanandreasp.mods.turretmod3.registry;
 
+import net.minecraft.inventory.Container;
 import sanandreasp.mods.turretmod3.client.gui.GuiDismantledStorage;
 import sanandreasp.mods.turretmod3.client.gui.TCU.GuiTCUInfo;
 import sanandreasp.mods.turretmod3.client.gui.laptop.GuiLaptopGeneral;
@@ -83,14 +84,15 @@ public class GuiHandler implements IGuiHandler {
 			case 6:
 				TileEntity te = world.getTileEntity(x, y, z);
 				if (te != null && te instanceof TileEntityLaptop) {
+                    Container container = new ContainerLaptop((TileEntityLaptop)te, player.inventory);
 					if (ID == 3)
-						return new GuiLaptopGeneral((ContainerLaptop)getServerGuiElement(ID, player, world, x, y, z), (TileEntityLaptop)te);
+						return new GuiLaptopGeneral(container, (TileEntityLaptop)te);
 					else if (ID == 4)
-						return new GuiLaptopTargets((ContainerLaptop)getServerGuiElement(ID, player, world, x, y, z), (TileEntityLaptop)te);
+						return new GuiLaptopTargets(container, (TileEntityLaptop)te);
 					else if (ID == 5)
-						return new GuiLaptopUpgrades((ContainerLaptopUpgrades)getServerGuiElement(ID, player, world, x, y, z), (TileEntityLaptop)te);
-					else if (ID == 6)
-						return new GuiLaptopMisc((ContainerLaptop)getServerGuiElement(ID, player, world, x, y, z), (TileEntityLaptop)te);
+						return new GuiLaptopUpgrades(new ContainerLaptopUpgrades((TileEntityLaptop)te, player.inventory), (TileEntityLaptop)te);
+					else
+						return new GuiLaptopMisc(container, (TileEntityLaptop)te);
 				}
 		}
 		return null;

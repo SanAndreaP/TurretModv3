@@ -13,7 +13,7 @@ public class GuiTCUInfo extends GuiTCUBase {
 	public void drawScreen(int par1, int par2, float par3) {
 		this.drawDefaultBackground();
 
-		this.mc.getTextureManager().bindTexture(TM3ModRegistry.TEX_GUITCUDIR + "page_2.png");
+		this.mc.getTextureManager().bindTexture(PAGE_2);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, xSize, ySize);
         
@@ -30,7 +30,7 @@ public class GuiTCUInfo extends GuiTCUBase {
 		    this.fontRendererObj.drawString(s, this.guiLeft + 6, this.guiTop + 22, 0xAA0000);
 
 		    String s1 = StatCollector.translateToLocal("gui.tinfo.healthpts").split("\\|")[1];
-		    s = turret.getSrvHealth() + " / " + turret.func_110138_aP() + " " + s1;
+		    s = turret.getSrvHealth() + " / " + turret.getMaxHealth() + " " + s1;
 		    this.fontRendererObj.drawString(s, this.guiLeft + 12, this.guiTop + 31, 0x600000);
 		    
 		    this.drawRect(this.guiLeft + 4, this.guiTop + 41, this.guiLeft + this.xSize - 4, this.guiTop + 42, 0xFFB0B0B0);

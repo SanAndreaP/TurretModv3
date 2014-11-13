@@ -9,6 +9,7 @@ import org.lwjgl.opengl.GL11;
 
 import sanandreasp.mods.turretmod3.client.gui.GuiTurretButton;
 import sanandreasp.mods.turretmod3.packet.PacketHandlerCommon;
+import sanandreasp.mods.turretmod3.packet.PacketRecvTurretSettings;
 import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgControl;
 import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TurretUpgrades;
@@ -53,7 +54,7 @@ public class GuiTCUSettings extends GuiTCUBase {
 	public void drawScreen(int par1, int par2, float par3) {
 		this.drawDefaultBackground();
 
-		this.mc.getTextureManager().bindTexture(TM3ModRegistry.TEX_GUITCUDIR + "page_2.png");
+		this.mc.getTextureManager().bindTexture(PAGE_2);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, xSize, ySize);
         
@@ -125,19 +126,7 @@ public class GuiTCUSettings extends GuiTCUBase {
     }
     
     private void writeFrequency() {
-    	try {
-    		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-    		DataOutputStream dos = new DataOutputStream(bos);
-    		
-    		dos.writeInt(0x002);
-			dos.writeInt(this.turret.entityId);
-			dos.writeByte(0x5);
-    		dos.writeUTF(this.frequency.getText());
-    		
-    		PacketDispatcher.sendPacketToServer(new Packet250CustomPayload(PacketHandlerCommon.getChannel(), bos.toByteArray()));
-    	} catch (IOException e) {
-    		e.printStackTrace();
-    	}
+        TM3ModRegistry.networkWrapper.sendToServer(new PacketRecvTurretSettings(this.turret.getEntityId(), (byte)0x5, Integer.parseInt(this.frequency.getText())));
     }
 	
 	@Override
@@ -149,19 +138,8 @@ public class GuiTCUSettings extends GuiTCUBase {
 		else if (par1GuiButton.id == this.dismountFromBase.id) b = 0x3;
 		else if (par1GuiButton.id == this.rideTurret.id) b = 0x4;
 		else if (par1GuiButton.id == this.switchOnOff.id) b = 0x6;
-		
-		try {
-			ByteArrayOutputStream bos = new ByteArrayOutputStream();
-			DataOutputStream dos = new DataOutputStream(bos);
-			
-			dos.writeInt(0x002);
-			dos.writeInt(this.turret.entityId);
-			dos.writeByte(b);
-			
-			PacketDispatcher.sendPacketToServer(new Packet250CustomPayload(PacketHandlerCommon.getChannel(), bos.toByteArray()));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+
+        TM3ModRegistry.networkWrapper.sendToServer(new PacketRecvTurretSettings(this.turret.getEntityId(), b));
 		
 		if (b == 0x0 || b == 0x4 || (b == 0x6 && this.turret.isActive())) {
 			this.mc.thePlayer.closeScreen();

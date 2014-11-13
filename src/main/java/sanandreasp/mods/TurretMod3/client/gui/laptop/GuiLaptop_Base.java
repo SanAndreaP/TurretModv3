@@ -98,7 +98,7 @@ public class GuiLaptop_Base extends GuiContainer {
                 if (guibutton.mousePressed(this.mc, par1, par2))
                 {
                     this.selectedButton = guibutton;
-                    this.mc.getSoundHandler().playSoundFX("random.click", 1.0F, 1.0F);
+                    guibutton.func_146113_a(this.mc.getSoundHandler());
                     this.actionPerformed(guibutton);
                 }
             }

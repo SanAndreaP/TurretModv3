@@ -1,14 +1,18 @@
 package sanandreasp.mods.turretmod3.client.gui.TCU;
 
 import net.minecraft.init.Items;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import sanandreasp.mods.turretmod3.client.gui.GuiItemTab;
 import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.item.ItemStack;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 
 public class GuiTCUBase extends GuiScreen {
+    public final static ResourceLocation PAGE_1 = new ResourceLocation(TM3ModRegistry.TEX_GUITCUDIR + "page_1.png");
+    public final static ResourceLocation PAGE_2 = new ResourceLocation(TM3ModRegistry.TEX_GUITCUDIR + "page_2.png");
 	protected int guiLeft;
 	protected int guiTop;
 	protected int xSize;
