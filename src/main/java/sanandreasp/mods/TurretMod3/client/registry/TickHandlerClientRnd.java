@@ -13,6 +13,7 @@ import org.lwjgl.opengl.GL11;
 
 import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
 import sanandreasp.mods.turretmod3.packet.PacketHandlerCommon;
+import sanandreasp.mods.turretmod3.packet.PacketRecvTurretShootKey;
 import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 import sanandreasp.mods.turretmod3.registry.TurretInfo.TurretInfo;
 import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgExperience;
@@ -31,16 +32,12 @@ import java.io.IOException;
 
 public class TickHandlerClientRnd {
     private final static ResourceLocation GUI_ICONS = new ResourceLocation("/gui/icons.png");
-	private FontRenderer nbFont;
-
-	public TickHandlerClientRnd() {
-		this.nbFont = new FontRenderer(mc.gameSettings, "/font/default.png", mc.renderEngine, false);
-	}
 
 	@SubscribeEvent
 	public void tickEnd(TickEvent.RenderTickEvent event) {
 		if (event.phase == TickEvent.Phase.END) {
             Minecraft mc = Minecraft.getMinecraft();
+            FontRenderer nbFont = new FontRenderer(mc.gameSettings, TM3ModRegistry.DEFAULT_FONT, mc.renderEngine, false);
 			if (mc.thePlayer != null
 					&& mc.thePlayer.ridingEntity instanceof EntityTurret_Base
 					&& mc.currentScreen == null
@@ -53,7 +50,7 @@ public class TickHandlerClientRnd {
 				mc.getTextureManager().bindTexture(TM3ModRegistry.TEX_TURRETCAM);
 				
 		        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-				float perc = (float)turret.getSrvHealth() / (float)turret.func_110138_aP();
+				float perc = (float)turret.getSrvHealth() / (float)turret.getMaxHealth();
 				this.drawTexturedModalRect(5, 7, 0, 0, 183, 5, -1);
 				this.drawTexturedModalRect(5, 7, 0, 5, MathHelper.ceiling_float_int(183F * perc), 5, 1);
 				
@@ -74,18 +71,18 @@ public class TickHandlerClientRnd {
 					this.drawTexturedModalRect(5, 43, 0, 25, MathHelper.ceiling_float_int(183F * perc), 5, 1);
 				}
 				
-				String s = turret.getSrvHealth() + " / " + turret.func_110138_aP();
-				drawStringWithFrame(this.nbFont, s, 190, 6, 0xDD0000, 0x000000);
+				String s = turret.getSrvHealth() + " / " + turret.getMaxHealth();
+				drawStringWithFrame(nbFont, s, 190, 6, 0xDD0000, 0x000000);
 				
 				s = inf ? "INF" : turret.getAmmo() + " / " + turret.getMaxAmmo();
-				drawStringWithFrame(this.nbFont, s, 190, 18, 0x3399FF, 0x000000);
+				drawStringWithFrame(nbFont, s, 190, 18, 0x3399FF, 0x000000);
 				
 				s = (turret.getMaxShootTicks() - turret.getShootTicks()) + " / " + turret.getMaxShootTicks();
-				drawStringWithFrame(this.nbFont, s, 190, 30, 0xFFFFFF, 0x000000);
+				drawStringWithFrame(nbFont, s, 190, 30, 0xFFFFFF, 0x000000);
 				
 				if (xpRender) {
 					s = turret.getExperience() + " / " + turret.getExpCap();
-					drawStringWithFrame(this.nbFont, s, 190, 42, 0x00FF33, 0x000000);
+					drawStringWithFrame(nbFont, s, 190, 42, 0x00FF33, 0x000000);
 				}
 				
 				s = tInf.getTurretName();
@@ -132,21 +129,14 @@ public class TickHandlerClientRnd {
         var9.draw();
     }
 
-    public static KeyBinding turretShootKey = new KeyBinding("turretmod3.keys.turretShoot", Keyboard.KEY_F);
+    public static KeyBinding turretShootKey = new KeyBinding("keys.turretShoot", Keyboard.KEY_F, "key.categories.gameplay");
 
     @SubscribeEvent
     public void keyDown(InputEvent.KeyInputEvent event) {
-        EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-        if (player != null && player.ridingEntity instanceof EntityTurret_Base && Minecraft.getMinecraft().currentScreen == null) {
-            try {
-                ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                DataOutputStream dos = new DataOutputStream(bos);
-
-                dos.writeInt(0x003);
-
-                PacketDispatcher.sendPacketToServer(new Packet250CustomPayload(PacketHandlerCommon.getChannel(), bos.toByteArray()));
-            } catch (IOException e) {
-                e.printStackTrace();
+        if(Keyboard.getEventKeyState() && Keyboard.getEventKey() == turretShootKey.getKeyCode()) {
+            EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+            if (player != null && player.ridingEntity instanceof EntityTurret_Base && Minecraft.getMinecraft().currentScreen == null) {
+                TM3ModRegistry.networkWrapper.sendToServer(new PacketRecvTurretShootKey());
             }
         }
     }
