@@ -21,7 +21,7 @@ public class TurretInfoT1Shotgun extends TurretInfo {
 		this.crafting = new Object[] {
 				" D ", " W ", "CCC",
 				'D', new ItemStack(Blocks.dispenser),
-				'W', new ItemStack(Blocks.wood, 0, OreDictionary.WILDCARD_VALUE),
+				'W', new ItemStack(Blocks.log, 0, OreDictionary.WILDCARD_VALUE),
 				'C', new ItemStack(Blocks.stone)
 		};
 		this.itemIcon = "TurretMod3:turret_02";
@@ -32,7 +32,7 @@ public class TurretInfoT1Shotgun extends TurretInfo {
 		
 		this.healItems.put(new ItemStack(Blocks.stone), 10);
 		this.healItems.put(new ItemStack(Blocks.cobblestone), 5);
-		this.healItems.put(new ItemStack(Blocks.wood, 1, OreDictionary.WILDCARD_VALUE), 2);
+		this.healItems.put(new ItemStack(Blocks.log, 1, OreDictionary.WILDCARD_VALUE), 2);
 		this.healItems.put(new ItemStack(Blocks.planks, 1, OreDictionary.WILDCARD_VALUE), 1);
 	}
 }

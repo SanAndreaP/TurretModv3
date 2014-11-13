@@ -128,7 +128,7 @@ public abstract class TurretInfo {
 		return curIS;
 	}
 
-	public int func_110143_aJFromItem(ItemStack is) {
+	public int getHealthFromItem(ItemStack is) {
 		for (Entry<ItemStack, Integer> ent : this.healItems.entrySet()) {
 			if (TM3ModRegistry.areStacksEqualWithWildcard(ent.getKey(), is))
 				return ent.getValue();
