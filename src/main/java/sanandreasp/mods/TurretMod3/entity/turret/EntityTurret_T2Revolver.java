@@ -76,6 +76,6 @@ public class EntityTurret_T2Revolver extends EntityTurret_Base {
 	
 	@Override
 	public String getShootSound() {
-		return "turretmod3.shoot.pistol";
+		return "turretmod3:shoot.pistol";
 	}
 }

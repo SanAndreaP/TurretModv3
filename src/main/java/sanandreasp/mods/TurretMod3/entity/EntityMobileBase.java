@@ -154,13 +154,13 @@ public class EntityMobileBase extends EntityLiving implements IHealable {
 	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
 		if (this.riddenByEntity != null) {
-			((EntityTurret_Base)this.riddenByEntity).attackEntityFrom(par1DamageSource, par2);
+			this.riddenByEntity.attackEntityFrom(par1DamageSource, par2);
 			return false;
 		}
 		if (par1DamageSource.getSourceOfDamage() instanceof EntityPlayer) {
 			if (!((EntityPlayer)par1DamageSource.getSourceOfDamage()).capabilities.isCreativeMode && !this.worldObj.isRemote)
 				this.entityDropItem(new ItemStack(TM3ModRegistry.mobileBase, 1), 0.0F);
-			this.playSound("turretmod3.hit.turretDeath", 1.0F, 1.0F);
+			this.playSound("turretmod3:hit.turretDeath", 1.0F, 1.0F);
 			onDeathUpdate();
 			return true;
 		}

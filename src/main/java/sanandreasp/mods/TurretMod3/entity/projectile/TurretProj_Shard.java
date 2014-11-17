@@ -28,7 +28,7 @@ public class TurretProj_Shard extends TurretProjectile {
 	
 	@Override
 	public String getHitSound() {
-		return "ricochet.splash";
+		return "turretmod3:ricochet.splash";
 	}
 	
 	@Override

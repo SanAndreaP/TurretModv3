@@ -80,7 +80,7 @@ public class EntityTurret_T4FLAK extends EntityTurret_Base {
 	
 	@Override
 	public String getShootSound() {
-		return "turretmod3.shoot.flak";
+		return "turretmod3:shoot.flak";
 	}
 	
 	@Override

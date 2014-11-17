@@ -29,7 +29,7 @@ public class EntityTurret_TSCollector extends EntityTurret_Base {
 	
 	@Override
 	protected String getLivingSound() {
-		return this.isActive() ? "turretmod3.idle.turretexp" : "";
+		return this.isActive() ? "turretmod3:idle.turretexp" : "";
 	}
 	
 	@Override

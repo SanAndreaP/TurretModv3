@@ -60,7 +60,7 @@ public class EntityTurret_T5Artillery extends EntityTurret_Base {
 	
 	@Override
 	public String getShootSound() {
-		return "turretmod3.shoot.artillery";
+		return "turretmod3:shoot.artillery";
 	}
 	
 	@Override

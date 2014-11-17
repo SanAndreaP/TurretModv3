@@ -84,7 +84,7 @@ public class EntityTurret_T2Minigun extends EntityTurret_Base {
 	
 	@Override
 	public String getShootSound() {
-		return "turretmod3.shoot.minigun";
+		return "turretmod3:shoot.minigun";
 	}
 	
 	@Override

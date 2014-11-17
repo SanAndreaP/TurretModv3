@@ -415,7 +415,7 @@ public class TurretProjectile extends EntityArrow {
                     this.posX -= this.motionX / (double)var20 * 0.05000000074505806D;
                     this.posY -= this.motionY / (double)var20 * 0.05000000074505806D;
                     this.posZ -= this.motionZ / (double)var20 * 0.05000000074505806D;
-                    this.playSound(this.getHitSound(), 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
+                    this.playSound(getHitSound(), 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
                     this.inGround = true;
 //                    if (this.isArrow())
                     	this.arrowShake = 7;
@@ -498,7 +498,13 @@ public class TurretProjectile extends EntityArrow {
     protected boolean shouldTargetOneType() {
     	return true;
     }
-    
+
+    @Override
+    public void playSound(String sound, float volume, float pitch){
+        if(sound!=null && !sound.isEmpty())
+            super.playSound(sound, volume, pitch);
+    }
+
     @Override
     public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
     {

@@ -1,5 +1,5 @@
 {
-"turretidle": {
+"idle.turretidle": {
     "category": "neutral",
     "sounds": [
       "idle/turretidle1",
@@ -23,11 +23,11 @@
     "category": "neutral",
     "sounds": ["collect/ia_get"]
   },
-"turretDeath": {
+"hit.turretDeath": {
     "category": "neutral",
     "sounds": ["hit/turretDeath"]
   },
-"turretHit": {
+"hit.turrethit": {
    "category": "neutral",
    "sounds": ["hit/turrethit"]
  },
@@ -69,7 +69,7 @@
   "category": "neutral",
   "sounds": ["shoot/artillery"]
 },
- "bullet": {
+ "ricochet.bullet": {
    "category": "neutral",
    "sounds": [
      "ricochet/bullet1",
@@ -79,7 +79,7 @@
      "ricochet/bullet5"
    ]
  },
-"splash": {
+"ricochet.splash": {
     "category": "neutral",
     "sounds": ["ricochet/splash1"]
 },

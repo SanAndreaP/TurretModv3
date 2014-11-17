@@ -39,7 +39,7 @@ public class EntityTurret_TSHealer extends EntityTurret_Base {
 	
 	@Override
 	public String getShootSound() {
-		return "turretmod3.shoot.healBeam";
+		return "turretmod3:shoot.healBeam";
 	}
 	
 	@Override

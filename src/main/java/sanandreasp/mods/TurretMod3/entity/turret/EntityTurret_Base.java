@@ -60,7 +60,7 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
     {
         super.entityInit();
         this.dataWatcher.addObject(20, (short) 0); // Ammo
-        this.dataWatcher.addObject(21,  0); // Health
+        this.dataWatcher.addObject(21,  0.0F); // Health
         this.dataWatcher.addObject(22, (short) 0); // Ammo type
         this.dataWatcher.addObject(23, (short) 0); // Experience
         this.dataWatcher.addObject(24, ""); // Player name
@@ -136,7 +136,7 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 		if (this.currentTarget == null && !this.worldObj.isRemote) {
 			List<Entity> rangedEntities = getRangedEntities();
 			for (Entity entity : rangedEntities) {
-				if (entity != null && entity instanceof EntityLivingBase && isTargetValid((EntityLiving)entity)) {
+				if (entity != null && entity instanceof EntityLivingBase && isTargetValid((EntityLivingBase)entity)) {
 					this.currentTarget = (EntityLivingBase) entity;
 					break;
 				}
@@ -214,9 +214,9 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
         double var8 = par1Entity.posZ - this.posZ;
         double var6;
         
-        if (par1Entity instanceof EntityLiving)
+        if (par1Entity instanceof EntityLivingBase)
         {
-            EntityLiving var10 = (EntityLiving)par1Entity;
+            EntityLivingBase var10 = (EntityLivingBase)par1Entity;
             var6 = this.posY + (double)this.getEyeHeight() - (var10.posY + (double)var10.getEyeHeight());
         }
         else
@@ -291,7 +291,7 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 	
 	@Override
     protected String getDeathSound() {
-    	return "hit.turretDeath";
+    	return "turretmod3:hit.turretDeath";
     }
 	
 	public int getExpCap() {
@@ -304,12 +304,12 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 
 	@Override
 	protected String getHurtSound() {
-		return "hit.turrethit";
+		return "turretmod3:hit.turrethit";
 	}
 
     @Override
 	protected String getLivingSound() {
-    	return this.rand.nextInt(10) == 0 && this.isActive() ? "idle.turretidle" : "";
+    	return this.rand.nextInt(10) == 0 && this.isActive() ? "turretmod3:idle.turretidle" : null;
     }
 	
 	public int getMaxAmmo() {
@@ -407,7 +407,7 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
     		}
     	}
     	
-    	if (playSound) this.worldObj.playSoundAtEntity(this, "turretmod3.collect.chest", 1.0F, 1.0F);
+    	if (playSound) this.worldObj.playSoundAtEntity(this, "turretmod3:collect.chest", 1.0F, 1.0F);
     }
 	
 	public boolean hasPlayerAccess(EntityPlayer player) {
@@ -428,7 +428,7 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 			if (tInfo.getHealthFromItem(held) > 0 && this.getHealth()+tInfo.getHealthFromItem(held) <= this.getMaxHealth()) {
 				this.heal(tInfo.getHealthFromItem(held));
 				par1EntityPlayer.inventory.decrStackSize(par1EntityPlayer.inventory.currentItem, 1);
-				this.worldObj.playSoundAtEntity(this, "turretmod3.collect.ia_get", 1.0F, 1.0F);
+				this.playSound("turretmod3:collect.ia_get", 1.0F, 1.0F);
 				return true;
 			} else if (tInfo.getAmmoFromItem(held) > 0 && this.getAmmo() < this.getMaxAmmo() && tInfo.getAmmoTypeFromItem(held) == this.getAmmoType()) {
 				int needed = this.getMaxAmmo() - this.getAmmo();
@@ -437,14 +437,12 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 						int decrStackSizeCnt = MathHelper.ceiling_double_int((double)needed / (double)tInfo.getAmmoFromItem(held));
 						this.incrAmmo(needed);
 						par1EntityPlayer.inventory.decrStackSize(par1EntityPlayer.inventory.currentItem, decrStackSizeCnt);
-						this.worldObj.playSoundAtEntity(this, "turretmod3.collect.ia_get", 1.0F, 1.0F);
-						return true;
 					} else {
 						this.incrAmmo(held.stackSize * tInfo.getAmmoFromItem(held));
 						par1EntityPlayer.inventory.decrStackSize(par1EntityPlayer.inventory.currentItem, held.stackSize);
-						this.worldObj.playSoundAtEntity(this, "turretmod3.collect.ia_get", 1.0F, 1.0F);
-						return true;
 					}
+                    this.playSound("turretmod3:collect.ia_get", 1.0F, 1.0F);
+                    return true;
 				}
 			} else if (tInfo.getAmmoFromItem(held) > 0 && tInfo.getAmmoTypeFromItem(held) != this.getAmmoType() && this.getPlayerName().equals(par1EntityPlayer.getCommandSenderName())) {
 				ItemStack is = this.tInfo.getAmmoTypeItemWithLowestScore(this.getAmmoType()).copy();
@@ -461,7 +459,7 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 					this.setAmmo(needed * ammo);
 					this.setAmmoType(tInfo.getAmmoTypeFromItem(held));
 					par1EntityPlayer.inventory.decrStackSize(par1EntityPlayer.inventory.currentItem, needed);
-					this.worldObj.playSoundAtEntity(this, "turretmod3.collect.ia_get", 1.0F, 1.0F);
+					this.playSound("turretmod3:collect.ia_get", 1.0F, 1.0F);
 					return true;
 				}
 			} else if (held.getItem() == TM3ModRegistry.tcu) {
@@ -519,7 +517,7 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 					this.upgrades.put(newUpgId, newUpgItem);
 					par1EntityPlayer.inventory.decrStackSize(par1EntityPlayer.inventory.currentItem, 1);
 					par1EntityPlayer.triggerAchievement(AchievementPageTM.upgrade);
-					this.worldObj.playSoundAtEntity(this, "turretmod3.collect.ia_get", 1.0F, 1.0F);
+					this.playSound("turretmod3:collect.ia_get", 1.0F, 1.0F);
 					if (!this.worldObj.isRemote) PacketRecvUpgrades.send(this);
 					return true;
 				}
@@ -857,7 +855,8 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
         	var2.setTarget(this, this.currentTarget, 1.4F, 0.0F);
         }
         var2.isEndermanDamageable = TurretUpgrades.hasUpgrade(TUpgEnderHitting.class, this.upgrades);
-        this.worldObj.playSoundAtEntity(this, this.getShootSound(), this.getShootSoundRng(), 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
+        if(this.getShootSound()!=null)
+            this.playSound(this.getShootSound(), this.getShootSoundRng(), 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
         this.worldObj.spawnEntityInWorld(var2);
         var2.isMoving = true;
 	}
@@ -878,7 +877,7 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 					this.shootProjectile(isRidden);
 			        this.decrAmmo();
 				} else {
-					this.worldObj.playSoundAtEntity(this, "random.click", 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
+					this.playSound("random.click", 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
 				}
 				this.setShootTicks(this.getMaxShootTicks());
 			}

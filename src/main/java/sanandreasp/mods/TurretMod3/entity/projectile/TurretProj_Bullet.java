@@ -18,7 +18,7 @@ public class TurretProj_Bullet extends TurretProjectile {
 	
 	@Override
 	public String getHitSound() {
-		return "ricochet.bullet";
+		return "turretmod3:ricochet.bullet";
 	}
 	
 	@Override

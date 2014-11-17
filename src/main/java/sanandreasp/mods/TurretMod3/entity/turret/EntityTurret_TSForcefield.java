@@ -42,7 +42,7 @@ public class EntityTurret_TSForcefield extends EntityTurret_Base {
 	
 	@Override
 	protected String getLivingSound() {
-		return this.isActive() ? "turretmod3.idle.turretexp" : "";
+		return this.isActive() ? "turretmod3:idle.turretexp" : null;
 	}
 	
 	@Override
@@ -219,7 +219,7 @@ public class EntityTurret_TSForcefield extends EntityTurret_Base {
 				this.toggleShield(false);
 			if (this.getShieldPts() >= this.getMaxShieldPts()/2 && !this.isShieldOnline()) {
 				this.toggleShield(true);
-				this.playSound("turretmod3.misc.shieldActive", 1.0F, 1.0F);
+				this.playSound("turretmod3:misc.shieldActive", 1.0F, 1.0F);
 				TM3ModRegistry.proxy.spawnParticle(12, this.posX-0.5D, this.posY+1.0D, this.posZ-0.5D, 128, this.dimension, this);
 			}
 		}

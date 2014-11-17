@@ -78,8 +78,8 @@ public class EntityTurret_T3Flamethrower extends EntityTurret_Base {
 		double partZ = this.posZ + rotYawZ * (Math.cos(this.rotationPitch / (180F / (float)Math.PI))) * 0.7D;
 		
 		TM3ModRegistry.proxy.spawnParticle(2, partX, partY, partZ, 64, this.worldObj.provider.dimensionId, this);
-		
-	    this.worldObj.playSoundAtEntity(this, this.getShootSound(), 1.5F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
+		if(this.getShootSound()!=null)
+	        this.playSound(this.getShootSound(), 1.5F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
 	}
 	
 	@Override
@@ -108,7 +108,7 @@ public class EntityTurret_T3Flamethrower extends EntityTurret_Base {
 	
 	@Override
 	public String getShootSound() {
-		return this.soundTicks == 0 ? "turretmod3.shoot.flamethrower" : "";
+		return this.soundTicks == 0 ? "turretmod3:shoot.flamethrower" : null;
 	}
 	
 	@Override

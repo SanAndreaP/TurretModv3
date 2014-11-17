@@ -65,7 +65,7 @@ public class EntityTurret_T1Shotgun extends EntityTurret_Base {
 		
 		TM3ModRegistry.proxy.spawnParticle(0, partX, partY, partZ, 64, this.worldObj.provider.dimensionId, this);
 		
-	    this.worldObj.playSoundAtEntity(this, this.getShootSound(), 1.5F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
+	    this.playSound(this.getShootSound(), 1.5F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
 	}
 	
 	@Override
@@ -76,7 +76,7 @@ public class EntityTurret_T1Shotgun extends EntityTurret_Base {
 	
 	@Override
 	public String getShootSound() {
-		return "turretmod3.shoot.shotgun";
+		return "turretmod3:shoot.shotgun";
 	}
 	
 	@Override

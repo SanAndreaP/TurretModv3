@@ -50,6 +50,6 @@ public class EntityTurret_T3Laser extends EntityTurret_Base {
 	
 	@Override
 	public String getShootSound() {
-		return "turretmod3.shoot.laser";
+		return "turretmod3:shoot.laser";
 	}
 }
