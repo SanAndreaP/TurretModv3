@@ -22,7 +22,6 @@ import java.util.Map;
 public class GuiTInfoPG4 extends GuiTInfoBase {
     private static final ResourceLocation PAGE_4 = new ResourceLocation(TM3ModRegistry.TEX_GUIINFO + "page_4.png");
     protected static RenderItem itemRenderer = new RenderItem();
-    protected FontRenderer customFR;
 
 	private Map<Integer, TurretUpgrades> upgrades = Maps.newHashMap();
 	
@@ -50,8 +49,6 @@ public class GuiTInfoPG4 extends GuiTInfoBase {
 		}
 		
         this.tabTurretUpgrades.enabled = false;
-        
-        this.customFR = new FontRenderer(this.mc.gameSettings, TM3ModRegistry.DEFAULT_FONT, this.mc.renderEngine, true);
         
         this.entryPos = 0;
         this.currScrollPos = 0;
@@ -83,20 +80,21 @@ public class GuiTInfoPG4 extends GuiTInfoBase {
 
         for (int i = this.entryPos; i < 4 + entryPos && i < this.upgrades.size(); i++) {
         	if (this.upgrades.get(i) != null) {
+                TurretUpgrades upgrade = this.upgrades.get(i);
 	        	int icnX = this.guiLeft + 8;
 	        	int icnY = this.guiTop + 50 + (i-entryPos)*19;
 	        	RenderHelper.enableGUIStandardItemLighting();
 	        	GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-	        	ItemStack renderedItem = this.upgrades.get(i).getItem().copy();
+	        	ItemStack renderedItem = upgrade.getItem().copy();
 	        	if (renderedItem.getItemDamage() == OreDictionary.WILDCARD_VALUE) renderedItem.setItemDamage(0);
-	        	if (this.upgrades.get(i).getEnchantment() != null) renderedItem.addEnchantment(this.upgrades.get(i).getEnchantment(), 1);
+	        	if (upgrade.getEnchantment() != null) renderedItem.addEnchantment(upgrade.getEnchantment(), 1);
 	        	this.drawItemStack(renderedItem, icnX, icnY);
 	        	RenderHelper.disableStandardItemLighting();
-	        	this.fontRendererObj.drawString(this.upgrades.get(i).getName(), this.guiLeft + 26, this.guiTop + 54 + (i-entryPos)*19, 0xFFFFFF);
+	        	this.fontRendererObj.drawString(upgrade.getName(), this.guiLeft + 26, this.guiTop + 54 + (i-entryPos)*19, 0xFFFFFF);
 	        	
 	        	if (par1 >= this.guiLeft + 7 && par1 < this.guiLeft + 159 && par2 >= this.guiTop + 49 + (i-entryPos)*19 && par2 < this.guiTop + 67 + (i-entryPos)*19) {
 	        		this.drawRect(this.guiLeft + 7, this.guiTop + 49 + (i-entryPos)*19, this.guiLeft + 159, this.guiTop + 67 + (i-entryPos)*19, 0x3000A0FF);
-	        		this.customFR.drawSplitString(this.upgrades.get(i).getDesc(), this.guiLeft + 11, this.guiTop + 131, 154, 0x000000);
+	        		this.customFR.drawSplitString(upgrade.getDesc(), this.guiLeft + 11, this.guiTop + 131, 154, 0x000000);
 	        		hover = i;
 	        		hovY = this.guiTop + 49 + (i-entryPos)*19;
 	        	}
@@ -138,9 +136,10 @@ public class GuiTInfoPG4 extends GuiTInfoBase {
 		super.drawScreen(par1, par2, par3);
 		
 		if (hover > -1) {
-    		drawUpgradeTooltip(this.upgrades.get(hover).getItem().getDisplayName(),
-    				this.upgrades.get(hover).getEnchantment() != null ? this.upgrades.get(hover).getEnchantment().getTranslatedName(1) : "",
-    				this.upgrades.get(hover).getReqUpgradeName(), par1, par2);
+            TurretUpgrades upgrade = this.upgrades.get(hover);
+    		drawUpgradeTooltip(upgrade.getItem().getDisplayName(),
+                    upgrade.getEnchantment() != null ? upgrade.getEnchantment().getTranslatedName(1) : "",
+                    upgrade.getReqUpgradeName(), par1, par2);
 		}
 	}
 

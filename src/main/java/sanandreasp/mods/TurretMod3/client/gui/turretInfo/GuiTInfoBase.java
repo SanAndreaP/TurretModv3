@@ -11,9 +11,9 @@ import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 import sanandreasp.mods.turretmod3.registry.TurretInfo.TurretInfo;
 
 public class GuiTInfoBase extends GuiScreen {
-	
+
     protected FontRenderer customFR;
-    
+
 	protected int guiLeft;
 	protected int guiTop;
 	protected int xSize;
@@ -73,7 +73,7 @@ public class GuiTInfoBase extends GuiScreen {
         		this.tabInd = i;
         	}
         }
-        
+
         this.customFR = new FontRenderer(this.mc.gameSettings, TM3ModRegistry.DEFAULT_FONT, this.mc.renderEngine, true);
 	}
 	

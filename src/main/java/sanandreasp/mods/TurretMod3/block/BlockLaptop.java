@@ -10,6 +10,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -24,8 +25,6 @@ import sanandreasp.mods.turretmod3.tileentity.TileEntityLaptop;
 import java.util.List;
 
 public class BlockLaptop extends BlockContainer {
-	@SideOnly(Side.CLIENT)
-	public IIcon blackIcon;
 	
 	public BlockLaptop(Material par2Material) {
 		super(par2Material);
@@ -41,9 +40,9 @@ public class BlockLaptop extends BlockContainer {
 	public IIcon getIcon(int par1, int par2) {
 		int i = getType(par1);
 		switch(i) {
-			case 1: return this.blackIcon;
+			case 1: return Blocks.obsidian.getIcon(par1, par2);
 			default:
-				return this.blockIcon;
+				return Blocks.quartz_block.getIcon(par1, par2);
 		}
 	}
 	
@@ -130,8 +129,7 @@ public class BlockLaptop extends BlockContainer {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister par1IconRegister) {
-		this.blockIcon = par1IconRegister.registerIcon(getTextureName()+"White");
-		this.blackIcon = par1IconRegister.registerIcon(getTextureName() + "Black");
+
 	}
 
     @SuppressWarnings("unchecked")

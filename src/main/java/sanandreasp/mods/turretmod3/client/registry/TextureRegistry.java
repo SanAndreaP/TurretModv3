@@ -9,9 +9,11 @@ public class TextureRegistry {
 
     @SubscribeEvent
     public void stitchTextureMap(TextureStitchEvent.Pre event){
-        iconCache = new IIcon[3];
-        iconCache[0] = event.map.registerIcon("TurretMod3:ach_piercing");
-        iconCache[1] = event.map.registerIcon("TurretMod3:redFlame");
-        iconCache[2] = event.map.registerIcon("TurretMod3:blueFlame");
+        if(event.map.getTextureType()==1) {
+            iconCache = new IIcon[3];
+            iconCache[0] = event.map.registerIcon("TurretMod3:ach_piercing");
+            iconCache[1] = event.map.registerIcon("TurretMod3:redFlame");
+            iconCache[2] = event.map.registerIcon("TurretMod3:blueFlame");
+        }
     }
 }
