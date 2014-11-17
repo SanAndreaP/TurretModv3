@@ -360,8 +360,8 @@ public abstract class EntityTurret_Base extends EntityLiving implements IHealabl
 		return this.dataWatcher.getWatchableObjectInt(28);
 	}
 	
-	public int getSrvHealth() {
-		return Math.max(this.dataWatcher.getWatchableObjectInt(21), 0);
+	public float getSrvHealth() {
+		return Math.max(this.dataWatcher.getWatchableObjectFloat(21), 0);
 	}
 	
 	public String getTurretName() {

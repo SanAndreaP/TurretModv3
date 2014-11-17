@@ -5,6 +5,7 @@ import cpw.mods.fml.common.gameevent.InputEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.settings.KeyBinding;
@@ -22,13 +23,13 @@ import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TUpgInfAmmo;
 import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TurretUpgrades;
 
 public class TickHandlerClientRnd {
-    private final static ResourceLocation GUI_ICONS = new ResourceLocation("/gui/icons.png");
-
+    private FontRenderer nbFont;
 	@SubscribeEvent
 	public void tickEnd(TickEvent.RenderTickEvent event) {
 		if (event.phase == TickEvent.Phase.END) {
             Minecraft mc = Minecraft.getMinecraft();
-            FontRenderer nbFont = new FontRenderer(mc.gameSettings, TM3ModRegistry.DEFAULT_FONT, mc.renderEngine, false);
+            if(nbFont == null)
+                nbFont = new FontRenderer(mc.gameSettings, TM3ModRegistry.DEFAULT_FONT, mc.renderEngine, false);
 			if (mc.thePlayer != null
 					&& mc.thePlayer.ridingEntity instanceof EntityTurret_Base
 					&& mc.currentScreen == null
@@ -41,7 +42,7 @@ public class TickHandlerClientRnd {
 				mc.getTextureManager().bindTexture(TM3ModRegistry.TEX_TURRETCAM);
 				
 		        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-				float perc = (float)turret.getSrvHealth() / (float)turret.getMaxHealth();
+				float perc = turret.getSrvHealth() / turret.getMaxHealth();
 				this.drawTexturedModalRect(5, 7, 0, 0, 183, 5, -1);
 				this.drawTexturedModalRect(5, 7, 0, 5, MathHelper.ceiling_float_int(183F * perc), 5, 1);
 				
@@ -87,7 +88,7 @@ public class TickHandlerClientRnd {
 		        	if (TM3ModRegistry.proxy.getPlayerTM3Data(mc.thePlayer).hasKey("tcCrosshair"))
 		        		icon = TM3ModRegistry.proxy.getPlayerTM3Data(mc.thePlayer).getByte("tcCrosshair");
 		        	GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		            mc.getTextureManager().bindTexture(GUI_ICONS);
+		            mc.getTextureManager().bindTexture(Gui.icons);
 		            GL11.glEnable(GL11.GL_BLEND);
 		            GL11.glBlendFunc(GL11.GL_ONE_MINUS_DST_COLOR, GL11.GL_ONE_MINUS_SRC_COLOR);
 		            this.drawTexturedModalRect(scaledRes.getScaledWidth() / 2 - 7, scaledRes.getScaledHeight() / 2 - 7, 0, 0, 16, 16, 1);

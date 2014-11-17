@@ -45,22 +45,22 @@ public class GuiTInfoPG2 extends GuiTInfoBase {
         } else if (par1 >= icoX + 18 && par1 < icoX + 34 && par2 >= icoY && par2 < icoY + 16) {
         	this.drawRect(icoX + 18, icoY, icoX + 34, icoY + 16, 0x80FFFFFF);
         	title = StatCollector.translateToLocal("gui.tinfo.nameMaxHealth");
-        	value = ((Integer)this.turretInf.func_110138_aP()).toString() + " HP";
+        	value = this.turretInf.func_110138_aP() + " HP";
         	desc = StatCollector.translateToLocal("gui.tinfo.descMaxHealth");
         } else if (par1 >= icoX + 36 && par1 < icoX + 52 && par2 >= icoY && par2 < icoY + 16) {
         	this.drawRect(icoX + 36, icoY, icoX + 52, icoY + 16, 0x80FFFFFF);
         	title = StatCollector.translateToLocal("gui.tinfo.nameUpperRangeY");
-        	value = new Integer((int)Math.floor(this.turretInf.getYRangeHigh())).toString() + " " + StatCollector.translateToLocal("gui.tinfo.blocks");
+        	value = Math.floor(this.turretInf.getYRangeHigh()) + " " + StatCollector.translateToLocal("gui.tinfo.blocks");
         	desc = StatCollector.translateToLocal("gui.tinfo.descUpperRangeY");
         } else if (par1 >= icoX + 54 && par1 < icoX + 70 && par2 >= icoY && par2 < icoY + 16) {
         	this.drawRect(icoX + 54, icoY, icoX + 70, icoY + 16, 0x80FFFFFF);
         	title = StatCollector.translateToLocal("gui.tinfo.nameLowerRangeY");
-        	value = new Integer((int)Math.floor(this.turretInf.getYRangeLow())).toString() + " " + StatCollector.translateToLocal("gui.tinfo.blocks");
+        	value = Math.floor(this.turretInf.getYRangeLow()) + " " + StatCollector.translateToLocal("gui.tinfo.blocks");
         	desc = StatCollector.translateToLocal("gui.tinfo.descLowerRangeY");
         } else if (par1 >= icoX + 72 && par1 < icoX + 88 && par2 >= icoY && par2 < icoY + 16) {
         	this.drawRect(icoX + 72, icoY, icoX + 88, icoY + 16, 0x80FFFFFF);
         	title = StatCollector.translateToLocal("gui.tinfo.nameRangeX");
-        	value = new Integer((int)Math.floor(this.turretInf.getXRange())).toString() + " " + StatCollector.translateToLocal("gui.tinfo.blocks");
+        	value = Math.floor(this.turretInf.getXRange()) + " " + StatCollector.translateToLocal("gui.tinfo.blocks");
         	desc = StatCollector.translateToLocal("gui.tinfo.descRangeX");
         } else if (par1 >= icoX + 90 && par1 < icoX + 106 && par2 >= icoY && par2 < icoY + 16) {
         	this.drawRect(icoX + 90, icoY, icoX + 106, icoY + 16, 0x80FFFFFF);
