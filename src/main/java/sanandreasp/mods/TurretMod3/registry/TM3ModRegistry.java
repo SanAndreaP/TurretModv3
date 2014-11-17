@@ -57,7 +57,7 @@ public class TM3ModRegistry {
 	public static final String TEX_GUITCUDIR	= "turretmod3:textures/guis/tcu_gui/";
 	public static final String TEX_GUILAP		= "turretmod3:textures/guis/laptop/";
 	public static final String TEX_GUIINFO		= "turretmod3:textures/guis/turretinfo_gui/";
-    public static final ResourceLocation DEFAULT_FONT = new ResourceLocation("/font/default.png");
+        public static final ResourceLocation DEFAULT_FONT = new ResourceLocation("textures/font/ascii.png");
 	public static final ResourceLocation TEX_GUIBUTTONS	= new ResourceLocation("turretmod3:textures/guis/guis_buttons.png");
 	public static final ResourceLocation TEX_TURRETCAM	= new ResourceLocation("turretmod3:textures/guis/turretCam.png");
 	public static final ResourceLocation TEX_WHITELAP		= new ResourceLocation("turretmod3:textures/blocks/laptopWhite.png");
@@ -183,7 +183,7 @@ public class TM3ModRegistry {
 		
 		this.registerItems(turretItem, ammoItems, tcu, tInfoBook, mobileBase, httm, rocket, artilleryBall, turretRec1);
 		
-		GameRegistry.registerBlock(laptop, ItemBlockWithMetadata.class, "tm3.laptopBLK");
+		GameRegistry.registerBlock(laptop, ItemSimpleBlock.class, "tm3.laptopBLK");
 
 		GameRegistry.registerTileEntity(TileEntityLaptop.class, "tm3.laptopTE");
 	}
