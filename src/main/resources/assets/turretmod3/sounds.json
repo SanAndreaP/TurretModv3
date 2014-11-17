@@ -5,7 +5,7 @@
       "idle/turretidle1",
       "idle/turretidle2",
       "idle/turretidle3",
-      "idle/turretidle5"
+      "idle/turretidle4"
     ]
   },
 "turretexp": {
@@ -81,7 +81,7 @@
  },
 "splash": {
     "category": "neutral",
-    "sounds": ["ricochet/splash"]
+    "sounds": ["ricochet/splash1"]
 },
 "shieldActive": {
     "category": "neutral",
