@@ -52,7 +52,7 @@ public class InventoryDismantleStorage extends InventoryBasic {
 	
 	@Override
 	public String getInventoryName() {
-		return "turretmod3.gui.invDismStorage";
+		return "gui.invDismStorage";
 	}
 	
     public int getFirstEmptyStack()

@@ -127,7 +127,7 @@ public class GuiTInfoPG3 extends GuiTInfoBase {
 	        		hoverY = icnY;
 	        		hoverType = 1;
 	        	}
-//	        	int hp = this.turretInf.func_110143_aJFromItem(this.healList.get(i));
+//	        	int hp = this.turretInf.getHealthFromItem(this.healList.get(i));
 //	        	str = StatCollector.translateToLocal("gui.tinfo.healthpts");
 //	        	str = hp + " " + str.substring(hp > 1 ? str.lastIndexOf('|')+1 : 0, hp > 1 ? str.length() : str.lastIndexOf('|'));
 //	        	this.fontRendererObj.drawString(str, 26 + this.guiLeft, icnY + 9, 0xE0E0E0);

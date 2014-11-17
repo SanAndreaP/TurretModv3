@@ -28,7 +28,7 @@ public class GuiTCUSettings extends GuiTCUBase {
         
 		this.dismantleTurret = new GuiTurretButton(this.buttonList.size(), this.guiLeft + 9, this.guiTop + 30, StatCollector.translateToLocal("gui.tcu.stgDismantle"));
 		this.buttonList.add(this.dismantleTurret);
-		this.toggleUniqueTarget = new GuiTurretButton(this.buttonList.size(), this.guiLeft + 9, this.guiTop + 46, StatCollector.translateToLocal("gui.tcu.stgUniqueTarget").split("\\|")[0]);
+		this.toggleUniqueTarget = new GuiTurretButton(this.buttonList.size(), this.guiLeft + 9, this.guiTop + 46, StatCollector.translateToLocal("gui.tcu.stgUniqueTarget"));
 		this.buttonList.add(this.toggleUniqueTarget);
 		this.getExperience = new GuiTurretButton(this.buttonList.size(), this.guiLeft + 9, this.guiTop + 62, StatCollector.translateToLocal("gui.tcu.stgGetExp"));
 		this.buttonList.add(this.getExperience);
@@ -54,9 +54,8 @@ public class GuiTCUSettings extends GuiTCUBase {
         
         String s = this.turret != null ? this.turret.tInfo.getTurretName() : "";
         this.fontRendererObj.drawString("\247a"+s, this.guiLeft + (this.xSize - this.fontRendererObj.getStringWidth(s))/2, this.guiTop + 207, 0xFFFFFF);
-        
-        s = StatCollector.translateToLocal("gui.tcu.titSettings");
-        this.fontRendererObj.drawString(s, this.guiLeft + 6, this.guiTop + 6, 0x808080);
+
+        this.fontRendererObj.drawString(StatCollector.translateToLocal("gui.tcu.titSettings"), this.guiLeft + 6, this.guiTop + 6, 0x808080);
         
         if (this.turret != null) {
         	this.dismantleTurret.enabled = true;
@@ -65,12 +64,10 @@ public class GuiTCUSettings extends GuiTCUBase {
         	this.getExperience.enabled = this.turret.getExperience() > 0;
         	this.dismountFromBase.enabled = this.turret.isRiding();
         	this.rideTurret.enabled = TurretUpgrades.hasUpgrade(TUpgControl.class, this.turret.upgrades) && this.turret.ridingEntity == null;
-        	
-        	String s1[] = StatCollector.translateToLocal("gui.tcu.stgUniqueTarget").split("\\|");
-        	this.toggleUniqueTarget.displayString = s1[0] + ": " + (this.turret.useUniqueTargets() ? s1[1] : s1[2]);
-        	
-        	s1 = StatCollector.translateToLocal("gui.tcu.turretOnOff").split("\\|");
-        	this.switchOnOff.displayString = (this.turret.isActive() ? s1[1] : s1[0]);
+
+            this.toggleUniqueTarget.displayString = StatCollector.translateToLocalFormatted("gui.tcu.stgUniqueTarget."+this.turret.useUniqueTargets(), StatCollector.translateToLocal("gui.tcu.stgUniqueTarget"));
+
+            this.switchOnOff.displayString = StatCollector.translateToLocal("gui.tcu.turret."+!this.turret.isActive());
         } else {
         	this.dismantleTurret.enabled = false;
         	this.toggleUniqueTarget.enabled = false;
@@ -81,9 +78,8 @@ public class GuiTCUSettings extends GuiTCUBase {
         }
         
 		super.drawScreen(par1, par2, par3);
-		
-		s = StatCollector.translateToLocal("gui.tcu.frequency");
-		this.fontRendererObj.drawString(s, this.guiLeft + 9, this.guiTop + 110, 0x606060);
+
+		this.fontRendererObj.drawString(StatCollector.translateToLocal("gui.tcu.frequency"), this.guiLeft + 9, this.guiTop + 110, 0x606060);
 		
 		this.frequency.drawTextBox();
 	}

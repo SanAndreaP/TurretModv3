@@ -6,18 +6,9 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.ItemRecord;
 
 public class ItemTMDisc extends ItemRecord {
-	private final String author;
-	
-	public ItemTMDisc(String par2Str, String par3Str) {
+	public ItemTMDisc(String par2Str) {
 		super(par2Str);
-		this.author = par3Str;
 	}
-
-    @SideOnly(Side.CLIENT)
-    public String getRecordNameLocal()
-    {
-        return this.author + " - " + this.recordName;
-    }
 
     @SideOnly(Side.CLIENT)
 	@Override

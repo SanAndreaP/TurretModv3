@@ -8,18 +8,18 @@
       "idle/turretidle4"
     ]
   },
-"turretexp": {
+"idle.turretexp": {
     "category": "neutral",
     "sounds": [
       "idle/turretexp1",
       "idle/turretexp2"
     ]
   },
-"chest": {
+"collect.chest": {
     "category": "neutral",
     "sounds": ["collect/chest"]
   },
-"ia_get": {
+"collect.ia_get": {
     "category": "neutral",
     "sounds": ["collect/ia_get"]
   },
@@ -31,41 +31,41 @@
    "category": "neutral",
    "sounds": ["hit/turrethit"]
  },
-"shotgun": {
+"shoot.shotgun": {
     "category": "neutral",
     "sounds": ["shoot/shotgun"]
 },
-"minigun": {
+"shoot.minigun": {
     "category": "neutral",
     "sounds": ["shoot/minigun"]
 },
-"pistol": {
+"shoot.pistol": {
     "category": "neutral",
     "sounds": ["shoot/pistol"]
 },
-"laser": {
+"shoot.laser": {
     "category": "neutral",
     "sounds": ["shoot/laser"]
 },
-"flamethrower": {
+"shoot.flamethrower": {
   "category": "neutral",
   "sounds": [
     "shoot/flamethrower"
   ]
 },
-"sniper": {
+"shoot.sniper": {
     "category": "neutral",
     "sounds": ["shoot/sniper"]
 },
-"healBeam": {
+"shoot.healBeam": {
     "category": "neutral",
     "sounds": ["shoot/healBeam"]
 },
-"flak": {
+"shoot.flak": {
     "category": "neutral",
     "sounds": ["shoot/flak"]
 },
-"artillery": {
+"shoot.artillery": {
   "category": "neutral",
   "sounds": ["shoot/artillery"]
 },
@@ -83,11 +83,11 @@
     "category": "neutral",
     "sounds": ["ricochet/splash1"]
 },
-"shieldActive": {
+"misc.shieldActive": {
     "category": "neutral",
     "sounds": ["misc/shieldActive"]
 },
-"TidalForce": {
+"records.tidalForce": {
  "category": "record",
  "sounds": [
      {

@@ -27,8 +27,7 @@ public class GuiTCUInfo extends GuiTCUBase {
 		    s = StatCollector.translateToLocal("gui.tcu.infoHealth");
 		    this.fontRendererObj.drawString(s, this.guiLeft + 6, this.guiTop + 22, 0xAA0000);
 
-		    String s1 = StatCollector.translateToLocal("gui.tinfo.healthpts").split("\\|")[1];
-		    s = turret.getSrvHealth() + " / " + turret.getMaxHealth() + " " + s1;
+		    s = StatCollector.translateToLocalFormatted("gui.tinfo.health.ratio", turret.getSrvHealth(), turret.getMaxHealth());
 		    this.fontRendererObj.drawString(s, this.guiLeft + 12, this.guiTop + 31, 0x600000);
 		    
 		    this.drawRect(this.guiLeft + 4, this.guiTop + 41, this.guiLeft + this.xSize - 4, this.guiTop + 42, 0xFFB0B0B0);
@@ -43,8 +42,7 @@ public class GuiTCUInfo extends GuiTCUBase {
 			    s = StatCollector.translateToLocal("gui.tcu.infoAmmo");
 			    this.fontRendererObj.drawString(s, this.guiLeft + 6, this.guiTop + 45, 0x0000AA);
 			    
-			    s1 = StatCollector.translateToLocal("gui.tinfo.projectiles").split("\\|")[1];
-			    s = this.turret.getAmmo() + " / " + this.turret.getMaxAmmo() + " " + s1;
+			    s = StatCollector.translateToLocalFormatted("gui.tinfo.project.ratio", this.turret.getAmmo(), this.turret.getMaxAmmo());
 			    this.fontRendererObj.drawString(s, this.guiLeft + 12, this.guiTop + 54, 0x000060);
         
 			    s = StatCollector.translateToLocal("gui.tcu.infoType") + ":";
@@ -69,28 +67,26 @@ public class GuiTCUInfo extends GuiTCUBase {
 		    
 		    s = StatCollector.translateToLocal("gui.tcu.misc");
 		    this.fontRendererObj.drawString(s, this.guiLeft + 6, this.guiTop + 109, 0x6000AA);
-		    
-		    String s2[] = StatCollector.translateToLocal("gui.tcu.miscUP").split("\\|");
-		    s = s2[0] + ":";
+
+		    s = StatCollector.translateToLocal("gui.tcu.misc.name");
 		    this.fontRendererObj.drawString(s, this.guiLeft + 12, this.guiTop + 118, 0x300060);
 		    s = this.turret.getTurretName();
 		    this.fontRendererObj.drawString(s, this.guiLeft + 18, this.guiTop + 127, 0x606060);
 		    
-		    s = s2[1] + ":";
+		    s = StatCollector.translateToLocal("gui.tcu.misc.own");
 		    this.fontRendererObj.drawString(s, this.guiLeft + 12, this.guiTop + 136, 0x300060);
 		    s = this.turret.getPlayerName();
 		    this.fontRendererObj.drawString(s, this.guiLeft + 18, this.guiTop + 145, 0x606060);
 		    
-		    s = s2[2] + ":";
+		    s = StatCollector.translateToLocal("gui.tcu.misc.tgt");
 		    this.fontRendererObj.drawString(s, this.guiLeft + 12, this.guiTop + 154, 0x300060);
-		    s = (this.turret.getCurrentTargetStr().length() > 0 ? StatCollector.translateToLocal(this.turret.getCurrentTargetStr()) : s2[3]);
+		    s = (this.turret.getCurrentTargetStr().length() > 0 ? StatCollector.translateToLocal(this.turret.getCurrentTargetStr()) : StatCollector.translateToLocal("gui.tcu.misc.scan"));
 		    this.fontRendererObj.drawString(s, this.guiLeft + 18, this.guiTop + 163, 0x606060);
 		    
-		    s = s2[4] + ":";
+		    s = StatCollector.translateToLocal("gui.tcu.misc.base");
 		    this.fontRendererObj.drawString(s, this.guiLeft + 12, this.guiTop + 172, 0x300060);
-		    s2 = StatCollector.translateToLocal("gui.tcu.yesNo").split("\\|");
-		    s = (this.turret.isRiding() ? s2[0] : s2[1]);
-		    this.fontRendererObj.drawString(s, this.guiLeft + 18, this.guiTop + 181, 0x606060);
+		    s = (this.turret.isRiding() ? "gui.yes" : "gui.no");
+		    this.fontRendererObj.drawString(StatCollector.translateToLocal(s), this.guiLeft + 18, this.guiTop + 181, 0x606060);
         }
 		super.drawScreen(par1, par2, par3);
 	}

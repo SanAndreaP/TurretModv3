@@ -177,7 +177,7 @@ public class TM3ModRegistry {
 		artilleryBall	= new ItemArtilleryShells()
 							.setUnlocalizedName("tm3.artilleryBalls")
 							.setCreativeTab(tabTurret);
-		turretRec1		= new ItemTMDisc("TidalForce", "Kubbi")
+		turretRec1		= new ItemTMDisc("tidalForce")
 							.setUnlocalizedName("tm3.turretRec1")
 							.setCreativeTab(tabTurret);
 		

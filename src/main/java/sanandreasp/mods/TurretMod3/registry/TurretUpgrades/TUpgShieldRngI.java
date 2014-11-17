@@ -8,8 +8,8 @@ import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_TSForcefield;
 public class TUpgShieldRngI extends TurretUpgrades {
 
 	public TUpgShieldRngI() {
-		this.upgName = "turretmod3.upgrades.nameShieldRngI";
-		this.upgDesc = "turretmod3.upgrades.descShieldRngI";
+		this.upgName = "upgrades.nameShieldRngI";
+		this.upgDesc = "upgrades.descShieldRngI";
 		this.upgItem = new ItemStack(Blocks.quartz_block, 1, OreDictionary.WILDCARD_VALUE);
 		
 		this.turrets.add(EntityTurret_TSForcefield.class);

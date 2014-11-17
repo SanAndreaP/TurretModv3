@@ -7,8 +7,8 @@ import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_TSCollector;
 public class TUpgItemCollect extends TurretUpgrades {
 
 	public TUpgItemCollect() {
-		this.upgName = "turretmod3.upgrades.nameICollect";
-		this.upgDesc = "turretmod3.upgrades.descICollect";
+		this.upgName = "upgrades.nameICollect";
+		this.upgDesc = "upgrades.descICollect";
 		this.upgItem = new ItemStack(Blocks.chest);
 		
 		this.turrets.add(EntityTurret_TSCollector.class);

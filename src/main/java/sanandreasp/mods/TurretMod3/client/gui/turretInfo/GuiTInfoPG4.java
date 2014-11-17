@@ -181,12 +181,10 @@ public class GuiTInfoPG4 extends GuiTInfoBase {
     {
         GL11.glDisable(GL11.GL_DEPTH_TEST);
         List<String> var4 = new ArrayList<String>();
-        
-    	String s[] = StatCollector.translateToLocal("gui.tinfo.upgToolTip").split("\\|");
     	
-        var4.add(s[1] + ": " + itemName);
+        var4.add(StatCollector.translateToLocal("entity.Item.name") + ": " + itemName);
         if (ench.length() > 0) var4.add("  " + ench);
-        if (required.length() > 0) var4.add(s[2] + ": " + required);
+        if (required.length() > 0) var4.add(StatCollector.translateToLocalFormatted("gui.tinfo.toolTip.req", required));
 
         if (!var4.isEmpty())
         {

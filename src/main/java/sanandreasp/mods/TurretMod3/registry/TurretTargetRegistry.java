@@ -82,7 +82,7 @@ public class TurretTargetRegistry {
 		Map<Integer, String> tList = Maps.newHashMap();
 		int index = 0;
 		
-		tList.put(index++, "\nturretmod3.gui.tcu.tgtMonster");
+		tList.put(index++, "\ngui.tcu.tgtMonster");
 		for (Iterator<Class> tCreatures = targetCreatures.iterator();tCreatures.hasNext();) {
 			Class entity = tCreatures.next();
 			if (IMob.class.isAssignableFrom(entity)) {
@@ -90,7 +90,7 @@ public class TurretTargetRegistry {
 			}
 		}
 		
-		tList.put(index++, "\nturretmod3.gui.tcu.tgtAnimals");
+		tList.put(index++, "\ngui.tcu.tgtAnimals");
 		for (Iterator<Class> tCreatures = targetCreatures.iterator();tCreatures.hasNext();) {
 			Class entity = tCreatures.next();
 			if (IAnimals.class.isAssignableFrom(entity) && !IMob.class.isAssignableFrom(entity)) {
@@ -98,7 +98,7 @@ public class TurretTargetRegistry {
 			}
 		}
 		
-		tList.put(index++, "\nturretmod3.gui.tcu.tgtOthers");
+		tList.put(index++, "\ngui.tcu.tgtOthers");
 		for (Iterator<Class> tCreatures = targetCreatures.iterator();tCreatures.hasNext();) {
 			Class entity = tCreatures.next();
 			if (!IAnimals.class.isAssignableFrom(entity) && !IMob.class.isAssignableFrom(entity)) {
