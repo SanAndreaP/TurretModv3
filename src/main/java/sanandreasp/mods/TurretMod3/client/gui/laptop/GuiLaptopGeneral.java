@@ -32,7 +32,7 @@ public class GuiLaptopGeneral extends GuiLaptop_Base {
 		super.initGui();
 		this.tabGeneral.enabled = false;
 		
-		this.statLabel = new GuiTurretButton(buttonList2.size(), this.guiLeft + (this.xSize - 150) / 2, this.guiTop + 35, StatCollector.translateToLocal("gui.laptop.enableLabel").split("\\|")[0]);
+		this.statLabel = new GuiTurretButton(buttonList2.size(), this.guiLeft + (this.xSize - 150) / 2, this.guiTop + 35, StatCollector.translateToLocal("gui.laptop.label"));
 		this.buttonList2.add(this.statLabel);
 		this.chngTCCrosshair = new GuiTurretButton(buttonList2.size(), this.guiLeft + (this.xSize - 150) / 2, this.guiTop + 48, StatCollector.translateToLocal("gui.laptop.chngCrosshair"));
 		this.buttonList2.add(this.chngTCCrosshair);
@@ -42,9 +42,9 @@ public class GuiLaptopGeneral extends GuiLaptop_Base {
 		this.buttonList2.add(this.deactivateTurret);
 		this.resetTarget = new GuiTurretButton(buttonList2.size(), this.guiLeft + (this.xSize - 150) / 2, this.guiTop + 87, StatCollector.translateToLocal("gui.laptop.rstTargets"));
 		this.buttonList2.add(this.resetTarget);
-		this.uniqueTargetOn = new GuiTurretButton(buttonList2.size(), this.guiLeft + (this.xSize - 150) / 2, this.guiTop + 100, StatCollector.translateToLocal("gui.laptop.uniqueTgt").split("\\|")[0]);
+		this.uniqueTargetOn = new GuiTurretButton(buttonList2.size(), this.guiLeft + (this.xSize - 150) / 2, this.guiTop + 100, StatCollector.translateToLocal("gui.laptop.uniqueTgt.on"));
 		this.buttonList2.add(this.uniqueTargetOn);
-		this.uniqueTargetOff = new GuiTurretButton(buttonList2.size(), this.guiLeft + (this.xSize - 150) / 2, this.guiTop + 113, StatCollector.translateToLocal("gui.laptop.uniqueTgt").split("\\|")[1]);
+		this.uniqueTargetOff = new GuiTurretButton(buttonList2.size(), this.guiLeft + (this.xSize - 150) / 2, this.guiTop + 113, StatCollector.translateToLocal("gui.laptop.uniqueTgt.off"));
 		this.buttonList2.add(this.uniqueTargetOff);
 		
 		this.frequency = new GuiTextField(this.fontRendererObj, this.guiLeft + 100, this.guiTop + 20, 40, 10);
@@ -63,8 +63,7 @@ public class GuiLaptopGeneral extends GuiLaptop_Base {
         this.fontRendererObj.drawString(StatCollector.translateToLocal("gui.laptop.titGeneral"), this.guiLeft + 6, this.guiTop + 6, 0x808080);
 		
 		boolean statEnabled = TM3ModRegistry.proxy.getPlayerTM3Data(this.mc.thePlayer).getBoolean("renderLabels");
-		String split[] = StatCollector.translateToLocal("gui.laptop.enableLabel").split("\\|");
-		this.statLabel.displayString = (!statEnabled ? split[1] : split[2]) + " " + split[0];
+		this.statLabel.displayString = (!statEnabled ? StatCollector.translateToLocal("gui.laptop.enableLabel") : StatCollector.translateToLocal("gui.laptop.diableLabel"));
 		
     	int icon = 0;
     	if (TM3ModRegistry.proxy.getPlayerTM3Data(this.mc.thePlayer).hasKey("tcCrosshair"))
@@ -75,9 +74,8 @@ public class GuiLaptopGeneral extends GuiLaptop_Base {
     	GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.getTextureManager().bindTexture(TM3ModRegistry.TEX_TURRETCAM);
         this.drawTexturedModalRect(chX-2, chY-2, icon * 16, 40, 16, 16);
-        
-		String s = StatCollector.translateToLocal("gui.tcu.frequency");
-		this.fontRendererObj.drawString(s, this.guiLeft + 40, this.guiTop + 22, 0x606060);
+
+		this.fontRendererObj.drawString(StatCollector.translateToLocal("gui.tcu.frequency"), this.guiLeft + 40, this.guiTop + 22, 0x606060);
 		
 		this.frequency.drawTextBox();
 	}

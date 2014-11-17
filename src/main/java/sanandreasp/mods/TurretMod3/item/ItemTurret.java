@@ -138,15 +138,14 @@ public class ItemTurret extends Item {
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
     	super.addInformation(par1ItemStack, par2EntityPlayer, par3List, par4);
-    	String[] infos = StatCollector.translateToLocal("item.turretInfo").split("\\|");
     	if (getProgramTag(par1ItemStack).hasKey("progName"))
-    		par3List.add("\247o" + String.format(infos[0], getCustomName(par1ItemStack)) + "\247r");
+    		par3List.add("\247o" + String.format(StatCollector.translateToLocal("item.turretInfo.name"), getCustomName(par1ItemStack)) + "\247r");
     	if (getProgramTag(par1ItemStack).hasKey("progFreq"))
-    		par3List.add("\247o" + String.format(infos[1], getFrequency(par1ItemStack)) + "\247r");
+    		par3List.add("\247o" + String.format(StatCollector.translateToLocal("item.turretInfo.freq"), getFrequency(par1ItemStack)) + "\247r");
     	if (getProgramTag(par1ItemStack).hasKey("progTargets"))
-    		par3List.add("\247o" + infos[2] + "\247r");
+    		par3List.add("\247o" + StatCollector.translateToLocal("item.turretInfo.target") + "\247r");
     	if (getProgramTag(par1ItemStack).hasKey("progUpgrades")) {
-    		par3List.add("\247o" + infos[3] + "\247r");
+    		par3List.add("\247o" + StatCollector.translateToLocal("item.turretInfo.upd") + "\247r");
     		if (par2EntityPlayer.openContainer instanceof ContainerLaptopUpgrades) {
     	    	Class<? extends EntityTurret_Base> turretCls = TurretInfo.getTurretClass(par1ItemStack.getItemDamage());
 				for (ItemStack is : getUpgItems(par1ItemStack)) {

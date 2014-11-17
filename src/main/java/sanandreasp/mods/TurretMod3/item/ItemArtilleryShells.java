@@ -45,25 +45,25 @@ public class ItemArtilleryShells extends Item {
 		switch(par1ItemStack.getItemDamage()) {
 			case 1: case 6:
 			case 3: case 8:
-				par3List.add(StatCollector.translateToLocal("item.artilleryInfo").split("\\|")[0] + ": 4");
+				par3List.add(StatCollector.translateToLocalFormatted("item.artilleryInfo.radius", 4));
 				break;
 			case 0: case 5:
 			case 2: case 7:
-				par3List.add(StatCollector.translateToLocal("item.artilleryInfo").split("\\|")[0] + ": 2");
+				par3List.add(StatCollector.translateToLocalFormatted("item.artilleryInfo.radius", 2));
 				break;
 			case 4: case 9:
-				par3List.add(StatCollector.translateToLocal("item.artilleryInfo").split("\\|")[0] + ": 2");
-				par3List.add(StatCollector.translateToLocal("item.artilleryInfo").split("\\|")[2]);
+				par3List.add(StatCollector.translateToLocalFormatted("item.artilleryInfo.radius", 2));
+				par3List.add(StatCollector.translateToLocal("item.artilleryInfo.shrapnel"));
 				break;
 		}
 		switch(par1ItemStack.getItemDamage()) {
 			case 2: case 3:
 			case 7: case 8: 
-				par3List.add(StatCollector.translateToLocal("item.artilleryInfo").split("\\|")[1]);
+				par3List.add(StatCollector.translateToLocal("item.artilleryInfo.spread"));
 				break;
 		}
 		if (par1ItemStack.getItemDamage() > 4) {
-			par3List.add(StatCollector.translateToLocal("item.artilleryInfo").split("\\|")[3]);
+			par3List.add(StatCollector.translateToLocal("item.artilleryInfo.grief"));
 		}
 	}
 	
