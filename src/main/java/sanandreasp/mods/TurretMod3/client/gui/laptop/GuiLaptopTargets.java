@@ -38,7 +38,7 @@ public class GuiLaptopTargets extends GuiLaptop_Base {
 	public void initGui() {
 		super.initGui();        
         this.targetList = trTargets.getTargetList();
-		List<String> entities = new ArrayList<String>(EntityList.classToStringMapping.values());
+		List<String> entities = new ArrayList<String>(EntityList.stringToClassMapping.keySet());
 		List<String> stdTargets = trTargets.getTargetStrings();
 		for (String entityName : entities) {
 			checkedTargets.put(entityName, stdTargets.contains(entityName));
@@ -73,8 +73,8 @@ public class GuiLaptopTargets extends GuiLaptop_Base {
 				if (s.startsWith("\n")) {
 					title = true;
 					s = "\247e\247o" + StatCollector.translateToLocal(s.replaceAll("\n", "")) + "\247r";
-					this.drawRect(x, y-1, x + this.xSize - 104, y, 0xFFFFFF66);
-					this.drawRect(x, y + 11, x + this.xSize - 104, y + 12, 0xFFFFFF66);
+					drawRect(x, y-1, x + this.xSize - 104, y, 0xFFFFFF66);
+					drawRect(x, y + 11, x + this.xSize - 104, y + 12, 0xFFFFFF66);
 				}
 			    if (!title) {
 			        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);

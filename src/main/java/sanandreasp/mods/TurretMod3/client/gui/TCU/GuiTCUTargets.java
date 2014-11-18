@@ -52,8 +52,8 @@ public class GuiTCUTargets extends GuiTCUBase {
 				if (s.startsWith("\n")) {
 					title = true;
 					s = "\247e\247o" + StatCollector.translateToLocal(s.replaceAll("\n", "")) + "\247r";
-					this.drawRect(x, y-1, x + this.xSize - 27, y, 0xFFFFFF66);
-					this.drawRect(x, y + 11, x + this.xSize - 27, y + 12, 0xFFFFFF66);
+					drawRect(x, y - 1, x + this.xSize - 27, y, 0xFFFFFF66);
+					drawRect(x, y + 11, x + this.xSize - 27, y + 12, 0xFFFFFF66);
 				}
 			    if (!title) {
 			        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -112,7 +112,7 @@ public class GuiTCUTargets extends GuiTCUBase {
 	        		if (!title) {
 			    		Boolean tgSel = this.turret.targets.get(targetList.get(tgID));
 			    		if (tgSel != null)
-			    			this.turret.targets.put(targetList.get(tgID), !tgSel.booleanValue());
+			    			this.turret.targets.put(targetList.get(tgID), !tgSel);
 			    		else
 			    			this.turret.targets.put(targetList.get(tgID), true);
 	        		} else {
@@ -156,14 +156,14 @@ public class GuiTCUTargets extends GuiTCUBase {
 			if (name.length() < 1 || name.startsWith("\n")) break;
 			Boolean b1 = this.turret.targets.get(name);
 			if (b1 != null)
-				b.add(b1.booleanValue());
+				b.add(b1);
 			else
 				b.add(false);
 		}
 		int trues = 0;
-		for (int i = 0; i < b.size(); i++) {
-			if (b.get(i)) trues++;
-		}
+        for (Boolean aB : b) {
+            if (aB) trues++;
+        }
 		return trues > b.size() / 2;
 	}
 	

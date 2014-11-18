@@ -20,8 +20,9 @@ import java.util.List;
 public class GuiTInfoPG1 extends GuiTInfoBase {
 	private static final ResourceLocation PAGE_1 = new ResourceLocation(TM3ModRegistry.TEX_GUIINFO + "page_1.png");
     protected static RenderItem itemRenderer = new RenderItem();
+    float renderYaw = 0.0F;
 
-	public GuiTInfoPG1(int pg) {
+    public GuiTInfoPG1(int pg) {
 		this.allowUserInput = true;
 		this.site = pg;
 	}
@@ -45,14 +46,12 @@ public class GuiTInfoPG1 extends GuiTInfoBase {
         
         str = this.turretInf.getTurretName();
         this.fontRendererObj.drawString(str, this.guiLeft + (this.xSize - this.fontRendererObj.getStringWidth(str))/2, this.guiTop + 21, 0x00FF00);
-        
+
+        this.customFR.drawSplitString(this.turretInf.getTurretDesc(), this.guiLeft + 12, this.guiTop + 125, 152, 0x000000);
+
         drawTurret();
 
         String itmNm = drawCrafting(par1, par2);
-        
-        str = this.turretInf.getTurretDesc();
-        
-        this.customFR.drawSplitString(str, this.guiLeft + 12, this.guiTop + 125, 152, 0x000000);
         
 		super.drawScreen(par1, par2, par3);
 		
@@ -60,17 +59,14 @@ public class GuiTInfoPG1 extends GuiTInfoBase {
 			this.drawTooltip(itmNm, par1, par2);
         }
 	}
-	
-	float renderYaw = 0.0F;	
+
 	private void drawTurret() {
-		EntityTurret_Base turret = null;
+		EntityTurret_Base turret;
 		try {
-			turret = (EntityTurret_Base) turretCls.getConstructor(World.class).newInstance(this.mc.theWorld);
+			turret = turretCls.getConstructor(World.class).newInstance(this.mc.theWorld);
 		} catch (Exception e) {
 			return;
 		}
-		
-		if (turret == null) return;
 		
 		turret.setInGui();
 		
@@ -80,9 +76,6 @@ public class GuiTInfoPG1 extends GuiTInfoBase {
         GL11.glTranslatef((float)this.guiLeft + 35, (float)this.guiTop + 110F, 50.0F);
         GL11.glScalef((float)(-30), (float)30, (float)30);
         GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
-        float var6 = turret.renderYawOffset;
-        float var7 = turret.rotationYaw;
-        float var8 = turret.rotationPitch;
         GL11.glRotatef(135.0F, 0.0F, 1.0F, 0.0F);
         RenderHelper.enableStandardItemLighting();
         GL11.glRotatef(-135.0F, 0.0F, 1.0F, 0.0F);
@@ -137,7 +130,7 @@ public class GuiTInfoPG1 extends GuiTInfoBase {
 				if (mX >= this.guiLeft + 67 + j*18 && mX < this.guiLeft + 67 + j*18 + 16 && mY >= this.guiTop + 52 + i*18 && mY < this.guiTop + 52 + i*18 + 16) {
 			        RenderHelper.disableStandardItemLighting();
 			        GL11.glDisable(GL11.GL_DEPTH_TEST);
-					this.drawRect(this.guiLeft + 67 + j*18, this.guiTop + 52 + i*18, this.guiLeft + 67 + j*18 + 16, this.guiTop + 52 + i*18 + 16, 0x80FFFFFF);
+					drawRect(this.guiLeft + 67 + j*18, this.guiTop + 52 + i*18, this.guiLeft + 67 + j*18 + 16, this.guiTop + 52 + i*18 + 16, 0x80FFFFFF);
 			        GL11.glEnable(GL11.GL_DEPTH_TEST);
 					RenderHelper.enableGUIStandardItemLighting();
 					itmName = item.getDisplayName();
@@ -222,5 +215,4 @@ public class GuiTInfoPG1 extends GuiTInfoBase {
         }
         GL11.glEnable(GL11.GL_DEPTH_TEST);
     }
-
 }

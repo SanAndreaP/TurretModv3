@@ -1,7 +1,6 @@
 package sanandreasp.mods.turretmod3.client.gui;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import org.lwjgl.opengl.GL11;
 import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
@@ -37,11 +36,8 @@ public class GuiTurretButton extends GuiButton {
                 var6 = 16777120;
             }
             GL11.glPopMatrix();
-
-            FontRenderer var4 = par1Minecraft.fontRenderer;
 //            var4.readFontData();
-            this.drawCenteredString(var4, this.displayString, this.xPosition + this.width / 2, this.yPosition + (this.height - 8) / 2, var6);
+            this.drawCenteredString(par1Minecraft.fontRenderer, this.displayString, this.xPosition + this.width / 2, this.yPosition + (this.height - 8) / 2, var6);
         }
     }
-
 }

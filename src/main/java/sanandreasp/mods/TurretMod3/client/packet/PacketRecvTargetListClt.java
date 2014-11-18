@@ -3,15 +3,12 @@ package sanandreasp.mods.turretmod3.client.packet;
 import com.google.common.collect.Maps;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.util.Constants;
-import sanandreasp.mods.turretmod3.client.gui.TCU.GuiTCUBase;
-import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
 import sanandreasp.mods.turretmod3.packet.PacketBase;
+import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 
 import java.util.Map;
 
@@ -34,12 +31,7 @@ public class PacketRecvTargetListClt extends PacketBase {
             NBTTagCompound var3 = var1.getCompoundTagAt(var2);
             tgt.put(var3.getString("tgName"), var3.getBoolean("isEnabled"));
         }
-
-        GuiScreen gui = Minecraft.getMinecraft().currentScreen;
-        if (gui != null && gui instanceof GuiTCUBase) {
-            ((GuiTCUBase)gui).turret = (EntityTurret_Base) player.worldObj.getEntityByID(eID);
-            ((GuiTCUBase)gui).turret.targets = tgt;
-        }
+        TM3ModRegistry.proxy.handleTargetList(player.worldObj.getEntityByID(eID), tgt);
 	}
 
     @Override

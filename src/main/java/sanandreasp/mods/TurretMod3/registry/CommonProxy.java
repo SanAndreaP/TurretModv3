@@ -13,6 +13,8 @@ import net.minecraftforge.common.MinecraftForge;
 import sanandreasp.mods.turretmod3.client.packet.PacketRecvPlayerNBT;
 import sanandreasp.mods.turretmod3.client.packet.PacketRecvSpawnParticle;
 
+import java.util.Map;
+
 public class CommonProxy {
 	
 	public void registerRenderInformation() {
@@ -65,5 +67,13 @@ public class CommonProxy {
 
     public EntityPlayer getPlayer(MessageContext context) {
         return context.getServerHandler().playerEntity;
+    }
+
+    public void handleSpawnParticles(PacketRecvSpawnParticle packetRecvSpawnParticle, Entity entity, EntityPlayer player) {
+
+    }
+
+    public void handleTargetList(Entity entityByID, Map<String, Boolean> tgt) {
+
     }
 }

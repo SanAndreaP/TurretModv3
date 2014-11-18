@@ -1,7 +1,6 @@
 package sanandreasp.mods.turretmod3.client.gui.turretInfo;
 
 import com.google.common.collect.Maps;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.item.ItemStack;
@@ -11,6 +10,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
+import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
 import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 import sanandreasp.mods.turretmod3.registry.TurretUpgrades.TurretUpgrades;
 
@@ -40,7 +40,7 @@ public class GuiTInfoPG4 extends GuiTInfoBase {
         this.upgrades.clear();
 		for (int i = 0; i < TurretUpgrades.getUpgradeCount(); i++) {
 			WeakReference<TurretUpgrades> upg = new WeakReference<TurretUpgrades>(TurretUpgrades.getUpgradeFromID(i));
-			for (Class cls : upg.get().getTurrets()) {
+			for (Class<? extends EntityTurret_Base> cls : upg.get().getTurrets()) {
 				if (cls.isAssignableFrom(this.turretCls)) {
 					this.upgrades.put(this.upgrades.size(), upg.get());
 					break;
@@ -69,8 +69,7 @@ public class GuiTInfoPG4 extends GuiTInfoBase {
         str = this.turretInf.getTurretName();
         this.fontRendererObj.drawString(str, this.guiLeft + (this.xSize - this.fontRendererObj.getStringWidth(str))/2, this.guiTop + 21, 0x00FF00);
 
-		this.mc.getTextureManager().bindTexture(PAGE_4);
-        int scrollX = 163;
+		int scrollX = 163;
         int scrollY = 49 + (int)(69F * currScrollPos);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         drawTexturedModalRect(scrollX + this.guiLeft, scrollY + this.guiTop, 176,  this.upgrades.size() > 4 ? 0 : 6, 6, 6);
@@ -93,7 +92,7 @@ public class GuiTInfoPG4 extends GuiTInfoBase {
 	        	this.fontRendererObj.drawString(upgrade.getName(), this.guiLeft + 26, this.guiTop + 54 + (i-entryPos)*19, 0xFFFFFF);
 	        	
 	        	if (par1 >= this.guiLeft + 7 && par1 < this.guiLeft + 159 && par2 >= this.guiTop + 49 + (i-entryPos)*19 && par2 < this.guiTop + 67 + (i-entryPos)*19) {
-	        		this.drawRect(this.guiLeft + 7, this.guiTop + 49 + (i-entryPos)*19, this.guiLeft + 159, this.guiTop + 67 + (i-entryPos)*19, 0x3000A0FF);
+	        		drawRect(this.guiLeft + 7, this.guiTop + 49 + (i - entryPos) * 19, this.guiLeft + 159, this.guiTop + 67 + (i - entryPos) * 19, 0x3000A0FF);
 	        		this.customFR.drawSplitString(upgrade.getDesc(), this.guiLeft + 11, this.guiTop + 131, 154, 0x000000);
 	        		hover = i;
 	        		hovY = this.guiTop + 49 + (i-entryPos)*19;
@@ -153,9 +152,8 @@ public class GuiTInfoPG4 extends GuiTInfoBase {
         this.zLevel = 0.0F;
         itemRenderer.zLevel = 0.0F;
     }
-    
-    
-	
+
+    @Override
 	public void handleMouseInput()
     {
         super.handleMouseInput();
@@ -244,5 +242,4 @@ public class GuiTInfoPG4 extends GuiTInfoBase {
             itemRenderer.zLevel = 0.0F;
         }
     }
-
 }

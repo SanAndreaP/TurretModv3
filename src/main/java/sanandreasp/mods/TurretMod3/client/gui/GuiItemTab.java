@@ -91,5 +91,4 @@ public class GuiItemTab extends GuiButton {
         this.zLevel = 0.0F;
         itemRenderer.zLevel = 0.0F;
     }
-
 }

@@ -30,7 +30,7 @@ public class GuiTCUInfo extends GuiTCUBase {
 		    s = StatCollector.translateToLocalFormatted("gui.tinfo.health.ratio", turret.getSrvHealth(), turret.getMaxHealth());
 		    this.fontRendererObj.drawString(s, this.guiLeft + 12, this.guiTop + 31, 0x600000);
 		    
-		    this.drawRect(this.guiLeft + 4, this.guiTop + 41, this.guiLeft + this.xSize - 4, this.guiTop + 42, 0xFFB0B0B0);
+		    drawRect(this.guiLeft + 4, this.guiTop + 41, this.guiLeft + this.xSize - 4, this.guiTop + 42, 0xFFB0B0B0);
 		    
 		    if (this.turret instanceof EntityTurret_TSForcefield) {
 			    s = StatCollector.translateToLocal("gui.tcu.infoShield");
@@ -51,8 +51,8 @@ public class GuiTCUInfo extends GuiTCUBase {
 			    this.fontRendererObj.drawString(s, this.guiLeft + 18, this.guiTop + 72, 0x606060);
 		    }
 		    
-		    this.drawRect(this.guiLeft + 4, this.guiTop + 82, this.guiLeft + this.xSize - 4, this.guiTop + 83, 0xFFB0B0B0);
-		   
+		    drawRect(this.guiLeft + 4, this.guiTop + 82, this.guiLeft + this.xSize - 4, this.guiTop + 83, 0xFFB0B0B0);
+
 		    s = StatCollector.translateToLocal("gui.tcu.infoExp");
 		    this.fontRendererObj.drawString(s, this.guiLeft + 6, this.guiTop + 86, 0x00AA00);
 		    boolean isRightPlayer = this.turret.hasPlayerAccess(this.mc.thePlayer);

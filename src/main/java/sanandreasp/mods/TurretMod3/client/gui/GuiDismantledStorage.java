@@ -28,7 +28,6 @@ public class GuiDismantledStorage extends GuiContainer {
 			mc.thePlayer.closeScreen();
 			return;
 		}
-		
 		super.drawScreen(par1, par2, par3);
 	}
 	
@@ -49,5 +48,4 @@ public class GuiDismantledStorage extends GuiContainer {
         this.fontRendererObj.drawString(StatCollector.translateToLocal(invName), 8, 6, 4210752);
         this.fontRendererObj.drawString(StatCollector.translateToLocal(playerInvName), 8, this.ySize - 96 + 2, 4210752);
     }
-
 }

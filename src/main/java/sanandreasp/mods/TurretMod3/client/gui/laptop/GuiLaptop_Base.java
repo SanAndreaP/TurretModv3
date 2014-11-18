@@ -79,7 +79,7 @@ public class GuiLaptop_Base extends GuiContainer {
 		RenderHelper.disableStandardItemLighting();
         for (int k = 0; k < this.buttonList2.size(); ++k)
         {
-            GuiButton guibutton = (GuiButton)this.buttonList2.get(k);
+            GuiButton guibutton = this.buttonList2.get(k);
             guibutton.drawButton(this.mc, par1, par2);
         }
 	}
@@ -92,7 +92,7 @@ public class GuiLaptop_Base extends GuiContainer {
         {
             for (int l = 0; l < this.buttonList2.size(); ++l)
             {
-                GuiButton guibutton = (GuiButton)this.buttonList2.get(l);
+                GuiButton guibutton = this.buttonList2.get(l);
 
                 if (guibutton.mousePressed(this.mc, par1, par2))
                 {

@@ -10,9 +10,6 @@ import sanandreasp.mods.turretmod3.packet.PacketRecvLaptopGeneralStg;
 import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 import sanandreasp.mods.turretmod3.tileentity.TileEntityLaptop;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-
 public class GuiLaptopGeneral extends GuiLaptop_Base {
 	private GuiButton statLabel;
 	private GuiButton chngTCCrosshair;
@@ -70,7 +67,7 @@ public class GuiLaptopGeneral extends GuiLaptop_Base {
     		icon = TM3ModRegistry.proxy.getPlayerTM3Data(this.mc.thePlayer).getByte("tcCrosshair");
     	int chX = this.guiLeft + (this.xSize - 150) / 2 + 159;
     	int chY = this.guiTop + 48;
-        this.drawRect(chX, chY, chX + 11, chY + 11, 0xFF000000);
+        drawRect(chX, chY, chX + 11, chY + 11, 0xFF000000);
     	GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.getTextureManager().bindTexture(TM3ModRegistry.TEX_TURRETCAM);
         this.drawTexturedModalRect(chX-2, chY-2, icon * 16, 40, 16, 16);
@@ -116,8 +113,6 @@ public class GuiLaptopGeneral extends GuiLaptop_Base {
 		    	
 		    	TM3ModRegistry.networkWrapper.sendToServer(new PacketRecvLaptopGeneralStg(0));
 			} else if (par1GuiButton.id == this.chngTCCrosshair.id) {
-				ByteArrayOutputStream b = new ByteArrayOutputStream();
-				DataOutputStream o = new DataOutputStream(b);
 
                 TM3ModRegistry.networkWrapper.sendToServer(new PacketRecvLaptopGeneralStg(1));
 			} else if (par1GuiButton.id == this.activateTurret.id || par1GuiButton.id == this.deactivateTurret.id) {

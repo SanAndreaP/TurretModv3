@@ -81,7 +81,7 @@ public class GuiTCUUpgrades extends GuiTCUBase {
 	        	boolean taken = TurretUpgrades.hasUpgrade(this.upgrades.get(i).getClass(), this.turret.upgrades);
 	        	
 	        	if (taken) {
-	        		this.drawRect(this.guiLeft + 7, this.guiTop + 19 + (i-entryPos)*19, this.guiLeft + 159, this.guiTop + 37 + (i-entryPos)*19, 0x3000FF00);
+	        		drawRect(this.guiLeft + 7, this.guiTop + 19 + (i-entryPos)*19, this.guiLeft + 159, this.guiTop + 37 + (i-entryPos)*19, 0x3000FF00);
 	        	}
 	        	
 	        	String str = this.upgrades.get(i).getName();

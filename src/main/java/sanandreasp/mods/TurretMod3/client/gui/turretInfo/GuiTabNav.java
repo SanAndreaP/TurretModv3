@@ -1,16 +1,11 @@
 package sanandreasp.mods.turretmod3.client.gui.turretInfo;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.item.ItemStack;
 import org.lwjgl.opengl.GL11;
 import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 
 public class GuiTabNav extends GuiButton {
-	
-	protected ItemStack renderedItem;
-    
     protected boolean isUp;
 
 	public GuiTabNav(int par1, int par2, int par3, boolean par6) {
@@ -25,7 +20,6 @@ public class GuiTabNav extends GuiButton {
     {
         if (this.visible)
         {
-        	FontRenderer var4 = par1Minecraft.fontRenderer;
             par1Minecraft.renderEngine.bindTexture(TM3ModRegistry.TEX_GUIBUTTONS);
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             this.field_146123_n = par2 >= this.xPosition && par3 >= this.yPosition && par2 < this.xPosition + this.width && par3 < this.yPosition + this.height;
@@ -34,5 +28,4 @@ public class GuiTabNav extends GuiButton {
             this.mouseDragged(par1Minecraft, par2, par3);
         }
     }
-
 }
