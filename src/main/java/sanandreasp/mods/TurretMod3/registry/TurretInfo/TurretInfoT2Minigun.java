@@ -16,7 +16,6 @@ public class TurretInfoT2Minigun extends TurretInfo {
 		this.upperRangeY = 5.5F;
 		this.rangeX = 24.5F;
 		this.desc = "turret.desct2m";
-		this.name = "turret.namet2m";
 		this.crafting = new Object[] {
 				"GDL", " I ", "BBB",
 				'G', new ItemStack(Items.gold_ingot),

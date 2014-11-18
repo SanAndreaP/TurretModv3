@@ -38,37 +38,37 @@ public class GuiTInfoPG2 extends GuiTInfoBase {
         String title = "", value = "", desc = "";
         
         if (par1 >= icoX && par1 < icoX + 16 && par2 >= icoY && par2 < icoY + 16) {
-        	this.drawRect(icoX, icoY, icoX + 16, icoY + 16, 0x80FFFFFF);
+        	drawRect(icoX, icoY, icoX + 16, icoY + 16, 0x80FFFFFF);
         	title = StatCollector.translateToLocal("gui.tinfo.nameMaxAmmo");
         	value = ((Integer)this.turretInf.getMaxAmmo()).toString();
         	desc = StatCollector.translateToLocal("gui.tinfo.descMaxAmmo");
         } else if (par1 >= icoX + 18 && par1 < icoX + 34 && par2 >= icoY && par2 < icoY + 16) {
-        	this.drawRect(icoX + 18, icoY, icoX + 34, icoY + 16, 0x80FFFFFF);
+        	drawRect(icoX + 18, icoY, icoX + 34, icoY + 16, 0x80FFFFFF);
         	title = StatCollector.translateToLocal("gui.tinfo.nameMaxHealth");
-        	value = this.turretInf.func_110138_aP() + " HP";
+        	value = this.turretInf.getMaxHealth() + " HP";
         	desc = StatCollector.translateToLocal("gui.tinfo.descMaxHealth");
         } else if (par1 >= icoX + 36 && par1 < icoX + 52 && par2 >= icoY && par2 < icoY + 16) {
-        	this.drawRect(icoX + 36, icoY, icoX + 52, icoY + 16, 0x80FFFFFF);
+        	drawRect(icoX + 36, icoY, icoX + 52, icoY + 16, 0x80FFFFFF);
         	title = StatCollector.translateToLocal("gui.tinfo.nameUpperRangeY");
-        	value = Math.floor(this.turretInf.getYRangeHigh()) + " " + StatCollector.translateToLocal("gui.tinfo.blocks");
+        	value =  StatCollector.translateToLocalFormatted("gui.tinfo.blocks", Math.floor(this.turretInf.getYRangeHigh()));
         	desc = StatCollector.translateToLocal("gui.tinfo.descUpperRangeY");
         } else if (par1 >= icoX + 54 && par1 < icoX + 70 && par2 >= icoY && par2 < icoY + 16) {
-        	this.drawRect(icoX + 54, icoY, icoX + 70, icoY + 16, 0x80FFFFFF);
+        	drawRect(icoX + 54, icoY, icoX + 70, icoY + 16, 0x80FFFFFF);
         	title = StatCollector.translateToLocal("gui.tinfo.nameLowerRangeY");
-        	value = Math.floor(this.turretInf.getYRangeLow()) + " " + StatCollector.translateToLocal("gui.tinfo.blocks");
+        	value = StatCollector.translateToLocalFormatted("gui.tinfo.blocks", Math.floor(this.turretInf.getYRangeLow()));
         	desc = StatCollector.translateToLocal("gui.tinfo.descLowerRangeY");
         } else if (par1 >= icoX + 72 && par1 < icoX + 88 && par2 >= icoY && par2 < icoY + 16) {
-        	this.drawRect(icoX + 72, icoY, icoX + 88, icoY + 16, 0x80FFFFFF);
+        	drawRect(icoX + 72, icoY, icoX + 88, icoY + 16, 0x80FFFFFF);
         	title = StatCollector.translateToLocal("gui.tinfo.nameRangeX");
-        	value = Math.floor(this.turretInf.getXRange()) + " " + StatCollector.translateToLocal("gui.tinfo.blocks");
+        	value = StatCollector.translateToLocalFormatted("gui.tinfo.blocks", Math.floor(this.turretInf.getXRange()));
         	desc = StatCollector.translateToLocal("gui.tinfo.descRangeX");
         } else if (par1 >= icoX + 90 && par1 < icoX + 106 && par2 >= icoY && par2 < icoY + 16) {
-        	this.drawRect(icoX + 90, icoY, icoX + 106, icoY + 16, 0x80FFFFFF);
+        	drawRect(icoX + 90, icoY, icoX + 106, icoY + 16, 0x80FFFFFF);
         	title = StatCollector.translateToLocal("gui.tinfo.nameDamage");
         	value = this.turretInf.getDamage() + " HP";
         	desc = StatCollector.translateToLocal("gui.tinfo.descDamage");
         } else if (par1 >= icoX + 108 && par1 < icoX + 124 && par2 >= icoY && par2 < icoY + 16) {
-        	this.drawRect(icoX + 108, icoY, icoX + 124, icoY + 16, 0x80FFFFFF);
+        	drawRect(icoX + 108, icoY, icoX + 124, icoY + 16, 0x80FFFFFF);
         	title = StatCollector.translateToLocal("gui.tinfo.nameExp");
         	value = this.turretInf.getMaxXP() + " XP";
         	desc = StatCollector.translateToLocal("gui.tinfo.descExp");
@@ -98,5 +98,4 @@ public class GuiTInfoPG2 extends GuiTInfoBase {
         
 		super.drawScreen(par1, par2, par3);
 	}
-
 }

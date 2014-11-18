@@ -17,7 +17,6 @@ public class TurretInfoT5Artillery extends TurretInfo {
 		this.upperRangeY = 15.5F;
 		this.rangeX = 50.5F;
 		this.desc = "turret.desct5a";
-		this.name = "turret.namet5a";
 		this.crafting = new Object[] {
 				"SDL", "EO ", "BOB",
 				'S', new ItemStack(TM3ModRegistry.httm),

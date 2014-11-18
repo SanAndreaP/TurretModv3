@@ -7,6 +7,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 import sanandreasp.mods.turretmod3.client.gui.GuiItemTab;
+import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
 import sanandreasp.mods.turretmod3.registry.TM3ModRegistry;
 import sanandreasp.mods.turretmod3.registry.TurretInfo.TurretInfo;
 
@@ -32,7 +33,7 @@ public class GuiTInfoBase extends GuiScreen {
 	
 	protected int site;
 	
-	protected Class turretCls;
+	protected Class<? extends EntityTurret_Base> turretCls;
 	protected TurretInfo turretInf;
 	
 	@Override
@@ -75,6 +76,10 @@ public class GuiTInfoBase extends GuiScreen {
         }
 
         this.customFR = new FontRenderer(this.mc.gameSettings, TM3ModRegistry.DEFAULT_FONT, this.mc.renderEngine, true);
+        if (mc.gameSettings.language != null)
+        {
+            mc.fontRenderer.setBidiFlag(mc.getLanguageManager().isCurrentLanguageBidirectional());
+        }
 	}
 	
 	@Override

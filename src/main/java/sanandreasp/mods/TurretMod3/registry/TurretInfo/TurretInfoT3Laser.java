@@ -16,7 +16,6 @@ public class TurretInfoT3Laser extends TurretInfo {
 		this.upperRangeY = 5.5F;
 		this.rangeX = 32.5F;
 		this.desc = "turret.desct3l";
-		this.name = "turret.namet3l";
 		this.crafting = new Object[] {
 				"SDL", " O ", "BIB",
 				'S', new ItemStack(Items.diamond),

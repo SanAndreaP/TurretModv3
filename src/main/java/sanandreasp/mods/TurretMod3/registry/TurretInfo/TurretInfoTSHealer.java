@@ -18,7 +18,6 @@ public class TurretInfoTSHealer extends TurretInfo {
 		this.upperRangeY = 5.5F;
 		this.rangeX = 16.5F;
 		this.desc = "turret.desctsh";
-		this.name = "turret.nametsh";
 		this.crafting = new Object[] {
 				" DG", " W ", "CGC",
 				'D', new ItemStack(Blocks.dispenser),

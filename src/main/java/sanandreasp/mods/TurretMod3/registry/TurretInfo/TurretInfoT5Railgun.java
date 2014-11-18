@@ -16,7 +16,6 @@ public class TurretInfoT5Railgun extends TurretInfo {
 		this.upperRangeY = 5.5F;
 		this.rangeX = 50.5F;
 		this.desc = "turret.desct5r";
-		this.name = "turret.namet5r";
 		this.crafting = new Object[] {
 				"SDL", " O ", "BLB",
 				'S', new ItemStack(TM3ModRegistry.httm),

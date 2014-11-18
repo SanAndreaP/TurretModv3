@@ -15,7 +15,6 @@ public class TurretInfoTSCollector extends TurretInfo {
 		this.upperRangeY = 16.5F;
 		this.rangeX = 16.5F;
 		this.desc = "turret.desctsc";
-		this.name = "turret.nametsc";
 		this.crafting = new Object[] {
 				"P P", "OEO", "WWW",
 				'P', new ItemStack(Items.ender_pearl),

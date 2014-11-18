@@ -16,7 +16,6 @@ public class TurretInfoT4Sniper extends TurretInfo {
 		this.upperRangeY = 5.5F;
 		this.rangeX = 64.5F;
 		this.desc = "turret.desct4s";
-		this.name = "turret.namet4s";
 		this.crafting = new Object[] {
 				"SDL", " O ", "BBB",
 				'S', new ItemStack(TM3ModRegistry.httm),

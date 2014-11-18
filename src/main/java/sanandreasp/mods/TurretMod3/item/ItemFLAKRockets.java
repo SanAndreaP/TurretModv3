@@ -41,15 +41,15 @@ public class ItemFLAKRockets extends Item {
 		switch(par1ItemStack.getItemDamage()) {
 			case 0:
 			case 3:
-				rng += "50 " + StatCollector.translateToLocal("gui.tinfo.blocks");
+				rng += StatCollector.translateToLocalFormatted("gui.tinfo.blocks", 50);
 				break;
 			case 1:
 			case 4:
-				rng += "75 " + StatCollector.translateToLocal("gui.tinfo.blocks");
+				rng += StatCollector.translateToLocalFormatted("gui.tinfo.blocks", 75);
 				break;
 			case 2:
 			case 5:
-				rng += "100 " + StatCollector.translateToLocal("gui.tinfo.blocks");
+				rng += StatCollector.translateToLocalFormatted("gui.tinfo.blocks", 100);
 				break;
 			default:
 				rng += "N/A";
@@ -57,7 +57,8 @@ public class ItemFLAKRockets extends Item {
 		par3List.add(rng);
 	}
 	
-	@Override
+	@SuppressWarnings("unchecked")
+    @Override
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
 		for (int i = 0; i < 6; i++) {

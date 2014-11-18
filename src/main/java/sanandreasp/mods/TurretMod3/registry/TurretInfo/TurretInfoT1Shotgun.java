@@ -17,7 +17,6 @@ public class TurretInfoT1Shotgun extends TurretInfo {
 		this.upperRangeY = 5.5F;
 		this.rangeX = 16.5F;
 		this.desc = "turret.desct1s";
-		this.name = "turret.namet1s";
 		this.crafting = new Object[] {
 				" D ", " W ", "CCC",
 				'D', new ItemStack(Blocks.dispenser),

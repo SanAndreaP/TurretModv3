@@ -16,7 +16,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlockWithMetadata;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.WeightedRandomChestContent;
@@ -190,23 +189,7 @@ public class TM3ModRegistry {
 
 	@EventHandler
 	public void init(FMLInitializationEvent evt) {
-	// register Turret-Informations
-		TurretInfo.addTurretInfo(EntityTurret_T1Arrow.class, new TurretInfoT1Arrow());
-		TurretInfo.addTurretInfo(EntityTurret_T1Shotgun.class, new TurretInfoT1Shotgun());
-		TurretInfo.addTurretInfo(EntityTurret_T2Minigun.class, new TurretInfoT2Minigun());
-		TurretInfo.addTurretInfo(EntityTurret_T2Revolver.class, new TurretInfoT2Revolver());
-		TurretInfo.addTurretInfo(EntityTurret_T3Laser.class, new TurretInfoT3Laser());
-		TurretInfo.addTurretInfo(EntityTurret_T3Flamethrower.class, new TurretInfoT3Flamethrower());
-		TurretInfo.addTurretInfo(EntityTurret_T4Sniper.class, new TurretInfoT4Sniper());
-		TurretInfo.addTurretInfo(EntityTurret_T4FLAK.class, new TurretInfoT4FLAK());
-		TurretInfo.addTurretInfo(EntityTurret_T5Railgun.class, new TurretInfoT5Railgun());
-		TurretInfo.addTurretInfo(EntityTurret_T5Artillery.class, new TurretInfoT5Artillery());
-		TurretInfo.addTurretInfo(EntityTurret_TSSnowball.class, new TurretInfoTSSnowball());
-		TurretInfo.addTurretInfo(EntityTurret_TSCollector.class, new TurretInfoTSCollector());
-		TurretInfo.addTurretInfo(EntityTurret_TSForcefield.class, new TurretInfoTSForcefield());
-		TurretInfo.addTurretInfo(EntityTurret_TSHealer.class, new TurretInfoTSHealer());
-
-	// register Turret-Upgrades
+	    // register Turret-Upgrades
 		TurretUpgrades.addUpgrade(new TUpgControl());
 		TurretUpgrades.addUpgrade(new TUpgChestGrabbing());
 		TurretUpgrades.addUpgrade(new TUpgInfAmmo());
@@ -230,7 +213,7 @@ public class TM3ModRegistry {
 		TurretUpgrades.addUpgrade(new TUpgShieldMobPush());
 		TurretUpgrades.addUpgrade(new TUpgRangeIncr());
 		
-	// register mod entities
+	    // register mod entities
 		int modEntityID = 0;
 		
 		EntityRegistry.registerModEntity(EntityTurret_T1Arrow.class, "Turret_T1A", modEntityID++, this, 128, 1, true);
@@ -262,7 +245,23 @@ public class TM3ModRegistry {
 		
 		EntityRegistry.registerModEntity(EntityMobileBase.class, "MobileBase", modEntityID++, this, 128, 5, true);
 		EntityRegistry.registerModEntity(EntityDismantleStorage.class, "DismStorage", modEntityID++, this, 128, 5, false);
-		
+
+        // register Turret-Informations
+        TurretInfo.addTurretInfo(EntityTurret_T1Arrow.class, new TurretInfoT1Arrow());
+        TurretInfo.addTurretInfo(EntityTurret_T1Shotgun.class, new TurretInfoT1Shotgun());
+        TurretInfo.addTurretInfo(EntityTurret_T2Minigun.class, new TurretInfoT2Minigun());
+        TurretInfo.addTurretInfo(EntityTurret_T2Revolver.class, new TurretInfoT2Revolver());
+        TurretInfo.addTurretInfo(EntityTurret_T3Laser.class, new TurretInfoT3Laser());
+        TurretInfo.addTurretInfo(EntityTurret_T3Flamethrower.class, new TurretInfoT3Flamethrower());
+        TurretInfo.addTurretInfo(EntityTurret_T4Sniper.class, new TurretInfoT4Sniper());
+        TurretInfo.addTurretInfo(EntityTurret_T4FLAK.class, new TurretInfoT4FLAK());
+        TurretInfo.addTurretInfo(EntityTurret_T5Railgun.class, new TurretInfoT5Railgun());
+        TurretInfo.addTurretInfo(EntityTurret_T5Artillery.class, new TurretInfoT5Artillery());
+        TurretInfo.addTurretInfo(EntityTurret_TSSnowball.class, new TurretInfoTSSnowball());
+        TurretInfo.addTurretInfo(EntityTurret_TSCollector.class, new TurretInfoTSCollector());
+        TurretInfo.addTurretInfo(EntityTurret_TSForcefield.class, new TurretInfoTSForcefield());
+        TurretInfo.addTurretInfo(EntityTurret_TSHealer.class, new TurretInfoTSHealer());
+
 	    // register Handlers
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
         networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(modID);

@@ -15,7 +15,6 @@ public class TurretInfoT4FLAK extends TurretInfo {
 		this.upperRangeY = 50.5F;
 		this.rangeX = 50.5F;
 		this.desc = "turret.desct4f";
-		this.name = "turret.namet4f";
 		this.crafting = new Object[] {
 				"SDL", " L ", "OOO",
 				'S', new ItemStack(TM3ModRegistry.httm),

@@ -44,7 +44,7 @@ public class GuiTInfoPG3 extends GuiTInfoBase {
 		this.healList.clear();
 		
         Iterator<ItemStack> dummyA = this.turretInf.getAmmoItems().keySet().iterator();
-        Iterator<ItemStack> dummyH = this.turretInf.func_110143_aJItems().keySet().iterator();
+        Iterator<ItemStack> dummyH = this.turretInf.getHealthItems().keySet().iterator();
         
         for (int i = 0; dummyA.hasNext(); i++) this.ammoList.put(i, dummyA.next());
         for (int i = 0; dummyH.hasNext(); i++) this.healList.put(i, dummyH.next());
@@ -188,7 +188,7 @@ public class GuiTInfoPG3 extends GuiTInfoBase {
 		super.drawScreen(par1, par2, par3);
         
         if (hoverX >= 0 && hoverY >= 0 && hoverID >= 0 && hoverType >= 0) {
-        	this.drawRect(hoverX-1, hoverY-1, hoverX + 152, hoverY + 17, 0x40FFFFFF);
+        	drawRect(hoverX - 1, hoverY - 1, hoverX + 152, hoverY + 17, 0x40FFFFFF);
         	if (hoverType == 0) {
 //	        	int am = this.turretInf.getAmmoFromItem(this.ammoList.get(hoverID));
 	        	String type = this.turretInf.getAmmoTypeNameFromIndex(this.turretInf.getAmmoTypeFromItem(this.ammoList.get(hoverID)));
@@ -199,7 +199,8 @@ public class GuiTInfoPG3 extends GuiTInfoBase {
         	}
         }
 	}
-	
+
+    @Override
 	public void handleMouseInput()
     {
         super.handleMouseInput();
@@ -252,7 +253,6 @@ public class GuiTInfoPG3 extends GuiTInfoBase {
     {
         GL11.glDisable(GL11.GL_DEPTH_TEST);
         List<String> var4 = new ArrayList<String>();
-        String str = "";
         
         is.getItem().addInformation(is, this.mc.thePlayer, var4, false);
         
@@ -260,8 +260,8 @@ public class GuiTInfoPG3 extends GuiTInfoBase {
         	var4.add("\2477-------");
         }
         
-        int count = 0;
-        
+        int count;
+        String str;
         if (aType.length() > 0) {
         	count = this.turretInf.getAmmoFromItem(is);
 	    	str = StatCollector.translateToLocal("gui.tinfo.projectiles");

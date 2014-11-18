@@ -16,7 +16,6 @@ public class TurretInfoTSForcefield extends TurretInfo {
 		this.upperRangeY = 16.5F;
 		this.rangeX = 16.5F;
 		this.desc = "turret.desctsf";
-		this.name = "turret.nametsf";
 		this.crafting = new Object[] {
 				"P P", "OEO", "WWW",
 				'P', new ItemStack(Items.ender_eye),

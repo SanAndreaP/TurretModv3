@@ -1,6 +1,7 @@
 package sanandreasp.mods.turretmod3.registry.TurretInfo;
 
 import com.google.common.collect.Maps;
+import cpw.mods.fml.common.registry.EntityRegistry;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 import sanandreasp.mods.turretmod3.entity.turret.EntityTurret_Base;
@@ -13,10 +14,11 @@ import java.util.Map.Entry;
 
 public abstract class TurretInfo {
 
-	protected static Map<Class<? extends EntityTurret_Base>, TurretInfo> turrets = Maps.newHashMap();
-	protected static Map<Integer, Class<? extends EntityTurret_Base>> turretList = Maps.newHashMap();
+	private static Map<Class<? extends EntityTurret_Base>, TurretInfo> turrets = Maps.newHashMap();
+	private static Map<Integer, Class<? extends EntityTurret_Base>> turretList = Maps.newHashMap();
 
-	protected String name;
+	private String name;
+    private int infoID = -1;
 	protected String desc;
 	protected Object[] crafting;
 	protected int maxAmmo;
@@ -31,14 +33,14 @@ public abstract class TurretInfo {
 	protected Map<Integer, String> ammoTypeNames = Maps.newHashMap();
 	protected Map<Integer, List<ItemStack>> ammoTypeItems = Maps.newHashMap();
 	protected Map<ItemStack, Integer> healItems = Maps.newHashMap();
-	protected int infoID = -1;
-
-	public TurretInfo() {
-	}
 
 	public static TurretInfo getTurretInfo(Class par0TurretCls) {
 		return turrets.get(par0TurretCls);
 	}
+
+    public void setName(String partName){
+        name = "entity."+partName+".name";
+    }
 
 	public String getIconFile() {
 		return this.itemIcon;
@@ -64,7 +66,7 @@ public abstract class TurretInfo {
 		return Maps.newHashMap(this.ammoItems);
 	}
 
-	public Map<ItemStack, Integer> func_110143_aJItems() {
+	public Map<ItemStack, Integer> getHealthItems() {
 		return Maps.newHashMap(this.healItems);
 	}
 
@@ -158,7 +160,7 @@ public abstract class TurretInfo {
 		return this.maxAmmo;
 	}
 
-	public int func_110138_aP() {
+	public int getMaxHealth() {
 		return this.maxHealth;
 	}
 
@@ -175,6 +177,7 @@ public abstract class TurretInfo {
 	}
 
 	public static void addTurretInfo(Class<? extends EntityTurret_Base> tClass, TurretInfo tInf) {
+        tInf.setName(TM3ModRegistry.modID+"."+EntityRegistry.instance().lookupModSpawn(tClass, false).getEntityName());
 		turretList.put(tInf.infoID = turretList.size(), tClass);
 		turrets.put(tClass, tInf);
 	}

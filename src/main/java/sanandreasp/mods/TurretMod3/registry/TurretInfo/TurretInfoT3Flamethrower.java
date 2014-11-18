@@ -17,7 +17,6 @@ public class TurretInfoT3Flamethrower extends TurretInfo {
 		this.upperRangeY = 5.5F;
 		this.rangeX = 8.5F;
 		this.desc = "turret.desct3f";
-		this.name = "turret.namet3f";
 		this.crafting = new Object[] {
 				"SDL", " O ", "BIB",
 				'S', new ItemStack(Items.bucket),

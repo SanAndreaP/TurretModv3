@@ -16,7 +16,6 @@ public class TurretInfoTSSnowball extends TurretInfo {
 		this.upperRangeY = 5.5F;
 		this.rangeX = 16.5F;
 		this.desc = "turret.desctss";
-		this.name = "turret.nametss";
 		this.crafting = new Object[] {
 				" DS", " W ", "CSC",
 				'D', new ItemStack(Blocks.dispenser),

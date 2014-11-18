@@ -18,7 +18,6 @@ public class TurretInfoT2Revolver extends TurretInfo {
 		this.upperRangeY = 5.5F;
 		this.rangeX = 24.5F;
 		this.desc = "turret.desct2r";
-		this.name = "turret.namet2r";
 		this.crafting = new Object[] {
 				"SDL", " I ", "BBB",
 				'S', new ItemStack(Blocks.iron_block),

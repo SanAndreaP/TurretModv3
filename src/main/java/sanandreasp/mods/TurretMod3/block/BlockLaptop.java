@@ -95,13 +95,12 @@ public class BlockLaptop extends BlockContainer {
 			TileEntityLaptop lap = (TileEntityLaptop)te;
 			if (lap.isUsedByPlayer)
 				return false;
-			if (par5EntityPlayer.isSneaking() || !lap.isOpen) {
+			if (par5EntityPlayer.isSneaking() || ! lap.isOpen) {
 				par1World.addBlockEvent(par2, par3, par4, this, 2, lap.isOpen ? 0 : 1);
-				return true;
-			} else if (lap.isOpen) {
+			} else {
 				par5EntityPlayer.openGui(TM3ModRegistry.instance, 3, par1World, par2, par3, par4);
-				return true;
 			}
+            return true;
 		}
 		return false;
 	}
@@ -117,9 +116,20 @@ public class BlockLaptop extends BlockContainer {
 	}
 	
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
-		return AxisAlignedBB.getBoundingBox(par2, par3, par4, par2+1F, par3+0.1F, par4+1F);
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
+        float height = 0.1F;
+        TileEntity te = world.getTileEntity(x, y, z);
+        if (te != null && te instanceof TileEntityLaptop && ((TileEntityLaptop) te).isOpen) {
+            height = 0.8F;
+        }
+		return AxisAlignedBB.getBoundingBox(x, y, z, x+1F, y+height, z+1F);
 	}
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int x, int y, int z){
+        return getCollisionBoundingBoxFromPool(world, x, y, z);
+    }
 	
 	@Override
 	public int getRenderType() {
