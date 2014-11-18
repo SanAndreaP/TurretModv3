@@ -18,10 +18,8 @@ buildscript {
 apply plugin: 'forge'
 
 version = "1.7.10-1.0.0"
-group = "mods.sananreasp" 
+group = "mods.sanandreasp"
 archivesBaseName = "TurretMod"
-
-
 
 minecraft {
     version = "1.7.10-10.13.2.1230"
