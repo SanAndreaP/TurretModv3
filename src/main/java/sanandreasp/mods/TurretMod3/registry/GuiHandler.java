@@ -71,8 +71,12 @@ public class GuiHandler implements IGuiHandler {
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
 		switch(ID) {
-			case 0:
-				return new GuiTCUInfo();
+			case 0: {
+                Entity e = world.getEntityByID(x);
+                GuiTCUInfo gui = new GuiTCUInfo();
+                gui.turret = (EntityTurret_Base) e;
+                return gui;
+            }
 			case 1:
 				return new GuiTInfoPG1(0);
 			case 2:
